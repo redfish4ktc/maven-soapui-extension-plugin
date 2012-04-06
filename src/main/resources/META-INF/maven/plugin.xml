@@ -1,0 +1,1233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <description></description>
+<!-- ****************************
+//MODIF CUSTO-->
+<!--
+  <groupId>eviware</groupId>
+  <artifactId>maven-soapui-pro-plugin</artifactId>
+  <version>3.6.1</version>
+  <goalPrefix>soapui-pro</goalPrefix>
+-->
+  <groupId>com.github.redfish4ktc</groupId>
+  <artifactId>maven-soapui-extension-plugin</artifactId>
+  <version>${project.version}</version>
+  <goalPrefix>soapui-pro</goalPrefix>
+<!-- **************************** -->      
+  <isolatedRealm>false</isolatedRealm>
+  <inheritedByDefault>true</inheritedByDefault>
+  <mojos>
+<!-- ****************************
+//MODIF CUSTO-->
+<!--
+    <mojo>
+      <goal>mock</goal>
+      <description>Runs soapUI mockservice</description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <implementation>com.eviware.soapui.maven2.MockServiceMojo</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <parameters>
+        <parameter>
+          <name>globalProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified global property values</description>
+        </parameter>
+        <parameter>
+          <name>mockService</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The mockservice to run</description>
+        </parameter>
+        <parameter>
+          <name>noBlock</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>To not wait for input</description>
+        </parameter>
+        <parameter>
+          <name>path</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The path to listen on</description>
+        </parameter>
+        <parameter>
+          <name>port</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The port to listen on</description>
+        </parameter>
+        <parameter>
+          <name>projectFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The soapUI project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>projectPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapUI project file</description>
+        </parameter>
+        <parameter>
+          <name>projectProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified project property values</description>
+        </parameter>
+        <parameter>
+          <name>saveAfterRun</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Saves project file after running tests</description>
+        </parameter>
+        <parameter>
+          <name>settingsFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies soapUI settings file to use</description>
+        </parameter>
+        <parameter>
+          <name>settingsPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapui-settings file</description>
+        </parameter>
+        <parameter>
+          <name>soapuiProperties</name>
+          <type>java.util.Properties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>SoapUI Properties.</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <port implementation="java.lang.String">${soapui.port}</port>
+        <saveAfterRun implementation="boolean">${soapui.saveAfterRun}</saveAfterRun>
+        <projectPassword implementation="java.lang.String">${soapui.project.password}</projectPassword>
+        <projectFile implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectFile}</projectFile>
+        <soapuiProperties implementation="java.util.Properties">${soapuiProperties}</soapuiProperties>
+        <settingsPassword implementation="java.lang.String">${soapui.settingsFile.password}</settingsPassword>
+        <projectProperties implementation="java.lang.String[]">${soapui.projectProperties}</projectProperties>
+        <path implementation="java.lang.String">${soapui.path}</path>
+        <settingsFile implementation="java.lang.String">${soapui.settingsFile}</settingsFile>
+        <mockService implementation="java.lang.String">${soapui.mockService}</mockService>
+        <globalProperties implementation="java.lang.String[]">${soapui.globalProperties}</globalProperties>
+        <noBlock implementation="boolean">${soapui.noBlock}</noBlock>
+      </configuration>
+    </mojo>
+-->
+    <mojo>
+      <goal>test</goal>
+      <description>Runs soapUI functional tests</description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <implementation>org.ktc.soapui.maven.extension.TestMojo</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <parameters>
+<!-- ****************************
+//MODIF CUSTO-->      
+        <parameter>
+          <name>project</name>
+          <type>org.apache.maven.project.MavenProject</type>
+          <required>false</required>
+          <editable>false</editable>
+          <description>The maven project.</description>
+        </parameter>
+<!-- **************************** -->      
+        <parameter>
+          <name>coverage</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Enables creation of coverage reports</description>
+        </parameter>
+        <parameter>
+          <name>coverageBuilder</name>
+          <type>boolean</type>
+          <deprecated>use coverage instead</deprecated>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies if coverage report should be created</description>
+        </parameter>
+        <parameter>
+          <name>domain</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The domain to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>endpoint</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Overrides the endpoint to use for requests</description>
+        </parameter>
+        <parameter>
+          <name>exportAll</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on exporting of all results</description>
+        </parameter>
+        <parameter>
+          <name>globalProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified global property values</description>
+        </parameter>
+        <parameter>
+          <name>host</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The host to use for requests</description>
+        </parameter>
+        <parameter>
+          <name>interactive</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Enabled interactive groovy scripts</description>
+        </parameter>
+        <parameter>
+          <name>junitReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on creation of reports in junit style</description>
+        </parameter>
+        <parameter>
+          <name>openReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on creation of reports in junit style</description>
+        </parameter>
+        <parameter>
+          <name>outputFolder</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Sets the output folder for reports</description>
+        </parameter>
+        <parameter>
+          <name>password</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The password to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>printReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on printing of reports</description>
+        </parameter>
+        <parameter>
+          <name>projectFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The soapUI project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>projectPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapUI project file</description>
+        </parameter>
+        <parameter>
+          <name>projectProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified project property values</description>
+        </parameter>
+        <parameter>
+          <name>reportFormat</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Creates reports in specifoed formats</description>
+        </parameter>
+        <parameter>
+          <name>reportName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Creates named report</description>
+        </parameter>
+        <parameter>
+          <name>saveAfterRun</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Saves project file after running tests</description>
+        </parameter>
+        <parameter>
+          <name>settingsFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies soapUI settings file to use</description>
+        </parameter>
+        <parameter>
+          <name>settingsPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapui-settings file</description>
+        </parameter>
+        <parameter>
+          <name>skip</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Tells TestRunner to skip tests</description>
+        </parameter>
+        <parameter>
+          <name>soapuiProperties</name>
+          <type>java.util.Properties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>SoapUI Properties.</description>
+        </parameter>
+        <parameter>
+          <name>testCase</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The TestCase to run project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>testFailIgnore</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapui-settings file</description>
+        </parameter>
+        <parameter>
+          <name>testSuite</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The TestSuite to run project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>username</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The username to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>wssPasswordType</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The WSS password-type to use for any authentications. Setting this will
+result in the addition of WS-Security UsernamePassword tokens to any
+outgoing request containing the specified username and password. Set to
+either &apos;Text&apos; or &apos;Digest&apos;</description>
+        </parameter>
+      </parameters>
+      <configuration>
+<!-- ****************************
+//MODIF CUSTO-->      
+        <project implementation="org.apache.maven.project.MavenProject">${project}</project>
+<!-- **************************** -->      
+        <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>
+        <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
+        <printReport implementation="boolean">${soapui.printReport}</printReport>
+        <junitReport implementation="boolean">${soapui.junitReport}</junitReport>
+        <skip implementation="boolean">${soapui.skip}</skip>
+        <password implementation="java.lang.String">${soapui.password}</password>
+        <username implementation="java.lang.String">${soapui.username}</username>
+        <interactive implementation="boolean">${soapui.interactive}</interactive>
+        <exportAll implementation="boolean">${soapui.exportAll}</exportAll>
+        <projectFile implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectfile}</projectFile>
+        <reportFormat implementation="java.lang.String">${soapui.reportFormat}</reportFormat>
+        <domain implementation="java.lang.String">${soapui.domain}</domain>
+        <soapuiProperties implementation="java.util.Properties">${soapuiProperties}</soapuiProperties>
+        <testSuite implementation="java.lang.String">${soapui.testsuite}</testSuite>
+        <globalProperties implementation="java.lang.String[]">${soapui.globalProperties}</globalProperties>
+        <testCase implementation="java.lang.String">${soapui.testcase}</testCase>
+        <reportName implementation="java.lang.String">${soapui.reportName}</reportName>
+        <host implementation="java.lang.String">${soapui.host}</host>
+        <coverageBuilder implementation="boolean">${soapui.createCoverage}</coverageBuilder>
+        <openReport implementation="boolean">${soapui.openReport}</openReport>
+        <testFailIgnore implementation="boolean">${soapui.testFailIgnore}</testFailIgnore>
+        <settingsPassword implementation="java.lang.String">${soapui.settingfFile.password}</settingsPassword>
+        <endpoint implementation="java.lang.String">${soapui.endpoint}</endpoint>
+        <saveAfterRun implementation="boolean">${soapui.saveAfterRun}</saveAfterRun>
+        <projectPassword implementation="java.lang.String">${soapui.project.password}</projectPassword>
+        <coverage implementation="boolean">${soapui.coverage}</coverage>
+        <projectProperties implementation="java.lang.String[]">${soapui.projectProperties}</projectProperties>
+        <settingsFile implementation="java.lang.String">${soapui.settingsFile}</settingsFile>
+      </configuration>
+    </mojo>
+<!-- ****************************
+//MODIF CUSTO-->
+<!--
+    <mojo>
+      <goal>tool</goal>
+      <description>Runs soapUI tools</description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <implementation>com.eviware.soapui.maven2.ToolMojo</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <parameters>
+        <parameter>
+          <name>iface</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The interface to run for</description>
+        </parameter>
+        <parameter>
+          <name>outputFolder</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies output forder for report created by runned tool</description>
+        </parameter>
+        <parameter>
+          <name>projectFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The soapUI project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>projectPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapUI project file</description>
+        </parameter>
+        <parameter>
+          <name>settingsFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies soapUI settings file to use</description>
+        </parameter>
+        <parameter>
+          <name>settingsPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapui-settings file</description>
+        </parameter>
+        <parameter>
+          <name>soapuiProperties</name>
+          <type>java.util.Properties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>SoapUI Properties.</description>
+        </parameter>
+        <parameter>
+          <name>tool</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The tool to run</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <iface implementation="java.lang.String">${soapui.iface}</iface>
+        <projectPassword implementation="java.lang.String">${soapui.project.password}</projectPassword>
+        <projectFile implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectFile}</projectFile>
+        <tool implementation="java.lang.String">${soapui.tool}</tool>
+        <soapuiProperties implementation="java.util.Properties">${soapuiProperties}</soapuiProperties>
+        <settingsPassword implementation="java.lang.String">${soapui.settingsFile.password}</settingsPassword>
+        <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
+        <settingsFile implementation="java.lang.String">${soapui.settingsFile}</settingsFile>
+      </configuration>
+    </mojo>
+    <mojo>
+      <goal>loadtest</goal>
+      <description>Runs soapUI loadtests</description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <implementation>com.eviware.soapui.maven2.LoadTestMojo</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <parameters>
+        <parameter>
+          <name>domain</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The domain to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>endpoint</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Overrides the endpoint to use for requests</description>
+        </parameter>
+        <parameter>
+          <name>globalProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified global property values</description>
+        </parameter>
+        <parameter>
+          <name>host</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The host to use for requests</description>
+        </parameter>
+        <parameter>
+          <name>limit</name>
+          <type>java.lang.Integer</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Overrides the LoadTest limit</description>
+        </parameter>
+        <parameter>
+          <name>loadTest</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The LoadTest to run</description>
+        </parameter>
+        <parameter>
+          <name>outputFolder</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Sets the output folder for reports</description>
+        </parameter>
+        <parameter>
+          <name>password</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The password to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>printReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on printing of reports</description>
+        </parameter>
+        <parameter>
+          <name>projectFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The soapUI project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>projectPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapUI project file</description>
+        </parameter>
+        <parameter>
+          <name>projectProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified project property values</description>
+        </parameter>
+        <parameter>
+          <name>reportFormat</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Creates reports in specifoed formats</description>
+        </parameter>
+        <parameter>
+          <name>reportName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Creates named report</description>
+        </parameter>
+        <parameter>
+          <name>saveAfterRun</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Saves project file after running tests</description>
+        </parameter>
+        <parameter>
+          <name>settingsFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies soapUI settings file to use</description>
+        </parameter>
+        <parameter>
+          <name>settingsPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapui-settings file</description>
+        </parameter>
+        <parameter>
+          <name>soapuiProperties</name>
+          <type>java.util.Properties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>SoapUI Properties.</description>
+        </parameter>
+        <parameter>
+          <name>testCase</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The TestCase to run</description>
+        </parameter>
+        <parameter>
+          <name>testSuite</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The TestSuite to run</description>
+        </parameter>
+        <parameter>
+          <name>threadCount</name>
+          <type>java.lang.Integer</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Overrides the LoadTest threadCount</description>
+        </parameter>
+        <parameter>
+          <name>username</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The username to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>wssPasswordType</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The WSS password-type to use for any authentications. Setting this will
+result in the addition of WS-Security UsernamePassword tokens to any
+outgoing request containing the specified username and password. Set to
+either &apos;Text&apos; or &apos;Digest&apos;</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <limit implementation="java.lang.Integer">${soapui.limit}</limit>
+        <host implementation="java.lang.String">${soapui.host}</host>
+        <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>
+        <settingsPassword implementation="java.lang.String">${soapui.settingsFile.password}</settingsPassword>
+        <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
+        <printReport implementation="boolean">${soapui.printReport}</printReport>
+        <password implementation="java.lang.String">${soapui.password}</password>
+        <endpoint implementation="java.lang.String">${soapui.endpoint}</endpoint>
+        <saveAfterRun implementation="boolean">${soapui.saveAfterRun}</saveAfterRun>
+        <username implementation="java.lang.String">${soapui.username}</username>
+        <projectFile implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectFile}</projectFile>
+        <projectPassword implementation="java.lang.String">${soapui.project.password}</projectPassword>
+        <reportFormat implementation="java.lang.String">${soapui.reportFormat}</reportFormat>
+        <threadCount implementation="java.lang.Integer">${soapui.threadcount}</threadCount>
+        <soapuiProperties implementation="java.util.Properties">${soapuiProperties}</soapuiProperties>
+        <domain implementation="java.lang.String">${soapui.domain}</domain>
+        <projectProperties implementation="java.lang.String[]">${soapui.projectProperties}</projectProperties>
+        <testSuite implementation="java.lang.String">${soapui.testsuite}</testSuite>
+        <settingsFile implementation="java.lang.String">${soapui.settingsFile}</settingsFile>
+        <testCase implementation="java.lang.String">${soapui.testcase}</testCase>
+        <globalProperties implementation="java.lang.String[]">${soapui.globalProperties}</globalProperties>
+        <reportName implementation="java.lang.String">${soapui.reportName}</reportName>
+        <loadTest implementation="java.lang.String">${soapui.loadtest}</loadTest>
+      </configuration>
+    </mojo>
+-->
+  </mojos>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>wsdl4j</groupId>
+      <artifactId>wsdl4j</artifactId>
+      <type>jar</type>
+      <version>1.6.2-fixed</version>
+    </dependency>
+    <dependency>
+      <groupId>license4j</groupId>
+      <artifactId>license4j</artifactId>
+      <type>jar</type>
+      <version>1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <type>jar</type>
+      <version>4.4</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <type>jar</type>
+      <version>1.2.14</version>
+    </dependency>
+    <dependency>
+      <groupId>jgoodies</groupId>
+      <artifactId>looks</artifactId>
+      <type>jar</type>
+      <version>2.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jgoodies</groupId>
+      <artifactId>binding</artifactId>
+      <type>jar</type>
+      <version>2.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jgoodies</groupId>
+      <artifactId>forms</artifactId>
+      <type>jar</type>
+      <version>1.0.7</version>
+    </dependency>
+    <dependency>
+      <groupId>opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <type>jar</type>
+      <version>1.8</version>
+    </dependency>
+    <dependency>
+      <groupId>fife</groupId>
+      <artifactId>rsyntaxtextarea</artifactId>
+      <type>jar</type>
+      <version>1.3.4</version>
+    </dependency>
+    <dependency>
+      <groupId>jcalendar</groupId>
+      <artifactId>jcalendar</artifactId>
+      <type>jar</type>
+      <version>1.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <type>jar</type>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <type>jar</type>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <type>jar</type>
+      <version>2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <type>jar</type>
+      <version>1.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <type>jar</type>
+      <version>3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <type>jar</type>
+      <version>1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <type>jar</type>
+      <version>1.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>json</groupId>
+      <artifactId>json-lib</artifactId>
+      <type>jar</type>
+      <version>2.2.2-jdk15</version>
+    </dependency>
+    <dependency>
+      <groupId>ezmorph</groupId>
+      <artifactId>ezmorph</artifactId>
+      <type>jar</type>
+      <version>1.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>xom</groupId>
+      <artifactId>xom</artifactId>
+      <type>jar</type>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xmlParserAPIs</artifactId>
+      <type>jar</type>
+      <version>2.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <type>jar</type>
+      <version>2.9.1</version>
+    </dependency>
+    <dependency>
+      <groupId>xalan</groupId>
+      <artifactId>xalan</artifactId>
+      <type>jar</type>
+      <version>2.7.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jaxen</groupId>
+      <artifactId>jaxen</artifactId>
+      <type>jar</type>
+      <version>1.1-beta-8</version>
+    </dependency>
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <type>jar</type>
+      <version>1.6.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jdom</groupId>
+      <artifactId>jdom</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>l2fprod</groupId>
+      <artifactId>l2fprod-common-fontchooser</artifactId>
+      <type>jar</type>
+      <version>7.3</version>
+    </dependency>
+    <dependency>
+      <groupId>xmlbeans</groupId>
+      <artifactId>xbean</artifactId>
+      <type>jar</type>
+      <version>fixed-2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>xmlbeans</groupId>
+      <artifactId>xbean_xpath</artifactId>
+      <type>jar</type>
+      <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>xmlbeans</groupId>
+      <artifactId>xmlpublic</artifactId>
+      <type>jar</type>
+      <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>xmlbeans</groupId>
+      <artifactId>jsr173</artifactId>
+      <type>jar</type>
+      <version>xmlbeans-2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>soapui-xmlbeans</artifactId>
+      <type>jar</type>
+      <version>3.6</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>ext-xmlbeans</artifactId>
+      <type>jar</type>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>soap-xmlbeans</artifactId>
+      <type>jar</type>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>soapui-coverage-xmlbeans</artifactId>
+      <type>jar</type>
+      <version>3.6</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>policy-xmlbeans</artifactId>
+      <type>jar</type>
+      <version>1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>j2ee-xmlbeans</artifactId>
+      <type>jar</type>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>soapui-pro</artifactId>
+      <type>jar</type>
+      <version>3.6</version>
+    </dependency>
+    <dependency>
+      <groupId>eviware</groupId>
+      <artifactId>soapui</artifactId>
+      <type>jar</type>
+      <version>3.6</version>
+    </dependency>
+    <dependency>
+      <groupId>saxon</groupId>
+      <artifactId>saxon</artifactId>
+      <type>jar</type>
+      <version>9.1.0.8j</version>
+    </dependency>
+    <dependency>
+      <groupId>saxon</groupId>
+      <artifactId>saxon-dom</artifactId>
+      <type>jar</type>
+      <version>9.1.0.8j</version>
+    </dependency>
+    <dependency>
+      <groupId>groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <type>jar</type>
+      <version>1.7.5</version>
+    </dependency>
+    <dependency>
+      <groupId>rhino</groupId>
+      <artifactId>js</artifactId>
+      <type>jar</type>
+      <version>1.7R2</version>
+    </dependency>
+    <dependency>
+      <groupId>xmlunit</groupId>
+      <artifactId>xmlunit</artifactId>
+      <type>jar</type>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>xml-security</groupId>
+      <artifactId>xmlsec</artifactId>
+      <type>jar</type>
+      <version>1.4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>xalan</groupId>
+      <artifactId>serializer</artifactId>
+      <type>jar</type>
+      <version>2.7.1</version>
+    </dependency>
+    <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <type>jar</type>
+      <version>1.3.04</version>
+    </dependency>
+    <dependency>
+      <groupId>jtidy</groupId>
+      <artifactId>jtidy</artifactId>
+      <type>jar</type>
+      <version>r820</version>
+    </dependency>
+    <dependency>
+      <groupId>net-components</groupId>
+      <artifactId>netcomponents</artifactId>
+      <type>jar</type>
+      <version>1.3.8a</version>
+    </dependency>
+    <dependency>
+      <groupId>wss4j</groupId>
+      <artifactId>wss4j</artifactId>
+      <type>jar</type>
+      <version>1.5.8</version>
+    </dependency>
+    <dependency>
+      <groupId>opensaml</groupId>
+      <artifactId>opensaml</artifactId>
+      <type>jar</type>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jetty</groupId>
+      <artifactId>jetty</artifactId>
+      <type>jar</type>
+      <version>6.1.22</version>
+    </dependency>
+    <dependency>
+      <groupId>jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <type>jar</type>
+      <version>6.1.22</version>
+    </dependency>
+    <dependency>
+      <groupId>jetty</groupId>
+      <artifactId>servlet-api</artifactId>
+      <type>jar</type>
+      <version>2.5-20081211</version>
+    </dependency>
+    <dependency>
+      <groupId>jxl</groupId>
+      <artifactId>jxl</artifactId>
+      <type>jar</type>
+      <version>2.6.12</version>
+    </dependency>
+    <dependency>
+      <groupId>bouncycastle</groupId>
+      <artifactId>bcprov-jdk15</artifactId>
+      <type>jar</type>
+      <version>143</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-ssl</groupId>
+      <artifactId>not-yet-commons-ssl</artifactId>
+      <type>jar</type>
+      <version>0.3.11</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <type>jar</type>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <type>jar</type>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>idw</groupId>
+      <artifactId>idw</artifactId>
+      <type>jar</type>
+      <version>1.6.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jasperreports</groupId>
+      <artifactId>jasperreports</artifactId>
+      <type>jar</type>
+      <version>3.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-digester</groupId>
+      <artifactId>commons-digester</artifactId>
+      <type>jar</type>
+      <version>1.7</version>
+    </dependency>
+    <dependency>
+      <groupId>com.lowagie</groupId>
+      <artifactId>itext</artifactId>
+      <type>jar</type>
+      <version>2.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>bouncycastle</groupId>
+      <artifactId>bcmail-jdk14</artifactId>
+      <type>jar</type>
+      <version>136</version>
+    </dependency>
+    <dependency>
+      <groupId>bouncycastle</groupId>
+      <artifactId>bcprov-jdk14</artifactId>
+      <type>jar</type>
+      <version>136</version>
+    </dependency>
+    <dependency>
+      <groupId>jfree</groupId>
+      <artifactId>jcommon</artifactId>
+      <type>jar</type>
+      <version>1.0.15</version>
+    </dependency>
+    <dependency>
+      <groupId>jfree</groupId>
+      <artifactId>jfreechart</artifactId>
+      <type>jar</type>
+      <version>1.0.12</version>
+    </dependency>
+    <dependency>
+      <groupId>eclipse</groupId>
+      <artifactId>jdtcore</artifactId>
+      <type>jar</type>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jfreechart</groupId>
+      <artifactId>jfreechart</artifactId>
+      <type>jar</type>
+      <version>1.0.13</version>
+    </dependency>
+    <dependency>
+      <groupId>jfreechart</groupId>
+      <artifactId>jcommon</artifactId>
+      <type>jar</type>
+      <version>1.0.16</version>
+    </dependency>
+    <dependency>
+      <groupId>swingx</groupId>
+      <artifactId>swingx</artifactId>
+      <type>jar</type>
+      <version>soapui</version>
+    </dependency>
+    <dependency>
+      <groupId>teamdev</groupId>
+      <artifactId>jxbrowser</artifactId>
+      <type>jar</type>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-common</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-core</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-opt</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-proxy</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-remoting</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>thoughtworks</groupId>
+      <artifactId>xstream</artifactId>
+      <type>jar</type>
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.jms</groupId>
+      <artifactId>jms</artifactId>
+      <type>jar</type>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>hermesjms</groupId>
+      <artifactId>hermes</artifactId>
+      <type>jar</type>
+      <version>1.14</version>
+    </dependency>
+    <dependency>
+      <groupId>activesoap</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <type>jar</type>
+      <version>1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit</artifactId>
+      <type>jar</type>
+      <version>2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit-core-js</artifactId>
+      <type>jar</type>
+      <version>2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.nekohtml</groupId>
+      <artifactId>nekohtml</artifactId>
+      <type>jar</type>
+      <version>1.9.14</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.cssparser</groupId>
+      <artifactId>cssparser</artifactId>
+      <type>jar</type>
+      <version>0.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.w3c.css</groupId>
+      <artifactId>sac</artifactId>
+      <type>jar</type>
+      <version>1.3</version>
+    </dependency>
+<!-- ****************************
+//MODIF CUSTO-->      
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-project</artifactId>
+      <version>2.0.9</version>
+    </dependency>
+<!-- **************************** -->      
+  </dependencies>
+</plugin>
