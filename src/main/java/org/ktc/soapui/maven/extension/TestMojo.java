@@ -8,6 +8,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
+import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.SoapUIProTestCaseRunner;
 
 public class TestMojo extends AbstractMojo {
@@ -60,7 +61,7 @@ public class TestMojo extends AbstractMojo {
             throw new MojoExecutionException("soapui-project-file setting is required");
         }
 
-        SoapUIProTestCaseRunner runner = new SoapUIProTestCaseRunner("soapUI Pro 3.6 Maven2 TestCase Runner");
+        SoapUIProTestCaseRunner runner = new SoapUIProTestCaseRunner("SoapUI Pro " + SoapUI.SOAPUI_VERSION + " Maven2 TestCase Runner");
 
         runner.setProjectFile(this.projectFile);
 
