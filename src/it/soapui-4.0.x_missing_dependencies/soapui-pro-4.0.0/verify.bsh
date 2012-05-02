@@ -1,0 +1,33 @@
+import java.io.*;
+
+boolean checkFileContainsError(File file, String expectedError) {
+  System.out.println("Scanning file " + file);
+
+  if (!file.exists()) {
+    System.out.println("FAILED! File " + file + " does not exist!!");
+    return false;
+  }
+  // NOTE: do not log the expected error before reading the file, otherwise, the error will be found because of this log!!
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(file, "UTF-8");
+  
+  System.out.println("Looking for the following error: " + expectedError);
+  if (fileContent.indexOf(expectedError) < 0) {
+    System.out.println("FAILED! Unable to find the expected error");
+    return false;
+  }
+  
+  System.out.println("OK error found");
+  return true;
+}
+
+
+try {
+  System.out.println("Verifying missing dependency");
+  File logFile = new File(basedir, "build.log");
+  String expectedError = "A required class was missing while executing eviware:maven-soapui-pro-plugin:4.0.0:test: com/jgoodies/looks/plastic/theme/SkyBluer";
+  return checkFileContainsError(logFile, expectedError);
+}
+catch(Throwable t) {
+    t.printStackTrace();
+    return false;
+}
