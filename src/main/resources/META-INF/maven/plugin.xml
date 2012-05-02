@@ -150,7 +150,7 @@
       <executionStrategy>once-per-session</executionStrategy>
       <parameters>
 <!-- ****************************
-//MODIF CUSTO-->      
+add for #3 -->      
         <parameter>
           <name>project</name>
           <type>org.apache.maven.project.MavenProject</type>
@@ -166,6 +166,7 @@
           <editable>true</editable>
           <description>Enables creation of coverage reports</description>
         </parameter>
+<!-- removed as marked as deprecated in the maven-soapui-pro-plugin
         <parameter>
           <name>coverageBuilder</name>
           <type>boolean</type>
@@ -174,6 +175,7 @@
           <editable>true</editable>
           <description>Specifies if coverage report should be created</description>
         </parameter>
+-->
         <parameter>
           <name>domain</name>
           <type>java.lang.String</type>
@@ -362,7 +364,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
       </parameters>
       <configuration>
 <!-- ****************************
-//MODIF CUSTO-->      
+add for #3 -->      
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>
 <!-- **************************** -->      
         <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>

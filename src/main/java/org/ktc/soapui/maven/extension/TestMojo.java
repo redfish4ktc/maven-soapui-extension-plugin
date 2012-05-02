@@ -34,8 +34,6 @@ public class TestMojo extends AbstractMojo {
     private boolean testFailIgnore;
     private boolean coverage;
 
-    /** @deprecated */
-    private boolean coverageBuilder;
     private String[] globalProperties;
     private String[] projectProperties;
     private boolean saveAfterRun;
@@ -109,7 +107,7 @@ public class TestMojo extends AbstractMojo {
         if (this.settingsPassword != null) {
             runner.setSoapUISettingsPassword(this.settingsPassword);
         }
-        if ((this.coverageBuilder) || (this.coverage)) {
+        if (this.coverage) {
             runner.initCoverageBuilder();
         }
         if (this.globalProperties != null) {
