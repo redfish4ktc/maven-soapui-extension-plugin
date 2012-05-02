@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>soapui.bugs</groupId>
+  <artifactId>groovy-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  
+  <properties>
+    <soapui.configuration.path>${basedir}/../soapui-conf</soapui.configuration.path>
+    <soapui.project.file.path>${soapui.configuration.path}/projects/simple-project-with-groovy-xml-soapui-project.xml</soapui.project.file.path>
+    <soapui.settings.empty.file.path>${soapui.configuration.path}/soapui-settings/empty-soapui-settings.xml</soapui.settings.empty.file.path>
+    <soapui.settings.library.file.path>${soapui.configuration.path}/soapui-settings/library-soapui-settings.xml</soapui.settings.library.file.path>
+    <groovy.scripts.path>${soapui.configuration.path}/groovy_scripts</groovy.scripts.path>
+  </properties>
+
+</project>

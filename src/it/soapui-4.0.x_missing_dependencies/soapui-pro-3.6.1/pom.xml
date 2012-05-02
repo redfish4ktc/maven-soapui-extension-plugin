@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>soapui.bugs</groupId>
+    <artifactId>groovy-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../common.xml</relativePath>
+  </parent>
+  <artifactId>groovy-with-pro-3.6.1</artifactId>
+  <packaging>pom</packaging>  
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eviware</groupId>
+        <artifactId>maven-soapui-pro-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>project-with-groovy</id>
+            <phase>integration-test</phase>
+            <configuration>
+              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+              <projectFile>${soapui.project.file.path}</projectFile>
+              <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
+              <soapuiProperties>
+                <property>
+                  <name>soapui.scripting.library</name>
+                  <value>${groovy.scripts.path}</value>
+                </property>
+              </soapuiProperties>
+            </configuration>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
