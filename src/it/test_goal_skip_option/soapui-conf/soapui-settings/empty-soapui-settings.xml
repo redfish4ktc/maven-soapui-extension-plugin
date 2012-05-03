@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-settings xmlns:con="http://eviware.com/soapui/config">
+<!--
+<con:setting id="Script Library">C:\Donnees\Couplages\TestsSoapui\src\main\config\soapui\scripts</con:setting>
+-->
+</con:soapui-settings>

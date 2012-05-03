@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="simple-project-with-groovy.xml" resourceRoot="" soapui-version="3.6.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase with groovy" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4"><con:settings/><con:testStep type="groovy" name="Groovy directly"><con:settings/><con:config><script>log.info("groovy script that does not need external files to work");</script></con:config></con:testStep><con:testStep type="groovy" name="Groovy that needs external scripts"><con:settings/><con:config><script>log.info("groovy script that needs external files to work");
+def myDateUtil = new soapui.groovy.example.DateUtil() 
+def nbDaysInYear = myDateUtil.getNbDaysInYear();
+//def nbDaysInYear = fail.xvs.groovy.example.DateUtil.getNbDaysInYear();
+//soapui.groovy.example.DateUtil.getNbDaysInYear();
+//def nbDaysInYear = 365;
+log.info("nbDaysInYear=${nbDaysInYear}");
+log.info("END OF groovy script that needs external files to work");
+
+</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/></con:soapui-project>
