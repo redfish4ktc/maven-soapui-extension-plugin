@@ -16,7 +16,6 @@
         <groupId>eviware</groupId>
         <artifactId>maven-soapui-pro-plugin</artifactId>
         <version>@soapuiVersionCurrent@</version>
-<!--         <version>@soapui.base.version@</version> -->
         <executions>
           <execution>
             <id>project-with-groovy</id>
