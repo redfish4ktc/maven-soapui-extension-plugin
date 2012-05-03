@@ -1,0 +1,30 @@
+import java.io.*;
+
+try {
+  System.out.println("Verifying that no test have runned");
+  File logFile = new File(basedir, "build.log");
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
+  
+//  String runnerInitLog = "soapUI Pro 4.0.0 Maven2 TestCase Runner";
+  String runnerInitLog = "Maven2 TestCase Runner";
+// @soapuiVersionCurrent@
+// ${soapuiVersionCurrent}
+// @project.version@
+// ${project.version}  
+  if (fileContent.indexOf(runnerInitLog) >= 0) {
+    System.out.println("FAILED! Tests have runned");
+    return false;
+  }
+  
+  if (fileContent.indexOf("SoapUI tests are skipped.") < 0) {
+    System.out.println("FAILED! Skipping tests logs cannot be found");
+    return false;
+  }
+  
+  System.out.println("OK");
+  return true;  
+}
+catch(Throwable t) {
+    t.printStackTrace();
+    return false;
+}

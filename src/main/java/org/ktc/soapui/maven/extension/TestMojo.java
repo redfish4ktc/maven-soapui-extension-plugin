@@ -49,10 +49,8 @@ public class TestMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         if ((this.skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
-            // ****************************
-            // for issue #1
-//            getLog().info("Skipping execution of soapUI Pro 3.6 Maven2");
-            // ****************************
+            // #1 add log when skipping tests
+            getLog().info("SoapUI tests are skipped.");
             return;
         }
         if (this.projectFile == null) {
