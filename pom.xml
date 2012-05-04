@@ -11,8 +11,28 @@
   <artifactId>maven-soapui-extension-plugin</artifactId>
   <version>4.0.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-
   <name>maven-soapui-extension-plugin</name>
+  <description>Add new features and bug fixes to the eviware maven-soapui-pro-plugin</description>
+  <inceptionYear>2011</inceptionYear>
+
+  <url>https://github.com/redfish4ktc/maven-soapui-extension-plugin</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Thomas Bouffard</name>
+      <id>redfish4ktc</id>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>  
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
