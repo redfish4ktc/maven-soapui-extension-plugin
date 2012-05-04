@@ -1,7 +1,6 @@
 package org.ktc.soapui.maven.extension.impl;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Field;
@@ -40,19 +39,19 @@ public abstract class AbstractTestErrorHandler {
 
   @Test
   public void hasErrors_whenEverythingIsOk() {
-    assertThat(ErrorHandler.hasErrors(runner), is(false));
+    assertThat(ErrorHandler.hasErrors(runner)).isFalse();
   }
 
   @Test
   public void hasErrors_whenRunnerHasFailedTests() throws IllegalAccessException {
     initializeFailedTests();
-    assertThat(ErrorHandler.hasErrors(runner), is(true));
+    assertThat(ErrorHandler.hasErrors(runner)).isTrue();
   }
 
   @Test
   public void hasErrors_whenRunnerHasFailedAssertions() throws IllegalAccessException {
     initializeFailedAssertions();
-    assertThat(ErrorHandler.hasErrors(runner), is(true));
+    assertThat(ErrorHandler.hasErrors(runner)).isTrue();
   }
 
   private void initializeFailedTests() throws IllegalAccessException {

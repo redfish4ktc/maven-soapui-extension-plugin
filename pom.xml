@@ -46,6 +46,12 @@
       <version>4.9</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+<groupId>org.easytesting</groupId>
+  <artifactId>fest-assert</artifactId>
+  <version>1.4</version>
+  <scope>test</scope>  
+    </dependency>
     <!-- to get (could be done by using commons-lang 2.5 but do not want to mess with maven soapui-pro dependencies ) -->
     <dependency>
       <groupId>org.apache.commons</groupId>
