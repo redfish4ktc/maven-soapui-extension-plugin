@@ -33,7 +33,7 @@
       <name>Thomas Bouffard</name>
       <id>redfish4ktc</id>
       <roles>
-        <role>Java Developer</role>
+        <role>developer</role>
       </roles>
       <timezone>+1</timezone>
     </developer>
@@ -83,19 +83,11 @@
       <version>1.9.0</version>
       <scope>test</scope>
     </dependency>
-    <!-- to get (could be done by using commons-lang 2.5 but do not want to mess with maven soapui-pro dependencies ) -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.1</version>
-    </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-project</artifactId>
       <version>2.0.11</version>
     </dependency>
-
-
   </dependencies>
 
   <build>
