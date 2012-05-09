@@ -1,6 +1,5 @@
 package org.ktc.soapui.maven.extension;
 
-import java.util.Iterator;
 import java.util.Properties;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -120,11 +119,10 @@ public class TestMojo extends AbstractMojo {
         if (this.reportFormat != null)
             runner.setReportFormats(this.reportFormat.split(","));
         if ((this.soapuiProperties != null) && (this.soapuiProperties.size() > 0)) {
-            for (Iterator iterator = this.soapuiProperties.keySet().iterator(); iterator.hasNext();) {
-                Object key = iterator.next();
-                System.out.println("Setting " + ((String) key) + " value "
-                        + this.soapuiProperties.getProperty((String) key));
-                System.setProperty((String) key, this.soapuiProperties.getProperty((String) key));
+            for (Object keyObject : this.soapuiProperties.keySet()) {
+                String key = (String) keyObject;
+                System.out.println("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
+                System.setProperty(key, this.soapuiProperties.getProperty(key));
             }
         }
         try {
