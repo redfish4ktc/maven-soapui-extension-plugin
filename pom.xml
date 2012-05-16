@@ -182,7 +182,7 @@
         <version>0.8</version>
         <executions>
           <execution>
-            <phase>initialize</phase>
+            <phase>verify</phase>
             <goals>
               <goal>check</goal>
             </goals>
@@ -191,8 +191,7 @@
         <configuration>
           <includes>
             <include>*</include>
-            <include>src/main/**/*</include>
-            <include>src/test/**/*</include>
+            <include>src/**/*</include>
           </includes>
           <excludes>
             <exclude>.gitignore</exclude>
