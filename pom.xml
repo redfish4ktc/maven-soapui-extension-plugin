@@ -7,7 +7,7 @@
     <version>7</version>
   </parent>
 
-  <groupId>com.github.redfish4ktc</groupId>
+  <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
   <version>4.0.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>

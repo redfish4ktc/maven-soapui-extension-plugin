@@ -2,8 +2,8 @@
 <plugin>
   <description></description>
   <!-- ######## CUSTOMIZED -->
-  <groupId>com.github.redfish4ktc</groupId>
-  <artifactId>maven-soapui-extension-plugin</artifactId>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>${project.artifactId}</artifactId>
   <version>${project.version}</version>
   <!-- ######## END OF CUSTOMIZED -->
   <goalPrefix>soapui-pro</goalPrefix>
