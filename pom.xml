@@ -69,7 +69,7 @@
       <artifactId>maven-soapui-pro-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
     </dependency>
-    <!--- FIX for issue #7 (taken from maven-soapui-pro-plugin 3.6.1) -->
+    <!-- FIX for issue #7 (taken from maven-soapui-pro-plugin 3.6.1) -->
     <dependency>
       <groupId>jgoodies</groupId>
       <artifactId>looks</artifactId>
@@ -80,7 +80,7 @@
       <artifactId>rsyntaxtextarea</artifactId>
       <version>1.3.4</version>
     </dependency>
-    <!--- end of FIX for issue #7 -->
+    <!-- end of FIX for issue #7 -->
 
     <!-- needed to have junit annotations (maven-soapui-pro-plugin depends on junit 3.8.x) -->
     <dependency>

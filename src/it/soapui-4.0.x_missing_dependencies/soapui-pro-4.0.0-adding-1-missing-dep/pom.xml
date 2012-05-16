@@ -53,7 +53,7 @@
           </execution>
         </executions>
         <dependencies>
-          <!--- taken from maven-soapui-pro-plugin 3.6.1 -->
+          <!-- taken from maven-soapui-pro-plugin 3.6.1 -->
           <dependency>
             <groupId>jgoodies</groupId>
             <artifactId>looks</artifactId>
