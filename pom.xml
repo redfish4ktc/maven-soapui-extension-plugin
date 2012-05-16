@@ -41,6 +41,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javaMinimumSupportedVersion>1.5</javaMinimumSupportedVersion>
+    <mavenMinimumSupportedVersion>2.0.11</mavenMinimumSupportedVersion>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
     <soapuiVersionCurrent>4.0.0</soapuiVersionCurrent>
   </properties>
@@ -86,7 +88,7 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-project</artifactId>
-      <version>2.0.11</version>
+      <version>${mavenMinimumSupportedVersion}</version>
     </dependency>
   </dependencies>
 
@@ -105,8 +107,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.4</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>${javaMinimumSupportedVersion}</source>
+          <target>${javaMinimumSupportedVersion}</target>
         </configuration>
       </plugin>
       <plugin>
