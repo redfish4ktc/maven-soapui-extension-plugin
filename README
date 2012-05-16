@@ -1,3 +1,9 @@
-Add new features and bug fixes to the eviware maven-soapui-pro-plugin. 
+This plugin adds new features and bug fixes to the eviware maven-soapui-pro-plugin/maven-soapui-plugin and can be used as a drop replacement of these plugins.
 
 This plugin will be deployed in Central thanks to Sonatype OSS Repository Hosting Service.
+
+
+License
+-------
+maven-soapui-extension-plugin is licensed under the Apache 2.0 software license:
+http://www.apache.org/licenses/LICENSE-2.0.html

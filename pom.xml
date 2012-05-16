@@ -152,6 +152,43 @@
           <pushChanges>false</pushChanges>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.8</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <includes>
+            <include>src/**/*.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      
+<!--       <plugin> -->
+<!--         <groupId>org.pitest</groupId> -->
+<!--         <artifactId>pitest-maven</artifactId> -->
+<!--         <version>0.27</version> -->
+<!--         <configuration> -->
+<!--           <targetTests> -->
+<!--             <param>stormpot.*</param> -->
+<!--           </targetTests> -->
+<!--           <targetClasses> -->
+<!--             <param>stormpot.Config</param> -->
+<!--             <param>stormpot.PoolException</param> -->
+<!--             <param>stormpot.qpool.*</param> -->
+<!--             <param>stormpot.basicpool.*</param> -->
+<!--           </targetClasses> -->
+<!--           <threads>4</threads> -->
+<!--         </configuration>       -->
+<!--       </plugin> -->
+      
     </plugins>
 
   </build>
