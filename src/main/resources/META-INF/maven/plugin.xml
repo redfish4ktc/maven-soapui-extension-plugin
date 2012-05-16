@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 ~ Copyright 2012 Thomas Bouffard (redfish4ktc)
 ~
@@ -14,7 +15,6 @@
 ~ specific language governing permissions and limitations
 ~ under the License.
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <description></description>
   <!-- ######## CUSTOMIZED -->
