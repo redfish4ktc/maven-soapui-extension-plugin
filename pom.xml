@@ -116,6 +116,7 @@
         <version>1.5</version>
         <configuration>
           <debug>false</debug>
+          <showVersion>true</showVersion>
           <projectsDirectory>src/it</projectsDirectory>
           <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
           <pomIncludes>
@@ -150,7 +151,7 @@
           <localCheckout>true</localCheckout>
           <pushChanges>false</pushChanges>
         </configuration>
-      </plugin>      
+      </plugin>
     </plugins>
 
   </build>
