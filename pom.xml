@@ -190,8 +190,13 @@
         </executions>
         <configuration>
           <includes>
-            <include>src/**/*.java</include>
+            <include>*</include>
+            <include>src/main/**/*</include>
+            <include>src/test/**/*</include>
           </includes>
+          <excludes>
+            <exclude>.gitignore</exclude>
+          </excludes>
         </configuration>
       </plugin>
       
