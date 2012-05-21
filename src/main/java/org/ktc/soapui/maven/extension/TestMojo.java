@@ -49,7 +49,6 @@ public class TestMojo extends AbstractMojo {
     private String settingsPassword;
     private boolean testFailIgnore;
     private boolean coverage;
-
     private String[] globalProperties;
     private String[] projectProperties;
     private boolean saveAfterRun;
