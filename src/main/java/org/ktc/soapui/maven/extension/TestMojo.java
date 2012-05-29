@@ -19,6 +19,8 @@ package org.ktc.soapui.maven.extension;
 
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.maven.model.Build;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -57,11 +59,7 @@ public class TestMojo extends AbstractMojo {
     private String reportName;
     private Properties soapuiProperties;
 
-    // ****************************
-    // for issue #2 and #3
     private MavenProject project;
-
-    // ****************************
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
@@ -145,6 +143,7 @@ public class TestMojo extends AbstractMojo {
             }
         }
         try {
+            validateConfiguration();
             runner.run();
             // ****************************
             // for issue #2 and #3
@@ -162,10 +161,24 @@ public class TestMojo extends AbstractMojo {
             // }
             // ****************************
         } catch (Exception e) {
-            // #2 exception message will be logged as a MojoFailureException is then thrown
-            // getLog().error(e.toString());
+            getLog().debug("Detailled errors", e);
             throw new MojoFailureException(this, "SoapUI Test(s) failed", e.getMessage());
         }
+    }
+    
+    private void validateConfiguration() {
+        getLog().info("Checking logs configuration");
+        String soapuiLogRootKey = "soapui.logroot";
+        String soapuiLogRootValue = System.getProperty(soapuiLogRootKey);
+        getLog().debug("key " + soapuiLogRootKey + " value " + soapuiLogRootValue);
+        if(StringUtils.isBlank(soapuiLogRootValue)) {
+            Build build = project.getBuild();
+            // Be carreful with the trailing /
+            String defaultLogDirectoryPath = build.getDirectory() + "/soapui/logs/";
+            System.setProperty(soapuiLogRootKey, defaultLogDirectoryPath);
+            getLog().info("Using default log directory " + System.getProperty(soapuiLogRootKey));
+        }
+        getLog().info("Logs configuration done.");
     }
     
 }
