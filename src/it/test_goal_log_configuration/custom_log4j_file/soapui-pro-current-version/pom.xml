@@ -40,12 +40,6 @@
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <projectFile>${soapui.project.file.path}</projectFile>
               <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
-              <soapuiProperties>
-                <property>
-                  <name>soapui.scripting.library</name>
-                  <value>${groovy.scripts.path}</value>
-                </property>
-              </soapuiProperties>
             </configuration>
             <goals>
               <goal>test</goal>
