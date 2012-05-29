@@ -21,17 +21,17 @@
     <groupId>soapui.extension</groupId>
     <artifactId>test-goal-errors-logging</artifactId>
     <version>@project.version@</version>
-    <relativePath>../common.xml</relativePath>
+    <relativePath>../../common.xml</relativePath>
   </parent>
-  <artifactId>test-goal-errors-logging-only-once</artifactId>
+  <artifactId>test-goal-errors-logging-from-soapui</artifactId>
   <packaging>pom</packaging>  
 
   <build>
     <plugins>
       <plugin>
-        <groupId>@project.groupId@</groupId>
-        <artifactId>@project.artifactId@</artifactId>
-        <version>@project.version@</version>
+        <groupId>eviware</groupId>
+        <artifactId>maven-soapui-pro-plugin</artifactId>
+        <version>4.5.0</version>
         <executions>
           <execution>
             <id>project-with-groovy</id>
@@ -40,6 +40,7 @@
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <projectFile>${soapui.project.file.path}</projectFile>
               <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
+              <testFailIgnore>true</testFailIgnore>
             </configuration>
             <goals>
               <goal>test</goal>

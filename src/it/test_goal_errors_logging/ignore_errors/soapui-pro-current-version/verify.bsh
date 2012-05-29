@@ -1,0 +1,45 @@
+/*
+ * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+import java.io.*;
+
+try {
+  File logFile = new File(basedir, "build.log");
+  System.out.println("Scanning file " + logFile);
+  if (!logFile.exists()) {
+    System.out.println("FAILED! File " + logFile + " does not exist!!");
+    return false;
+  }  
+  
+  System.out.println("Reading the content of the groovy log file " + logFile);
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
+  String expectedContent = "TestCase [TestCase with groovy] failed without assertions";
+  int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
+  System.out.println("Number of occurences of expected content: " + matchCount);
+  int expectedMatchCount = 0;
+  if (matchCount != expectedMatchCount) {
+    System.out.println("FAILED! Find content in the log file. Expected content: " + expectedContent + ". Expected match count: " + expectedMatchCount);
+    return false;
+  }
+
+  System.out.println("OK");
+  return true;  
+}
+catch(Throwable t) {
+    t.printStackTrace();
+    return false;
+}

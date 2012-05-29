@@ -21,7 +21,7 @@
     <groupId>soapui.extension</groupId>
     <artifactId>test-goal-errors-logging</artifactId>
     <version>@project.version@</version>
-    <relativePath>../common.xml</relativePath>
+    <relativePath>../../common.xml</relativePath>
   </parent>
   <artifactId>test-goal-errors-logging-from-soapui</artifactId>
   <packaging>pom</packaging>  
@@ -31,7 +31,7 @@
       <plugin>
         <groupId>eviware</groupId>
         <artifactId>maven-soapui-pro-plugin</artifactId>
-        <version>4.5.0</version>
+        <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>
             <id>project-with-groovy</id>
@@ -40,12 +40,26 @@
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <projectFile>${soapui.project.file.path}</projectFile>
               <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
+              <testFailIgnore>true</testFailIgnore>
             </configuration>
             <goals>
               <goal>test</goal>
             </goals>
           </execution>
         </executions>
+        <dependencies>
+          <!-- taken from maven-soapui-pro-plugin 3.6.1 -->
+          <dependency>
+            <groupId>jgoodies</groupId>
+            <artifactId>looks</artifactId>
+            <version>2.2.0</version>
+          </dependency>
+          <dependency>
+            <groupId>fife</groupId>
+            <artifactId>rsyntaxtextarea</artifactId>
+            <version>1.3.4</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>

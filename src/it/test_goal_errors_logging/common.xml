@@ -23,7 +23,7 @@
   <version>@project.version@</version>
   
   <properties>
-    <soapui.configuration.path>${basedir}/../soapui-conf</soapui.configuration.path>
+    <soapui.configuration.path>${basedir}/../../soapui-conf</soapui.configuration.path>
     <soapui.project.file.path>${soapui.configuration.path}/projects/simple-fail-1-soapui-project.xml</soapui.project.file.path>
     <soapui.settings.empty.file.path>${soapui.configuration.path}/soapui-settings/empty-soapui-settings.xml</soapui.settings.empty.file.path>
     <soapui.config.output.directory>${project.build.directory}/soapui</soapui.config.output.directory>
