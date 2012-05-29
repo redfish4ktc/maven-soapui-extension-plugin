@@ -39,7 +39,7 @@
             <configuration>
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <projectFile>${soapui.project.file.path}</projectFile>
-              <outputFolder>${project.build.directory}/reports</outputFolder>
+              <outputFolder>${soapui.config.output.directory}/reports</outputFolder>
               <soapuiProperties>
                 <property>
                   <name>soapui.scripting.library</name>
@@ -47,7 +47,7 @@
                 </property>
                 <property>
                   <name>soapui.logroot</name>
-                  <value>${soapui.config.output.directory}/logs/</value>
+                  <value>${soapui.config.output.directory}/custom-logs/</value>
                 </property>
               </soapuiProperties>
             </configuration>

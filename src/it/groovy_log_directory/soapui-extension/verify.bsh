@@ -20,9 +20,9 @@ import java.io.*;
 try {
   System.out.println("Verifying groovy log file");
   File stdGroovyLogFile = new File(basedir, "global-groovy.log");
-  File groovyLogFile = new File(basedir, "target/soapui/logs/global-groovy.log");
+  File groovyLogFile = new File(basedir, "target/soapui/custom-logs/global-groovy.log");
   System.out.println("Standard plugin logs in " + stdGroovyLogFile);
-  System.out.println("We expect to log " + groovyLogFile);
+  System.out.println("We expect to log in " + groovyLogFile);
   
   
   if (stdGroovyLogFile.exists()) {
