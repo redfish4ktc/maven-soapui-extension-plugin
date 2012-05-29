@@ -162,7 +162,8 @@ public class TestMojo extends AbstractMojo {
             // }
             // ****************************
         } catch (Exception e) {
-            getLog().error(e.toString());
+            // #2 exception message will be logged as a MojoFailureException is then thrown
+            // getLog().error(e.toString());
             throw new MojoFailureException(this, "SoapUI Test(s) failed", e.getMessage());
         }
     }
