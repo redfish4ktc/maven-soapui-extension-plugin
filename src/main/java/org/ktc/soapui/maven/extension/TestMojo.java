@@ -23,6 +23,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.SoapUIProTestCaseRunner;
@@ -63,6 +64,8 @@ public class TestMojo extends AbstractMojo {
     // ****************************
 
     public void execute() throws MojoExecutionException, MojoFailureException {
+        getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
+
         if ((this.skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
             // #1 add log when skipping tests
             getLog().info("SoapUI tests are skipped.");
@@ -163,5 +166,5 @@ public class TestMojo extends AbstractMojo {
             throw new MojoFailureException(this, "SoapUI Test(s) failed", e.getMessage());
         }
     }
-
+    
 }
