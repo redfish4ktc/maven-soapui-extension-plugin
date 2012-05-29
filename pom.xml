@@ -59,6 +59,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <javaMinimumSupportedVersion>1.5</javaMinimumSupportedVersion>
     <mavenMinimumSupportedVersion>2.0.11</mavenMinimumSupportedVersion>
+    <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
     <soapuiVersionCurrent>4.0.0</soapuiVersionCurrent>
   </properties>
@@ -137,9 +138,10 @@
       </plugin>
       <plugin>
         <artifactId>maven-invoker-plugin</artifactId>
-        <version>1.5</version>
+        <version>1.6</version>
         <configuration>
           <debug>false</debug>
+          <parallelThreads>${invokerParallelThreads}</parallelThreads>
           <showVersion>true</showVersion>
           <projectsDirectory>src/it</projectsDirectory>
           <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
