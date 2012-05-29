@@ -27,12 +27,20 @@ try {
   
   System.out.println("Reading the content of the groovy log file " + logFile);
   String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
-  String expectedContent = "TestCase [TestCase with groovy] failed without assertions";
+  String expectedContent = "java.lang.RuntimeException: Fail project 1";
   int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
   System.out.println("Number of occurences of expected content: " + matchCount);
   int expectedMatchCount = 1;
   if (matchCount != expectedMatchCount) {
-    System.out.println("FAILED! Unable to find content in the log file. Expected content: " + expectedContent + ". Expected match count: " + expectedMatchCount);
+    System.out.println("FAILED! Find content in the log file. Expected content: " + expectedContent + ". Expected match count: " + expectedMatchCount);
+    return false;
+  }
+  String unexpectedContent = "TestCase [TestCase with groovy] failed without assertions";
+  int matchCountOfUnexpectedContent = org.apache.commons.lang.StringUtils.countMatches(fileContent, unexpectedContent);
+  System.out.println("Number of occurences of unexpected content: " + matchCountOfUnexpectedContent);
+  int expectedmatchCountOfUnexpectedContent = 0;
+  if (expectedmatchCountOfUnexpectedContent != matchCountOfUnexpectedContent) {
+    System.out.println("FAILED! Find content in the log file. Unexpected content: " + expectedContent + ". Expected match count: " + expectedmatchCountOfUnexpectedContent);
     return false;
   }
 

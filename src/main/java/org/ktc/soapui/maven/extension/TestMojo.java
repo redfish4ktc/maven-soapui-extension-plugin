@@ -25,7 +25,9 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.ProjectInfo;
+import org.ktc.soapui.maven.extension.impl.SoapuiTestsFailException;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.SoapUIProTestCaseRunner;
@@ -109,7 +111,7 @@ public class TestMojo extends AbstractMojo {
         runner.setJUnitReport(this.junitReport);
         runner.setEnableUI(this.interactive);
         runner.setOpenReport(this.openReport);
-        runner.setIgnoreError(this.testFailIgnore);
+        runner.setIgnoreError(true);
         runner.setSaveAfterRun(this.saveAfterRun);
 
         if (this.settingsFile != null) {
@@ -145,6 +147,11 @@ public class TestMojo extends AbstractMojo {
         try {
             validateConfiguration();
             runner.run();
+            boolean hasErrors = ErrorHandler.hasErrors(runner);
+             if (!testFailIgnore && hasErrors) {
+                throw new SoapuiTestsFailException("See logs and/or check the printReport"
+                        + " (if necessary, set the option to true)");
+             }
             // ****************************
             // for issue #2 and #3
             // if (testFailIgnore) {
