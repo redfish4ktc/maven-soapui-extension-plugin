@@ -4,6 +4,8 @@ It is deployed in Central thanks to [Sonatype OSS Repository Hosting Service](ht
 
 For more information about how to use, see the [wiki](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki).
 
+Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)
+
 
 License
 -------
