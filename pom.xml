@@ -54,6 +54,10 @@
       <timezone>+1</timezone>
     </developer>
   </developers>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>http://github.com/redfish4ktc/maven-soapui-extension-plugin/issues</url>
+  </issueManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
