@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 ~ Copyright 2012 Thomas Bouffard (redfish4ktc)
 ~
@@ -14,40 +15,23 @@
 ~ specific language governing permissions and limitations
 ~ under the License.
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <settings>
   <profiles>
     <profile>
-      <id>it-repo</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
+      <id>declareRepositories</id>
+       <activation>
+        <activeByDefault>false</activeByDefault>
       </activation>
-      <properties>
-        <!-- This property allows the ITs to access the real local repository instead of the isolated one -->
-        <invoker.repo.local>@localRepository@</invoker.repo.local>
-      </properties>
       <repositories>
         <repository>
-          <id>local.central</id>
-          <url>@localRepositoryUrl@</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
+          <id>eviwareRepository</id>
+          <url>http://www.eviware.com/repository/maven2/</url>
         </repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
-          <id>local.central</id>
-          <url>@localRepositoryUrl@</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
+          <id>eviwarePluginRepository</id>
+          <url>http://www.eviware.com/repository/maven2/</url>
         </pluginRepository>
       </pluginRepositories>
     </profile>
