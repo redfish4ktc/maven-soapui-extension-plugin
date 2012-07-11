@@ -9,5 +9,5 @@ Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/
 
 License
 -------
-maven-soapui-extension-plugin is licensed under the Apache 2.0 software license:
-http://www.apache.org/licenses/LICENSE-2.0.html
+maven-soapui-extension-plugin is licensed under the [Apache 2.0 software license](
+http://www.apache.org/licenses/LICENSE-2.0.html)
