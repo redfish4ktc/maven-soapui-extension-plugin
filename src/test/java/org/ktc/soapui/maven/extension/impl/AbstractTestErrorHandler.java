@@ -34,23 +34,23 @@ import com.eviware.soapui.tools.SoapUITestCaseRunner;
 
 public abstract class AbstractTestErrorHandler {
 
-  SoapUITestCaseRunner runner;
+  protected SoapUITestCaseRunner runner;
 
   @Test
-  public void hasErrors_whenEverythingIsOk() {
-    assertThat(ErrorHandler.hasErrors(runner)).isFalse();
+  public void hasFailures_whenEverythingIsOk() {
+    assertThat(ErrorHandler.hasFailures(runner)).isFalse();
   }
 
   @Test
-  public void hasErrors_whenRunnerHasFailedTests() throws IllegalAccessException {
+  public void hasFailures_whenRunnerHasFailedTests() throws IllegalAccessException {
     initializeFailedTests();
-    assertThat(ErrorHandler.hasErrors(runner)).isTrue();
+    assertThat(ErrorHandler.hasFailures(runner)).isTrue();
   }
 
   @Test
-  public void hasErrors_whenRunnerHasFailedAssertions() throws IllegalAccessException {
+  public void hasFailures_whenRunnerHasFailedAssertions() throws IllegalAccessException {
     initializeFailedAssertions();
-    assertThat(ErrorHandler.hasErrors(runner)).isTrue();
+    assertThat(ErrorHandler.hasFailures(runner)).isTrue();
   }
 
   private void initializeFailedTests() throws IllegalAccessException {

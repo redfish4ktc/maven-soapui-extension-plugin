@@ -28,7 +28,7 @@ import com.eviware.soapui.tools.SoapUITestCaseRunner;
 
 public class ErrorHandler {
 
-    public static boolean hasErrors(SoapUITestCaseRunner runner) {
+    public static boolean hasFailures(SoapUITestCaseRunner runner) {
         List < TestCase > failedTests = getFailedTests(runner);
         if (failedTests.size() > 0) {
             return true;

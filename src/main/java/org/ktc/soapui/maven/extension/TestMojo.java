@@ -27,7 +27,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.ProjectInfo;
-import org.ktc.soapui.maven.extension.impl.SoapuiTestsFailException;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.SoapUIProTestCaseRunner;
@@ -147,28 +146,27 @@ public class TestMojo extends AbstractMojo {
                 System.setProperty(key, this.soapuiProperties.getProperty(key));
             }
         }
+        validateConfiguration();
         try {
-            validateConfiguration();
             runner.run();
-            boolean hasErrors = ErrorHandler.hasErrors(runner);
-            if (hasErrors) {
-                if (testFailIgnore) {
-                    getLog().warn("Some tests have failed (see logs and/or check the printReport,"
-                            + " if necessary, set the option to true)");
-                    getLog().debug("Setting project property " + TEST_ERROR_KEY);
-                    project.getProperties().setProperty(TEST_ERROR_KEY, "true");
-                    getLog().debug(
-                            "Property " + TEST_ERROR_KEY + " set to "
-                                    + project.getProperties().getProperty(TEST_ERROR_KEY));
-                }
-                else {
-                    throw new SoapuiTestsFailException("See logs and/or check the printReport"
-                            + " (if necessary, set the option to true)");
-                 }
-            }
         } catch (Exception e) {
-            getLog().debug("Detailled errors", e);
-            throw new MojoFailureException(this, "SoapUI Test(s) failed", e.getMessage());
+            getLog().debug(e);
+            throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
+        }
+        boolean hasFailures = ErrorHandler.hasFailures(runner);
+        if (hasFailures) {
+            if (testFailIgnore) {
+                getLog().warn(
+                        "Some tests have failed (see logs and/or check the printReport,"
+                                + " if necessary, set the option to true)");
+                getLog().debug("Setting project property " + TEST_ERROR_KEY);
+                project.getProperties().setProperty(TEST_ERROR_KEY, "true");
+                getLog().debug(
+                        "Property " + TEST_ERROR_KEY + " set to " + project.getProperties().getProperty(TEST_ERROR_KEY));
+            } else {
+                throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
+                        + " (if necessary, set the option to true)");
+            }
         }
     }
     
