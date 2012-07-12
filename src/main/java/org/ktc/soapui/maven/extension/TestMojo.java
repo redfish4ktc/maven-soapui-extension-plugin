@@ -153,10 +153,11 @@ public class TestMojo extends AbstractMojo {
             boolean hasErrors = ErrorHandler.hasErrors(runner);
             if (hasErrors) {
                 if (testFailIgnore) {
-                    getLog().warn("The testFailIgnore parameter has been set to true but some tests have failed");
-                    getLog().info("Setting project property " + TEST_ERROR_KEY);
+                    getLog().warn("Some tests have failed (see logs and/or check the printReport,"
+                            + " if necessary, set the option to true)");
+                    getLog().debug("Setting project property " + TEST_ERROR_KEY);
                     project.getProperties().setProperty(TEST_ERROR_KEY, "true");
-                    getLog().info(
+                    getLog().debug(
                             "Property " + TEST_ERROR_KEY + " set to "
                                     + project.getProperties().getProperty(TEST_ERROR_KEY));
                 }
