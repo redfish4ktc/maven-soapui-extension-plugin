@@ -140,10 +140,10 @@ public class TestMojo extends AbstractMojo {
         }
         if (this.reportFormat != null)
             runner.setReportFormats(this.reportFormat.split(","));
-        if ((this.soapuiProperties != null) && (this.soapuiProperties.size() > 0)) {
+        if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
             for (Object keyObject : this.soapuiProperties.keySet()) {
                 String key = (String) keyObject;
-                System.out.println("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
+                getLog().info("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
                 System.setProperty(key, this.soapuiProperties.getProperty(key));
             }
         }
