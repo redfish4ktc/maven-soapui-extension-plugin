@@ -17,19 +17,30 @@
 
 package org.ktc.soapui.maven.extension;
 
+import static org.ktc.soapui.maven.extension.TestMojo.TEST_FAILURES_AND_ERRORS_KEY;
+
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 
 public class TestVerifyMojo extends AbstractMojo {
-    
+
     private MavenProject project;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getLog().info("i am the test verify mojo!!!");
-        String soapuiTestsHaveErrors = project.getProperties().getProperty(TestMojo.TEST_ERROR_KEY);
-        getLog().info("Soapui tests have errors: " + soapuiTestsHaveErrors);
+        // TODO duplicate with TestMojo
+        getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
+
+        getLog().info("Checking if soapui tests mojo fails");
+        String soapuiTestsHaveFailuresOrErrors = project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY);
+        if (BooleanUtils.toBoolean(soapuiTestsHaveFailuresOrErrors)) {
+            throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
+                    + " (if necessary, set the option to true)");
+        }
+        getLog().info("No Soapui tests fail.");
     }
 
 }

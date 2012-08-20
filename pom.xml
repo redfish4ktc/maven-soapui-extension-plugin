@@ -208,7 +208,8 @@
           <projectsDirectory>src/it</projectsDirectory>
           <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
           <pomIncludes>
-            <pomInclude>**/pom.xml</pomInclude>
+<!--             <pomInclude>**/pom.xml</pomInclude> -->
+            <pomInclude>test-verify_goal\one_failing_project\pom.xml</pomInclude>
           </pomIncludes>
           <preBuildHookScript>setup</preBuildHookScript>
           <postBuildHookScript>verify</postBuildHookScript>

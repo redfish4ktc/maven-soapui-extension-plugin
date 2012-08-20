@@ -33,7 +33,7 @@ import com.eviware.soapui.SoapUIProTestCaseRunner;
 
 public class TestMojo extends AbstractMojo {
     
-    public static final String TEST_ERROR_KEY = "soapui_extension_Mlx#ppp";
+    public static final String TEST_FAILURES_AND_ERRORS_KEY = "soapui_extension_Mlx#ppp";
     
     private String projectFile;
     private String testSuite;
@@ -159,10 +159,11 @@ public class TestMojo extends AbstractMojo {
                 getLog().warn(
                         "Some tests have failed (see logs and/or check the printReport,"
                                 + " if necessary, set the option to true)");
-                getLog().debug("Setting project property " + TEST_ERROR_KEY);
-                project.getProperties().setProperty(TEST_ERROR_KEY, "true");
+                getLog().debug("Setting project property " + TEST_FAILURES_AND_ERRORS_KEY);
+                project.getProperties().setProperty(TEST_FAILURES_AND_ERRORS_KEY, "true");
                 getLog().debug(
-                        "Property " + TEST_ERROR_KEY + " set to " + project.getProperties().getProperty(TEST_ERROR_KEY));
+                        "Property " + TEST_FAILURES_AND_ERRORS_KEY + " set to "
+                                + project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY));
             } else {
                 throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
                         + " (if necessary, set the option to true)");
