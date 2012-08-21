@@ -23,7 +23,7 @@
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>test-verify</artifactId>
+  <artifactId>test-verify-with-one-soapui-failing-project</artifactId>
   <packaging>pom</packaging>  
 
   <build>
