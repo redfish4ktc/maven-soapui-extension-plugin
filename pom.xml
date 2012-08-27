@@ -284,6 +284,7 @@
           </includes>
           <excludes>
             <exclude>.gitignore</exclude>
+            <exclude>.travis.yml</exclude>
             <exclude>src/config/eclipse/java-formatter.xml</exclude>
           </excludes>
         </configuration>
