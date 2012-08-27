@@ -1,4 +1,6 @@
 language: java
+# default install is mvn install --quiet -DskipTests=true
+install: mvn clean initialize -P declareRepositories
 script: mvn clean verify -P declareRepositories
 jdk:
   - oraclejdk7
