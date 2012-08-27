@@ -61,7 +61,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javaMinimumSupportedVersion>1.5</javaMinimumSupportedVersion>
+    <javaMinimumSupportedVersion>1.6</javaMinimumSupportedVersion>
     <mavenMinimumSupportedVersion>2.0.11</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
