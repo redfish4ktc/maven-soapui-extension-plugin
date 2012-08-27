@@ -1,3 +1,6 @@
+# Configuration for Travis CI server
+# See http://travis-ci.org/#!/redfish4ktc/maven-soapui-extension-plugin
+#
 language: java
 # default install is mvn install --quiet -DskipTests=true
 install: mvn -V clean initialize -P declareRepositories
