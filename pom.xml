@@ -186,6 +186,11 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12.2</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.rat</groupId>
+				<artifactId>apache-rat-plugin</artifactId>
+				<version>0.8</version>
+			</plugin>
 		</plugins>
 	</pluginManagement>
 
@@ -251,7 +256,6 @@
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
-        <version>0.8</version>
         <executions>
           <execution>
             <phase>verify</phase>
@@ -267,6 +271,7 @@
           </includes>
           <excludes>
             <exclude>.gitignore</exclude>
+            <exclude>src/config/eclipse/java-formatter.xml</exclude>
           </excludes>
         </configuration>
       </plugin>
