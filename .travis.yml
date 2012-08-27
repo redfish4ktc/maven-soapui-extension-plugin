@@ -1,0 +1,10 @@
+language: java
+script: mvn clean verify -P declareRepositories
+# whitelist
+branches:
+  only:
+    - master
+jdk:
+  - oraclejdk7
+  # oracle jdk6 is not supported, so give a try to openjdk
+  - openjdk6
