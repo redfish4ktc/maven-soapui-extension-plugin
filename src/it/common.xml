@@ -17,23 +17,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>soapui.extension</groupId>
-    <artifactId>common-it-parent</artifactId>
-    <version>@project.version@</version>
-    <relativePath>../common.xml</relativePath>
-  </parent>
   <groupId>soapui.extension</groupId>
-  <artifactId>test-goal-display-message-with-skip-to-true</artifactId>
+  <artifactId>common-it-parent</artifactId>
   <packaging>pom</packaging>
   <version>@project.version@</version>
   
-  <properties>
-    <soapui.configuration.path>${basedir}/../soapui-conf</soapui.configuration.path>
-    <soapui.project.file.path>${soapui.configuration.path}/projects/simple-project-with-groovy-xml-soapui-project.xml</soapui.project.file.path>
-    <soapui.settings.empty.file.path>${soapui.configuration.path}/soapui-settings/empty-soapui-settings.xml</soapui.settings.empty.file.path>
-    <soapui.settings.library.file.path>${soapui.configuration.path}/soapui-settings/library-soapui-settings.xml</soapui.settings.library.file.path>
-    <groovy.scripts.path>${soapui.configuration.path}/groovy_scripts</groovy.scripts.path>
-  </properties>
+  <profiles>
+    <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
+    <profile>
+      <id>declareRepositories</id>
+       <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>eviwareRepository</id>
+          <url>http://www.eviware.com/repository/maven2/</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>eviwarePluginRepository</id>
+          <url>http://www.eviware.com/repository/maven2/</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
 
 </project>

@@ -17,6 +17,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>soapui.extension</groupId>
+    <artifactId>common-it-parent</artifactId>
+    <version>@project.version@</version>
+    <relativePath>../common.xml</relativePath>
+  </parent>
   <groupId>soapui.extension</groupId>
   <artifactId>test-goal-groovy-log-in-the-configured-directory</artifactId>
   <packaging>pom</packaging>
