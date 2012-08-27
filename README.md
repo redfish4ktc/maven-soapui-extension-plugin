@@ -10,9 +10,9 @@ Supported versions
   * maven 2.2.1 and 3.0.4
   * java 6 and 7 (soapui needs java 6+ starting from soapui 4.0.0)
 
-
-Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)
-
+Build status  
+* Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)  
+* Travis: [![Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](http://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin) (may failed because it cannot access to eviware repository)
 
 License
 ============
