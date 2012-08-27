@@ -1,5 +1,7 @@
 # Configuration for Travis CI server
-# See http://travis-ci.org/#!/redfish4ktc/maven-soapui-extension-plugin
+# Live instance: http://travis-ci.org/#!/redfish4ktc/maven-soapui-extension-plugin
+#
+# WARN: please validate this file after modification by visiting http://lint.travis-ci.org/
 #
 language: java
 # default install is mvn install --quiet -DskipTests=true
