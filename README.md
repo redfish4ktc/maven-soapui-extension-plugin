@@ -11,8 +11,10 @@ Supported versions
   * java 6 and 7 (soapui needs java 6+ starting from soapui 4.0.0)
 
 Build status  
-* Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)  
-* Travis: [![Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](http://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin) (may failed because it cannot access to eviware repository)
+* [maven 3.0.4, java 6] Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)  
+* [maven 3.0.3, java 6/7] Travis: [![Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](http://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin)
+* Coming soon [maven 2.2.1, java 6/7] Cloudbees + Jenkins Embeddable Build Status Plugin
+
 
 License
 ============
