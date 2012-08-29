@@ -24,4 +24,27 @@ def nbDaysInYear = myDateUtil.getNbDaysInYear();
 log.info("nbDaysInYear=${nbDaysInYear}");
 log.info("END OF groovy script that needs external files to work");
 
+</script></con:config></con:testStep><con:testStep type="groovy" name="Groovy that needs Junit code"><con:settings/><con:config><script>log.info("groovy script that needs junit to work");
+
+try {
+  // need xml escaping, otherwise soapui remove the whole text
+  String expected = "&lt;a&gt;&lt;/a&gt;" // <a></a>
+  String actual = "&lt;b&gt;&lt;/b&gt;" // <b></b>
+  log.info("expected: " + expected)
+  log.info("actual: " + actual)
+  org.custommonkey.xmlunit.XMLAssert.assertXMLEqual(expected, actual)
+}
+catch (Throwable t) {
+  if ( t instanceof junit.framework.AssertionFailedError) {
+    junit.framework.AssertionFailedError failure = (junit.framework.AssertionFailedError) t
+    log.info("Found expected junit failure: " + failure.getMessage())
+  }
+  else {
+    throw new RuntimeException("Test should have catch a junit.framework.ComparisonFailure", t);
+  }
+}
+finally {
+  log.info("END OF groovy script that needs junit to work");
+}
+
 </script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/></con:soapui-project>
