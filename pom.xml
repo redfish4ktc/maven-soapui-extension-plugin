@@ -68,7 +68,7 @@
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
     <soapuiVersionCurrent>4.0.0</soapuiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
-    <invokerProfile>profile-that-does-not-exist</invokerProfile>
+    <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
 
   <dependencies>

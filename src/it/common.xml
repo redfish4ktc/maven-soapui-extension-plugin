@@ -23,6 +23,12 @@
   <version>@project.version@</version>
   
   <profiles>
+    <profile>
+      <id>defaultInvokerProfile</id>
+       <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+    </profile>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <profile>
       <id>declareRepositories</id>
