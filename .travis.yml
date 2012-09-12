@@ -6,7 +6,7 @@
 language: java
 # default install is mvn install --quiet -DskipTests=true
 install: mvn -V clean initialize -P declareRepositories
-script: mvn -V clean verify -P declareRepositories
+script: mvn -V clean verify -P declareRepositories,runIT
 jdk:
   - oraclejdk7
   # oracle jdk6 is not supported, so give a try to openjdk
