@@ -24,7 +24,7 @@
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.0.0.2</version>
+  <version>4.0.0.3-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>Add new features and bug fixes to the eviware maven-soapui-pro-plugin</description>
@@ -42,7 +42,7 @@
     <connection>scm:git:git@github.com:redfish4ktc/maven-soapui-extension-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:redfish4ktc/maven-soapui-extension-plugin.git</developerConnection>
     <url>git@github.com:redfish4ktc/maven-soapui-extension-plugin.git</url>
-    <tag>maven-soapui-extension-plugin-4.0.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
   <developers>
     <developer>
