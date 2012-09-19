@@ -9,7 +9,7 @@ install: mvn -V clean initialize -P declareRepositories
 script: mvn -V clean verify -P declareRepositories,runIT
 jdk:
   - oraclejdk7
-  # oracle jdk6 is not supported, so give a try to openjdk
+  - openjdk7
   - openjdk6
 branches:
   only:
