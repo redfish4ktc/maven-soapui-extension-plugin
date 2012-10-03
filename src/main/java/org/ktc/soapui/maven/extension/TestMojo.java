@@ -178,7 +178,7 @@ public class TestMojo extends AbstractMojo {
         getLog().debug("key " + soapuiLogRootKey + " value " + soapuiLogRootValue);
         if(StringUtils.isBlank(soapuiLogRootValue)) {
             Build build = project.getBuild();
-            // Be carreful with the trailing /
+            // Be careful with the trailing / (see https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#wiki-log-config)
             String defaultLogDirectoryPath = build.getDirectory() + "/soapui/logs/";
             System.setProperty(soapuiLogRootKey, defaultLogDirectoryPath);
             getLog().info("Using default log directory " + System.getProperty(soapuiLogRootKey));
