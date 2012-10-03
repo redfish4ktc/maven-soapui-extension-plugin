@@ -7,7 +7,7 @@ For more information about how to use it, see the [wiki](https://github.com/redf
 Last released version: [4.0.0.2](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
 
 
-Supported versions
+Supported java and maven versions
 ============
   * maven 2.2.1 and 3.0.4
   * java 6 and 7 (soapui needs java 6+ starting from 4.0.0)
