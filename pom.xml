@@ -63,7 +63,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- also check animal-sniffer configuration -->
     <javaMinimumSupportedVersion>1.6</javaMinimumSupportedVersion>
-    <mavenMinimumSupportedVersion>2.0.11</mavenMinimumSupportedVersion>
+    <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
     <soapuiVersionCurrent>4.0.0</soapuiVersionCurrent>
