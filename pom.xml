@@ -182,6 +182,7 @@
           <excludes>
             <exclude>.gitignore</exclude>
             <exclude>.travis.yml</exclude>
+            <exclude>TODO.md</exclude>
           </excludes>
         </configuration>
       </plugin>
