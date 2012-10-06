@@ -1,8 +1,6 @@
 # Development todo list #
 
 ## Parent ##
-- use redfish4ktc-maven-oss-parent version 2
-  - remove config already done in parent (pluginmanagement)
 - move to parent (version 3)
   - complier config
   - animalsniffer

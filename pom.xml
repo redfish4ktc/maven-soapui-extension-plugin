@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.github.redfish4ktc.parent</groupId>
     <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>1</version>
+    <version>2</version>
   </parent>
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
@@ -137,23 +137,6 @@
       </resource>
     </resources>
 
-    <pluginManagement>
-      <plugins>
-        <!-- not configured in redfish4ktc-maven-oss-parent 1 -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.7</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.8.1</version>
-        </plugin>
-        <!-- END of not configured in redfish4ktc-maven-oss-parent 1 -->
-      </plugins>
-    </pluginManagement>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -184,17 +167,6 @@
             <exclude>.travis.yml</exclude>
             <exclude>TODO.md</exclude>
           </excludes>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-            </manifest>
-          </archive>
         </configuration>
       </plugin>
       <plugin>
