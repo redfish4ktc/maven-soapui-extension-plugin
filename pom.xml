@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.github.redfish4ktc.parent</groupId>
     <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>2</version>
+    <version>3</version>
   </parent>
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
