@@ -62,6 +62,8 @@ public class TestMojo extends AbstractMojo {
     private String reportFormat;
     private String reportName;
     private Properties soapuiProperties;
+    // new in soapui 4.5.0 (pro only)
+    private String environment;
 
     private MavenProject project;
 
@@ -81,6 +83,9 @@ public class TestMojo extends AbstractMojo {
 
         runner.setProjectFile(this.projectFile);
 
+        if (environment != null) {
+            runner.setEnvironment(environment);
+          }
         if (this.endpoint != null) {
             runner.setEndpoint(this.endpoint);
         }

@@ -66,7 +66,7 @@
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
-    <soapuiVersionCurrent>4.0.0</soapuiVersionCurrent>
+    <soapuiVersionCurrent>4.5.0</soapuiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
@@ -77,25 +77,6 @@
       <artifactId>maven-soapui-pro-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
     </dependency>
-    <!-- FIX for issue #7 (taken from maven-soapui-pro-plugin 3.6.1) -->
-    <dependency>
-      <groupId>jgoodies</groupId>
-      <artifactId>looks</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>fife</groupId>
-      <artifactId>rsyntaxtextarea</artifactId>
-      <version>1.3.4</version>
-    </dependency>
-    <!-- end of FIX for issue #7 -->
-    <!-- FIX for issue #18 -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.4</version>
-    </dependency>
-    <!-- end of FIX for issue #18 -->
 
     <dependency>
       <groupId>org.easytesting</groupId>
@@ -166,6 +147,7 @@
             <exclude>.gitignore</exclude>
             <exclude>.travis.yml</exclude>
             <exclude>TODO.md</exclude>
+            <exclude>src/main/resources/META-INF/maven/plugin.xml</exclude>
           </excludes>
         </configuration>
       </plugin>
