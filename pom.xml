@@ -110,6 +110,7 @@
       </resource>
       <resource>
         <directory>${basedir}</directory>
+        <targetPath>META-INF</targetPath>
         <filtering>false</filtering>
         <includes>
           <include>LICENSE</include>
