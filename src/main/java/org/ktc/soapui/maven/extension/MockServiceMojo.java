@@ -17,16 +17,14 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.SoapUIProMockServiceRunner;
-import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.Properties;
-import java.util.Set;
+
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.logging.Log;
+
+import com.eviware.soapui.SoapUI;
+import com.eviware.soapui.SoapUIProMockServiceRunner;
 
 public class MockServiceMojo extends AbstractMojo {
     private String projectFile;
