@@ -17,6 +17,9 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
   - check if we need to force the "–Djava.headless=false" when running test
 
 
+## Mojo implementation ##
+test and mock goal does not declare mandatory parameter as required (see plugin.xml). Instead, null check is done in mojo implementation
+
 
 ### Invoker bug ###
 
