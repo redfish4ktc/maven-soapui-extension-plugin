@@ -19,6 +19,7 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
 
 ## Mojo implementation ##
 test and mock goal does not declare mandatory parameter as required (see plugin.xml). Instead, null check is done in mojo implementation
+Check parameters that should be declared as File instead of String
 
 
 ### Invoker bug ###
