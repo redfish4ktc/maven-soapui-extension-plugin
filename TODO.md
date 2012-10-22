@@ -15,6 +15,7 @@
   - avoid duplication in verify script (expecially log parsing): put duplicate code in a java class (see  
 http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classes.html)
   - check if we need to force the "–Djava.headless=false" when running test
+  - remove duplication in soapui configuration (settings, project)
 
 
 ## Mojo implementation ##
