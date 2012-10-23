@@ -45,7 +45,7 @@ public class ConvertProjectMojo extends AbstractMojo {
         // maybe this is fixed by providing settings file (auto-save option in the global UI-Settings which will save all open projects when exiting, is that what you are looking for?)
         try {
             WsdlProjectPro project = new WsdlProjectPro(inputProject.getAbsolutePath());
-            project.setComposite(true);
+            project.setComposite(conversionType.isTargetedProjectComposite());
             project.saveAs(outputProject.getAbsolutePath());
         }
         catch (Exception e) {

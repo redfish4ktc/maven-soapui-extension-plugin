@@ -37,6 +37,7 @@
             <id>standard-to-composite</id>
             <phase>generate-resources</phase>
             <configuration>
+              <conversionType>TO_COMPOSITE</conversionType>
               <inputProject>${soapui.project.standard.file.path}</inputProject>
               <outputProject>${soapui.config.output.directory}/converted-projects/composite</outputProject>
             </configuration>

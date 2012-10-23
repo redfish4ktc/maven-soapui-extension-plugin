@@ -18,6 +18,15 @@
 package org.ktc.soapui.maven.extension.impl;
 
 public enum ProjectConversionType {
-    TO_STANDARD, TO_COMPOSITE;
-    // TODO add abstract method isTargetedProjectComposite
+    TO_STANDARD(false), TO_COMPOSITE(true);
+    
+    private final boolean isTargetedProjectComposite;
+
+    private ProjectConversionType (boolean isTargetedProjectComposite) {
+      this.isTargetedProjectComposite= isTargetedProjectComposite;
+    }
+    
+    public boolean isTargetedProjectComposite() {
+      return isTargetedProjectComposite;
+    }
 }
