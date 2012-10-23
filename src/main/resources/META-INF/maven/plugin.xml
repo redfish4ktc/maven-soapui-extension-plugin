@@ -391,7 +391,17 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <editable>true</editable>
           <description></description>
         </parameter>
+        <parameter>
+          <name>conversionType</name>
+          <type>org.ktc.soapui.maven.extension.impl.ProjectConversionType</type>
+          <required>true</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
       </parameters>
+      <configuration>
+        <conversionType implementation="org.ktc.soapui.maven.extension.impl.ProjectConversionType">TO_STANDARD</conversionType>
+      </configuration>
     </mojo>
     <mojo>
       <goal>test-verify</goal>
