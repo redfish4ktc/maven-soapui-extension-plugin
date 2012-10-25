@@ -20,7 +20,7 @@ import java.io.*;
 // TODO create a checkFileExists method
 try {
   File baseOuputDirectory = new File(basedir, "target/soapui/converted-projects/composite");
-  System.out.println("Checking if composite project has been created in " + baseOuputDirectory);
+  System.out.println("Checking if a composite project has been created in " + baseOuputDirectory);
   if (!baseOuputDirectory.exists()) {
     System.out.println("FAILED! File " + baseOuputDirectory + " does not exist!!");
     return false;
