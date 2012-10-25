@@ -19,21 +19,35 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>common-it-parent</artifactId>
+    <artifactId>project-converter-goal</artifactId>
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <groupId>soapui.extension</groupId>
-  <artifactId>project-converter-goal</artifactId>
-  <packaging>pom</packaging>
-  <version>@project.version@</version>
-  
-  <properties>
-    <soapui.configuration.path>${basedir}/../_soapui-conf</soapui.configuration.path>
-    <soapui.project.composite.file.path>${soapui.configuration.path}/projects/composite-project</soapui.project.composite.file.path>
-    <soapui.project.standard.file.path>${soapui.configuration.path}/projects/standard-soapui-project.xml</soapui.project.standard.file.path>
-    <soapui.settings.empty.file.path>${soapui.configuration.path}/soapui-settings/empty-soapui-settings.xml</soapui.settings.empty.file.path>
-    <soapui.config.output.directory>${project.build.directory}/soapui</soapui.config.output.directory>
-  </properties>
+  <artifactId>project-converter-goal-composite-to-standard</artifactId>
+  <packaging>pom</packaging>  
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>@project.groupId@</groupId>
+        <artifactId>@project.artifactId@</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <id>composite-to-standard</id>
+            <phase>generate-resources</phase>
+            <configuration>
+              <conversionType>TO_STANDARD</conversionType>
+              <inputProject>${soapui.project.composite.file.path}</inputProject>
+              <outputProject>${soapui.config.output.directory}/converted-projects/standard.xml</outputProject>
+            </configuration>
+            <goals>
+              <goal>convert-project</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
 </project>
