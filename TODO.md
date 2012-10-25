@@ -15,8 +15,8 @@
   - avoid duplication in verify script (expecially log parsing): put duplicate code in a java class (see  
 http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classes.html)
   - check if we need to force the "–Djava.headless=false" when running test
-  - remove duplication in soapui configuration (settings, project)
-
+  - remove duplication in soapui configuration (settings, projects)
+  - add tests with composite projects
 
 ## Mojo implementation ##
   - test and mock goal does not declare mandatory parameter as required (see plugin.xml). Instead, null check is done in mojo implementation
