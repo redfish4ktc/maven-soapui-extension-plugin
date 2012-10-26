@@ -148,7 +148,10 @@
             <exclude>.gitignore</exclude>
             <exclude>.travis.yml</exclude>
             <exclude>TODO.md</exclude>
+            <!-- modified from orginal plugin.xml generated file -->
             <exclude>src/main/resources/META-INF/maven/plugin.xml</exclude>
+            <!-- Unable to add license because some files are -->
+            <exclude>src/it/convert-project_goal/_soapui-conf/projects/composite-project/**/*</exclude>
           </excludes>
         </configuration>
       </plugin>
