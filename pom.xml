@@ -142,12 +142,12 @@
         <configuration>
           <includes>
             <include>*</include>
+            <include>*.*</include>
             <include>src/**/*</include>
           </includes>
           <excludes>
             <exclude>.gitignore</exclude>
             <exclude>.travis.yml</exclude>
-            <exclude>TODO.md</exclude>
             <!-- modified from orginal plugin.xml generated file -->
             <exclude>src/main/resources/META-INF/maven/plugin.xml</exclude>
             <!-- Unable to add license because some files are -->
