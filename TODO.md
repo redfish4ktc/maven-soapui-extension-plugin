@@ -64,6 +64,15 @@ A workaround has been done in our project (we do not use the mergeUserSettings p
 
 
 
+### Documentation ###
+
+**Tips page**
+
+* document how to configure scripts and ext directory
+* talk about default value (everything in basedir)
+* put the 'Avoid log warnings at startup' section just before logs tips + modify link/text according to the new documentation about scripts and ext
+
+
 ### Have a look on invoker goal parameters ###
 see http://maven.apache.org/plugins/maven-invoker-plugin/run-mojo.html
 
