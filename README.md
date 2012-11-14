@@ -24,6 +24,37 @@ For more information about how to use it, see the [wiki](https://github.com/redf
 Last released version: [4.5.1.0](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
 
 
+Main features
+============
+
+**Documentation**
+
+  * give [tips](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips) about configuration expectially for [logs](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#wiki-log-config)
+  * provide full documentation of [goals and parameters](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals)
+
+
+**New features**
+
+  * test goal
+    * provide a new test-verify goal that let user run soapui tests, perform post processing tasks and then fail the build if tests failed (see [#3](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/3)). This is very usefull to run multiple projects
+<!-- convert goal -->
+<!-- mock as war -->
+
+
+**Improvements**
+
+  * test goal
+    * by default, logs are generated in a subdirectory of ${project.build.directory} see [#5](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/5)
+   * do not display details of errors as exception stack trace to avoid flooding of the maven console, see [#2](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/2)
+<!-- mock -->
+
+
+**Bug fixes**
+
+  * fix the 'groovy.log' bug, see [#6](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/6)
+  * do not display details of errors as exception stack trace to avoid flooding of the maven console, see [#2](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/2)
+
+
 Supported java and maven versions
 ============
   * maven 2.2.1 and 3.0.4
