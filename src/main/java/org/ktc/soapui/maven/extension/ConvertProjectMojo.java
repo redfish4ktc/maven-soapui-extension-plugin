@@ -38,15 +38,16 @@ public class ConvertProjectMojo extends AbstractMojo {
         // needed because soapui does not create missing directories
         outputProject.getParentFile().mkdirs();
 
-        // soapui bug : try to use the saveIn method, so project should only be saved in ouputProject but all opened projects are saved when closing soapui
+        // soapui bug : try to use the saveIn method, so project should only be saved in ouputProject but all opened
+        // projects are saved when closing soapui
         // see http://www.soapui.org/forum/viewtopic.php?f=4&t=15631
-        // maybe this is fixed by providing settings file (auto-save option in the global UI-Settings which will save all open projects when exiting, is that what you are looking for?)
+        // maybe this is fixed by providing settings file (auto-save option in the global UI-Settings which will save
+        // all open projects when exiting, is that what you are looking for?)
         try {
             WsdlProjectPro project = new WsdlProjectPro(inputProject.getAbsolutePath());
             project.setComposite(conversionType.isTargetedProjectComposite());
             project.saveAs(outputProject.getAbsolutePath());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
         }
     }
