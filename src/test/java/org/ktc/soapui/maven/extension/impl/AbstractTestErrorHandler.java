@@ -17,20 +17,18 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang.reflect.FieldUtils;
-import org.junit.Test;
 
 import com.eviware.soapui.SoapUIProTestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestAssertion;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang.reflect.FieldUtils;
+import org.junit.Test;
 
 public abstract class AbstractTestErrorHandler {
 
