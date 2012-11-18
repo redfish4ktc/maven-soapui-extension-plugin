@@ -30,6 +30,7 @@ public class TestVerifyMojo extends AbstractMojo {
 
     private MavenProject project;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         // TODO duplicate with TestMojo
         getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());

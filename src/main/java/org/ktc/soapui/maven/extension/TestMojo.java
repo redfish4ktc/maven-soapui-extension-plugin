@@ -17,8 +17,9 @@
 
 package org.ktc.soapui.maven.extension;
 
+import com.eviware.soapui.SoapUI;
+import com.eviware.soapui.SoapUIProTestCaseRunner;
 import java.util.Properties;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.model.Build;
 import org.apache.maven.plugin.AbstractMojo;
@@ -27,9 +28,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.ProjectInfo;
-
-import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.SoapUIProTestCaseRunner;
 
 public class TestMojo extends AbstractMojo {
     
@@ -67,6 +65,7 @@ public class TestMojo extends AbstractMojo {
 
     private MavenProject project;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
 

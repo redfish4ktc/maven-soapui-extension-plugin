@@ -17,14 +17,12 @@
 
 package org.ktc.soapui.maven.extension;
 
+import com.eviware.soapui.SoapUI;
+import com.eviware.soapui.SoapUIProMockServiceRunner;
 import java.util.Properties;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-
-import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.SoapUIProMockServiceRunner;
 
 public class MockServiceMojo extends AbstractMojo {
     private String projectFile;
@@ -41,6 +39,7 @@ public class MockServiceMojo extends AbstractMojo {
     private boolean saveAfterRun;
     private Properties soapuiProperties;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         if ((skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
             return;
