@@ -20,16 +20,12 @@ package org.ktc.soapui.maven.extension;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.SoapUIProTestCaseRunner;
 import java.util.Properties;
-import org.apache.commons.lang.StringUtils;
-import org.apache.maven.model.Build;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.project.MavenProject;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 
-public class TestMojo extends AbstractMojo {
+public class TestMojo extends AbstractSoapuiMojo {
     
     public static final String TEST_FAILURES_AND_ERRORS_KEY = "soapui_extension_Mlx#ppp";
     
@@ -63,10 +59,8 @@ public class TestMojo extends AbstractMojo {
     // new in soapui 4.5.0 (pro only)
     private String environment;
 
-    private MavenProject project;
-
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void performExecute() throws MojoExecutionException, MojoFailureException {
         getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
 
         if ((this.skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
@@ -150,7 +144,6 @@ public class TestMojo extends AbstractMojo {
                 System.setProperty(key, this.soapuiProperties.getProperty(key));
             }
         }
-        validateConfiguration();
         try {
             runner.run();
         } catch (Exception e) {
@@ -173,21 +166,6 @@ public class TestMojo extends AbstractMojo {
                         + " (if necessary, set the option to true)");
             }
         }
-    }
-    
-    private void validateConfiguration() {
-        getLog().info("Checking logs configuration");
-        String soapuiLogRootKey = "soapui.logroot";
-        String soapuiLogRootValue = System.getProperty(soapuiLogRootKey);
-        getLog().debug("key " + soapuiLogRootKey + " value " + soapuiLogRootValue);
-        if(StringUtils.isBlank(soapuiLogRootValue)) {
-            Build build = project.getBuild();
-            // Be careful with the trailing / (see https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#wiki-log-config)
-            String defaultLogDirectoryPath = build.getDirectory() + "/soapui/logs/";
-            System.setProperty(soapuiLogRootKey, defaultLogDirectoryPath);
-            getLog().info("Using default log directory " + System.getProperty(soapuiLogRootKey));
-        }
-        getLog().info("Logs configuration done.");
     }
     
 }
