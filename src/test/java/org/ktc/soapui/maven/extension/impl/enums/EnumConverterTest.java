@@ -18,7 +18,7 @@
 package org.ktc.soapui.maven.extension.impl.enums;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.fest.assertions.api.Assertions.failBecauseExceptionWasNotThrown;
 
 import org.junit.Test;
 import org.ktc.soapui.maven.extension.impl.ProjectConversionType;
@@ -34,7 +34,7 @@ public class EnumConverterTest {
     public void toProjectConversionType_from_unknown_value() {
         try {
             EnumConverter.toProjectConversionType("un4658$$$");
-            fail("should have thrown an Exception");
+            failBecauseExceptionWasNotThrown(UnknownEnumException.class);
         } catch (UnknownEnumException e) {
             assertThat(e.getMessage()).isEqualTo(
                     "Unsupported project conversion type un4658$$$. Valid values are [TO_STANDARD,TO_COMPOSITE]");
