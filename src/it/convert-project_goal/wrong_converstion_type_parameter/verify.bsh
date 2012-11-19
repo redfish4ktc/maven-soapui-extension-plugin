@@ -1,0 +1,52 @@
+/*
+ * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+import java.io.*;
+
+boolean checkFileContainsError(File file, String expectedError) {
+  System.out.println("Scanning file " + file);
+
+  if (!file.exists()) {
+    System.out.println("FAILED! File " + file + " does not exist!!");
+    return false;
+  }
+  // NOTE: do not log the expected error before reading the file, otherwise, the error will be found because of this log!!
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(file, "UTF-8");
+  
+  System.out.println("Looking for the following errors:");
+  System.out.println(expectedError);
+  
+  if (fileContent.indexOf(expectedError) < 0) {
+    System.out.println("FAILED! Unable to find the expected error");
+    return false;
+  }
+  
+  System.out.println("OK error found");
+  return true;
+}
+
+
+try {
+  System.out.println("Checking 'wrong project conversion type' error");
+  File logFile = new File(basedir, "build.log");
+  String expectedError = "Unsupported project conversion type TO_NEW_TYPE. Valid values are [TO_STANDARD,TO_COMPOSITE]";
+  return checkFileContainsError(logFile, expectedError);
+}
+catch(Throwable t) {
+    t.printStackTrace();
+    return false;
+}
