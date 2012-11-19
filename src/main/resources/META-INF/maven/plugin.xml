@@ -393,14 +393,14 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         </parameter>
         <parameter>
           <name>conversionType</name>
-          <type>org.ktc.soapui.maven.extension.impl.ProjectConversionType</type>
+          <type>java.lang.String</type>
           <required>true</required>
           <editable>true</editable>
           <description></description>
         </parameter>
       </parameters>
       <configuration>
-        <conversionType implementation="org.ktc.soapui.maven.extension.impl.ProjectConversionType">TO_STANDARD</conversionType>
+        <conversionType implementation="java.lang.String">TO_STANDARD</conversionType>
       </configuration>
     </mojo>
     <mojo>

@@ -23,11 +23,12 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ProjectConversionType;
+import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
 public class ConvertProjectMojo extends AbstractMojo {
     private File inputProject;
     private File outputProject;
-    private ProjectConversionType conversionType;
+    private String conversionType;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -35,6 +36,8 @@ public class ConvertProjectMojo extends AbstractMojo {
         getLog().info("from " + inputProject);
         getLog().info("to " + outputProject);
 
+        ProjectConversionType conversionTypeEnum = EnumConverter.toProjectConversionType(conversionType);
+        
         // needed because soapui does not create missing directories
         outputProject.getParentFile().mkdirs();
 
@@ -45,10 +48,11 @@ public class ConvertProjectMojo extends AbstractMojo {
         // all open projects when exiting, is that what you are looking for?)
         try {
             WsdlProjectPro project = new WsdlProjectPro(inputProject.getAbsolutePath());
-            project.setComposite(conversionType.isTargetedProjectComposite());
+            project.setComposite(conversionTypeEnum.isTargetedProjectComposite());
             project.saveAs(outputProject.getAbsolutePath());
         } catch (Exception e) {
             throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
         }
     }
+    
 }

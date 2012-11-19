@@ -15,19 +15,14 @@
  *
  */
 
-package org.ktc.soapui.maven.extension.impl;
+package org.ktc.soapui.maven.extension.impl.enums;
 
-public enum ProjectConversionType {
-    TO_STANDARD(false), TO_COMPOSITE(true);
-    
-    private final boolean isTargetedProjectComposite;
+public class UnknownEnumException extends RuntimeException {
 
-    private ProjectConversionType (boolean isTargetedProjectComposite) {
-      this.isTargetedProjectComposite= isTargetedProjectComposite;
+    private static final long serialVersionUID = 7580305208310725615L;
+
+    public UnknownEnumException(String message, Throwable cause) {
+        super(message, cause);
     }
-    
-    public boolean isTargetedProjectComposite() {
-      return isTargetedProjectComposite;
-    }
-    
+
 }
