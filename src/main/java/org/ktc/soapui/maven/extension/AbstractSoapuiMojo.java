@@ -22,6 +22,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 
 public abstract class AbstractSoapuiMojo extends AbstractMojo {
     protected MavenProject project;
@@ -30,6 +31,7 @@ public abstract class AbstractSoapuiMojo extends AbstractMojo {
 
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
+        getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
         configureDefaultLogDirectory();
         performExecute();
     }

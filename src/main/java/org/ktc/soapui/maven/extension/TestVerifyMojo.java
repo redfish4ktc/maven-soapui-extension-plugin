@@ -20,21 +20,13 @@ package org.ktc.soapui.maven.extension;
 import static org.ktc.soapui.maven.extension.TestMojo.TEST_FAILURES_AND_ERRORS_KEY;
 
 import org.apache.commons.lang.BooleanUtils;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.project.MavenProject;
-import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 
-public class TestVerifyMojo extends AbstractMojo {
-
-    private MavenProject project;
+public class TestVerifyMojo extends AbstractSoapuiMojo {
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        // TODO duplicate with TestMojo
-        getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
-
+    public void performExecute() throws MojoExecutionException, MojoFailureException {
         getLog().info("Checking if soapui tests mojo fails");
         String soapuiTestsHaveFailuresOrErrors = project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY);
         if (BooleanUtils.toBoolean(soapuiTestsHaveFailuresOrErrors)) {
