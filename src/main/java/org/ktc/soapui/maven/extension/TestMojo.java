@@ -17,12 +17,14 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.SoapUIProTestCaseRunner;
+import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import java.util.Properties;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
+import org.ktc.soapui.maven.extension.impl.RunnerType;
+import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
 public class TestMojo extends AbstractSoapuiMojo {
     
@@ -57,6 +59,9 @@ public class TestMojo extends AbstractSoapuiMojo {
     private Properties soapuiProperties;
     // new in soapui 4.5.0 (pro only)
     private String environment;
+    
+    // custom maven-soapui-extension-plugin (#14)
+    private String runnerType;
 
     @Override
     public void performExecute() throws MojoExecutionException, MojoFailureException {
@@ -68,14 +73,12 @@ public class TestMojo extends AbstractSoapuiMojo {
         if (this.projectFile == null) {
             throw new MojoExecutionException("soapui-project-file setting is required");
         }
-
-        SoapUIProTestCaseRunner runner = new SoapUIProTestCaseRunner("SoapUI Pro " + SoapUI.SOAPUI_VERSION + " Maven2 TestCase Runner");
-
+        
+        RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
+        SoapUITestCaseRunner runner = runnerTypeEnum.newTestRunner();
+        
         runner.setProjectFile(this.projectFile);
 
-        if (environment != null) {
-            runner.setEnvironment(environment);
-          }
         if (this.endpoint != null) {
             runner.setEndpoint(this.endpoint);
         }
@@ -107,7 +110,6 @@ public class TestMojo extends AbstractSoapuiMojo {
         runner.setExportAll(this.exportAll);
         runner.setJUnitReport(this.junitReport);
         runner.setEnableUI(this.interactive);
-        runner.setOpenReport(this.openReport);
         runner.setIgnoreError(true);
         runner.setSaveAfterRun(this.saveAfterRun);
 
@@ -120,20 +122,12 @@ public class TestMojo extends AbstractSoapuiMojo {
         if (this.settingsPassword != null) {
             runner.setSoapUISettingsPassword(this.settingsPassword);
         }
-        if (this.coverage) {
-            runner.initCoverageBuilder();
-        }
         if (this.globalProperties != null) {
             runner.setGlobalProperties(this.globalProperties);
         }
         if (this.projectProperties != null) {
             runner.setProjectProperties(this.projectProperties);
         }
-        if (this.reportName != null) {
-            runner.setReportName(this.reportName);
-        }
-        if (this.reportFormat != null)
-            runner.setReportFormats(this.reportFormat.split(","));
         if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
             for (Object keyObject : this.soapuiProperties.keySet()) {
                 String key = (String) keyObject;
@@ -141,6 +135,24 @@ public class TestMojo extends AbstractSoapuiMojo {
                 System.setProperty(key, this.soapuiProperties.getProperty(key));
             }
         }
+
+        if(runnerTypeEnum.isProRunner()) {
+            SoapUIProTestCaseRunner proRunner = (SoapUIProTestCaseRunner) runner;
+            if (environment != null) {
+                proRunner.setEnvironment(environment);
+            }
+            proRunner.setOpenReport(this.openReport);
+            if (this.coverage) {
+                proRunner.initCoverageBuilder();
+            }
+            if (this.reportName != null) {
+                proRunner.setReportName(this.reportName);
+            }
+            if (this.reportFormat != null) {
+                proRunner.setReportFormats(this.reportFormat.split(","));
+            }
+        }
+
         try {
             runner.run();
         } catch (Exception e) {

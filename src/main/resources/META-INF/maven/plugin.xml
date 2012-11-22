@@ -463,6 +463,15 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <description>The maven project.</description>
         </parameter>
         <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #14 -->
+        <parameter>
+          <name>runnerType</name>
+          <type>java.lang.String</type>
+          <required>true</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
         <parameter>
           <name>coverage</name>
           <type>boolean</type>
@@ -676,7 +685,10 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
       <configuration>
         <!-- ######## CUSTOMIZED, added for #3 -->
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>
-        <!-- ######## END OF CUSTOMIZED --> 
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #14 -->
+        <runnerType implementation="java.lang.String">PRO</runnerType>
+        <!-- ######## END OF CUSTOMIZED -->
         <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>
         <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
         <printReport implementation="boolean">${soapui.printReport}</printReport>

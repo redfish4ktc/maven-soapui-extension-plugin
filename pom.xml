@@ -149,8 +149,9 @@
             <exclude>.travis.yml</exclude>
             <!-- modified from orginal plugin.xml generated file -->
             <exclude>src/main/resources/META-INF/maven/plugin.xml</exclude>
-            <!-- Unable to add license because some files are -->
+            <!-- Unable to add license because some files have no way to specify comments -->
             <exclude>src/it/convert-project_goal/_soapui-conf/projects/composite-project/**/*</exclude>
+            <exclude>src/it/test_goal_runner_type/_soapui-conf/projects/composite-project/**/*</exclude>
           </excludes>
         </configuration>
       </plugin>

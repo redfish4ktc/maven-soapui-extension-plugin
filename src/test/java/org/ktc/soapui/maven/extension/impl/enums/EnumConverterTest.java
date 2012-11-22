@@ -22,6 +22,7 @@ import static org.fest.assertions.api.Assertions.failBecauseExceptionWasNotThrow
 
 import org.junit.Test;
 import org.ktc.soapui.maven.extension.impl.ProjectConversionType;
+import org.ktc.soapui.maven.extension.impl.RunnerType;
 
 public class EnumConverterTest {
 
@@ -38,6 +39,22 @@ public class EnumConverterTest {
         } catch (UnknownEnumException e) {
             assertThat(e.getMessage()).isEqualTo(
                     "Unsupported project conversion type un4658$$$. Valid values are [TO_STANDARD,TO_COMPOSITE]");
+        }
+    }
+
+    @Test
+    public void toRunnerType_valid_value() {
+        assertThat(EnumConverter.toRunnerType("OSS")).isEqualTo(RunnerType.OSS);
+    }
+
+    @Test
+    public void toRunnerType_from_unknown_value() {
+        try {
+            EnumConverter.toRunnerType("%%%oooo$$$");
+            failBecauseExceptionWasNotThrown(UnknownEnumException.class);
+        } catch (UnknownEnumException e) {
+            assertThat(e.getMessage()).isEqualTo(
+                    "Unsupported project conversion type %%%oooo$$$. Valid values are [PRO,OSS]");
         }
     }
 

@@ -19,6 +19,7 @@ package org.ktc.soapui.maven.extension.impl.enums;
 
 import org.apache.commons.lang.StringUtils;
 import org.ktc.soapui.maven.extension.impl.ProjectConversionType;
+import org.ktc.soapui.maven.extension.impl.RunnerType;
 
 // needed because maven 2.2.1 does not support enum parameter
 // this let us provide convenient error message to end user (available enum values)
@@ -35,6 +36,19 @@ public class EnumConverter {
 
     private static String buildProjectConversionTypeListAsString() {
         return "[" + StringUtils.join(ProjectConversionType.values(), ',') + "]";
+    }
+
+    public static RunnerType toRunnerType(String value) {
+        try {
+            return RunnerType.valueOf(value);
+        } catch (RuntimeException e) {
+            throw new UnknownEnumException("Unsupported project conversion type " + value + ". Valid values are "
+                    + buildRunnerTypeListAsString() + "", e);
+        }
+    }
+
+    private static String buildRunnerTypeListAsString() {
+        return "[" + StringUtils.join(RunnerType.values(), ',') + "]";
     }
 
 }
