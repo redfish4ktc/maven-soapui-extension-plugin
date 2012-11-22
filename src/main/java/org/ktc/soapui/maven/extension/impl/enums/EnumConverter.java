@@ -30,25 +30,21 @@ public class EnumConverter {
             return ProjectConversionType.valueOf(value);
         } catch (RuntimeException e) {
             throw new UnknownEnumException("Unsupported project conversion type " + value + ". Valid values are "
-                    + buildProjectConversionTypeListAsString() + "", e);
+                    + buildEnumValuesToString(ProjectConversionType.values()) + "", e);
         }
-    }
-
-    private static String buildProjectConversionTypeListAsString() {
-        return "[" + StringUtils.join(ProjectConversionType.values(), ',') + "]";
     }
 
     public static RunnerType toRunnerType(String value) {
         try {
             return RunnerType.valueOf(value);
         } catch (RuntimeException e) {
-            throw new UnknownEnumException("Unsupported project conversion type " + value + ". Valid values are "
-                    + buildRunnerTypeListAsString() + "", e);
+            throw new UnknownEnumException("Unsupported runner type " + value + ". Valid values are "
+                    + buildEnumValuesToString(RunnerType.values()) + "", e);
         }
     }
 
-    private static String buildRunnerTypeListAsString() {
-        return "[" + StringUtils.join(RunnerType.values(), ',') + "]";
+    private static String buildEnumValuesToString(Object[] values) {
+        return "[" + StringUtils.join(values, ',') + "]";
     }
-
+    
 }
