@@ -19,19 +19,18 @@ package org.ktc.soapui.maven.extension;
 
 import com.eviware.soapui.impl.wsdl.WsdlProjectPro;
 import java.io.File;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ProjectConversionType;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
-public class ConvertProjectMojo extends AbstractMojo {
+public class ConvertProjectMojo extends AbstractSoapuiMojo {
     private File inputProject;
     private File outputProject;
     private String conversionType;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void performExecute() throws MojoExecutionException, MojoFailureException {
         getLog().info("Converting project " + conversionType);
         getLog().info("from " + inputProject);
         getLog().info("to " + outputProject);

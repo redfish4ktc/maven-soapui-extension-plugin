@@ -36,8 +36,8 @@ public abstract class AbstractSoapuiMojo extends AbstractMojo {
 
     private void configureDefaultLogDirectory() {
         Build build = project.getBuild();
-        // Be careful with the trailing / (see
-        // https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#wiki-log-config)
+        // Be careful with the trailing /
+        // see https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#wiki-log-config
         String defaultLogDirectoryPath = build.getDirectory() + "/soapui/logs/";
         String soapuiLogRootKey = "soapui.logroot";
         System.setProperty(soapuiLogRootKey, defaultLogDirectoryPath);

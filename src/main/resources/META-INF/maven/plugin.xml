@@ -398,9 +398,17 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <editable>true</editable>
           <description></description>
         </parameter>
+        <parameter>
+          <name>project</name>
+          <type>org.apache.maven.project.MavenProject</type>
+          <required>true</required>
+          <editable>false</editable>
+          <description>The maven project.</description>
+        </parameter>
       </parameters>
       <configuration>
         <conversionType implementation="java.lang.String">TO_STANDARD</conversionType>
+        <project implementation="org.apache.maven.project.MavenProject">${project}</project>      
       </configuration>
     </mojo>
     <mojo>
