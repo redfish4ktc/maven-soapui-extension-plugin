@@ -46,9 +46,9 @@ public class ConvertProjectMojo extends AbstractSoapuiMojo {
         // maybe this is fixed by providing settings file (auto-save option in the global UI-Settings which will save
         // all open projects when exiting, is that what you are looking for?)
         try {
-            WsdlProjectPro project = new WsdlProjectPro(inputProject.getAbsolutePath());
-            project.setComposite(conversionTypeEnum.isTargetedProjectComposite());
-            project.saveAs(outputProject.getAbsolutePath());
+            WsdlProjectPro wsdlProject = new WsdlProjectPro(inputProject.getAbsolutePath());
+            wsdlProject.setComposite(conversionTypeEnum.isTargetedProjectComposite());
+            wsdlProject.saveAs(outputProject.getAbsolutePath());
         } catch (Exception e) {
             throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
         }
