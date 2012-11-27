@@ -26,5 +26,9 @@ public class ProjectInfo {
     public static String getVersion() {
         return ProjectInfo.class.getPackage().getImplementationVersion();
     }
+    
+    public static String getSoapuiVersion() {
+        return "4.5.1";
+    }
 
 }
