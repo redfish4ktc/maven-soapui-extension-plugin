@@ -15,7 +15,7 @@
 ~ under the License.
 -->
 
-Content
+maven-soapui-extension-plugin
 ============
 
 This plugin adds new features and bug fixes to the smartbear maven-soapui-pro-plugin/maven-soapui-plugin.  
