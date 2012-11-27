@@ -17,7 +17,21 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
+import java.io.IOException;
+import java.util.jar.Manifest;
+
 public class ProjectInfo {
+
+    private static Manifest manifest = null;
+
+    static {
+        try {
+            manifest = new Manifest(ProjectInfo.class.getClassLoader().getResourceAsStream("META-INF/MANIFEST.MF"));
+        } catch (IOException e) {
+            System.err.println("[maven-soapui-extension] unable to load the project manifest file");
+            e.printStackTrace();
+        }
+    }
 
     public static String getName() {
         return ProjectInfo.class.getPackage().getImplementationTitle();
@@ -26,9 +40,17 @@ public class ProjectInfo {
     public static String getVersion() {
         return ProjectInfo.class.getPackage().getImplementationVersion();
     }
-    
+
     public static String getSoapuiVersion() {
-        return "4.5.1";
+        return getValueOf("Soapui-version");
+    }
+
+    private static String getValueOf(String key) {
+        try {
+            return manifest.getMainAttributes().getValue(key);
+        } catch (RuntimeException e) {
+            return key;
+        }
     }
 
 }
