@@ -43,29 +43,6 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
   - plugin.xml: test goal should not declare a 'project' parameter, it should only be configured in the configuration section
 
 
-
-### Invoker bug ###
-
-With maven 2.2.1, mergeUserSettings option generates a NPE (java 5 and 6)  
-For instance, see  https://redfish4ktc.ci.cloudbees.com/job/maven-soapui-extension-plugin_jdk6_maven221/1/console
-
-```java
-java.lang.NullPointerException
-        at org.apache.maven.settings.SettingsUtils.merge(SettingsUtils.java:110)
-        at org.apache.maven.plugin.invoker.AbstractInvokerMojo.runBuilds(AbstractInvokerMojo.java:1035)
-        at org.apache.maven.plugin.invoker.AbstractInvokerMojo.execute(AbstractInvokerMojo.java:670)
-        at org.apache.maven.plugin.DefaultPluginManager.executeMojo(DefaultPluginManager.java:490)
-        at hudson.maven.agent.PluginManagerInterceptor.executeMojo(PluginManagerInterceptor.java:182)
-```
-
-I've filled an issue: http://jira.codehaus.org/browse/MINVOKER-137
-An integration test that shows the problem already exists:  
-http://svn.apache.org/viewvc/maven/plugins/tags/maven-invoker-plugin-1.7/src/it/settings-merge/pom.xml
-
-A workaround has been done in our project (we do not use the mergeUserSettings parameter, a profile is defined in a super parent pom used by all pom in integration tests)
-
-
-
 ### Documentation ###
 
 **Tips page**
