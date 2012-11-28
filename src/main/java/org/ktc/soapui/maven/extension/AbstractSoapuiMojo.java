@@ -31,7 +31,8 @@ public abstract class AbstractSoapuiMojo extends AbstractMojo {
 
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
-        getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getVersion());
+        getLog().info("You are using " + ProjectInfo.getName() + " " + ProjectInfo.getFullVersion());
+        getLog().info("Soapui version: " + ProjectInfo.getSoapuiVersion());
         configureDefaultLogDirectory();
         performExecute();
     }
