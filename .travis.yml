@@ -11,9 +11,6 @@ jdk:
   - oraclejdk7
   - openjdk7
   - openjdk6
-branches:
-  only:
-    - master
 notifications:
   email:
     - red4ktc-github987225@yahoo.fr
