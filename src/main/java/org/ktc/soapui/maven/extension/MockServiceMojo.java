@@ -40,7 +40,9 @@ public class MockServiceMojo extends AbstractSoapuiMojo {
 
     @Override
     public void performExecute() throws MojoExecutionException, MojoFailureException {
+        System.out.println("skip parameter:" + skip);
         if ((skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
+            getLog().info("SoapUI mock are skipped.");
             return;
         }
         if (projectFile == null) {
