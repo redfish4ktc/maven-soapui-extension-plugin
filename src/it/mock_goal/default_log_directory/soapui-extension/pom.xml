@@ -19,18 +19,35 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>common-it-parent</artifactId>
+    <artifactId>mock-goal</artifactId>
     <version>@project.version@</version>
-    <relativePath>../common.xml</relativePath>
+    <relativePath>../../common.xml</relativePath>
   </parent>
-  <groupId>soapui.extension</groupId>
-  <artifactId>mock-goal</artifactId>
-  <packaging>pom</packaging>
-  
-  <properties>
-    <soapui.configuration.path>${basedir}/../../_soapui_conf</soapui.configuration.path>
-    <soapui.project.file.path>${soapui.configuration.path}/test-mock-service-soapui-project.xml</soapui.project.file.path>
-    <soapui.settings.empty.file.path>${soapui.configuration.path}/empty-soapui-settings.xml</soapui.settings.empty.file.path>
-  </properties>
+  <artifactId>mock-goal-default-log-directory</artifactId>
+  <packaging>pom</packaging>  
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>@project.groupId@</groupId>
+        <artifactId>@project.artifactId@</artifactId>
+        <version>@project.version@</version>
+        <configuration>
+          <noBlock>true</noBlock>
+          <projectFile>${soapui.project.file.path}</projectFile>
+          <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>soapui-start-mock</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>mock</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
 </project>
