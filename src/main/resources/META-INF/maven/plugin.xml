@@ -19,11 +19,22 @@
       <aggregator>false</aggregator>
       <requiresOnline>false</requiresOnline>
       <inheritedByDefault>true</inheritedByDefault>
-      <implementation>com.eviware.soapui.maven2.MockServiceMojo</implementation>
+      <!-- ######## CUSTOMIZED -->
+      <implementation>org.ktc.soapui.maven.extension.MockServiceMojo</implementation>
+      <!-- ######## END OF CUSTOMIZED -->
       <language>java</language>
       <instantiationStrategy>per-lookup</instantiationStrategy>
       <executionStrategy>once-per-session</executionStrategy>
       <parameters>
+        <!-- ######## CUSTOMIZED, added for #20 -->
+        <parameter>
+          <name>project</name>
+          <type>org.apache.maven.project.MavenProject</type>
+          <required>false</required>
+          <editable>false</editable>
+          <description>The maven project.</description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
         <parameter>
           <name>globalProperties</name>
           <type>java.lang.String[]</type>
@@ -110,6 +121,9 @@
         </parameter>
       </parameters>
       <configuration>
+        <!-- ######## CUSTOMIZED, added for #20 -->
+        <project implementation="org.apache.maven.project.MavenProject">${project}</project>
+        <!-- ######## END OF CUSTOMIZED -->
         <port implementation="java.lang.String">${soapui.port}</port>
         <saveAfterRun implementation="boolean">${soapui.saveAfterRun}</saveAfterRun>
         <projectPassword implementation="java.lang.String">${soapui.project.password}</projectPassword>
