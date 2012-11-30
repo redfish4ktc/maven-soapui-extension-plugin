@@ -19,7 +19,6 @@ package org.ktc.soapui.maven.extension;
 
 import com.eviware.soapui.SoapUIProTestCaseRunner;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
-import java.util.Properties;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
@@ -30,7 +29,6 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     
     public static final String TEST_FAILURES_AND_ERRORS_KEY = "soapui_extension_Mlx#ppp";
     
-    private String projectFile;
     private String testSuite;
     private String testCase;
     private String username;
@@ -45,17 +43,10 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     private boolean exportAll;
     private boolean junitReport;
     private boolean openReport;
-    private String settingsFile;
-    private String projectPassword;
-    private String settingsPassword;
     private boolean testFailIgnore;
     private boolean coverage;
-    private String[] globalProperties;
-    private String[] projectProperties;
-    private boolean saveAfterRun;
     private String reportFormat;
     private String reportName;
-    private Properties soapuiProperties;
     // new in soapui 4.5.0 (pro only)
     private String environment;
     
@@ -64,10 +55,6 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
 
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        if (this.projectFile == null) {
-            throw new MojoExecutionException("soapui-project-file setting is required");
-        }
-        
         RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
         SoapUITestCaseRunner runner = runnerTypeEnum.newTestRunner();
         

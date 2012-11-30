@@ -18,30 +18,17 @@
 package org.ktc.soapui.maven.extension;
 
 import com.eviware.soapui.SoapUIProMockServiceRunner;
-import java.util.Properties;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
-    private String projectFile;
     private String mockService;
     private String path;
     private String port;
-    private String settingsFile;
     private boolean noBlock;
-    private String projectPassword;
-    private String settingsPassword;
-    private String[] globalProperties;
-    private String[] projectProperties;
-    private boolean saveAfterRun;
-    private Properties soapuiProperties;
 
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        if (projectFile == null) {
-            throw new MojoExecutionException("soapui-project-file setting is required");
-        }
-
         SoapUIProMockServiceRunner runner = new SoapUIProMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
 
         runner.setProjectFile(projectFile);
