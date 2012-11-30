@@ -21,7 +21,7 @@ maven-soapui-extension-plugin
 This plugin adds new features and bug fixes to the smartbear maven-soapui-pro-plugin/maven-soapui-plugin.  
 For more information about how to use it, see the [wiki](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki).
 
-Last released version: [4.5.1.0](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
+Last released version: [4.5.1.1](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
 
 
 Main features
@@ -39,7 +39,7 @@ Main features
     * provide a new [test-verify](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-verify-goal) goal that let user run soapui tests, perform post processing tasks and then fail the build if tests failed. This is very usefull to run [multiple projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
     * add the `runnerType` parameter to choose to use the open source or pro runner (see [goal documentation](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-goal-add-param))
   * 'convert-project' goal
-    * [convert-project](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-convert-project-goal) convert composite to standard or standard
+    * [convert-project](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-convert-project-goal) converts composite to standard projects or standard to composite projects
 
 
 **Improvements**
@@ -73,7 +73,7 @@ Supported java and maven versions
 Build status
 ============ 
 * [maven 3.0.4, oracle jdk6] Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)  
-* [maven 3.0.4, openjdk6, openjdk7 and oracle jdk7] Travis: [![Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](http://next.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin)
+* [maven 3.0.4, openjdk6, openjdk7 and oracle jdk7] Travis: [![Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin)
 * Coming soon [maven 2.2.1, oracle jdk6 and jdk7] Cloudbees + Jenkins Embeddable Build Status Plugin
 
 
