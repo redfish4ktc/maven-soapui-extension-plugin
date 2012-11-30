@@ -5,8 +5,9 @@
 #
 language: java
 # default install is mvn install --quiet -DskipTests=true
-install: mvn -V clean initialize -P declareRepositories
-script: mvn -V clean verify -P declareRepositories,runIT
+install: mvn --show-version --errors clean initialize -P declareRepositories
+#invoker.streamLogs: we cannot access to log files through Travis web ui, so display everything in the console
+script: mvn --show-version --errors clean verify -P declareRepositories,runIT -Dinvoker.streamLogs=true
 jdk:
   - oraclejdk7
   - openjdk7
