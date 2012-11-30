@@ -37,10 +37,14 @@ public class ProjectInfo {
         return ProjectInfo.class.getPackage().getImplementationTitle();
     }
 
-    public static String getVersion() {
+    private static String getVersion() {
         return ProjectInfo.class.getPackage().getImplementationVersion();
     }
 
+    public static String getFullVersion() {
+        return getVersion() + " (" + getValueOf("Project-build-scm-changeset") + "; " + getValueOf("Project-build-date") + ")";
+    }
+    
     public static String getSoapuiVersion() {
         return getValueOf("Soapui-version");
     }

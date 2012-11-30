@@ -24,7 +24,7 @@ public enum RunnerType {
     PRO {
         @Override
         public SoapUITestCaseRunner newTestRunner() {
-            return new SoapUIProTestCaseRunner("SoapUI Pro " + ProjectInfo.getSoapuiVersion() + " Maven2 TestCase Runner");
+            return new SoapUIProTestCaseRunner("SoapUI Pro Maven2 TestCase Runner");
         }
 
         @Override
@@ -35,7 +35,7 @@ public enum RunnerType {
     OSS {
         @Override
         public SoapUITestCaseRunner newTestRunner() {
-            return new SoapUITestCaseRunner("SoapUI " + ProjectInfo.getSoapuiVersion() + " Maven2 TestCase Runner");
+            return new SoapUITestCaseRunner("SoapUI Maven2 TestCase Runner");
         }
 
         @Override

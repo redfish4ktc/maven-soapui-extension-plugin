@@ -22,7 +22,6 @@ import java.util.Properties;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 
 public class MockServiceMojo extends AbstractMojo {
     private String projectFile;
@@ -48,7 +47,7 @@ public class MockServiceMojo extends AbstractMojo {
             throw new MojoExecutionException("soapui-project-file setting is required");
         }
 
-        SoapUIProMockServiceRunner runner = new SoapUIProMockServiceRunner("SoapUI " + ProjectInfo.getSoapuiVersion() + " Maven2 MockService Runner");
+        SoapUIProMockServiceRunner runner = new SoapUIProMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
 
         runner.setProjectFile(projectFile);
 
