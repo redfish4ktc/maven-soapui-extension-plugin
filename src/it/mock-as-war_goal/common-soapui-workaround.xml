@@ -30,7 +30,7 @@
     <!-- TO BE OVERRIDEN IN CHILD POM -->
     <soapui.artifactId>unkwown-soapui-plugin</soapui.artifactId>
     <soapui.version>99.9-does-not-exist</soapui.version>
-    <soapui.project.path>${soapui.project.file.path}</soapui.project.path>
+    <soapui.project.mockaswar.path>${soapui.project.file.path}</soapui.project.mockaswar.path>
     <soapui.generator.classname>FakeGenerator</soapui.generator.classname>
     
     <!-- COMMON CONFIGURATION -->
@@ -136,7 +136,7 @@
                   <arg value="-d${soapui.generation.working.dir}" />
                   <arg value="-f${soapui.war.path}" />
                   <arg value="-w true" />
-                  <arg value="${soapui.project.path}" />
+                  <arg value="${soapui.project.mockaswar.path}" />
                 </java>
               </target>
             </configuration>
