@@ -20,7 +20,7 @@
     <soapui.artifactId>maven-soapui-pro-plugin</soapui.artifactId>
     <soapui.generator.classname>SoapUIProMockAsWarGenerator</soapui.generator.classname>
 
-    <soapui.project.mockaswar.path>${soapui.config.output.directory}/converted-projects/composite</soapui.project.mockaswar.path>
+    <soapui.project.mockaswar.path>${soapui.output.directory}/converted-projects/composite</soapui.project.mockaswar.path>
   </properties>
 
   <build>
