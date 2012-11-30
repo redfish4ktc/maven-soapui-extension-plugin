@@ -79,11 +79,12 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
                 System.setProperty((String) key, soapuiProperties.getProperty((String) key));
             }
         }
+
         try {
             runner.run();
         } catch (Exception e) {
-            getLog().error(e.toString());
-            throw new MojoFailureException(this, "SoapUI MockService(s) failed", e.getMessage());
+            getLog().debug(e);
+            throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
         }
     }
 }
