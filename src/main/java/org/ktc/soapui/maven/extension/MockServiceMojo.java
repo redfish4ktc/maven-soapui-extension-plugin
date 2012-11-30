@@ -74,9 +74,10 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         if (projectProperties != null)
             runner.setProjectProperties(projectProperties);
         if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
-            for (Object key : this.soapuiProperties.keySet()) {
-                System.out.println("Setting " + (String) key + " value " + soapuiProperties.getProperty((String) key));
-                System.setProperty((String) key, soapuiProperties.getProperty((String) key));
+            for (Object keyObject : this.soapuiProperties.keySet()) {
+                String key = (String) keyObject;
+                getLog().info("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
+                System.setProperty(key, this.soapuiProperties.getProperty(key));
             }
         }
 
