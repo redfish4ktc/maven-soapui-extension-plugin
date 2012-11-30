@@ -19,18 +19,16 @@ package org.ktc.soapui.maven.extension;
 
 import com.eviware.soapui.SoapUIProMockServiceRunner;
 import java.util.Properties;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
-public class MockServiceMojo extends AbstractMojo {
+public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
     private String projectFile;
     private String mockService;
     private String path;
     private String port;
     private String settingsFile;
     private boolean noBlock;
-    private boolean skip;
     private String projectPassword;
     private String settingsPassword;
     private String[] globalProperties;
@@ -39,10 +37,7 @@ public class MockServiceMojo extends AbstractMojo {
     private Properties soapuiProperties;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        if ((skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
-            return;
-        }
+    public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         if (projectFile == null) {
             throw new MojoExecutionException("soapui-project-file setting is required");
         }
@@ -78,16 +73,18 @@ public class MockServiceMojo extends AbstractMojo {
         if (projectProperties != null)
             runner.setProjectProperties(projectProperties);
         if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
-            for (Object key : this.soapuiProperties.keySet()) {
-                System.out.println("Setting " + (String) key + " value " + soapuiProperties.getProperty((String) key));
-                System.setProperty((String) key, soapuiProperties.getProperty((String) key));
+            for (Object keyObject : this.soapuiProperties.keySet()) {
+                String key = (String) keyObject;
+                getLog().info("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
+                System.setProperty(key, this.soapuiProperties.getProperty(key));
             }
         }
+
         try {
             runner.run();
         } catch (Exception e) {
-            getLog().error(e.toString());
-            throw new MojoFailureException(this, "SoapUI MockService(s) failed", e.getMessage());
+            getLog().debug(e);
+            throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
         }
     }
 }
