@@ -26,7 +26,7 @@ import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
-public class TestMojo extends AbstractSoapuiMojo {
+public class TestMojo extends AbstractSoapuiRunnerMojo {
     
     public static final String TEST_FAILURES_AND_ERRORS_KEY = "soapui_extension_Mlx#ppp";
     
@@ -46,7 +46,6 @@ public class TestMojo extends AbstractSoapuiMojo {
     private boolean junitReport;
     private boolean openReport;
     private String settingsFile;
-    private boolean skip;
     private String projectPassword;
     private String settingsPassword;
     private boolean testFailIgnore;
@@ -64,12 +63,7 @@ public class TestMojo extends AbstractSoapuiMojo {
     private String runnerType;
 
     @Override
-    public void performExecute() throws MojoExecutionException, MojoFailureException {
-        if ((this.skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
-            // #1 add log when skipping tests
-            getLog().info("SoapUI tests are skipped.");
-            return;
-        }
+    public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         if (this.projectFile == null) {
             throw new MojoExecutionException("soapui-project-file setting is required");
         }

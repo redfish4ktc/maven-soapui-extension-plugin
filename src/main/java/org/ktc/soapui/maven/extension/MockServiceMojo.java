@@ -23,14 +23,13 @@ import java.util.Properties;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
-public class MockServiceMojo extends AbstractSoapuiMojo {
+public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
     private String projectFile;
     private String mockService;
     private String path;
     private String port;
     private String settingsFile;
     private boolean noBlock;
-    private boolean skip;
     private String projectPassword;
     private String settingsPassword;
     private String[] globalProperties;
@@ -39,12 +38,7 @@ public class MockServiceMojo extends AbstractSoapuiMojo {
     private Properties soapuiProperties;
 
     @Override
-    public void performExecute() throws MojoExecutionException, MojoFailureException {
-        System.out.println("skip parameter:" + skip);
-        if ((skip) || (System.getProperty("maven.test.skip", "false").equals("true"))) {
-            getLog().info("SoapUI mock are skipped.");
-            return;
-        }
+    public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         if (projectFile == null) {
             throw new MojoExecutionException("soapui-project-file setting is required");
         }

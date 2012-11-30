@@ -18,18 +18,18 @@
 import java.io.*;
 
 try {
-  System.out.println("Verifying that no mock services have runned");
+  System.out.println("Verifying that mock services have not runned");
   File logFile = new File(basedir, "build.log");
   String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
   
   String runnerInitLog = "Maven2 MockService Runner";
   if (fileContent.indexOf(runnerInitLog) >= 0) {
-    System.out.println("FAILED! Mock services have runned");
+    System.err.println("FAILED! Mock services have runned");
     return false;
   }
   
-  if (fileContent.indexOf("SoapUI mock are skipped.") < 0) {
-    System.out.println("FAILED! Skipping mock logs cannot be found");
+  if (fileContent.indexOf("SoapUI execution is skipped.") < 0) {
+    System.err.println("FAILED! Skipping execution logs cannot be found");
     return false;
   }
   
