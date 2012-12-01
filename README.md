@@ -73,8 +73,8 @@ Supported java and maven versions
 Build status
 ============ 
 * [maven 3.0.4, oracle jdk6] Buildhive: [![Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)  
-* [maven 3.0.4, openjdk6, openjdk7 and oracle jdk7] Travis: [![Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin)
-* Coming soon [maven 2.2.1, oracle jdk6 and jdk7] Cloudbees + Jenkins Embeddable Build Status Plugin
+* [maven 3.0.4, openjdk6, openjdk7 and oracle jdk7] Travis: [![Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=feature-4-add-mockaswar-goal)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin)
+
 
 
 License
