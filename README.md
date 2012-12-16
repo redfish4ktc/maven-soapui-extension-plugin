@@ -58,6 +58,17 @@ Main features
     * make the 'skip' parameter work, see [#35](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/35)
 
 
+**Tests**
+
+SmartBear implemenation has no tests.
+maven-soapui-extension-plugin has both unit tests and high-level tests. These high-level tests are
+
+  * executed with the maven-invoker-plugin, this means that these tests are runned with maven plugins on real soapui projects
+  * created to show bug or missing feature in SmartBear implementations
+  * created to show fix, improvement or feature in maven-soapui-extension-plugin
+
+
+
 Roadmap
 ============
 
