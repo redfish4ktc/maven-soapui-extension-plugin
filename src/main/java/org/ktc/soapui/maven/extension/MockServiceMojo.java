@@ -17,19 +17,25 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.SoapUIProMockServiceRunner;
+import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.ktc.soapui.maven.extension.impl.RunnerType;
+import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
 public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
     private String mockService;
     private String path;
     private String port;
     private boolean noBlock;
+    
+    // custom maven-soapui-extension-plugin (#23)
+    private String runnerType;
 
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        SoapUIProMockServiceRunner runner = new SoapUIProMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
+        RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
+        SoapUIMockServiceRunner runner = runnerTypeEnum.newMockRunner();
 
         runner.setProjectFile(projectFile);
 
