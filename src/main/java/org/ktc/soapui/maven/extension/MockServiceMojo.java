@@ -29,16 +29,13 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
     private String port;
     private boolean noBlock;
     
-    // custom maven-soapui-extension-plugin (#23)
-    private String runnerType;
-
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
         SoapUIMockServiceRunner runner = runnerTypeEnum.newMockRunner();
+        configureWithSharedParameters(runner);
 
-        runner.setProjectFile(projectFile);
-
+        runner.setBlock(!noBlock);
         if (mockService != null) {
             runner.setMockService(mockService);
         }
@@ -48,30 +45,8 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         if (port != null) {
             runner.setPort(port);
         }
-        if (settingsFile != null) {
-            runner.setSettingsFile(settingsFile);
-        }
-        runner.setBlock(!noBlock);
         runner.setSaveAfterRun(saveAfterRun);
 
-        if (projectPassword != null) {
-            runner.setProjectPassword(projectPassword);
-        }
-        if (settingsPassword != null) {
-            runner.setSoapUISettingsPassword(settingsPassword);
-        }
-        if (globalProperties != null) {
-            runner.setGlobalProperties(globalProperties);
-        }
-        if (projectProperties != null)
-            runner.setProjectProperties(projectProperties);
-        if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
-            for (Object keyObject : this.soapuiProperties.keySet()) {
-                String key = (String) keyObject;
-                getLog().info("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
-                System.setProperty(key, this.soapuiProperties.getProperty(key));
-            }
-        }
 
         try {
             runner.run();

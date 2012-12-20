@@ -50,87 +50,60 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     // new in soapui 4.5.0 (pro only)
     private String environment;
     
-    // custom maven-soapui-extension-plugin (#14)
-    private String runnerType;
-
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
         SoapUITestCaseRunner runner = runnerTypeEnum.newTestRunner();
-        
-        runner.setProjectFile(this.projectFile);
+        configureWithSharedParameters(runner);
 
-        if (this.endpoint != null) {
-            runner.setEndpoint(this.endpoint);
+        if (endpoint != null) {
+            runner.setEndpoint(endpoint);
         }
-        if (this.testSuite != null) {
-            runner.setTestSuite(this.testSuite);
+        if (testSuite != null) {
+            runner.setTestSuite(testSuite);
         }
-        if (this.testCase != null) {
-            runner.setTestCase(this.testCase);
+        if (testCase != null) {
+            runner.setTestCase(testCase);
         }
-        if (this.username != null) {
-            runner.setUsername(this.username);
+        if (username != null) {
+            runner.setUsername(username);
         }
-        if (this.password != null) {
-            runner.setPassword(this.password);
+        if (password != null) {
+            runner.setPassword(password);
         }
-        if (this.wssPasswordType != null) {
-            runner.setWssPasswordType(this.wssPasswordType);
+        if (wssPasswordType != null) {
+            runner.setWssPasswordType(wssPasswordType);
         }
-        if (this.domain != null) {
-            runner.setDomain(this.domain);
+        if (domain != null) {
+            runner.setDomain(domain);
         }
-        if (this.host != null) {
-            runner.setHost(this.host);
+        if (host != null) {
+            runner.setHost(host);
         }
-        if (this.outputFolder != null) {
-            runner.setOutputFolder(this.outputFolder);
+        if (outputFolder != null) {
+            runner.setOutputFolder(outputFolder);
         }
-        runner.setPrintReport(this.printReport);
-        runner.setExportAll(this.exportAll);
-        runner.setJUnitReport(this.junitReport);
-        runner.setEnableUI(this.interactive);
+        runner.setPrintReport(printReport);
+        runner.setExportAll(exportAll);
+        runner.setJUnitReport(junitReport);
+        runner.setEnableUI(interactive);
         runner.setIgnoreError(true);
-        runner.setSaveAfterRun(this.saveAfterRun);
-
-        if (this.settingsFile != null) {
-            runner.setSettingsFile(this.settingsFile);
-        }
-        if (this.projectPassword != null) {
-            runner.setProjectPassword(this.projectPassword);
-        }
-        if (this.settingsPassword != null) {
-            runner.setSoapUISettingsPassword(this.settingsPassword);
-        }
-        if (this.globalProperties != null) {
-            runner.setGlobalProperties(this.globalProperties);
-        }
-        if (this.projectProperties != null) {
-            runner.setProjectProperties(this.projectProperties);
-        }
-        if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
-            for (Object keyObject : this.soapuiProperties.keySet()) {
-                String key = (String) keyObject;
-                getLog().info("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
-                System.setProperty(key, this.soapuiProperties.getProperty(key));
-            }
-        }
+        runner.setSaveAfterRun(saveAfterRun);
 
         if(runnerTypeEnum.isProRunner()) {
             SoapUIProTestCaseRunner proRunner = (SoapUIProTestCaseRunner) runner;
             if (environment != null) {
                 proRunner.setEnvironment(environment);
             }
-            proRunner.setOpenReport(this.openReport);
-            if (this.coverage) {
+            proRunner.setOpenReport(openReport);
+            if (coverage) {
                 proRunner.initCoverageBuilder();
             }
-            if (this.reportName != null) {
-                proRunner.setReportName(this.reportName);
+            if (reportName != null) {
+                proRunner.setReportName(reportName);
             }
-            if (this.reportFormat != null) {
-                proRunner.setReportFormats(this.reportFormat.split(","));
+            if (reportFormat != null) {
+                proRunner.setReportFormats(reportFormat.split(","));
             }
         }
 
