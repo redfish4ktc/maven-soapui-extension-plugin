@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase with groovy" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testStep type="groovy" name="Groovy directly"><con:settings/><con:config><script>log.info("I am a soapui project and I succeed");</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase>
