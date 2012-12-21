@@ -2,9 +2,9 @@
 <plugin>
   <description></description>
   <!-- ######## CUSTOMIZED -->
-  <groupId>${project.groupId}</groupId>
-  <artifactId>${project.artifactId}</artifactId>
-  <version>${project.version}</version>
+  <groupId>@project.groupId@</groupId>
+  <artifactId>@project.artifactId@</artifactId>
+  <version>@project.version@</version>
   <!-- ######## END OF CUSTOMIZED -->
   <goalPrefix>soapui-pro</goalPrefix>
   <isolatedRealm>false</isolatedRealm>

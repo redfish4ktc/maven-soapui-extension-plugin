@@ -19,12 +19,12 @@
   <parent>
     <groupId>com.github.redfish4ktc.parent</groupId>
     <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>4</version>
+    <version>5</version>
   </parent>
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.5.1.2-SNAPSHOT</version>
+  <version>4.5.1.3-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>Add new features and bug fixes to the eviware maven-soapui-pro-plugin</description>
@@ -125,6 +125,16 @@
         <configuration>
           <source>${javaMinimumSupportedVersion}</source>
           <target>${javaMinimumSupportedVersion}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <delimiters>
+            <delimiter>@</delimiter>
+          </delimiters>
+          <useDefaultDelimiters>false</useDefaultDelimiters>
         </configuration>
       </plugin>
       <plugin>

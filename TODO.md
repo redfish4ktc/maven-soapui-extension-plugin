@@ -18,10 +18,16 @@
 # Development todo list #
 
 ## Parent ##
-- move to parent (version 3)
+- move to parent
   - complier config
   - animalsniffer
   - maven minimum version
+
+
+## Experiments ##
+- check if it is possible to export wsdl/wadl from soapui project to external file
+  - could avoid us to sync the wsdl file and the wsdl definition in soapui project
+  - check if bindind directory of composite projects is ok, see http://www.soapui.org/Working-with-Projects/team-testing-support.html
 
 
 ## Integration tests ##
@@ -32,6 +38,7 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
   - remove duplication in soapui configuration (settings, projects)
   - add tests with composite projects
   - test goal default log directory: also check they are no log file in base directory (cf related test of convert-project goal)
+  - pretty print project. See http://www.soapui.org/Working-with-Projects/team-testing-support.html Tip: The “Pretty Print Project Files” setting in the global preferences WSDS Settings tab will make merging a single project file substantially easier (but will also increase the size of the project file).
 
 
 ## Mojo implementation ##
