@@ -39,6 +39,7 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
   - add tests with composite projects
   - test goal default log directory: also check they are no log file in base directory (cf related test of convert-project goal)
   - pretty print project. See http://www.soapui.org/Working-with-Projects/team-testing-support.html Tip: The “Pretty Print Project Files” setting in the global preferences WSDS Settings tab will make merging a single project file substantially easier (but will also increase the size of the project file).
+  - check the globalProperties bug with maven plugin (http://www.soapui.org/forum/viewtopic.php?f=2&t=8210&p=23818&hilit=maven+globalproperties#p23818). May affect only 4.0.0 version
 
 
 ## Mojo implementation ##
