@@ -82,6 +82,7 @@ Supported java and maven versions
   * maven 2.2.1 and 3.0.4
   * java 6 and 7 (soapui needs java 6+ starting from 4.0.0)
 
+
   
 Build status
 ============ 
