@@ -95,7 +95,7 @@
         <executions>
           <execution>
             <id>prepare-soapui-home</id>
-            <phase>generate-resources</phase>
+            <phase>initialize</phase>
             <goals>
               <goal>run</goal>
             </goals>
@@ -115,8 +115,6 @@
             </goals>
             <configuration>
               <target>
-                <!-- to be sure it works on linux -->
-                <mkdir dir="${soapui.home.fake}" />
                 <property name="soapui.generation.working.dir" location="${soapui.generation.dir}/work" />
                 <!-- soapui code does not create subdirectories, so do it ourself -->
                 <mkdir dir="${soapui.generation.working.dir}" />
