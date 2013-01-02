@@ -18,6 +18,7 @@
   <properties>
     <soapui.version>4.5.1</soapui.version>
     <soapui.artifactId>maven-soapui-pro-plugin</soapui.artifactId>
+    <soapui.plugin.artifactId>maven-soapui-pro-plugin</soapui.plugin.artifactId>
     <soapui.generator.classname>SoapUIProMockAsWarGenerator</soapui.generator.classname>
 
     <soapui.project.mockaswar.path>${soapui.output.directory}/converted-projects/composite</soapui.project.mockaswar.path>
