@@ -40,7 +40,8 @@ Main features
     * add the `runnerType` parameter to choose to use the open source or pro runner (see [goal documentation](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-goal-add-param))
   * 'convert-project' goal
     * [convert-project](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-convert-project-goal) converts composite to standard projects or standard to composite projects
-
+  * 'mock' goal
+    * add the `runnerType` parameter to choose to use the open source or pro runner (see [goal documentation](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-mock-goal-add-param))
 
 **Improvements**
 
