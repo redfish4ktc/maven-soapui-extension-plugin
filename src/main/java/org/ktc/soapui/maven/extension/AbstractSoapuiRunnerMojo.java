@@ -17,21 +17,25 @@
 
 package org.ktc.soapui.maven.extension;
 
+import com.eviware.soapui.tools.AbstractSoapUIRunner;
 import java.util.Properties;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
-    private boolean skip;
-    
-    protected String[] globalProperties;
-    protected String projectFile;
-    protected String projectPassword;
-    protected String[] projectProperties;
+    // already in smartbear implementation
+    private String[] globalProperties;
+    private String projectFile;
+    private String projectPassword;
+    private String[] projectProperties;
     protected boolean saveAfterRun;
-    protected String settingsFile;
-    protected String settingsPassword;
-    protected Properties soapuiProperties;
+    private String settingsFile;
+    private String settingsPassword;
+    private boolean skip;
+    private Properties soapuiProperties;
+
+    // custom maven-soapui-extension-plugin
+    protected String runnerType;
 
     @Override
     protected void performExecute() throws MojoExecutionException, MojoFailureException {
@@ -46,5 +50,31 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
     }
 
     public abstract void performRunnerExecute() throws MojoExecutionException, MojoFailureException;
+
+    protected void configureWithSharedParameters(AbstractSoapUIRunner runner) {
+        runner.setProjectFile(projectFile);
+        if (projectPassword != null) {
+            runner.setProjectPassword(projectPassword);
+        }
+        if (settingsFile != null) {
+            runner.setSettingsFile(settingsFile);
+        }
+        if (settingsPassword != null) {
+            runner.setSoapUISettingsPassword(settingsPassword);
+        }
+        if (globalProperties != null) {
+            runner.setGlobalProperties(globalProperties);
+        }
+        if (projectProperties != null) {
+            runner.setProjectProperties(projectProperties);
+        }
+        if (soapuiProperties != null && !soapuiProperties.isEmpty()) {
+            for (Object keyObject : soapuiProperties.keySet()) {
+                String key = (String) keyObject;
+                getLog().info("Setting " + key + " value " + soapuiProperties.getProperty(key));
+                System.setProperty(key, soapuiProperties.getProperty(key));
+            }
+        }
+    }
 
 }

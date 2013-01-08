@@ -44,6 +44,15 @@
           <description>Tells TestRunner to skip tests</description>
         </parameter>
         <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #23 -->
+        <parameter>
+          <name>runnerType</name>
+          <type>java.lang.String</type>
+          <required>true</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
         <parameter>
           <name>globalProperties</name>
           <type>java.lang.String[]</type>
@@ -135,6 +144,9 @@
         <!-- ######## END OF CUSTOMIZED -->
         <!-- ######## CUSTOMIZED, added for #22 -->
         <skip implementation="boolean">${soapui.skip}</skip>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #23 -->
+        <runnerType implementation="java.lang.String">PRO</runnerType>
         <!-- ######## END OF CUSTOMIZED -->
         <port implementation="java.lang.String">${soapui.port}</port>
         <saveAfterRun implementation="boolean">${soapui.saveAfterRun}</saveAfterRun>

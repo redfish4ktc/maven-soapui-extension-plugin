@@ -172,6 +172,7 @@
             <exclude>src/main/resources/META-INF/maven/plugin.xml</exclude>
             <!-- Unable to add license because some files have no way to specify comments -->
             <exclude>src/it/convert-project_goal/_soapui-conf/projects/composite-project/**/*</exclude>
+            <exclude>src/it/mock_goal/_soapui_conf/composite-project/**/*</exclude>
             <exclude>src/it/test_goal_runner_type/_soapui-conf/projects/composite-project/**/*</exclude>
           </excludes>
         </configuration>
