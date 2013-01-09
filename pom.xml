@@ -27,7 +27,7 @@
   <version>4.5.1.3-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
-  <description>Add new features and bug fixes to the eviware maven-soapui-pro-plugin</description>
+  <description>This plugin adds new features and bug fixes to smartbear maven-soapui-pro-plugin/maven-soapui-plugin.</description>
   <inceptionYear>2011</inceptionYear>
 
   <url>https://github.com/redfish4ktc/maven-soapui-extension-plugin</url>
