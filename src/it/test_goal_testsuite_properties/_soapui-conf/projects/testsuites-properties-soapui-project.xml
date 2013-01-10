@@ -27,7 +27,7 @@
 log.info "Reading custom properties for testsuite '$currentTestSuite.name'"
 
 def testsuiteProperties= currentTestSuite.getPropertyList()
-testsuiteProperties.each() { log.info "${it.name}=${it.value}" };
+testsuiteProperties.each() { log.info "[$currentTestSuite.name]${it.name}=${it.value}" };
 
 log.info "Done"</script>
         </con:config>
@@ -59,7 +59,7 @@ log.info "Done"</script>
 log.info "Reading custom properties for testsuite '$currentTestSuite.name'"
 
 def testsuiteProperties= currentTestSuite.getPropertyList()
-testsuiteProperties.each() { log.info "${it.name}=${it.value}" };
+testsuiteProperties.each() { log.info "[$currentTestSuite.name]${it.name}=${it.value}" };
 
 log.info "Done"</script>
         </con:config>
@@ -91,7 +91,7 @@ log.info "Done"</script>
 log.info "Reading custom properties for testsuite '$currentTestSuite.name'"
 
 def testsuiteProperties= currentTestSuite.getPropertyList()
-testsuiteProperties.each() { log.info "${it.name}=${it.value}" };
+testsuiteProperties.each() { log.info "[$currentTestSuite.name]${it.name}=${it.value}" };
 
 log.info "Done"</script>
         </con:config>
