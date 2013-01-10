@@ -17,11 +17,20 @@
 
 package org.ktc.soapui.maven.extension.impl.runner;
 
+import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.model.testsuite.TestSuite;
+import java.util.List;
 import org.apache.log4j.Logger;
 
 public class TestSuitePropertiesModifier {
     private static final Logger log = Logger.getLogger(TestSuitePropertiesModifier.class);
+
+    public static void overrideTestSuiteProperties(WsdlProject project, String[] testsuiteProperties) {
+        List<TestSuite> suites = project.getTestSuiteList();
+        for (TestSuite suite : suites) {
+            overrideTestSuiteProperties(suite, testsuiteProperties);
+        }
+    }
 
     public static void overrideTestSuiteProperties(TestSuite testSuite, String[] testsuiteProperties) {
         if (testsuiteProperties != null) {

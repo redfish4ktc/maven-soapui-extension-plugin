@@ -44,7 +44,7 @@ public class TestSuitePropertiesModifierTest {
     }
 
     @Test
-    public void createNewProperties() throws Exception {
+    public void createNewPropertiesAndManageProvidedPropertiesWithoutKeyValueSeparator() throws Exception {
         TestSuitePropertiesModifier.overrideTestSuiteProperties(testSuite, new String[] {"prop1=value1", "prop2",
                 "prop3=value3"});
         List<TestProperty> testProperties = testSuite.getPropertyList();
@@ -90,6 +90,24 @@ public class TestSuitePropertiesModifierTest {
         assertThat(extractProperty("name").from(testProperties)).containsExactly("property2", "property1");
         assertThat(extractProperty("value").from(testProperties)).containsExactly("testsuite3-value2",
                 "new super salue for property1");
+    }
+
+    @Test
+    public void updatePropertiesInTheWholeProject() throws Exception {
+        WsdlProject project = new WsdlProject();
+        WsdlTestSuite suite1 = project.addNewTestSuite("suite1");
+        WsdlTestSuite suite2 = project.addNewTestSuite("suite2");
+
+        TestSuitePropertiesModifier.overrideTestSuiteProperties(project, new String[] {"property=new property"});
+        assertThat(extractProperty("name").from(suite1.getPropertyList())).containsExactly("property");
+        assertThat(extractProperty("name").from(suite2.getPropertyList())).containsExactly("property");
+    }
+
+    @Test
+    public void updatePropertiesInTheWholeProjectWhichHasNoTestSuite() throws Exception {
+        WsdlProject project = new WsdlProject();
+        assertThat(project.getTestSuiteCount()).isEqualTo(0);
+        TestSuitePropertiesModifier.overrideTestSuiteProperties(project, new String[] {"property=new property"});
     }
 
 }
