@@ -26,14 +26,17 @@ public class TestSuitePropertiesModifier {
     private static final Logger log = Logger.getLogger(TestSuitePropertiesModifier.class);
 
     public static void overrideTestSuiteProperties(WsdlProject project, String[] testsuiteProperties) {
+        log.info("Configuring test suite properties");
         List<TestSuite> suites = project.getTestSuiteList();
         for (TestSuite suite : suites) {
             overrideTestSuiteProperties(suite, testsuiteProperties);
         }
+        log.info("Test suite properties configuration done");
     }
 
     public static void overrideTestSuiteProperties(TestSuite testSuite, String[] testsuiteProperties) {
         if (testsuiteProperties != null) {
+            log.info("Configuring properties for TestSuite " + testSuite.getName());
             for (String option : testsuiteProperties) {
                 int positionOfKeyValueSeparator = option.indexOf('=');
                 if (positionOfKeyValueSeparator != -1) {
@@ -43,6 +46,7 @@ public class TestSuitePropertiesModifier {
                     testSuite.setPropertyValue(name, value);
                 }
             }
+            log.info("TestSuite properties configured");
         }
     }
 

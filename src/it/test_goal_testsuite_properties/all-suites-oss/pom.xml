@@ -40,11 +40,9 @@
               <runnerType>OSS</runnerType>
               <projectFile>${soapui.project.standard.file.path}</projectFile>
               <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
-              <testsuiteProperties>
-                <properties>
-                  <property>property1=new-value1</property>
-                </properties>
-              </testsuiteProperties>
+              <testSuiteProperties>
+                  <testSuiteProperty>property1=new-value1</testSuiteProperty>
+              </testSuiteProperties>
             </configuration>
             <goals>
               <goal>test</goal>

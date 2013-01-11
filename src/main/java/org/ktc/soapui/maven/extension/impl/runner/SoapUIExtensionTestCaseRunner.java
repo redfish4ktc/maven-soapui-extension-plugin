@@ -19,11 +19,10 @@ package org.ktc.soapui.maven.extension.impl.runner;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
-import org.apache.commons.lang.ArrayUtils;
 
 public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {
 
-    private String[] testsuiteProperties = {"fake"};
+    private String[] testSuiteProperties = {"fake"};
 
     public SoapUIExtensionTestCaseRunner() {
         super();
@@ -33,6 +32,10 @@ public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {
         super(title);
     }
 
+    public void setTestSuiteProperties(String[] testSuiteProperties) {
+        this.testSuiteProperties = testSuiteProperties;
+    }
+
     @Override
     protected void initProject(WsdlProject project) throws Exception {
         super.initProject(project);
@@ -40,9 +43,7 @@ public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {
     }
 
     private void initTestSuiteProperties(WsdlProject project) {
-        log.info("Configuring test suite properties");
-        log.info(ArrayUtils.toString(testsuiteProperties));
-        log.info("Test suite properties configuration done");
+        TestSuitePropertiesModifier.overrideTestSuiteProperties(project, testSuiteProperties);
     }
 
 }

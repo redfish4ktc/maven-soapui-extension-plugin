@@ -17,20 +17,6 @@
 
 import java.io.*;
 
-/*
-02:25:53,335 INFO  [log] Reading custom properties for testsuite 'TestSuite1'
-02:25:53,369 INFO  [log] [TestSuite1]property1=testsuite1-value1
-02:25:53,369 INFO  [log] [TestSuite1]property2=testsuite1-value2
-02:25:53,369 INFO  [log] Done
-02:25:53,412 INFO  [log] Reading custom properties for testsuite 'TestSuite2'
-02:25:53,414 INFO  [log] [TestSuite2]property1=testsuite2-value1
-02:25:53,414 INFO  [log] [TestSuite2]property2=testsuite2-value2
-02:25:53,415 INFO  [log] Done
-02:25:53,447 INFO  [log] Reading custom properties for testsuite 'TestSuite3'
-02:25:53,449 INFO  [log] [TestSuite3]property2=testsuite3-value2
-02:25:53,449 INFO  [log] Done
-*/
-
 private boolean checkFileContainsMessage(String fileContent, String message) {
   int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, message);
   if (matchCount < 1) {

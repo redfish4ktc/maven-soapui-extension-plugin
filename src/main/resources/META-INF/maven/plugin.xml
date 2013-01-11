@@ -510,6 +510,15 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <description></description>
         </parameter>
         <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #38 -->
+        <parameter>
+          <name>testSuiteProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified TestSuite property values</description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
         <parameter>
           <name>coverage</name>
           <type>boolean</type>
@@ -726,6 +735,9 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <!-- ######## END OF CUSTOMIZED -->
         <!-- ######## CUSTOMIZED, added for #14 -->
         <runnerType implementation="java.lang.String">PRO</runnerType>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #14 -->
+        <testSuiteProperties implementation="java.lang.String[]">${soapui.testSuiteProperties}</testSuiteProperties>
         <!-- ######## END OF CUSTOMIZED -->
         <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>
         <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
