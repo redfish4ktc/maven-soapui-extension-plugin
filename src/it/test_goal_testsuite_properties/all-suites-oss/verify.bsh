@@ -20,7 +20,7 @@ import java.io.*;
 private boolean checkFileContainsMessage(String fileContent, String message) {
   int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, message);
   if (matchCount < 1) {
-    System.out.println("FAILED! Did not find content in the log file that should prove that test suite properites have been updated. Expected content: " + message);
+    System.out.println("FAILED! Did not find content in the log file that should prove that test suite properties have been updated. Expected content: " + message);
     return false;
   }
   return true;
