@@ -17,10 +17,12 @@
 
 package org.ktc.soapui.maven.extension.impl.runner;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.model.testsuite.TestSuite;
-import java.util.List;
-import org.apache.log4j.Logger;
 
 public class TestSuitePropertiesModifier {
     private static final Logger log = Logger.getLogger(TestSuitePropertiesModifier.class);
@@ -36,17 +38,15 @@ public class TestSuitePropertiesModifier {
 
     public static void overrideTestSuiteProperties(TestSuite testSuite, String[] testsuiteProperties) {
         if (testsuiteProperties != null) {
-            log.info("Configuring properties for TestSuite " + testSuite.getName());
             for (String option : testsuiteProperties) {
                 int positionOfKeyValueSeparator = option.indexOf('=');
                 if (positionOfKeyValueSeparator != -1) {
                     String name = option.substring(0, positionOfKeyValueSeparator);
                     String value = option.substring(positionOfKeyValueSeparator + 1);
-                    log.info("Setting test suite property [" + name + "] to [" + value + "]");
+                    log.info("TestSuite [" + testSuite.getName() + "], setting property [" + name + "] to [" + value + "]");
                     testSuite.setPropertyValue(name, value);
                 }
             }
-            log.info("TestSuite properties configured");
         }
     }
 
