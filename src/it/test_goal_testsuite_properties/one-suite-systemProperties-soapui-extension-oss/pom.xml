@@ -34,7 +34,7 @@
         <version>@project.version@</version>
         <executions>
           <execution>
-            <id>oss</id>
+            <id>override-one-testsuite-property</id>
             <phase>integration-test</phase>
             <configuration>
               <runnerType>OSS</runnerType>
