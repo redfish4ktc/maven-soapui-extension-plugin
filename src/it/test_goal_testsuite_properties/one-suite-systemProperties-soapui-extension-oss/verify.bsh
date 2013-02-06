@@ -26,6 +26,16 @@ private boolean checkFileContainsMessage(String fileContent, String message) {
   return true;
 }
 
+private boolean checkFileDoesNotContainMessage(String fileContent, String message) {
+  int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, message);
+  if (matchCount > 0) {
+    System.out.println("FAILED! The log file that should not contains the following message but it has been found "
+      + matchCount + "times. Unexpected content: " + message);
+    return false;
+  }
+  return true;
+}
+
 
 try {
   File logFile = new File(basedir, "build.log");
@@ -41,7 +51,10 @@ try {
   System.out.println("Checking content of the log file");
   boolean checkStatus = checkFileContainsMessage(fileContent, "[log] [TestSuite1]property1=testsuite1-value1")
                         &&
-                        checkFileContainsMessage(fileContent, "[log] [TestSuite2]property1=new-value1");
+                        checkFileContainsMessage(fileContent, "[log] [TestSuite2]property1=new-value1")
+                        &&
+                        checkFileDoesNotContainMessage(fileContent, "[log] [TestSuite3]property1=")
+                        ;
 
   System.out.println("Check done");
   return checkStatus;
