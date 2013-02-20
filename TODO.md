@@ -80,3 +80,13 @@ File	1.4	Base directory where all build reports are written to. Every execution 
 Default value is: ${project.build.directory}/invoker-reports.
 
 
+### New Features ###
+
+New issue needs to be created
+
+mock-as-war goal
+We will already have a "include lib in ext folder" parameter.  
+This will be nice to be able to declare maven dependencies to be added instead of putting jar in the ext folder (workaround: use dependency:copy first before calling the mock-as-war goal)  
+The workaround need to be documented
+
+
