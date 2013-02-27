@@ -56,6 +56,26 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
 * talk about default value (everything in basedir)
 * put the 'Avoid log warnings at startup' section just before logs tips + modify link/text according to the new documentation about scripts and ext
 
+**Test strategy**
+
+* mostly with invoker
+* i use groovy test step and check logs in output (explain why)
+
+**Goal implemenation status**
+
+* currently, some goals are not implemented directly, we rely on SmartBear impl
+* create a table to describe what is implemented
+  * which goal
+  * from which version 
+  * pro/oss support (from which version)
+* tool goal:
+  * should be remove in the future as it rely on external tools.
+  * Instead, create a goal to export the wsdl and directly use maven plugin provided by each tool (cxf, axis, axis2, ...)
+* describe the plugin.xml hack (because smartbear impl does not use maven plugin annotation so cannot extends the plugin directly)
+
+**Goal page**
+
+* add an entry for the "tool" goal and mark it as "to be removed" (see other info)
 
 ### Have a look on invoker goal parameters ###
 see http://maven.apache.org/plugins/maven-invoker-plugin/run-mojo.html
@@ -84,9 +104,18 @@ Default value is: ${project.build.directory}/invoker-reports.
 
 New issue needs to be created
 
-mock-as-war goal
+**mock-as-war goal**
+
 We will already have a "include lib in ext folder" parameter.  
 This will be nice to be able to declare maven dependencies to be added instead of putting jar in the ext folder (workaround: use dependency:copy first before calling the mock-as-war goal)  
 The workaround need to be documented
 
+**extract-wsdl**
 
+Extract wsdl from soapui project
+* avoid duplication: no need to store the wsdl both in the soapui project and in the build directory
+* then can be use
+* multi interface definition in a soapui project
+  * add a parameter (in another issue
+  * if not set, use the 1st interface found
+* implem: the "tool" goal/utility may already perform this export to let external tool used the wsdl to generate client/service for instance)
