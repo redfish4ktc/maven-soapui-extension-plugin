@@ -41,7 +41,9 @@
               <projectFile>${soapui.project.standard.file.path}</projectFile>
               <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
               <testSuiteProperties>
-                  <testSuiteProperty>property1=new-value1</testSuiteProperty>
+                <properties>
+                  <property>property1=new-value1</property>
+                </properties>
               </testSuiteProperties>
             </configuration>
             <goals>

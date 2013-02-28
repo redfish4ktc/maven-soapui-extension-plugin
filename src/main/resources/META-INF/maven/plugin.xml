@@ -513,7 +513,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <!-- ######## CUSTOMIZED, added for #38 -->
         <parameter>
           <name>testSuiteProperties</name>
-          <type>java.lang.String[]</type>
+          <type>org.ktc.soapui.maven.extension.impl.TestSuiteProperties</type>
           <required>false</required>
           <editable>true</editable>
           <description>Specified TestSuite property values</description>
@@ -737,7 +737,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <runnerType implementation="java.lang.String">PRO</runnerType>
         <!-- ######## END OF CUSTOMIZED -->
         <!-- ######## CUSTOMIZED, added for #14 -->
-        <testSuiteProperties implementation="java.lang.String[]">${soapui.testSuiteProperties}</testSuiteProperties>
+        <testSuiteProperties implementation="org.ktc.soapui.maven.extension.impl.TestSuiteProperties">${soapui.testSuiteProperties}</testSuiteProperties>
         <!-- ######## END OF CUSTOMIZED -->
         <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>
         <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
