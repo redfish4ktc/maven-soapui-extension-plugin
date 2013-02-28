@@ -90,3 +90,26 @@ This will be nice to be able to declare maven dependencies to be added instead o
 The workaround need to be documented
 
 
+**test goal: testsuite properties**
+
+
+With #38, we have introduced the new testsuiteproperties parameter to override/create properties in **ALL** test suite.  
+This is the format that will let us extend this feature: override/create properties for a given test suite.
+
+
+```xml
+<testsuiteproperties>
+  <properties>
+    <property></property>
+  </properties>
+  <suites>
+      <suite>
+        <name></name>
+        <properties>
+          <property></property>
+        </properties>
+      </suite>
+  </suites>
+</testsuiteproperties>
+```
+
