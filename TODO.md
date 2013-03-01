@@ -25,7 +25,7 @@
 
 
 ## Experiments ##
-- check if it is possible to export wsdl/wadl from soapui project to external file
+- check if it is possible to export wsdl/wadl from soapui project to external file (see also new features todo)
   - could avoid us to sync the wsdl file and the wsdl definition in soapui project
   - check if bindind directory of composite projects is ok, see http://www.soapui.org/Working-with-Projects/team-testing-support.html
 
@@ -76,6 +76,14 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
 **Goal page**
 
 * add an entry for the "tool" goal and mark it as "to be removed" (see other info)
+* mock goal
+  * possible missing options (no documented by Smartbear or not implemented)
+  * the following are available when running the command line
+    * f : Sets the output folder to export results to ( soapUI Pro only )
+    * o : Opens the Coverage Report in a browser (with the -g option) ( soapUI Pro only )
+    * g : Sets the output to include Coverage HTML reports ( soapUI Pro only )
+  * if not implemented, create issues (no need to open the coverage report)
+
 
 ### Have a look on invoker goal parameters ###
 see http://maven.apache.org/plugins/maven-invoker-plugin/run-mojo.html
