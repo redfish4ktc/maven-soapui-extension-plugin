@@ -76,7 +76,7 @@ Roadmap
 ============
 
 * improve the test goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
-* add a goal for generating war from [mock services](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal) aka [MockAsWar or Deploy as War](http://www.soapui.org/Service-Mocking/deploying-mock-services-as-war-files.html)
+* add a goal for generating war from [mock services](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal)
 
 
 
