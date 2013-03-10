@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +17,36 @@
 
 import java.io.*;
 
+private boolean checkFileContainsMessage(String fileContent, String message) {
+  int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, message);
+  if (matchCount < 1) {
+    System.out.println("FAILED! Did not find content in the log file that should prove that test suite properties have been updated. Expected content: " + message);
+    return false;
+  }
+  return true;
+}
+
+
 try {
   File logFile = new File(basedir, "build.log");
   System.out.println("Scanning file " + logFile);
   if (!logFile.exists()) {
     System.out.println("FAILED! File " + logFile + " does not exist!!");
     return false;
-  }  
-  
-  System.out.println("Reading the content of the log file " + logFile);
-  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
-  String expectedContent = "INFO  [SoapUIExtensionTestCaseRunner]";
-  int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
-  System.out.println("Number of occurences of expected content: " + matchCount);
-  if (matchCount < 1) {
-    System.out.println("FAILED! Did not find content in the log file that should prove that we use an open source runner. Expected content: " + expectedContent);
-    return false;
   }
 
-  System.out.println("OK");
-  return true;  
+  System.out.println("Reading the content of the log file " + logFile);
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
+
+  System.out.println("Checking content of the log file");
+  boolean checkStatus = checkFileContainsMessage(fileContent, "[log] [TestSuite1]property1=new-value1")
+                        &&
+                        checkFileContainsMessage(fileContent, "[log] [TestSuite2]property1=new-value1")
+                        &&
+                        checkFileContainsMessage(fileContent, "[log] [TestSuite3]property1=new-value1");
+
+  System.out.println("Check done");
+  return checkStatus;
 }
 catch(Throwable t) {
     t.printStackTrace();

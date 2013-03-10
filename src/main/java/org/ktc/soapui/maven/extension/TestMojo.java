@@ -23,7 +23,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
+import org.ktc.soapui.maven.extension.impl.TestSuiteProperties;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
 
 public class TestMojo extends AbstractSoapuiRunnerMojo {
     
@@ -49,7 +51,10 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     private String reportName;
     // new in soapui 4.5.0 (pro only)
     private String environment;
-    
+
+    // maven-soapui-extension additional parameters
+    private TestSuiteProperties testSuiteProperties;
+
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
@@ -105,7 +110,10 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
             if (reportFormat != null) {
                 proRunner.setReportFormats(reportFormat.split(","));
             }
+        } else {
+            ((SoapUIExtensionTestCaseRunner) runner).setTestSuiteProperties(testSuiteProperties.getProperties());
         }
+        
 
         try {
             runner.run();

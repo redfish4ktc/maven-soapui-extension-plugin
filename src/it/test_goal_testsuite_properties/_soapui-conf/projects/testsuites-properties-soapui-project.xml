@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~ Copyright 2013 Thomas Bouffard (redfish4ktc)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing,
+~ software distributed under the License is distributed on an
+~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~ KIND, either express or implied.  See the License for the
+~ specific language governing permissions and limitations
+~ under the License.-->
+<con:soapui-project name="testsuite-properties" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:testSuite name="TestSuite1">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase1" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4">
+      <con:settings/>
+      <con:testStep type="groovy" name="Groovy logs testsuite custom properties">
+        <con:settings/>
+        <con:config>
+          <script>def currentTestSuite = testRunner.testCase.testSuite
+log.info "Reading custom properties for testsuite '$currentTestSuite.name'"
+
+def testsuiteProperties= currentTestSuite.getPropertyList()
+testsuiteProperties.each() { log.info "[$currentTestSuite.name]${it.name}=${it.value}" };
+
+log.info "Done"</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties>
+      <con:property>
+        <con:name>property1</con:name>
+        <con:value>testsuite1-value1</con:value>
+      </con:property>
+      <con:property>
+        <con:name>property2</con:name>
+        <con:value>testsuite1-value2</con:value>
+      </con:property>
+    </con:properties>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite name="TestSuite2">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase1" searchProperties="true" id="afc48937-7f30-462d-a218-a5f2e50a6071">
+      <con:settings/>
+      <con:testStep type="groovy" name="Groovy logs testsuite custom properties">
+        <con:settings/>
+        <con:config>
+          <script>def currentTestSuite = testRunner.testCase.testSuite
+log.info "Reading custom properties for testsuite '$currentTestSuite.name'"
+
+def testsuiteProperties= currentTestSuite.getPropertyList()
+testsuiteProperties.each() { log.info "[$currentTestSuite.name]${it.name}=${it.value}" };
+
+log.info "Done"</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties>
+      <con:property>
+        <con:name>property1</con:name>
+        <con:value>testsuite2-value1</con:value>
+      </con:property>
+      <con:property>
+        <con:name>property2</con:name>
+        <con:value>testsuite2-value2</con:value>
+      </con:property>
+    </con:properties>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite name="TestSuite3">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase1" searchProperties="true" id="16be04c7-cca4-4d4c-a429-2a01760f994a">
+      <con:settings/>
+      <con:testStep type="groovy" name="Groovy logs testsuite custom properties">
+        <con:settings/>
+        <con:config>
+          <script>def currentTestSuite = testRunner.testCase.testSuite
+log.info "Reading custom properties for testsuite '$currentTestSuite.name'"
+
+def testsuiteProperties= currentTestSuite.getPropertyList()
+testsuiteProperties.each() { log.info "[$currentTestSuite.name]${it.name}=${it.value}" };
+
+log.info "Done"</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties>
+      <con:property>
+        <con:name>property2</con:name>
+        <con:value>testsuite3-value2</con:value>
+      </con:property>
+    </con:properties>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:requirements/>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer/>
+  <con:sensitiveInformation/>
+</con:soapui-project>
