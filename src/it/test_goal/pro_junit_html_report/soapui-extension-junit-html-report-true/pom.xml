@@ -23,7 +23,7 @@
     <version>@project.version@</version>
     <relativePath>../common-soapui-extension.xml</relativePath>
   </parent>
-  <artifactId>test-pro-junit-html-report-default</artifactId>
+  <artifactId>test-pro-junit-html-report-true</artifactId>
   <packaging>pom</packaging>  
 
   <build>
@@ -38,6 +38,9 @@
             <goals>
               <goal>test</goal>
             </goals>
+            <configuration>
+              <junitHtmlReport>true</junitHtmlReport>
+            </configuration>
           </execution>
         </executions>
       </plugin>
