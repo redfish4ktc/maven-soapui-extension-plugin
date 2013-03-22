@@ -18,14 +18,22 @@
 import java.io.*;
 
 try {
-  System.out.println("Verifying additional junit repot xml file");
-  File additionalJunitReportFile = new File(basedir, "report.xml");
-  System.out.println("We expect to find file " + additionalJunitReportFile);
+  System.out.println("Verifying additional junit report xml file");
+  File reportDirectory = new File(basedir, "target/soapui/test-reports");
 
+  File regularJunitFile = new File(reportDirectory, "TEST-TestSuite_1.xml");
+  System.out.println("We expect to find regular junit file " + regularJunitFile);
+  if (!regularJunitFile.exists()) {
+    System.out.println("FAILED! File " + regularJunitFile + " does not exist!!");
+    return false;
+  }
+  
+  File additionalJunitReportFile = new File(reportDirectory, "report.xml");
+  System.out.println("We expect to find additional junit report file " + additionalJunitReportFile);
   if (!additionalJunitReportFile.exists()) {
     System.out.println("FAILED! File " + additionalJunitReportFile + " does not exist!!");
     return false;
-  }  
+  }
 
   System.out.println("OK");
   return true;  

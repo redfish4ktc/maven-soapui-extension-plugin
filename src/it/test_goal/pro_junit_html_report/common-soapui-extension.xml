@@ -36,6 +36,7 @@
           <configuration>
             <exportAll>true</exportAll>
             <junitReport>true</junitReport>
+            <outputFolder>${project.build.directory}/soapui/test-reports</outputFolder>
             <projectFile>${soapui.project.success.1.file.path}</projectFile>
             <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
           </configuration>
