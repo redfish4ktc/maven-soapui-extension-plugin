@@ -50,7 +50,6 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
             try {
                 collector.saveReports(folder == null ? "" : folder);
             } catch (Exception e) {
-                e.printStackTrace();
                 log.error("Failed to create JUnit reports", e);
             }
         }
