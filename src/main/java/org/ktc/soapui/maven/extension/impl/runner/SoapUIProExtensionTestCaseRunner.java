@@ -18,8 +18,12 @@
 package org.ktc.soapui.maven.extension.impl.runner;
 
 import com.eviware.soapui.SoapUIProTestCaseRunner;
+import com.eviware.soapui.impl.wsdl.WsdlProject;
+import com.eviware.soapui.report.JUnitReportCollector;
 
 public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
+
+    private boolean junitHtmlReport = true;
 
     public SoapUIProExtensionTestCaseRunner() {
         super();
@@ -27,6 +31,30 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
 
     public SoapUIProExtensionTestCaseRunner(String title) {
         super(title);
+    }
+
+    public boolean isJunitHtmlReport() {
+        return junitHtmlReport;
+    }
+
+    public void setJunitHtmlReport(boolean junitHtmlReport) {
+        this.junitHtmlReport = junitHtmlReport;
+    }
+
+    @Override
+    public void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project) {
+        if (junitHtmlReport) {
+            super.exportJUnitReports(collector, folder, project);
+        } else {
+            // copy from SoapUITestCaseRunner
+            try {
+                collector.saveReports(folder == null ? "" : folder);
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error("Failed to create JUnit reports", e);
+            }
+        }
+
     }
 
 }

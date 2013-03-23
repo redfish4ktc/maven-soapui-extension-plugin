@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2011-2013 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.SoapUIProTestCaseRunner;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -26,6 +25,7 @@ import org.ktc.soapui.maven.extension.impl.RunnerType;
 import org.ktc.soapui.maven.extension.impl.TestSuiteProperties;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
 
 public class TestMojo extends AbstractSoapuiRunnerMojo {
     
@@ -54,6 +54,7 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
 
     // maven-soapui-extension additional parameters
     private TestSuiteProperties testSuiteProperties;
+    private boolean junitHtmlReport = true;
 
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
@@ -96,10 +97,11 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
         runner.setSaveAfterRun(saveAfterRun);
 
         if(runnerTypeEnum.isProRunner()) {
-            SoapUIProTestCaseRunner proRunner = (SoapUIProTestCaseRunner) runner;
+            SoapUIProExtensionTestCaseRunner proRunner = (SoapUIProExtensionTestCaseRunner) runner;
             if (environment != null) {
                 proRunner.setEnvironment(environment);
             }
+            proRunner.setJunitHtmlReport(junitHtmlReport);
             proRunner.setOpenReport(openReport);
             if (coverage) {
                 proRunner.initCoverageBuilder();

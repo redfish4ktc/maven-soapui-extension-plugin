@@ -519,6 +519,15 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <description>Specified TestSuite property values</description>
         </parameter>
         <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #45 -->
+        <parameter>
+          <name>junitHtmlReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Enables creation of junit html report (Pro only)</description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
         <parameter>
           <name>coverage</name>
           <type>boolean</type>
@@ -736,8 +745,11 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <!-- ######## CUSTOMIZED, added for #14 -->
         <runnerType implementation="java.lang.String">PRO</runnerType>
         <!-- ######## END OF CUSTOMIZED -->
-        <!-- ######## CUSTOMIZED, added for #14 -->
+        <!-- ######## CUSTOMIZED, added for #38 -->
         <testSuiteProperties implementation="org.ktc.soapui.maven.extension.impl.TestSuiteProperties">${soapui.testSuiteProperties}</testSuiteProperties>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #45 -->
+        <junitHtmlReport implementation="boolean">${soapui.junitHtmlReport}</junitHtmlReport>
         <!-- ######## END OF CUSTOMIZED -->
         <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>
         <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
