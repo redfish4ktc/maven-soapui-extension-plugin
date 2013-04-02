@@ -112,10 +112,11 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
             if (reportFormat != null) {
                 proRunner.setReportFormats(reportFormat.split(","));
             }
+            proRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
         } else {
-            ((SoapUIExtensionTestCaseRunner) runner).setTestSuiteProperties(testSuiteProperties.getProperties());
+            SoapUIExtensionTestCaseRunner ossRunner = (SoapUIExtensionTestCaseRunner) runner;
+            ossRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
         }
-        
 
         try {
             runner.run();

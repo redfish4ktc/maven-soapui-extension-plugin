@@ -22,7 +22,7 @@ import com.eviware.soapui.tools.SoapUITestCaseRunner;
 
 public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {
 
-    private String[] testSuiteProperties = {"fake"};
+    private String[] testSuiteProperties = {};
 
     public SoapUIExtensionTestCaseRunner() {
         super();
