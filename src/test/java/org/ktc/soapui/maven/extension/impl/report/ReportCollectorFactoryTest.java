@@ -27,10 +27,16 @@ public class ReportCollectorFactoryTest {
 
     @Test
     public void newReportCollectorWithNoSystemProperty() {
-        System.setProperty("soapui.junit.reportCollector", "");
+        System.clearProperty("soapui.junit.reportCollector");
         assertThat(newReportCollector()).isNotNull();
     }
 
+    @Test
+    public void newReportCollectorWithEmptySystemProperty() {
+        System.setProperty("soapui.junit.reportCollector", "");
+        assertThat(newReportCollector()).isNotNull();
+    }
+    
     @Test
     public void newReportCollectorWithNoSystemPropertyBlankValue() {
         System.setProperty("soapui.junit.reportCollector", "  ");
@@ -45,8 +51,8 @@ public class ReportCollectorFactoryTest {
 
     @Test
     public void newReportCollectorSystemPropertyReferenceReportCollectorExtension() {
-        System.setProperty("soapui.junit.reportCollector", CustomReportCollector.class.getName());
-        assertThat(newReportCollector()).isInstanceOf(CustomReportCollector.class);
+        System.setProperty("soapui.junit.reportCollector", CustomReportCollectorForUnitTesting.class.getName());
+        assertThat(newReportCollector()).isInstanceOf(CustomReportCollectorForUnitTesting.class);
     }
 
     private static class WrongReportCollector {
@@ -56,9 +62,9 @@ public class ReportCollectorFactoryTest {
         }
     }
 
-    private static class CustomReportCollector extends JUnitSecurityReportCollector {
+    private static class CustomReportCollectorForUnitTesting extends JUnitSecurityReportCollector {
         @SuppressWarnings("unused")
-        public CustomReportCollector() {
+        public CustomReportCollectorForUnitTesting() {
             // do nothing
         }
     }

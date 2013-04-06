@@ -22,7 +22,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 public class ReportCollectorFactory {
-
     private static final Logger log = Logger.getLogger(ReportCollectorFactory.class);
 
     // TODO manage maxErrors
