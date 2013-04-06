@@ -16,54 +16,23 @@
  */
 
 import java.io.*;
-
-try {
-  File logFile = new File(basedir, "build.log");
-  System.out.println("Scanning file " + logFile);
-  if (!logFile.exists()) {
-    System.out.println("FAILED! File " + logFile + " does not exist!!");
-    return false;
-  }  
-
-  System.out.println("Reading the content of the log file " + logFile);
-  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
-
-  System.out.println("Check that the OSS runner has been used");
-  String expectedContent = "INFO  [SoapUIExtensionTestCaseRunner]";
-  int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
-  System.out.println("Number of occurences of expected content: " + matchCount);
-  if (matchCount < 1) {
-    System.out.println("FAILED! Did not find content in the log file that should prove that we use an open source runner. Expected content: " + expectedContent);
-    return false;
-  }
-  System.out.println("The OSS runner has been used");
+import org.ktc.soapui.maven.invoker.util.*;
 
 
-  System.out.println("Check that the custom report collector has been used");
-  expectedContent = "INFO  [NoOpReportCollector] Do nothing on save reports call";
-  int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
-  System.out.println("Number of occurences of expected content: " + matchCount);
-  if (matchCount < 1) {
-    System.out.println("FAILED! Did not find content in the log file that should prove that we use a custom report collector. Expected content: " + expectedContent);
-    return false;
-  }
-  System.out.println("The custom report collector has been used");
+CheckBuildLog checker = new CheckBuildLog(basedir);
+checker.assertOssTestRunnerHasBeenUsed();
 
+Check.log("Check that the custom report collector has been used");
+checker.assertLogFileContains("INFO  [NoOpReportCollector] Do nothing on save reports call");
+Check.log("The custom report collector has been used");
 
-  System.out.println("Verifying additional junit report xml file");
-  File reportDirectory = new File(basedir, "target/soapui/test-reports");
-
-  File regularJunitFile = new File(reportDirectory, "TEST-TestSuite_1.xml");
-  System.out.println("We expect not to find regular junit file " + regularJunitFile);
-  if (regularJunitFile.exists()) {
-    System.out.println("FAILED! File " + regularJunitFile + " exist!!");
-    return false;
-  }
-  
-  System.out.println("OK");
-  return true;  
+Check.log("Verifying additional junit report xml file");
+File reportDirectory = new File(basedir, "target/soapui/test-reports");
+File regularJunitFile = new File(reportDirectory, "TEST-TestSuite_1.xml");
+Check.log("We expect not to find regular junit file " + regularJunitFile);
+if (regularJunitFile.exists()) {
+  Check.logAndFail("FAILED! File " + regularJunitFile + " exist!!");
 }
-catch(Throwable t) {
-    t.printStackTrace();
-    return false;
-}
+Check.log("Regular junit file found");
+
+return true;
