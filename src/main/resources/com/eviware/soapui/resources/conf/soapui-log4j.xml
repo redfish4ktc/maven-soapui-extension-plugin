@@ -95,10 +95,11 @@
      <appender-ref ref="SOAPUI"/>
    <appender-ref ref="CONSOLE"/>
    </logger>
-   <!-- ######## CUSTOMIZED, added for #38 -->
+   <!-- ######## CUSTOMIZED -->
    <!-- This is needed because we now use custom runners -->
    <!-- So also activate logs for these runners to display the same messages than with original runners -->
-   <logger name="org.ktc.soapui.maven.extension.impl.runner">
+   <!-- Finally, do not restrict additional logs for runners as we want to log all custom actions done -->
+   <logger name="org.ktc.soapui.maven.extension.impl">
      <level value="INFO" />
      <appender-ref ref="SOAPUI"/>
      <appender-ref ref="CONSOLE"/>
