@@ -20,7 +20,6 @@ package org.ktc.soapui.maven.extension.impl.report;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.ktc.soapui.maven.extension.impl.report.ReportCollectorFactory.newReportCollector;
 
-import com.eviware.soapui.report.JUnitSecurityReportCollector;
 import org.junit.Test;
 
 public class ReportCollectorFactoryTest {
@@ -51,20 +50,13 @@ public class ReportCollectorFactoryTest {
 
     @Test
     public void newReportCollectorSystemPropertyReferenceReportCollectorExtension() {
-        System.setProperty("soapui.junit.reportCollector", CustomReportCollectorForUnitTesting.class.getName());
-        assertThat(newReportCollector()).isInstanceOf(CustomReportCollectorForUnitTesting.class);
+        System.setProperty("soapui.junit.reportCollector", NoOpReportCollector.class.getName());
+        assertThat(newReportCollector()).isInstanceOf(NoOpReportCollector.class);
     }
 
     private static class WrongReportCollector {
         @SuppressWarnings("unused")
         public WrongReportCollector() {
-            // do nothing
-        }
-    }
-
-    private static class CustomReportCollectorForUnitTesting extends JUnitSecurityReportCollector {
-        @SuppressWarnings("unused")
-        public CustomReportCollectorForUnitTesting() {
             // do nothing
         }
     }
