@@ -27,20 +27,23 @@
 ## Experiments ##
 - check if it is possible to export wsdl/wadl from soapui project to external file (see also new features todo)
   - could avoid us to sync the wsdl file and the wsdl definition in soapui project
-  - check if bindind directory of composite projects is ok, see http://www.soapui.org/Working-with-Projects/team-testing-support.html
+  - check if binding directory of composite projects is ok, see http://www.soapui.org/Working-with-Projects/team-testing-support.html
 
 
 ## Integration tests ##
   - all pom should use the project version as version (@project.version@)
-  - avoid duplication in verify script (expecially log parsing): put duplicate code in a java class (see  
+  - add intermediate parent pom to avoid duplication for a given tested feature
+  - avoid duplication in verify script (especially log parsing): put duplicate code in a java class (see  
 http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classes.html)
   - check if we need to force the "–Djava.headless=false" when running test
   - remove duplication in soapui configuration (settings, projects)
-  - add tests with composite projects
+  - add tests with composite projects for all features using the pro runner
   - test goal default log directory: also check they are no log file in base directory (cf related test of convert-project goal)
   - pretty print project. See http://www.soapui.org/Working-with-Projects/team-testing-support.html Tip: The “Pretty Print Project Files” setting in the global preferences WSDS Settings tab will make merging a single project file substantially easier (but will also increase the size of the project file).
   - check the globalProperties bug with maven plugin (http://www.soapui.org/forum/viewtopic.php?f=2&t=8210&p=23818&hilit=maven+globalproperties#p23818). May affect only 4.0.0 version
-
+  - in test and mock goal, always check the runner type used in the tests
+  - test goal: put all test in a single root directory. Currently, there is a directory per feature
+ 
 
 ## Mojo implementation ##
   - test and mock goal does not declare mandatory parameter as required (see plugin.xml). Instead, null check is done in mojo implementation
@@ -61,9 +64,9 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
 * mostly with invoker
 * i use groovy test step and check logs in output (explain why)
 
-**Goal implemenation status**
+**Goal implementation status**
 
-* currently, some goals are not implemented directly, we rely on SmartBear impl
+* currently, some goals are not implemented directly, we rely on SmartBear implementation
 * create a table to describe what is implemented
   * which goal
   * from which version 
@@ -121,6 +124,7 @@ The workaround need to be documented
 **extract-wsdl**
 
 Extract wsdl from soapui project
+
 * avoid duplication: no need to store the wsdl both in the soapui project and in the build directory
 * then can be use
 * multi interface definition in a soapui project
