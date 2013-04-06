@@ -24,7 +24,7 @@ import org.ktc.soapui.maven.extension.impl.report.ReportCollectorFactory;
 
 public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {
 
-    private String[] testSuiteProperties = {"fake"};
+    private String[] testSuiteProperties = {};
 
     public SoapUIExtensionTestCaseRunner() {
         super();

@@ -24,6 +24,7 @@ import com.eviware.soapui.report.JUnitReportCollector;
 public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
 
     private boolean junitHtmlReport = true;
+    private String[] testSuiteProperties = {};
 
     public SoapUIProExtensionTestCaseRunner() {
         super();
@@ -41,6 +42,10 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
         this.junitHtmlReport = junitHtmlReport;
     }
 
+    public void setTestSuiteProperties(String[] testSuiteProperties) {
+        this.testSuiteProperties = testSuiteProperties;
+    }
+
     @Override
     public void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project) {
         if (junitHtmlReport) {
@@ -53,7 +58,16 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
                 log.error("Failed to create JUnit reports", e);
             }
         }
+    }
 
+    @Override
+    protected void initProject(WsdlProject project) {
+        super.initProject(project);
+        initTestSuiteProperties(project);
+    }
+
+    private void initTestSuiteProperties(WsdlProject project) {
+        TestSuitePropertiesModifier.overrideTestSuiteProperties(project, testSuiteProperties);
     }
 
 }
