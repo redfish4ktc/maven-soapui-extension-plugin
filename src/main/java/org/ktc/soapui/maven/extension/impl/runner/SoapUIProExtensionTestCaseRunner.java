@@ -20,6 +20,8 @@ package org.ktc.soapui.maven.extension.impl.runner;
 import com.eviware.soapui.SoapUIProTestCaseRunner;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.report.JUnitReportCollector;
+import com.eviware.soapui.report.JUnitSecurityReportCollector;
+import org.ktc.soapui.maven.extension.impl.report.ReportCollectorFactory;
 
 public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
 
@@ -53,7 +55,12 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
                 log.error("Failed to create JUnit reports", e);
             }
         }
+    }
 
+    // TODO duplicate with oss test runner
+    @Override
+    protected JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
+        return ReportCollectorFactory.newReportCollector();
     }
 
 }
