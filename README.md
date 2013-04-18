@@ -43,6 +43,7 @@ Main features
     * the `junitHtmlReport` parameter lets disable junit html report generation when using the pro runner
     * the `runnerType` parameter lets choose to use the open source or pro runner 
     * the `testsuiteProperties` parameter lets override custom properties in test suites
+    * configure the JunitReportCollector to be able to modify xml junit files generation 
   * `test-verify` additional goal
     * [test-verify](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-verify-goal) goal that let user run soapui tests, perform post processing tasks and then fail the build if tests failed. This is very usefull to run [multiple projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
 
