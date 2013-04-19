@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-~ Copyright 2012 Thomas Bouffard (redfish4ktc)
+<!--~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -13,23 +12,42 @@
 ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 ~ KIND, either express or implied.  See the License for the
 ~ specific language governing permissions and limitations
-~ under the License.
--->
-<con:soapui-project name="simple-project-with-groovy.xml" resourceRoot="" soapui-version="3.6.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase with groovy" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4"><con:settings/><con:testStep type="groovy" name="Groovy directly"><con:settings/><con:config><script>log.info("groovy script that does not need external files to work");</script></con:config></con:testStep><con:testStep type="groovy" name="Groovy that needs external scripts"><con:settings/><con:config><script>log.info("groovy script that needs external files to work");
+~ under the License.-->
+<con:soapui-project name="simple-project-with-groovy.xml" resourceRoot="" soapui-version="4.5.1" activeEnvironment="Default" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:testSuite name="TestSuite 1">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase with groovy" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4">
+      <con:settings/>
+      <con:testStep type="groovy" name="Groovy directly">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that does not need external files to work");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="Groovy that needs external scripts">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that needs external files to work");
 def myDateUtil = new soapui.groovy.example.DateUtil() 
 def nbDaysInYear = myDateUtil.getNbDaysInYear();
 //def nbDaysInYear = fail.xvs.groovy.example.DateUtil.getNbDaysInYear();
 //soapui.groovy.example.DateUtil.getNbDaysInYear();
 //def nbDaysInYear = 365;
 log.info("nbDaysInYear=${nbDaysInYear}");
-log.info("END OF groovy script that needs external files to work");
-
-</script></con:config></con:testStep><con:testStep type="groovy" name="Groovy that needs Junit code"><con:settings/><con:config><script>log.info("groovy script that needs junit to work");
+log.info("END OF groovy script that needs external files to work");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="Groovy that needs Junit code">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that needs junit to work");
 
 try {
   // need xml escaping, otherwise soapui remove the whole text
-  String expected = "&lt;a&gt;&lt;/a&gt;" // <a></a>
-  String actual = "&lt;b&gt;&lt;/b&gt;" // <b></b>
+  String expected = "&lt;a>&lt;/a>" // 
+  String actual = "&lt;b>&lt;/b>" // 
   log.info("expected: " + expected)
   log.info("actual: " + actual)
   org.custommonkey.xmlunit.XMLAssert.assertXMLEqual(expected, actual)
@@ -45,6 +63,17 @@ catch (Throwable t) {
 }
 finally {
   log.info("END OF groovy script that needs junit to work");
-}
-
-</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/></con:soapui-project>
+}</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:requirements/>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer/>
+</con:soapui-project>
