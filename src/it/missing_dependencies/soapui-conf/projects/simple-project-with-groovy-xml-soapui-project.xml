@@ -18,7 +18,7 @@
   <con:testSuite name="TestSuite 1">
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase with groovy" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4">
+    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase with groovy" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
       <con:settings/>
       <con:testStep type="groovy" name="Groovy directly">
         <con:settings/>
@@ -39,7 +39,7 @@ log.info("nbDaysInYear=${nbDaysInYear}");
 log.info("END OF groovy script that needs external files to work");</script>
         </con:config>
       </con:testStep>
-      <con:testStep type="groovy" name="Groovy that needs Junit code">
+      <con:testStep type="groovy" name="Groovy that needs JUnit code">
         <con:settings/>
         <con:config>
           <script>log.info("groovy script that needs junit to work");
@@ -63,6 +63,42 @@ catch (Throwable t) {
 }
 finally {
   log.info("END OF groovy script that needs junit to work");
+}</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="Groovy that needs google-guava code">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that needs google-guava to work");
+
+try {
+  log.info("Read soapui version");
+  def soapuiVersion = com.eviware.soapui.SoapUI.SOAPUI_VERSION;
+  //def soapuiVersion = "4.5.1-SN"
+  log.info("soapuiVersion ${soapuiVersion}");
+
+  def minimumSoapuiVersionToCheckGuava = "4.5.1"; 
+  if (soapuiVersion.compareToIgnoreCase(minimumSoapuiVersionToCheckGuava) >= 0 ) {
+  	  def locationClassName = "com.eviware.soapui.testondemand.Location";
+	  log.info("Use code that needs guava (${locationClassName})");
+	  // Use reflection to be sure this script can be compile with soapui version &lt; 4.5.1
+	  // because the Location class has been introduced in soapui 4.5.1
+	  //def location = new com.eviware.soapui.testondemand.Location("code", "name", null);
+	  def location = Class.forName(locationClassName).getConstructor(String.class, String.class, String[].class)
+	                                                 .newInstance("code", "name", null)
+	  log.info("location name: " + location.getName());
+	
+	  log.info("Directly use guava code");
+	  Class.forName("com.google.common.base.Strings");
+	  def myString = "abc";
+	  log.info("${myString} is null or empty? " + com.google.common.base.Strings.isNullOrEmpty(myString));
+  }
+  else {
+  	log.info("Soapui version prior to ${minimumSoapuiVersionToCheckGuava}, do not check guava dependency");
+  }
+}
+finally {
+  log.info("END OF groovy script that needs google-guava to work");
 }</script>
         </con:config>
       </con:testStep>
