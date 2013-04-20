@@ -72,6 +72,12 @@
   </properties>
 
   <dependencies>
+    <!-- Missing in SmartBear 4.5.1 implementation -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>11.0</version>
+    </dependency>
     <dependency>
       <groupId>eviware</groupId>
       <artifactId>maven-soapui-pro-plugin</artifactId>
