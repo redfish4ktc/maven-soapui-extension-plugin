@@ -82,6 +82,23 @@
       <groupId>eviware</groupId>
       <artifactId>maven-soapui-pro-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
+      <exclusions>
+      <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
+      is not able to detect that the project already depends on groovy -->
+        <exclusion>
+          <groupId>groovy</groupId>
+          <artifactId>groovy-all</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Adding groovy with regular coordinates (see exclusion of soapui-pro)
+    Forced to use the same version than in maven-invoker (due to limitation of the way this plugin perform duplicate dependency detection)
+    -->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <!-- <version>1.8.0</version> -->
+      <version>2.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.easytesting</groupId>

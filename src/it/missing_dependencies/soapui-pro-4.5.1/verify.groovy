@@ -15,15 +15,14 @@
  *
  */
 
-import java.io.*;
 import org.ktc.soapui.maven.invoker.util.*;
-
+import static org.ktc.soapui.maven.invoker.util.Check.*;
 
 CheckBuildLog checker = new CheckBuildLog(basedir);
 
-Check.log("Check that google-guava dependency is missing");
+log("Check that google-guava dependency is missing");
 checker.assertLogFileContains("INFO  [log] END OF groovy script that needs google-guava to work");
 checker.assertLogFileContains("ERROR [SoapUI] An error occured [com/google/common/base/Charsets], see error log for details");
-Check.log("The google-guava dependency is missing");
+log("The google-guava dependency is missing");
 
 return true;
