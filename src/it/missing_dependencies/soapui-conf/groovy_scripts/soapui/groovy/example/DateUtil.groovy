@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2011-2013 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
