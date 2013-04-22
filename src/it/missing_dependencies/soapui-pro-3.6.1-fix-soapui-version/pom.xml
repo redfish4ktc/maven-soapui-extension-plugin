@@ -1,0 +1,85 @@
+<!--
+~ Copyright 2013 Thomas Bouffard (redfish4ktc)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing,
+~ software distributed under the License is distributed on an
+~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~ KIND, either express or implied.  See the License for the
+~ specific language governing permissions and limitations
+~ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>soapui.bugs</groupId>
+    <artifactId>groovy-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../common.xml</relativePath>
+  </parent>
+  <artifactId>groovy-with-pro-3.6.1-use-right-soapui-version</artifactId>
+  <packaging>pom</packaging>  
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eviware</groupId>
+        <artifactId>maven-soapui-pro-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>project-with-groovy</id>
+            <phase>integration-test</phase>
+            <configuration>
+              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+              <projectFile>${soapui.project.file.path}</projectFile>
+              <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
+              <soapuiProperties>
+                <property>
+                  <name>soapui.scripting.library</name>
+                  <value>${groovy.scripts.path}</value>
+                </property>
+              </soapuiProperties>
+            </configuration>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <!-- force use of soapui 3.6.1 -->
+          <dependency>
+            <groupId>eviware</groupId>
+            <artifactId>soapui</artifactId>
+            <version>3.6.1</version>
+          </dependency>
+          <dependency>
+            <groupId>eviware</groupId>
+            <artifactId>soapui-xmlbeans</artifactId>
+            <version>3.6.1</version>
+          </dependency>
+          <!-- also add this if you use the maven-soapui-pro-plugin -->
+          <dependency>
+            <groupId>eviware</groupId>
+            <artifactId>soapui-pro</artifactId>
+            <version>3.6.1</version>
+          </dependency>
+          <!-- missing in the maven repository
+          <dependency>
+            <groupId>eviware</groupId>
+            <artifactId>soapui-coverage-xmlbeans</artifactId>
+            <version>3.6.1</version>
+          </dependency>
+          -->
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>

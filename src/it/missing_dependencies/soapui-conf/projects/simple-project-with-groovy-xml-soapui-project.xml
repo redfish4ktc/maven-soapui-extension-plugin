@@ -15,10 +15,10 @@
 ~ under the License.-->
 <con:soapui-project name="simple-project-with-groovy.xml" resourceRoot="" soapui-version="4.5.1" activeEnvironment="Default" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
   <con:settings/>
-  <con:testSuite name="TestSuite 1">
+  <con:testSuite name="Missing dependencies">
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase with groovy" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
+    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Groovy only" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
       <con:settings/>
       <con:testStep type="groovy" name="Groovy directly">
         <con:settings/>
@@ -105,6 +105,18 @@ finally {
       <con:properties/>
       <con:reportParameters/>
     </con:testCase>
+    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Database" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
+      <con:settings/>
+      <con:testStep type="groovy" name="register Jdbc Driver">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Register jdbc driver: H2");
+com.eviware.soapui.support.GroovyUtils.registerJdbcDriver("org.h2.Driver")
+log.info("Jdbc driver registered");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
     <con:properties/>
     <con:reportParameters/>
   </con:testSuite>
@@ -112,4 +124,5 @@ finally {
   <con:properties/>
   <con:wssContainer/>
   <con:databaseConnectionContainer/>
+  <con:sensitiveInformation/>
 </con:soapui-project>
