@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing,
+~ software distributed under the License is distributed on an
+~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~ KIND, either express or implied.  See the License for the
+~ specific language governing permissions and limitations
+~ under the License.-->
+<con:soapui-project name="simple-project-with-groovy.xml" resourceRoot="" soapui-version="4.5.1" activeEnvironment="Default" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:testSuite name="Missing dependencies">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Groovy only" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
+      <con:settings/>
+      <con:testStep type="groovy" name="Groovy directly">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that does not need external files to work");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="Groovy that needs external scripts">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that needs external files to work");
+def myDateUtil = new soapui.groovy.example.DateUtil() 
+def nbDaysInYear = myDateUtil.getNbDaysInYear();
+//def nbDaysInYear = fail.xvs.groovy.example.DateUtil.getNbDaysInYear();
+//soapui.groovy.example.DateUtil.getNbDaysInYear();
+//def nbDaysInYear = 365;
+log.info("nbDaysInYear=${nbDaysInYear}");
+log.info("END OF groovy script that needs external files to work");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="Groovy that needs JUnit code">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that needs junit to work");
+
+try {
+  // need xml escaping, otherwise soapui remove the whole text
+  String expected = "&lt;a>&lt;/a>" // 
+  String actual = "&lt;b>&lt;/b>" // 
+  log.info("expected: " + expected)
+  log.info("actual: " + actual)
+  org.custommonkey.xmlunit.XMLAssert.assertXMLEqual(expected, actual)
+}
+catch (Throwable t) {
+  if ( t instanceof junit.framework.AssertionFailedError) {
+    junit.framework.AssertionFailedError failure = (junit.framework.AssertionFailedError) t
+    log.info("Found expected junit failure: " + failure.getMessage())
+  }
+  else {
+    throw new RuntimeException("Test should have catch a junit.framework.ComparisonFailure", t);
+  }
+}
+finally {
+  log.info("END OF groovy script that needs junit to work");
+}</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="Groovy that needs google-guava code">
+        <con:settings/>
+        <con:config>
+          <script>log.info("groovy script that needs google-guava to work");
+
+try {
+  log.info("Read soapui version");
+  def soapuiVersion = com.eviware.soapui.SoapUI.SOAPUI_VERSION;
+  //def soapuiVersion = "4.5.1-SN"
+  log.info("soapuiVersion ${soapuiVersion}");
+
+  def minimumSoapuiVersionToCheckGuava = "4.5.1"; 
+  if (soapuiVersion.compareToIgnoreCase(minimumSoapuiVersionToCheckGuava) >= 0 ) {
+  	  def locationClassName = "com.eviware.soapui.testondemand.Location";
+	  log.info("Use code that needs guava (${locationClassName})");
+	  // Use reflection to be sure this script can be compile with soapui version &lt; 4.5.1
+	  // because the Location class has been introduced in soapui 4.5.1
+	  //def location = new com.eviware.soapui.testondemand.Location("code", "name", null);
+	  def location = Class.forName(locationClassName).getConstructor(String.class, String.class, String[].class)
+	                                                 .newInstance("code", "name", null)
+	  log.info("location name: " + location.getName());
+	
+	  log.info("Directly use guava code");
+	  Class.forName("com.google.common.base.Strings");
+	  def myString = "abc";
+	  log.info("${myString} is null or empty? " + com.google.common.base.Strings.isNullOrEmpty(myString));
+  }
+  else {
+  	log.info("Soapui version prior to ${minimumSoapuiVersionToCheckGuava}, do not check guava dependency");
+  }
+}
+finally {
+  log.info("END OF groovy script that needs google-guava to work");
+}</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Database" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
+      <con:settings/>
+      <con:testStep type="groovy" name="register Jdbc Driver">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Register jdbc driver: H2");
+com.eviware.soapui.support.GroovyUtils.registerJdbcDriver("org.h2.Driver")
+log.info("Jdbc driver registered");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:requirements/>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer/>
+  <con:sensitiveInformation/>
+</con:soapui-project>

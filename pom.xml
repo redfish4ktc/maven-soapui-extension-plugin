@@ -61,6 +61,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <groovyVersion>1.8.0</groovyVersion>
     <!-- also check animal-sniffer configuration -->
     <javaMinimumSupportedVersion>1.6</javaMinimumSupportedVersion>
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
@@ -72,10 +73,32 @@
   </properties>
 
   <dependencies>
+    <!-- Missing in SmartBear 4.5.1 implementation -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>11.0</version>
+    </dependency>
     <dependency>
       <groupId>eviware</groupId>
       <artifactId>maven-soapui-pro-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
+      <exclusions>
+      <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
+      is not able to detect that the project already depends on groovy -->
+        <exclusion>
+          <groupId>groovy</groupId>
+          <artifactId>groovy-all</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Adding groovy with regular coordinates (see exclusion of soapui-pro)
+    Forced to use the same version than in maven-invoker (due to limitation of the way this plugin perform duplicate dependency detection)
+    -->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>${groovyVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.easytesting</groupId>
@@ -288,6 +311,14 @@
                 </goals>
               </execution>
             </executions>
+            <dependencies>
+              <!-- Force use of the same version than in our plugin to be sure this dependency is not added twice to the classpath -->
+              <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovyVersion}</version>
+              </dependency>
+            </dependencies>
           </plugin>
         </plugins>
       </build>
