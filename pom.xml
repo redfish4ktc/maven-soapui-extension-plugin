@@ -99,6 +99,17 @@
       <artifactId>maven-plugin-api</artifactId>
       <version>${mavenMinimumSupportedVersion}</version>
     </dependency>
+    <!-- TODO check version built with eclipse groupID -->
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-api</artifactId>
+      <version>1.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-util</artifactId>
+      <version>1.13.1</version>
+    </dependency>    
   </dependencies>
 
   <build>
