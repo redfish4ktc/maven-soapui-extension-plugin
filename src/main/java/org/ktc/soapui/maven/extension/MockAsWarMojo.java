@@ -70,21 +70,17 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     private List<RemoteRepository> remoteRepos;
 
     @Override
-    // TODO should be protected
-    public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
+    protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         // List<RemoteRepository> remoteRepos = getRemoteRepos();
         getLog().info("Running Mock As War");
 
         SoapUIMockAsWarGenerator runner = new SoapUIMockAsWarGenerator("SoapUI Maven2 MockAsWar Runner");
-        // TODO duplicate with other mojo when setting runner configuration
-        runner.setProjectFile(projectFile);
+        configureWithSharedParameters(runner);
+
         // TODO should be set to false in all runner mojo
 //        runner.setEnableUI(false);
-        // TODO check if this is a parameter in the abstract mojo
+        // TODO check if this is a parameter in the abstract mojo + set by super class
 //        runner.setOutputFolder(null);
-//        runner.setProjectPassword(projectPassword);
-//        runner.setSettingsFile(settingsFile);
-//        runner.setSoapUISettingsPassword(settingsPassword);
         
         try {
             buildSoapuiGuiEnvironment();

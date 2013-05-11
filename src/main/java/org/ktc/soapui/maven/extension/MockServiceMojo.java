@@ -30,7 +30,7 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
     private boolean noBlock;
     
     @Override
-    public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
+    protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
         SoapUIMockServiceRunner runner = runnerTypeEnum.newMockRunner();
         configureWithSharedParameters(runner);

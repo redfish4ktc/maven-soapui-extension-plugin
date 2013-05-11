@@ -49,7 +49,7 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
         performRunnerExecute();
     }
 
-    public abstract void performRunnerExecute() throws MojoExecutionException, MojoFailureException;
+    protected abstract void performRunnerExecute() throws MojoExecutionException, MojoFailureException;
 
     protected void configureWithSharedParameters(AbstractSoapUIRunner runner) {
         runner.setProjectFile(projectFile);
