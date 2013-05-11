@@ -39,10 +39,15 @@ import org.sonatype.aether.resolution.DependencyResolutionException;
 import org.sonatype.aether.util.artifact.DefaultArtifact;
 import org.sonatype.aether.util.artifact.JavaScopes;
 
-public class MockAsWarMojo extends AbstractSoapuiMojo {
+public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     // for 2.2.x support, see http://docs.codehaus.org/display/MAVENUSER/Mojo+Developer+Cookbook
     // http://blog.sonatype.com/people/2011/01/how-to-use-aether-in-maven-plugins/
     // http://www.jcabi.com/jcabi-aether/
+    
+    // TODO add a default value (build.getDirectory() + "/soapui/mock-as-war/" + "maven-artifactId.war")
+    private File warFile;
+    // TODO add a default value (build.getDirectory() + "/soapui/mock-as-war/" + "exploded")
+    private File explodedWarDirectory;
 
     /**
      * The entry point to Aether, i.e. the component doing all the work.
@@ -65,48 +70,72 @@ public class MockAsWarMojo extends AbstractSoapuiMojo {
     private List<RemoteRepository> remoteRepos;
 
     @Override
-    protected void performExecute() throws MojoExecutionException, MojoFailureException {
+    // TODO should be protected
+    public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         // List<RemoteRepository> remoteRepos = getRemoteRepos();
         getLog().info("Running Mock As War");
 
-        System.setProperty("soapui.home", getBuiltSoapuiGuiBinDirectory().getAbsolutePath());
-
+        SoapUIMockAsWarGenerator runner = new SoapUIMockAsWarGenerator("SoapUI Maven2 MockAsWar Runner");
+        // TODO duplicate with other mojo when setting runner configuration
+        runner.setProjectFile(projectFile);
+        // TODO should be set to false in all runner mojo
+//        runner.setEnableUI(false);
+        // TODO check if this is a parameter in the abstract mojo
+//        runner.setOutputFolder(null);
+//        runner.setProjectPassword(projectPassword);
+//        runner.setSettingsFile(settingsFile);
+//        runner.setSoapUISettingsPassword(settingsPassword);
+        
         try {
             buildSoapuiGuiEnvironment();
-            
-            
-            Build build = project.getBuild();
-            String generationBaseDirPath = build.getDirectory() + "/soapui/mock-as-war";
-            
-            String generationDirPath = generationBaseDirPath + "/exploded";
+
             // TODO needed as mockaswar generator does not create subdirectories
-            new File(generationBaseDirPath).mkdirs();
-            
-            String generationWarPath = generationBaseDirPath + "/example.war";
-            
-            String projectFile = project.getBasedir().getParent() + "/_soapui_conf/test-mock-service-soapui-project.xml";
-            SoapUIMockAsWarGenerator.main(new String[] {"-d" + generationDirPath, "-f" + generationWarPath, "-w true",
-                    projectFile});
-            
-//            <arg value="-d${soapui.generation.working.dir}" />
-//            <arg value="-f${soapui.war.path}" />
-//            <arg value="-w true" />
-//            <arg value="path_to_project_file" />
-            
-            
+            explodedWarDirectory.mkdirs();
+            runner.setOutputFolder(explodedWarDirectory.getAbsolutePath());
 
+            // TODO needed as mockaswar generator does not create subdirectories
+            warFile.getParentFile().mkdirs();
+            runner.setWarFile(warFile.getAbsolutePath());
+
+            // specific configuration
+            // runner.setEnableWebUI(true);
+            // runner.setLocalEndpoint(null);
+            // TODO related java system properties must be correctly set (add documentation)
+            // WARN the mock generator does not respect properties (it used directories in the soapui.home directory)
+            // runner.setIncludeActions(false);
+            // runner.setIncludeLibraries(false);
+            // runner.setIncludeListeners(false);
+
+            // TODO pro feature: include scripts
+
+            runner.run();
         } catch (Exception e) {
-            throw new MojoExecutionException(e.getMessage(), e);
+            getLog().debug(e);
+            throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
         }
-
     }
 
+    // TODO extend this: add a boolean parameter to specify if jars must be downloaded
+    // can create the /ext and /script (pro only?) directory
+    // if system properties are not set to configure the 2 directories, set them to use directories in soapui fake. This
+    // will avoid warning on soapui startup
+    // also set the soapui.home property if not set
     private void buildSoapuiGuiEnvironment() throws DependencyResolutionException, IOException {
         getLog().info("Building a Soapui Gui environment");
-        resolveAndCopyDependencies(new DefaultArtifact("eviware:maven-soapui-plugin:4.5.1"), getBuiltSoapuiGuiLibDirectory());
+
+        resolveAndCopyDependencies(new DefaultArtifact("eviware:maven-soapui-plugin:4.5.1"),
+                getBuiltSoapuiGuiLibDirectory());
+        // Needed, otherwise the generator mess up
+        // TODO should not retrieve transitive dependencies
+        // this is currently ok because it does not declare any transitive dependencies
         resolveAndCopyDependencies(new DefaultArtifact("eviware:soapui:4.5.1"), getBuiltSoapuiGuiBinDirectory());
         
         getLog().info("Soapui Gui environment built");
+        
+        System.setProperty("soapui.home", getBuiltSoapuiGuiBinDirectory().getAbsolutePath());
+     // TODO check to set this java property if setting headless does not work:
+        //uncomment to disable browser component
+        //-Dsoapui.jxbrowser.disable="true"
     }
 
     private void resolveAndCopyDependencies(DefaultArtifact rootArtifact, File soapuiLibDirectory) throws DependencyResolutionException,

@@ -453,27 +453,27 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
       <executionStrategy>once-per-session</executionStrategy>
       <threadSafe>false</threadSafe>
       <parameters>
-<!--         <parameter> -->
-<!--           <name>outputProject</name> -->
-<!--           <type>java.io.File</type> -->
-<!--           <required>true</required> -->
-<!--           <editable>true</editable> -->
-<!--           <description></description> -->
-<!--         </parameter> -->
-<!--         <parameter> -->
-<!--           <name>inputProject</name> -->
-<!--           <type>java.io.File</type> -->
-<!--           <required>true</required> -->
-<!--           <editable>true</editable> -->
-<!--           <description></description> -->
-<!--         </parameter> -->
-<!--         <parameter> -->
-<!--           <name>conversionType</name> -->
-<!--           <type>java.lang.String</type> -->
-<!--           <required>true</required> -->
-<!--           <editable>true</editable> -->
-<!--           <description></description> -->
-<!--         </parameter> -->
+        <parameter>
+          <name>projectFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The soapUI project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>warFile</name>
+          <type>java.io.File</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
+        <parameter>
+          <name>explodedWarDirectory</name>
+          <type>java.io.File</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
         <parameter>
           <name>project</name>
           <type>org.apache.maven.project.MavenProject</type>
@@ -497,9 +497,12 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         </parameter>
       </parameters>
       <configuration>
-        <remoteRepos implementation="java.util.List" default-value="${project.remoteProjectRepositories}"/>
-        <project implementation="org.apache.maven.project.MavenProject" default-value="${project}"/>    
-        <repoSession implementation="org.sonatype.aether.RepositorySystemSession" default-value="${repositorySystemSession}"/>
+        <explodedWarDirectory implementation="java.io.File">${soapui.explodedWarDirectory}</explodedWarDirectory>
+        <project              implementation="org.apache.maven.project.MavenProject" default-value="${project}"/>    
+        <projectFile          implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectfile}</projectFile>
+        <remoteRepos          implementation="java.util.List" default-value="${project.remoteProjectRepositories}"/>
+        <repoSession          implementation="org.sonatype.aether.RepositorySystemSession" default-value="${repositorySystemSession}"/>
+        <warFile              implementation="java.io.File">${soapui.warFile}</warFile>
       </configuration>
       <!-- components -->
       <requirements>

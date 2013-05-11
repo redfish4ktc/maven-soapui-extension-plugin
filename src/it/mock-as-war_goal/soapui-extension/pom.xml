@@ -37,18 +37,9 @@
             <id>mock-as-war</id>
             <phase>validate</phase>
             <configuration>
-<!--               <projectFile>${soapui.project.file.path}</projectFile> -->
-<!--               <outputFolder>${soapui.config.output.directory}/reports</outputFolder> -->
-<!--               <soapuiProperties> -->
-<!--                 <property> -->
-<!--                   <name>soapui.scripting.library</name> -->
-<!--                   <value>${groovy.scripts.path}</value> -->
-<!--                 </property> -->
-<!--                 <property> -->
-<!--                   <name>soapui.logroot</name> -->
-<!--                   <value>${soapui.config.output.directory}/custom-logs/</value> -->
-<!--                 </property> -->
-<!--               </soapuiProperties> -->
+              <explodedWarDirectory>${project.build.directory}/soapui/generation/war/exploded</explodedWarDirectory>
+              <projectFile>${soapui.project.file.path}</projectFile>
+              <warFile>${project.build.directory}/soapui/generation/war/project.war</warFile>
             </configuration>
             <goals>
               <goal>mock-as-war</goal>
