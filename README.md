@@ -18,10 +18,10 @@
 maven-soapui-extension-plugin [![Buildhive Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)
 ============
 
-This plugin adds new features and bug fixes to the smartbear maven-soapui-pro-plugin/maven-soapui-plugin.  
+This plugin adds new features and bug fixes to smartbear maven-soapui-pro-plugin/maven-soapui-plugin.  
 For more information about how to use it, see the [wiki](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki).
 
-Last released version: [4.5.1.2](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
+Last released version: [4.5.1.4](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
 
 
 Main features
@@ -35,11 +35,17 @@ Main features
 
 **New features**
 
-  * 'test' goal
-    * provide a new [test-verify](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-verify-goal) goal that let user run soapui tests, perform post processing tasks and then fail the build if tests failed. This is very usefull to run [multiple projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
-    * add the `runnerType` parameter to choose to use the open source or pro runner (see [goal documentation](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-goal-add-param))
-  * 'convert-project' goal
+  * `convert-project` additional goal
     * [convert-project](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-convert-project-goal) converts composite to standard projects or standard to composite projects
+  * [`mock` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-mock-goal-add-param)
+    * the `runnerType` parameter lets choose to use the open source or pro runner
+  * [`test` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-goal-add-param)
+    * the `junitHtmlReport` parameter lets disable junit html report generation when using the pro runner
+    * the `runnerType` parameter lets choose to use the open source or pro runner 
+    * the `testsuiteProperties` parameter lets override custom properties in test suites
+    * configure the JunitReportCollector to be able to modify xml junit files generation 
+  * `test-verify` additional goal
+    * [test-verify](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-verify-goal) goal that let user run soapui tests, perform post processing tasks and then fail the build if tests failed. This is very usefull to run [multiple projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
 
 
 **Improvements**
@@ -53,6 +59,7 @@ Main features
 
 **Bug fixes**
 
+  * starting from soapui 3.6.1, almost all SmartBear plugin versions have missing dependencies. This is fixed in maven-soapui-extension-plugin
   * fix the 'groovy.log' bug, see the [logs](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#wiki-log-config) documentation
   * 'mock' goal
     * make the 'skip' parameter work, see [#35](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/35)
@@ -60,7 +67,7 @@ Main features
 
 **Tests**
 
-SmartBear implemenation has no tests.
+SmartBear implementation has no tests.
 maven-soapui-extension-plugin has both unit tests and high-level tests. These high-level tests are
 
   * executed with the maven-invoker-plugin, this means that these tests are runned with maven plugins on real soapui projects
@@ -72,14 +79,14 @@ maven-soapui-extension-plugin has both unit tests and high-level tests. These hi
 Roadmap
 ============
 
-* improve the test goal to manage [several soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
-* add a goal for generating war from [mock services](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal) aka [MockAsWar or Deploy as War](http://www.soapui.org/Service-Mocking/deploying-mock-services-as-war-files.html)
+* improve the test goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
+* add a goal for generating war from [mock services](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal)
 
 
 
 Supported java and maven versions
 ============
-  * maven 2.2.1 and 3.0.4
+  * maven 2.2.1 and 3.0.x (tested with 3.0.4 and 3.0.5)
   * java 6 and 7 (soapui needs java 6+ starting from 4.0.0)
 
 
@@ -87,7 +94,7 @@ Supported java and maven versions
 Build status
 ============ 
 * maven 3.0.4, oracle jdk6 (Buildhive) [![Buildhive Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/)
-* maven 3.0.4, oracle jdk6 (drone.io) [![drone.io Build Status](https://drone.io/redfish4ktc/maven-soapui-extension-plugin/status.png)](https://drone.io/redfish4ktc/maven-soapui-extension-plugin/latest) - only launched  manually
+* maven 3.0.4, openjdk7 (drone.io) [![drone.io Build Status](https://drone.io/redfish4ktc/maven-soapui-extension-plugin/status.png)](https://drone.io/redfish4ktc/maven-soapui-extension-plugin/latest) - only launched  manually
 * maven 3.0.4, openjdk6, openjdk7 and oracle jdk7 (Travis) [![Travis Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin) - build all branches
 * maven 3.0.4, openjdk8 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.4_openjdk8/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.4_openjdk8/)
 * maven 2.2.1, oracle jdk6 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_oracle_jdk6/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_oracle_jdk6/)

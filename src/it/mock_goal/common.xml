@@ -30,6 +30,7 @@
   <properties>
     <soapui.configuration.path>${basedir}/../../_soapui_conf</soapui.configuration.path>
     <soapui.project.file.path>${soapui.configuration.path}/test-mock-service-soapui-project.xml</soapui.project.file.path>
+    <soapui.project.composite.file.path>${soapui.configuration.path}/composite-project</soapui.project.composite.file.path>
     <soapui.settings.empty.file.path>${soapui.configuration.path}/empty-soapui-settings.xml</soapui.settings.empty.file.path>
   </properties>
 

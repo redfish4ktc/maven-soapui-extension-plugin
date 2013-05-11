@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2011-2013 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,15 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.SoapUIProTestCaseRunner;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
+import org.ktc.soapui.maven.extension.impl.TestSuiteProperties;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
 
 public class TestMojo extends AbstractSoapuiRunnerMojo {
     
@@ -49,89 +51,71 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     private String reportName;
     // new in soapui 4.5.0 (pro only)
     private String environment;
-    
-    // custom maven-soapui-extension-plugin (#14)
-    private String runnerType;
+
+    // maven-soapui-extension additional parameters
+    private TestSuiteProperties testSuiteProperties;
+    private boolean junitHtmlReport = true;
 
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
         SoapUITestCaseRunner runner = runnerTypeEnum.newTestRunner();
-        
-        runner.setProjectFile(this.projectFile);
+        configureWithSharedParameters(runner);
 
-        if (this.endpoint != null) {
-            runner.setEndpoint(this.endpoint);
+        if (endpoint != null) {
+            runner.setEndpoint(endpoint);
         }
-        if (this.testSuite != null) {
-            runner.setTestSuite(this.testSuite);
+        if (testSuite != null) {
+            runner.setTestSuite(testSuite);
         }
-        if (this.testCase != null) {
-            runner.setTestCase(this.testCase);
+        if (testCase != null) {
+            runner.setTestCase(testCase);
         }
-        if (this.username != null) {
-            runner.setUsername(this.username);
+        if (username != null) {
+            runner.setUsername(username);
         }
-        if (this.password != null) {
-            runner.setPassword(this.password);
+        if (password != null) {
+            runner.setPassword(password);
         }
-        if (this.wssPasswordType != null) {
-            runner.setWssPasswordType(this.wssPasswordType);
+        if (wssPasswordType != null) {
+            runner.setWssPasswordType(wssPasswordType);
         }
-        if (this.domain != null) {
-            runner.setDomain(this.domain);
+        if (domain != null) {
+            runner.setDomain(domain);
         }
-        if (this.host != null) {
-            runner.setHost(this.host);
+        if (host != null) {
+            runner.setHost(host);
         }
-        if (this.outputFolder != null) {
-            runner.setOutputFolder(this.outputFolder);
+        if (outputFolder != null) {
+            runner.setOutputFolder(outputFolder);
         }
-        runner.setPrintReport(this.printReport);
-        runner.setExportAll(this.exportAll);
-        runner.setJUnitReport(this.junitReport);
-        runner.setEnableUI(this.interactive);
+        runner.setPrintReport(printReport);
+        runner.setExportAll(exportAll);
+        runner.setJUnitReport(junitReport);
+        runner.setEnableUI(interactive);
         runner.setIgnoreError(true);
-        runner.setSaveAfterRun(this.saveAfterRun);
-
-        if (this.settingsFile != null) {
-            runner.setSettingsFile(this.settingsFile);
-        }
-        if (this.projectPassword != null) {
-            runner.setProjectPassword(this.projectPassword);
-        }
-        if (this.settingsPassword != null) {
-            runner.setSoapUISettingsPassword(this.settingsPassword);
-        }
-        if (this.globalProperties != null) {
-            runner.setGlobalProperties(this.globalProperties);
-        }
-        if (this.projectProperties != null) {
-            runner.setProjectProperties(this.projectProperties);
-        }
-        if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
-            for (Object keyObject : this.soapuiProperties.keySet()) {
-                String key = (String) keyObject;
-                getLog().info("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
-                System.setProperty(key, this.soapuiProperties.getProperty(key));
-            }
-        }
+        runner.setSaveAfterRun(saveAfterRun);
 
         if(runnerTypeEnum.isProRunner()) {
-            SoapUIProTestCaseRunner proRunner = (SoapUIProTestCaseRunner) runner;
+            SoapUIProExtensionTestCaseRunner proRunner = (SoapUIProExtensionTestCaseRunner) runner;
             if (environment != null) {
                 proRunner.setEnvironment(environment);
             }
-            proRunner.setOpenReport(this.openReport);
-            if (this.coverage) {
+            proRunner.setJunitHtmlReport(junitHtmlReport);
+            proRunner.setOpenReport(openReport);
+            if (coverage) {
                 proRunner.initCoverageBuilder();
             }
-            if (this.reportName != null) {
-                proRunner.setReportName(this.reportName);
+            if (reportName != null) {
+                proRunner.setReportName(reportName);
             }
-            if (this.reportFormat != null) {
-                proRunner.setReportFormats(this.reportFormat.split(","));
+            if (reportFormat != null) {
+                proRunner.setReportFormats(reportFormat.split(","));
             }
+            proRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
+        } else {
+            SoapUIExtensionTestCaseRunner ossRunner = (SoapUIExtensionTestCaseRunner) runner;
+            ossRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
         }
 
         try {

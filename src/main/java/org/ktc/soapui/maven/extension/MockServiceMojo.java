@@ -17,22 +17,25 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.SoapUIProMockServiceRunner;
+import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.ktc.soapui.maven.extension.impl.RunnerType;
+import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
 public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
     private String mockService;
     private String path;
     private String port;
     private boolean noBlock;
-
+    
     @Override
     public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        SoapUIProMockServiceRunner runner = new SoapUIProMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
+        RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
+        SoapUIMockServiceRunner runner = runnerTypeEnum.newMockRunner();
+        configureWithSharedParameters(runner);
 
-        runner.setProjectFile(projectFile);
-
+        runner.setBlock(!noBlock);
         if (mockService != null) {
             runner.setMockService(mockService);
         }
@@ -42,30 +45,8 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         if (port != null) {
             runner.setPort(port);
         }
-        if (settingsFile != null) {
-            runner.setSettingsFile(settingsFile);
-        }
-        runner.setBlock(!noBlock);
         runner.setSaveAfterRun(saveAfterRun);
 
-        if (projectPassword != null) {
-            runner.setProjectPassword(projectPassword);
-        }
-        if (settingsPassword != null) {
-            runner.setSoapUISettingsPassword(settingsPassword);
-        }
-        if (globalProperties != null) {
-            runner.setGlobalProperties(globalProperties);
-        }
-        if (projectProperties != null)
-            runner.setProjectProperties(projectProperties);
-        if (this.soapuiProperties != null && !this.soapuiProperties.isEmpty()) {
-            for (Object keyObject : this.soapuiProperties.keySet()) {
-                String key = (String) keyObject;
-                getLog().info("Setting " + key + " value " + this.soapuiProperties.getProperty(key));
-                System.setProperty(key, this.soapuiProperties.getProperty(key));
-            }
-        }
 
         try {
             runner.run();
