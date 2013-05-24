@@ -49,8 +49,6 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     private boolean coverage;
     private String reportFormat;
     private String reportName;
-    // new in soapui 4.5.0 (pro only)
-    private String environment;
 
     // maven-soapui-extension additional parameters
     private TestSuiteProperties testSuiteProperties;
@@ -98,9 +96,6 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
 
         if(runnerTypeEnum.isProRunner()) {
             SoapUIProExtensionTestCaseRunner proRunner = (SoapUIProExtensionTestCaseRunner) runner;
-            if (environment != null) {
-                proRunner.setEnvironment(environment);
-            }
             proRunner.setJunitHtmlReport(junitHtmlReport);
             proRunner.setOpenReport(openReport);
             if (coverage) {

@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2011-2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2011-2013 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.5.1.5-SNAPSHOT</version>
+  <version>4.0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>This plugin adds new features and bug fixes to smartbear maven-soapui-pro-plugin/maven-soapui-plugin.</description>
@@ -67,30 +67,40 @@
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
-    <soapuiVersionCurrent>4.5.1</soapuiVersionCurrent>
+    <soapuiVersionCurrent>4.0.1</soapuiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
 
   <dependencies>
-    <!-- Missing in SmartBear 4.5.1 implementation -->
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>11.0</version>
-    </dependency>
     <dependency>
       <groupId>eviware</groupId>
       <artifactId>maven-soapui-pro-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
       <exclusions>
-      <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
-      is not able to detect that the project already depends on groovy -->
+        <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
+        is not able to detect that the project already depends on groovy -->
         <exclusion>
           <groupId>groovy</groupId>
           <artifactId>groovy-all</artifactId>
         </exclusion>
+        <!-- need to use a signed jar -->        
+        <exclusion>
+          <groupId>eviware</groupId>
+          <artifactId>soapui</artifactId>
+        </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.github.redfish4ktc.soapui</groupId>
+      <artifactId>soapui</artifactId>
+      <version>4.0.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
     </dependency>
     <!-- Adding groovy with regular coordinates (see exclusion of soapui-pro)
     Forced to use the same version than in maven-invoker (due to limitation of the way this plugin perform duplicate dependency detection)
