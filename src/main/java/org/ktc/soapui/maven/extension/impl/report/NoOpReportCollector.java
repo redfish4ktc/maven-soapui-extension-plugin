@@ -169,6 +169,7 @@ public class NoOpReportCollector extends JUnitSecurityReportCollector {
     @Override
     public void afterTestSuite(ProjectRunner testScenarioRunner, ProjectRunContext runContext,
             TestSuiteRunner testRunner) {
+        // do nothing
     }
 
     @Override
