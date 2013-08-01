@@ -82,9 +82,10 @@
      </layout>      
    </appender>
 
-   <logger name="groovy.log">
+   <logger name="groovy.log" >
      <level value="INFO" />
     <appender-ref ref="GLOBAL_GROOVY_LOG" />
+    <appender-ref ref="CONSOLE" />
    </logger>   
    <!-- =============== -->
    <!-- Loggers         -->
