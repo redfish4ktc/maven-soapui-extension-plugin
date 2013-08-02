@@ -27,7 +27,7 @@ try {
   
   System.out.println("Reading the content of the log file " + logFile);
   String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
-  String expectedContent = "INFO  [SoapUIMockServiceRunner]";
+  String expectedContent = "INFO  [SoapUIExtensionMockServiceRunner]";
   int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
   System.out.println("Number of occurences of expected content: " + matchCount);
   if (matchCount < 1) {
