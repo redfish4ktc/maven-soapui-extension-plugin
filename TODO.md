@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -25,9 +25,12 @@
 
 
 ## Experiments ##
-- check if it is possible to export wsdl/wadl from soapui project to external file (see also new features todo)
-  - could avoid us to sync the wsdl file and the wsdl definition in soapui project
-  - check if binding directory of composite projects is ok, see http://www.soapui.org/Working-with-Projects/team-testing-support.html
+
+* remove null check in mojo
+  * in all mojo, null checks are done before setting parameters to the related runner
+  * runners are supposed to deal with this
+  * so test removing the supposed extra null checks and run the integration tests
+  * if ok, create an issue (type: task) for all mojo
 
 
 ## Integration tests ##
@@ -43,11 +46,19 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
   - check the globalProperties bug with maven plugin (http://www.soapui.org/forum/viewtopic.php?f=2&t=8210&p=23818&hilit=maven+globalproperties#p23818). May affect only 4.0.0 version
   - in test and mock goal, always check the runner type used in the tests
   - test goal: put all test in a single root directory. Currently, there is a directory per feature
- 
+  - remove the `invokerParallelThreads` property in the pom.xml file. Overriding the invoker plugin parameter should be done by passing `-Dinvoker.parallelThreads` parameter
+
 
 ## Mojo implementation ##
   - test and mock goal does not declare mandatory parameter as required (see plugin.xml). Instead, null check is done in mojo implementation
   - Check parameters that should be declared as File instead of String
+    - because of this, multimodule builds fail when the parameters are set with  relative path
+    - found more information in the soapui forums and in my internal archives (expecially, this problem is documented in the developer maven plugin documentation
+    - create an integration test to reproduce this issue
+    - create an issue
+    - documentation (Tips and Goals pages)
+      - inform the users they should better use absolute path
+      - document the issue for SmartBear implementation
   - plugin.xml: test goal should not declare a 'project' parameter, it should only be configured in the configuration section
 
 
@@ -58,11 +69,22 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
 * document how to configure scripts and ext directory
 * talk about default value (everything in basedir)
 * put the 'Avoid log warnings at startup' section just before logs tips + modify link/text according to the new documentation about scripts and ext
+* log4j configuration: document the java system property to set an alternative path to the configuration file
 
 **Test strategy**
 
-* mostly with invoker
+The developer documentation should also point on this
+
+* mostly with the invoker plugin
 * i use groovy test step and check logs in output (explain why)
+* technical code is stored in java utility class to avoid duplication across script
+
+**Contributing**
+
+* use pull request
+* if it fixes an issue in the SmartBear implementation, create integration tests that show the issue (in oss and pro runners if needed)
+* create tests (at least integration plugin tests) to show the new feature or the fixed bug
+
 
 **Goal implementation status**
 
@@ -78,7 +100,7 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
 
 **Goal page**
 
-* add an entry for the "tool" goal and mark it as "to be removed" (see other info)
+* add an entry for the "tool" goal and mark it as "to be removed" (see above)
 * mock goal
   * possible missing options (no documented by Smartbear or not implemented)
   * the following are available when running the command line
@@ -118,7 +140,7 @@ New issue needs to be created
 **mock-as-war goal**
 
 We will already have a "include lib in ext folder" parameter.  
-This will be nice to be able to declare maven dependencies to be added instead of putting jar in the ext folder (workaround: use dependency:copy first before calling the mock-as-war goal)  
+This will be nice to be able to declare maven dependencies to be added instead of putting jar in the ext folder (current workaround: use dependency:copy first before calling the mock-as-war goal)  
 The workaround need to be documented
 
 **extract-wsdl**
@@ -131,7 +153,7 @@ Extract wsdl from soapui project
   * add a parameter (in another issue
   * if not set, use the 1st interface found
 * implem: the "tool" goal/utility may already perform this export to let external tool used the wsdl to generate client/service for instance)
-
+* check if binding directory of composite projects is ok, see http://www.soapui.org/Working-with-Projects/team-testing-support.html
 
 **test goal: testsuite properties**
 
