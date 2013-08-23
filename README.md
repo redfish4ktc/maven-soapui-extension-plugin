@@ -86,7 +86,7 @@ Roadmap
 
 Supported java and maven versions
 ============
-  * maven 2.2.1 and 3.0.x (tested with 3.0.4 and 3.0.5)
+  * maven 2.2.1, 3.0.x (tested with 3.0.4 and 3.0.5) and 3.1.x (tested with 3.1.0)
   * java 6 and 7 (soapui needs java 6+ starting from 4.0.0)
 
 
