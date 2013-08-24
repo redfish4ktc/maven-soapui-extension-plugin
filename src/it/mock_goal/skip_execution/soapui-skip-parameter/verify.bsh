@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,18 @@
 import java.io.*;
 
 try {
-  System.out.println("Verifying that no mock services have runned");
+  System.out.println("Verifying mock services have runned (because of bug)");
   File logFile = new File(basedir, "build.log");
   String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
   
   String runnerInitLog = "Maven2 MockService Runner";
-  if (fileContent.indexOf(runnerInitLog) >= 0) {
-    System.out.println("FAILED! Mock services have runned");
+  if (fileContent.indexOf(runnerInitLog) < 0) {
+    System.err.println("FAILED! Mock services should have runned");
+    return false;
+  }
+  String runnerClassLog = "[SoapUIMockServiceRunner]";
+  if (fileContent.indexOf(runnerClassLog) < 0) {
+    System.err.println("FAILED! Should have log the mock runner class name");
     return false;
   }
   

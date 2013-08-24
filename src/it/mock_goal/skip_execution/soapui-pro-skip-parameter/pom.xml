@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@
       <plugin>
         <groupId>eviware</groupId>
         <artifactId>maven-soapui-pro-plugin</artifactId>
-        <version>4.5.1</version>
+        <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>
             <id>mock-skip-parameter</id>

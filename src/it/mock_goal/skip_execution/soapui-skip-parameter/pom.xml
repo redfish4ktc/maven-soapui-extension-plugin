@@ -23,22 +23,22 @@
     <version>@project.version@</version>
     <relativePath>../../common.xml</relativePath>
   </parent>
-  <artifactId>mock-goal-skip-system-property-soapui-pro</artifactId>
+  <artifactId>mock-goal-skip-parameter-soapui</artifactId>
   <packaging>pom</packaging>  
 
   <build>
     <plugins>
       <plugin>
         <groupId>eviware</groupId>
-        <artifactId>maven-soapui-pro-plugin</artifactId>
-        <version>4.5.1</version>
+        <artifactId>maven-soapui-plugin</artifactId>
+        <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>
-            <id>mock-skip-system-property</id>
+            <id>mock-skip-parameter</id>
             <phase>pre-integration-test</phase>
             <configuration>
               <noBlock>true</noBlock>
-              <skip>false</skip>
+              <skip>true</skip>
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <projectFile>${soapui.project.file.path}</projectFile>
             </configuration>
