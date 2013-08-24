@@ -84,21 +84,31 @@
       <artifactId>maven-soapui-pro-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
       <exclusions>
-      <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
-      is not able to detect that the project already depends on groovy -->
+        <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
+        is not able to detect that the project already depends on groovy -->
         <exclusion>
           <groupId>groovy</groupId>
           <artifactId>groovy-all</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>jasperreports</groupId>
+          <artifactId>jasperreports</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
-    <!-- Adding groovy with regular coordinates (see exclusion of soapui-pro)
+    <!-- Adding groovy with regular coordinates (see exclusion of maven-soapui-pro-plugin)
     Forced to use the same version than in maven-invoker (due to limitation of the way this plugin perform duplicate dependency detection)
     -->
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
       <version>${groovyVersion}</version>
+    </dependency>
+    <!-- use regular maven coordinates (see #67) -->
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports</artifactId>
+      <version>4.0.2</version>
     </dependency>
     <dependency>
       <groupId>org.easytesting</groupId>
@@ -159,6 +169,31 @@
           </delimiters>
           <useDefaultDelimiters>false</useDefaultDelimiters>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-banned-dependencies</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <bannedDependencies>
+                  <searchTransitive>true</searchTransitive>
+                  <excludes>
+                    <!-- needed to avoid conflicts with the maven invoker plugin -->
+                    <exclude>groovy</exclude>
+                    <!-- artifacts with wrong pom in the soapui repository (see #67) -->
+                    <exclude>jasperreports</exclude>
+                  </excludes>
+                </bannedDependencies>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
