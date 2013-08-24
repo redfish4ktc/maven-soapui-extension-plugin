@@ -31,7 +31,7 @@
       <plugin>
         <groupId>eviware</groupId>
         <artifactId>maven-soapui-pro-plugin</artifactId>
-        <version>4.5.1</version>
+        <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>
             <id>default</id>

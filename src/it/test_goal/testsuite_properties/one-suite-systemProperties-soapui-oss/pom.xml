@@ -23,15 +23,15 @@
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>test-goal-system-properties-override-in-one-specific-suite-maven-soapui-pro-4.5.1</artifactId>
+  <artifactId>test-goal-system-properties-override-in-one-specific-suite-maven-soapui-4.5.1</artifactId>
   <packaging>pom</packaging>  
 
   <build>
     <plugins>
       <plugin>
         <groupId>eviware</groupId>
-        <artifactId>maven-soapui-pro-plugin</artifactId>
-        <version>4.5.1</version>
+        <artifactId>maven-soapui-plugin</artifactId>
+        <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>
             <id>override-one-testsuite-property</id>
