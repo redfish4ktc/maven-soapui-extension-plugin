@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@
   <properties>
     <soapui.configuration.path>${basedir}/../soapui-conf</soapui.configuration.path>
     <soapui.project.file.path>${soapui.configuration.path}/projects/simple-project-with-groovy-xml-soapui-project.xml</soapui.project.file.path>
+    <soapui.project.file.no.external.groovy.scripts.path>${soapui.configuration.path}/projects/simple-project-with-groovy-no-external-scripts-xml-soapui-project.xml</soapui.project.file.no.external.groovy.scripts.path>
     <soapui.settings.empty.file.path>${soapui.configuration.path}/soapui-settings/empty-soapui-settings.xml</soapui.settings.empty.file.path>
     <soapui.settings.library.file.path>${soapui.configuration.path}/soapui-settings/library-soapui-settings.xml</soapui.settings.library.file.path>
     <groovy.scripts.path>${soapui.configuration.path}/groovy_scripts</groovy.scripts.path>
