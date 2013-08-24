@@ -21,7 +21,7 @@
     <groupId>soapui.extension</groupId>
     <artifactId>common-it-parent</artifactId>
     <version>@project.version@</version>
-    <relativePath>../common.xml</relativePath>
+    <relativePath>../../common.xml</relativePath>
   </parent>
   <groupId>soapui.extension</groupId>
   <artifactId>test-goal-display-message-with-skip-to-true</artifactId>
