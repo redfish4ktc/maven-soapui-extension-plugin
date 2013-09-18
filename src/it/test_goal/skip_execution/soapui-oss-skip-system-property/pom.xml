@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+~ Copyright 2013 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -19,30 +19,36 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>mock-goal</artifactId>
+    <artifactId>test-goal-display-message-with-skip-to-true</artifactId>
     <version>@project.version@</version>
-    <relativePath>../../common.xml</relativePath>
+    <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>mock-goal-default-log-directory</artifactId>
+  <artifactId>groovy-with-pro-current-version</artifactId>
   <packaging>pom</packaging>  
 
   <build>
     <plugins>
       <plugin>
-        <groupId>@project.groupId@</groupId>
-        <artifactId>@project.artifactId@</artifactId>
-        <version>@project.version@</version>
-        <configuration>
-          <noBlock>true</noBlock>
-          <projectFile>${soapui.project.file.path}</projectFile>
-          <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
-        </configuration>
+        <groupId>eviware</groupId>
+        <artifactId>maven-soapui-plugin</artifactId>
+        <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>
-            <id>soapui-start-mock</id>
-            <phase>pre-integration-test</phase>
+            <id>project-with-groovy</id>
+            <phase>integration-test</phase>
+            <configuration>
+              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+              <projectFile>${soapui.project.file.path}</projectFile>
+              <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
+              <soapuiProperties>
+                <property>
+                  <name>soapui.scripting.library</name>
+                  <value>${groovy.scripts.path}</value>
+                </property>
+              </soapuiProperties>
+            </configuration>
             <goals>
-              <goal>mock</goal>
+              <goal>test</goal>
             </goals>
           </execution>
         </executions>

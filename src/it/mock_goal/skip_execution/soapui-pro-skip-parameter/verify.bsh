@@ -18,24 +18,20 @@
 import java.io.*;
 
 try {
-  System.out.println("Verifying log file in the default logs directory");
-  File defaultLogDirectory = new File(basedir, "target/soapui/logs");
-  if (!defaultLogDirectory.exists()) {
-    System.out.println("FAILED! Directory " + defaultLogDirectory + " does not exist!!");
-    return false;
-  }  
-  File logFile = new File(defaultLogDirectory, "global-groovy.log");
-  if (!logFile.exists()) {
-    System.out.println("FAILED! File " + logFile + " does not exist!!");
-    return false;
-  }  
+  System.out.println("Verifying mock services have runned (because of bug)");
+  File logFile = new File(basedir, "build.log");
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
   
-  System.out.println("Verifying no groovy log file in base directory");
-  File noLogFile = new File(basedir, "global-groovy.log");
-  if (noLogFile.exists()) {
-    System.out.println("FAILED! File " + noLogFile + " should not exist!!");
+  String runnerInitLog = "Maven2 MockService Runner";
+  if (fileContent.indexOf(runnerInitLog) < 0) {
+    System.err.println("FAILED! Mock services should have runned");
     return false;
-  }  
+  }
+  String runnerClassLog = "[SoapUIProMockServiceRunner]";
+  if (fileContent.indexOf(runnerClassLog) < 0) {
+    System.err.println("FAILED! Should have log the mock runner class name");
+    return false;
+  }
   
   System.out.println("OK");
   return true;  

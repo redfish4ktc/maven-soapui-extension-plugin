@@ -19,35 +19,21 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>mock-goal</artifactId>
+    <artifactId>common-it-parent</artifactId>
     <version>@project.version@</version>
     <relativePath>../../common.xml</relativePath>
   </parent>
-  <artifactId>mock-goal-default-log-directory</artifactId>
-  <packaging>pom</packaging>  
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>@project.groupId@</groupId>
-        <artifactId>@project.artifactId@</artifactId>
-        <version>@project.version@</version>
-        <configuration>
-          <noBlock>true</noBlock>
-          <projectFile>${soapui.project.file.path}</projectFile>
-          <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
-        </configuration>
-        <executions>
-          <execution>
-            <id>soapui-start-mock</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>mock</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <groupId>soapui.extension</groupId>
+  <artifactId>test-with-runnerType-goal</artifactId>
+  <packaging>pom</packaging>
+  <version>@project.version@</version>
   
+  <properties>
+    <soapui.configuration.path>${basedir}/../_soapui-conf</soapui.configuration.path>
+    <soapui.project.composite.file.path>${soapui.configuration.path}/projects/composite-project</soapui.project.composite.file.path>
+    <soapui.project.standard.file.path>${soapui.configuration.path}/projects/standard-soapui-project.xml</soapui.project.standard.file.path>
+    <soapui.settings.empty.file.path>${soapui.configuration.path}/soapui-settings/empty-soapui-settings.xml</soapui.settings.empty.file.path>
+    <soapui.config.output.directory>${project.build.directory}/soapui</soapui.config.output.directory>
+  </properties>
+
 </project>

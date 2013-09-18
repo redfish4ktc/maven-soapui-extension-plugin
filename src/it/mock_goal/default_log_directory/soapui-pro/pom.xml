@@ -23,15 +23,15 @@
     <version>@project.version@</version>
     <relativePath>../../common.xml</relativePath>
   </parent>
-  <artifactId>mock-goal-default-log-directory</artifactId>
+  <artifactId>mock-goal-default-log-directory-soapui-pro</artifactId>
   <packaging>pom</packaging>  
 
   <build>
     <plugins>
       <plugin>
-        <groupId>@project.groupId@</groupId>
-        <artifactId>@project.artifactId@</artifactId>
-        <version>@project.version@</version>
+        <groupId>eviware</groupId>
+        <artifactId>maven-soapui-pro-plugin</artifactId>
+        <version>@soapuiVersionCurrent@</version>
         <configuration>
           <noBlock>true</noBlock>
           <projectFile>${soapui.project.file.path}</projectFile>

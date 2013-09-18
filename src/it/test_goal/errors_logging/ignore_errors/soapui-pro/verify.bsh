@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2012 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,25 +18,24 @@
 import java.io.*;
 
 try {
-  System.out.println("Verifying log file in the default logs directory");
-  File defaultLogDirectory = new File(basedir, "target/soapui/logs");
-  if (!defaultLogDirectory.exists()) {
-    System.out.println("FAILED! Directory " + defaultLogDirectory + " does not exist!!");
-    return false;
-  }  
-  File logFile = new File(defaultLogDirectory, "global-groovy.log");
+  File logFile = new File(basedir, "build.log");
+  System.out.println("Scanning file " + logFile);
   if (!logFile.exists()) {
     System.out.println("FAILED! File " + logFile + " does not exist!!");
     return false;
   }  
   
-  System.out.println("Verifying no groovy log file in base directory");
-  File noLogFile = new File(basedir, "global-groovy.log");
-  if (noLogFile.exists()) {
-    System.out.println("FAILED! File " + noLogFile + " should not exist!!");
+  System.out.println("Reading the content of the groovy log file " + logFile);
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
+  String expectedContent = "TestCase [TestCase with groovy] failed without assertions";
+  int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
+  System.out.println("Number of occurences of expected content: " + matchCount);
+  int expectedMatchCount = 0;
+  if (matchCount != expectedMatchCount) {
+    System.out.println("FAILED! Find content in the log file. Expected content: " + expectedContent + ". Expected match count: " + expectedMatchCount);
     return false;
-  }  
-  
+  }
+
   System.out.println("OK");
   return true;  
 }

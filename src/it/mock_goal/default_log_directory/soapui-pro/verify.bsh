@@ -18,22 +18,10 @@
 import java.io.*;
 
 try {
-  System.out.println("Verifying log file in the default logs directory");
-  File defaultLogDirectory = new File(basedir, "target/soapui/logs");
-  if (!defaultLogDirectory.exists()) {
-    System.out.println("FAILED! Directory " + defaultLogDirectory + " does not exist!!");
-    return false;
-  }  
-  File logFile = new File(defaultLogDirectory, "global-groovy.log");
+  System.out.println("Verifying log file in base directory");
+  File logFile = new File(basedir, "global-groovy.log");
   if (!logFile.exists()) {
-    System.out.println("FAILED! File " + logFile + " does not exist!!");
-    return false;
-  }  
-  
-  System.out.println("Verifying no groovy log file in base directory");
-  File noLogFile = new File(basedir, "global-groovy.log");
-  if (noLogFile.exists()) {
-    System.out.println("FAILED! File " + noLogFile + " should not exist!!");
+    System.out.println("FAILED! File " + logFile + " should exist!!");
     return false;
   }  
   

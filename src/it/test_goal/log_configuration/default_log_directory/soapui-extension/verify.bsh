@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2012 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,12 +30,13 @@ try {
     return false;
   }  
   
-  System.out.println("Verifying no groovy log file in base directory");
-  File noLogFile = new File(basedir, "global-groovy.log");
-  if (noLogFile.exists()) {
-    System.out.println("FAILED! File " + noLogFile + " should not exist!!");
+  System.out.println("Reading the content of the groovy log file " + logFile);
+  String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
+  String expectedContent = "groovy script that does not need external files to work";
+  if (fileContent.indexOf(expectedContent) < 0) {
+    System.out.println("FAILED! Unable to find content in the log file. Expected content: " + expectedContent);
     return false;
-  }  
+  }
   
   System.out.println("OK");
   return true;  

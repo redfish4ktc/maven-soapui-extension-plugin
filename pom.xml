@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2011-2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2011-2013 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -231,7 +231,7 @@
             <!-- Unable to add license because some files have no way to specify comments -->
             <exclude>src/it/convert-project_goal/_soapui-conf/projects/composite-project/**/*</exclude>
             <exclude>src/it/mock_goal/_soapui_conf/composite-project/**/*</exclude>
-            <exclude>src/it/test_goal_runner_type/_soapui-conf/projects/composite-project/**/*</exclude>
+            <exclude>src/it/test_goal/runner_type/_soapui-conf/projects/composite-project/**/*</exclude>
           </excludes>
         </configuration>
       </plugin>

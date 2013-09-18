@@ -61,6 +61,15 @@ public class CheckBuildLog {
         }
     }
 
+    public void assertLogFileDoesNotContain(String content) {
+        log("Expect not to find content in the log file: " + content);
+        int matchCount = StringUtils.countMatches(logFileContent, content);
+        log("Found " + matchCount + " occurences");
+        if (matchCount > 0) {
+            logAndFail("FAILED! Find unexpected content in the log file: " + content);
+        }
+    }
+
     private static void log(String message) {
         Check.log(getLogHeader(), message);
     }

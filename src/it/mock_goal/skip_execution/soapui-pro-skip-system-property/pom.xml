@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -23,24 +23,25 @@
     <version>@project.version@</version>
     <relativePath>../../common.xml</relativePath>
   </parent>
-  <artifactId>mock-goal-default-log-directory</artifactId>
+  <artifactId>mock-goal-skip-system-property-soapui-pro</artifactId>
   <packaging>pom</packaging>  
 
   <build>
     <plugins>
       <plugin>
-        <groupId>@project.groupId@</groupId>
-        <artifactId>@project.artifactId@</artifactId>
-        <version>@project.version@</version>
-        <configuration>
-          <noBlock>true</noBlock>
-          <projectFile>${soapui.project.file.path}</projectFile>
-          <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
-        </configuration>
+        <groupId>eviware</groupId>
+        <artifactId>maven-soapui-pro-plugin</artifactId>
+        <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>
-            <id>soapui-start-mock</id>
+            <id>mock-skip-system-property</id>
             <phase>pre-integration-test</phase>
+            <configuration>
+              <noBlock>true</noBlock>
+              <skip>false</skip>
+              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+              <projectFile>${soapui.project.file.path}</projectFile>
+            </configuration>
             <goals>
               <goal>mock</goal>
             </goals>
