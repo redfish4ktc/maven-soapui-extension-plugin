@@ -61,6 +61,18 @@ public class CheckBuildLog {
         }
     }
 
+    public void assertSmartBearOssTestRunnerHasBeenUsed() {
+        log("Check that the SmartBear OSS runner has been used");
+        assertLogFileContains("INFO  [SoapUITestCaseRunner]");
+        log("The SmartBear OSS runner has been used");
+    }
+
+    public void assertSmartBearProTestRunnerHasBeenUsed() {
+        log("Check that the SmartBear PRO test runner has been used");
+        assertLogFileContains("INFO  [SoapUIProTestCaseRunner]");
+        log("The SmartBear PRO test runner has been used");
+    }
+
     private static void log(String message) {
         Check.log(getLogHeader(), message);
     }

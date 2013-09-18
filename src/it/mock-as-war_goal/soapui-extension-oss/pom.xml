@@ -23,8 +23,17 @@
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>mock-as-war-soapui-extension-default</artifactId>
+  <artifactId>mock-as-war-soapui-extension-oss</artifactId>
   <packaging>pom</packaging>  
+
+  <properties>
+    <soapui.plugin.groupId>@project.groupId@</soapui.plugin.groupId>
+    <soapui.plugin.artifactId>@project.artifactId@</soapui.plugin.artifactId>
+    <soapui.plugin.version>@project.version@</soapui.plugin.version>
+
+    <soapui.project.mockaswar.path>${soapui.project.file.path}</soapui.project.mockaswar.path>
+    <soapui.war.path>${project.build.directory}/soapui/generation/war/project.war</soapui.war.path>
+  </properties>
 
   <build>
     <plugins>
@@ -35,11 +44,11 @@
         <executions>
           <execution>
             <id>mock-as-war</id>
-            <phase>validate</phase>
+            <phase>generate-resources</phase>
             <configuration>
               <explodedWarDirectory>${project.build.directory}/soapui/generation/war/exploded</explodedWarDirectory>
-              <projectFile>${soapui.project.file.path}</projectFile>
-              <warFile>${project.build.directory}/soapui/generation/war/project.war</warFile>
+              <projectFile>${soapui.project.mockaswar.path}</projectFile>
+              <warFile>${soapui.war.path}</warFile>
             </configuration>
             <goals>
               <goal>mock-as-war</goal>

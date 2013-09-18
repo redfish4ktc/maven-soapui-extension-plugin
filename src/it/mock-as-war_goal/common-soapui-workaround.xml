@@ -34,6 +34,8 @@
     <soapui.generator.classname>FakeGenerator</soapui.generator.classname>
     
     <!-- COMMON CONFIGURATION -->
+    <soapui.plugin.groupId>eviware</soapui.plugin.groupId>
+    <soapui.plugin.version>@soapuiVersionCurrent@</soapui.plugin.version>
     <soapui.version>@soapuiVersionCurrent@</soapui.version>
     <soapui.output.directory>${project.build.directory}/soapui</soapui.output.directory>
     <soapui.home.fake>${soapui.output.directory}/home/bin</soapui.home.fake>
@@ -41,8 +43,6 @@
     <soapui.generation.dir>${soapui.output.directory}/generation</soapui.generation.dir>
     <soapui.war.path>${soapui.generation.dir}/${project.build.finalName}.war</soapui.war.path>
     
-    <server.port>9090</server.port>
-    <server.stop.port>9091</server.stop.port>
   </properties>
 
   <dependencies>
@@ -156,101 +156,6 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <groupId>eviware</groupId>
-        <artifactId>${soapui.plugin.artifactId}</artifactId>
-        <version>${soapui.version}</version>
-        <executions>
-          <execution>
-            <id>soapui-test</id>
-            <phase>integration-test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-            <configuration>
-              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
-              <projectFile>${soapui.project.mockaswar.path}</projectFile>
-              <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
-              <host>localhost:${server.port}</host>
-              <soapuiProperties>
-                <property>
-                  <name>soapui.logroot</name>
-                  <value>${project.build.directory}/soapui/test-logs/</value>
-                </property>
-              </soapuiProperties>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- Jetty 6 -->
-      <!-- http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin -->
-<!--       <plugin> -->
-<!--         <groupId>org.mortbay.jetty</groupId> -->
-<!--         <artifactId>maven-jetty-plugin</artifactId> -->
-<!--         <version>6.1.26</version> -->
-<!--         <configuration> -->
-<!--           <webApp>${soapui.war.path}</webApp> -->
-<!--         </configuration> -->
-<!--         <executions> -->
-<!--           <execution> -->
-<!--             <id>start-jetty</id> -->
-<!--             <phase>pre-integration-test</phase> -->
-<!--             <goals> -->
-<!--               <goal>deploy-war</goal> -->
-<!--             </goals> -->
-<!--             <configuration> -->
-<!--               <daemon>true</daemon> -->
-<!--               <reload>manual</reload> -->
-<!--             </configuration> -->
-<!--           </execution> -->
-<!--           <execution> -->
-<!--             <id>stop-jetty</id> -->
-<!--             <phase>post-integration-test</phase> -->
-<!--             <goals> -->
-<!--               <goal>stop</goal> -->
-<!--             </goals> -->
-<!--           </execution> -->
-<!--         </executions> -->
-<!--       </plugin> -->
-      <!-- Jetty 7 -->
-      <!-- http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
-      <plugin>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>7.6.8.v20121106</version>
-        <configuration>
-          <war>${soapui.war.path}</war>
-        </configuration>
-        <executions>
-          <execution>
-            <id>start-jetty</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>deploy-war</goal>
-            </goals>
-            <configuration>
-              <daemon>true</daemon>
-              <connectors>
-                 <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                    <port>${server.port}</port>
-                    <maxIdleTime>60000</maxIdleTime>
-                 </connector>
-               </connectors>              
-            </configuration>
-          </execution>
-          <execution>
-            <id>stop-jetty</id>
-            <phase>post-integration-test</phase>
-            <goals>
-              <goal>stop</goal>
-            </goals>
-            <configuration>
-              <stopPort>${server.stop.port}</stopPort>
-              <stopKey>foo</stopKey>
-            </configuration>            
-          </execution>
-        </executions>
-      </plugin>      
     </plugins>
   </build>
 </project>
