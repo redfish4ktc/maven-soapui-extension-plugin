@@ -19,7 +19,7 @@ package org.ktc.soapui.maven.extension;
 
 import static org.sonatype.aether.util.filter.DependencyFilterUtils.classpathFilter;
 
-import com.eviware.soapui.tools.SoapUIMockAsWarGenerator;
+import com.eviware.soapui.tools.SoapUIProMockAsWarGenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -28,6 +28,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.maven.model.Build;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 import org.sonatype.aether.RepositorySystem;
 import org.sonatype.aether.RepositorySystemSession;
 import org.sonatype.aether.collection.CollectRequest;
@@ -74,7 +75,10 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
         // List<RemoteRepository> remoteRepos = getRemoteRepos();
         getLog().info("Running Mock As War");
 
-        SoapUIMockAsWarGenerator runner = new SoapUIMockAsWarGenerator("SoapUI Maven2 MockAsWar Runner");
+        // be carefull, if in the same jvm, the oss generator is used then the pro test runner, we got a class cast
+        // exception when loading the project (actual type: oss project, fail to cast into a pro project)
+        SoapUIProMockAsWarGenerator runner = new SoapUIProMockAsWarGenerator();
+//        SoapUIMockAsWarGenerator runner = new SoapUIMockAsWarGenerator("SoapUI Maven2 MockAsWar Runner");
         configureWithSharedParameters(runner);
 
         // TODO should be set to false in all runner mojo
@@ -119,12 +123,14 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     private void buildSoapuiGuiEnvironment() throws DependencyResolutionException, IOException {
         getLog().info("Building a Soapui Gui environment");
 
-        resolveAndCopyDependencies(new DefaultArtifact("eviware:maven-soapui-plugin:4.5.1"),
+        String dependencyVersion = ProjectInfo.getSoapuiVersion();
+        // TODO use our plugin to retrieve soapui dependencies (avoid missing dependencies)
+        resolveAndCopyDependencies(new DefaultArtifact("eviware:maven-soapui-pro-plugin:" + dependencyVersion),
                 getBuiltSoapuiGuiLibDirectory());
         // Needed, otherwise the generator mess up
         // TODO should not retrieve transitive dependencies
         // this is currently ok because it does not declare any transitive dependencies
-        resolveAndCopyDependencies(new DefaultArtifact("eviware:soapui:4.5.1"), getBuiltSoapuiGuiBinDirectory());
+        resolveAndCopyDependencies(new DefaultArtifact("eviware:soapui-pro:" + dependencyVersion), getBuiltSoapuiGuiBinDirectory());
         
         getLog().info("Soapui Gui environment built");
         
