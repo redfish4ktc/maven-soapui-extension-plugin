@@ -32,6 +32,16 @@
     <soapui.project.file.path>${soapui.configuration.path}/test-mock-service-soapui-project.xml</soapui.project.file.path>
     <soapui.settings.empty.file.path>${soapui.configuration.path}/empty-soapui-settings.xml</soapui.settings.empty.file.path>
 
+    <soapui.base.output.directory>${project.build.directory}/soapui</soapui.base.output.directory>
+    <soapui.output.directory>${soapui.base.output.directory}/reports</soapui.output.directory>
+    <soapui.log.directory>${soapui.base.output.directory}/test-logs/</soapui.log.directory>
+    <soapui.generation.dir>${soapui.base.output.directory}/generation</soapui.generation.dir>
+    <!-- put generated webapp in 2 differents tree to be sure our plugin creates subdirectories -->
+    <soapui.war.path.basedir>${soapui.generation.dir}/file/war/</soapui.war.path.basedir>
+    <soapui.war.path>${soapui.war.path.basedir}/${project.build.finalName}.war</soapui.war.path>
+    <soapui.war.exploded.path>${soapui.generation.dir}/war/exploded</soapui.war.exploded.path>
+    <soapui.host>localhost:${server.port}</soapui.host>    
+
     <!-- COMMON CONFIGURATION -->
     <server.port>9090</server.port>
     <server.stop.port>9091</server.stop.port>
@@ -39,32 +49,6 @@
   
   <build>
     <plugins>
-      <plugin>
-        <groupId>${soapui.plugin.groupId}</groupId>
-        <artifactId>${soapui.plugin.artifactId}</artifactId>
-        <version>${soapui.plugin.version}</version>
-        <executions>
-          <execution>
-            <id>soapui-test</id>
-            <phase>integration-test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-            <configuration>
-              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
-              <projectFile>${soapui.project.mockaswar.path}</projectFile>
-              <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
-              <host>localhost:${server.port}</host>
-              <soapuiProperties>
-                <property>
-                  <name>soapui.logroot</name>
-                  <value>${project.build.directory}/soapui/test-logs/</value>
-                </property>
-              </soapuiProperties>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <!-- Jetty 6 -->
       <!-- http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin -->
 <!--       <plugin> -->

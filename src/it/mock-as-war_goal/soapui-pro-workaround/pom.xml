@@ -19,15 +19,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>mock-as-war-workaround-common-soapui</artifactId>
+    <artifactId>mock-as-war-common-soapui-workaround</artifactId>
     <version>@project.version@</version>
     <relativePath>../common-soapui-workaround.xml</relativePath>
   </parent>
   <artifactId>mock-as-war-workaround-for-soapui-pro</artifactId>
   <packaging>pom</packaging>  
 
-   <properties>
-    <soapui.artifactId>maven-soapui-pro-plugin</soapui.artifactId>
+  <properties>
+    <soapui.artifactId>soapui-pro</soapui.artifactId>
+    <soapui.dependency.artifactId>maven-soapui-pro-plugin</soapui.dependency.artifactId>
     <soapui.plugin.artifactId>maven-soapui-pro-plugin</soapui.plugin.artifactId>
     <soapui.generator.classname>SoapUIProMockAsWarGenerator</soapui.generator.classname>
   </properties>

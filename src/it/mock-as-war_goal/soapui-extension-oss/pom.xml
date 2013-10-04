@@ -19,44 +19,15 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>mock-as-war-goal</artifactId>
+    <artifactId>mock-as-war-common-soapui-extension</artifactId>
     <version>@project.version@</version>
-    <relativePath>../common.xml</relativePath>
+    <relativePath>../common-soapui-extension.xml</relativePath>
   </parent>
-  <artifactId>mock-as-war-soapui-extension-oss</artifactId>
+  <artifactId>mock-as-war-soapui-extension-pro</artifactId>
   <packaging>pom</packaging>  
 
   <properties>
-    <soapui.plugin.groupId>@project.groupId@</soapui.plugin.groupId>
-    <soapui.plugin.artifactId>@project.artifactId@</soapui.plugin.artifactId>
-    <soapui.plugin.version>@project.version@</soapui.plugin.version>
-
-    <soapui.project.mockaswar.path>${soapui.project.file.path}</soapui.project.mockaswar.path>
-    <soapui.war.path>${project.build.directory}/soapui/generation/war/project.war</soapui.war.path>
+    <soapui.runner.type>OSS</soapui.runner.type>
   </properties>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>@project.groupId@</groupId>
-        <artifactId>@project.artifactId@</artifactId>
-        <version>@project.version@</version>
-        <executions>
-          <execution>
-            <id>mock-as-war</id>
-            <phase>generate-resources</phase>
-            <configuration>
-              <explodedWarDirectory>${project.build.directory}/soapui/generation/war/exploded</explodedWarDirectory>
-              <projectFile>${soapui.project.mockaswar.path}</projectFile>
-              <warFile>${soapui.war.path}</warFile>
-            </configuration>
-            <goals>
-              <goal>mock-as-war</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>

@@ -23,40 +23,63 @@
     <version>@project.version@</version>
     <relativePath>common.xml</relativePath>
   </parent>
-  <artifactId>mock-as-war-workaround-common-soapui</artifactId>
+  <artifactId>mock-as-war-common-soapui-workaround</artifactId>
   <packaging>pom</packaging>  
 
    <properties>
     <!-- TO BE OVERRIDEN IN CHILD POM -->
     <soapui.artifactId>unkwown-soapui</soapui.artifactId>
+    <soapui.dependency.artifactId>unkwown-soapui</soapui.dependency.artifactId>
     <soapui.plugin.artifactId>unkwown-soapui-plugin</soapui.plugin.artifactId>
     <soapui.project.mockaswar.path>${soapui.project.file.path}</soapui.project.mockaswar.path>
     <soapui.generator.classname>FakeGenerator</soapui.generator.classname>
     
     <!-- COMMON CONFIGURATION -->
-    <soapui.plugin.groupId>eviware</soapui.plugin.groupId>
+    <soapui.groupId>eviware</soapui.groupId>
     <soapui.plugin.version>@soapuiVersionCurrent@</soapui.plugin.version>
     <soapui.version>@soapuiVersionCurrent@</soapui.version>
-    <soapui.output.directory>${project.build.directory}/soapui</soapui.output.directory>
-    <soapui.home.fake>${soapui.output.directory}/home/bin</soapui.home.fake>
+    <soapui.home.fake>${soapui.base.output.directory}/home/bin</soapui.home.fake>
     <soapui.home.lib>${soapui.home.fake}/../lib</soapui.home.lib>
-    <soapui.generation.dir>${soapui.output.directory}/generation</soapui.generation.dir>
-    <soapui.war.path>${soapui.generation.dir}/${project.build.finalName}.war</soapui.war.path>
-    
   </properties>
 
   <dependencies>
     <!-- TODO confirm this is needed
     to be sure that it is in the local repository so can be retrieved by depency:copy -->
     <dependency>
-      <groupId>eviware</groupId>
-      <artifactId>${soapui.artifactId}</artifactId>
+      <groupId>${soapui.groupId}</groupId>
+      <artifactId>${soapui.dependency.artifactId}</artifactId>
       <version>${soapui.version}</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>${soapui.groupId}</groupId>
+        <artifactId>${soapui.plugin.artifactId}</artifactId>
+        <version>${soapui.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>soapui-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <host>${soapui.host}</host>
+              <outputFolder>${soapui.output.directory}</outputFolder>
+              <projectFile>${soapui.project.mockaswar.path}</projectFile>
+              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+              <soapuiProperties>
+                <property>
+                  <name>soapui.logroot</name>
+                  <value>${soapui.log.directory}</value>
+                </property>
+              </soapuiProperties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>    
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -82,9 +105,8 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>eviware</groupId>
-                  <!-- TODO add a property to manage soapui-pro case -->
-                  <artifactId>soapui</artifactId>
+                  <groupId>${soapui.groupId}</groupId>
+                  <artifactId>${soapui.artifactId}</artifactId>
                   <version>${soapui.version}</version>
                 </artifactItem>
               </artifactItems>            
@@ -120,9 +142,9 @@
             </goals>
             <configuration>
               <target>
-                <property name="soapui.generation.working.dir" location="${soapui.generation.dir}/work" />
                 <!-- soapui code does not create subdirectories, so do it ourself -->
-                <mkdir dir="${soapui.generation.working.dir}" />
+                <mkdir dir="${soapui.war.path.basedir}" />
+                <mkdir dir="${soapui.war.exploded.path}" />
               
                 <property name="plugin_classpath" refid="maven.plugin.classpath" />
                 
@@ -130,11 +152,11 @@
                 <java failonerror="true" classname="com.eviware.soapui.tools.${soapui.generator.classname}" fork="true" classpath="${project.build.directory}/classes;${plugin_classpath}">
                   <!-- if no set, fail on the environment with no graphical device -->
                   <jvmarg value="-Djava.awt.headless=true" />
-                  <jvmarg value="-Dsoapui.logroot=${soapui.output.directory}/soapui-mockaswar-logs/" />
+                  <jvmarg value="-Dsoapui.logroot=${soapui.log.directory}" />
                   <jvmarg value="-Dsoapui.home=${soapui.home.fake}" />
                   <!-- do not add space between option and value, otherwise, there will be an extra leading whitespace
                   which will make the generation fail -->
-                  <arg value="-d${soapui.generation.working.dir}" />
+                  <arg value="-d${soapui.war.exploded.path}" />
                   <arg value="-f${soapui.war.path}" />
                   <arg value="-w true" />
                   <arg value="${soapui.project.mockaswar.path}" />
@@ -150,8 +172,8 @@
             <version>1.8.2</version>
           </dependency>
           <dependency>
-            <groupId>eviware</groupId>
-            <artifactId>${soapui.artifactId}</artifactId>
+            <groupId>${soapui.groupId}</groupId>
+            <artifactId>${soapui.dependency.artifactId}</artifactId>
             <version>${soapui.version}</version>
           </dependency>
         </dependencies>
