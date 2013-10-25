@@ -37,7 +37,7 @@ public class ProjectInfo {
         return ProjectInfo.class.getPackage().getImplementationTitle();
     }
 
-    private static String getVersion() {
+    public static String getVersion() {
         return ProjectInfo.class.getPackage().getImplementationVersion();
     }
 

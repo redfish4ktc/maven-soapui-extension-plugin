@@ -21,6 +21,7 @@ import static org.sonatype.aether.util.filter.DependencyFilterUtils.classpathFil
 
 import com.eviware.soapui.tools.SoapUIProMockAsWarGenerator;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -119,25 +120,25 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     // can create the /ext and /script (pro only?) directory
     // if system properties are not set to configure the 2 directories, set them to use directories in soapui fake. This
     // will avoid warning on soapui startup
-    // also set the soapui.home property if not set
+    // if the soapui.home property if already set, we should restore the initial value after the call of this mojo
     private void buildSoapuiGuiEnvironment() throws DependencyResolutionException, IOException {
         getLog().info("Building a Soapui Gui environment");
 
-        String dependencyVersion = ProjectInfo.getSoapuiVersion();
-        // TODO use our plugin to retrieve soapui dependencies (avoid missing dependencies)
-        resolveAndCopyDependencies(new DefaultArtifact("eviware:maven-soapui-pro-plugin:" + dependencyVersion),
-                getBuiltSoapuiGuiLibDirectory());
+        String version = ProjectInfo.getVersion();
+        // use our plugin to be sure we do not have missing dependencies (at least for versions prior to 4.5.2) 
+        File soapuiLibDirectory = getBuiltSoapuiGuiLibDirectory();
+        resolveAndCopyDependencies(new DefaultArtifact("com.github.redfish4ktc.soapui:maven-soapui-extension-plugin:"
+                + version), soapuiLibDirectory);        
         // Needed, otherwise the generator mess up
-        // TODO should not retrieve transitive dependencies
-        // this is currently ok because it does not declare any transitive dependencies
-        resolveAndCopyDependencies(new DefaultArtifact("eviware:soapui-pro:" + dependencyVersion), getBuiltSoapuiGuiBinDirectory());
-        
+        File soapuiBinDirectory = getBuiltSoapuiGuiBinDirectory();
+        copySoapuiJar(soapuiLibDirectory, soapuiBinDirectory);
+
+        System.setProperty("soapui.home", soapuiBinDirectory.getAbsolutePath());
         getLog().info("Soapui Gui environment built");
-        
-        System.setProperty("soapui.home", getBuiltSoapuiGuiBinDirectory().getAbsolutePath());
-     // TODO check to set this java property if setting headless does not work:
-        //uncomment to disable browser component
-        //-Dsoapui.jxbrowser.disable="true"
+
+        // TODO check to set this java property if setting headless does not work:
+        // uncomment to disable browser component
+        // -Dsoapui.jxbrowser.disable="true"
     }
 
     private void resolveAndCopyDependencies(DefaultArtifact rootArtifact, File soapuiLibDirectory) throws DependencyResolutionException,
@@ -153,6 +154,26 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
             File ouputFile = new File(soapuiLibDirectory, artifactFile.getName());
             FileUtils.copyFile(artifactFile, ouputFile);
         }
+        getLog().info("Copy done");
+    }
+
+    // highly inspired by MockAsWar#prepareWarFile
+    private void copySoapuiJar(File sourceDirectory, File destinationDirectory) throws IOException {
+        getLog().info("Copying soapui jar to " + destinationDirectory);
+        File[] mainJars = sourceDirectory.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                if (name.toLowerCase().startsWith("soapui") && name.toLowerCase().endsWith(".jar"))
+                    return true;
+                return false;
+            }
+        });
+
+        if (mainJars.length == 0) {
+            throw new RuntimeException("Unable to found a soapui jar in " + sourceDirectory);
+        }
+        File soapuiSourceJar = mainJars[0];
+        FileUtils.copyFileToDirectory(soapuiSourceJar, destinationDirectory);
         getLog().info("Copy done");
     }
 
