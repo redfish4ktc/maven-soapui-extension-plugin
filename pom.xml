@@ -258,6 +258,20 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>templating-maven-plugin</artifactId>
+        <version>1.0-alpha-3</version>
+        <executions>
+          <execution>
+            <id>filter-sources</id>
+<!--             <phase></phase> -->
+            <goals>
+              <goal>filter-sources</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 <!--       <plugin> -->
 <!--         <groupId>org.pitest</groupId> -->
 <!--         <artifactId>pitest-maven</artifactId> -->
