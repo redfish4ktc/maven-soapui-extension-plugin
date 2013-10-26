@@ -67,7 +67,8 @@ Main features
 
 **Tests**
 
-SmartBear implementation has no tests.
+SmartBear maven plugins have almost no tests. Have a look on the [soapui-maven-plugin-tester](https://github.com/SmartBear/soapui/tree/master/soapui-maven-plugin-tester).
+
 maven-soapui-extension-plugin has both unit tests and high-level tests. These high-level tests are
 
   * executed with the maven-invoker-plugin, this means that these tests are runned with maven plugins on real soapui projects
