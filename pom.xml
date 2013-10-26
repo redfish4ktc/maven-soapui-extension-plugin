@@ -188,6 +188,9 @@
                     <exclude>groovy</exclude>
                     <!-- artifacts with wrong pom in the soapui repository (see #67) -->
                     <exclude>jasperreports</exclude>
+                    <!-- remove ui support as in SmartBear plugins (see #75) -->
+                    <exclude>com.jgoodies</exclude>
+                    <exclude>teamdev</exclude>
                   </excludes>
                 </bannedDependencies>
               </rules>
