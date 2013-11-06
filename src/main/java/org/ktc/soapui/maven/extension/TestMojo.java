@@ -57,7 +57,7 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     private boolean junitHtmlReport = true;
 
     @Override
-    public void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
+    protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
         SoapUITestCaseRunner runner = runnerTypeEnum.newTestRunner();
         configureWithSharedParameters(runner);

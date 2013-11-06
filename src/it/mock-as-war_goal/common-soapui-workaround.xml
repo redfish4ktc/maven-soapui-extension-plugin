@@ -1,0 +1,183 @@
+<!--
+~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing,
+~ software distributed under the License is distributed on an
+~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~ KIND, either express or implied.  See the License for the
+~ specific language governing permissions and limitations
+~ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>soapui.extension</groupId>
+    <artifactId>mock-as-war-goal</artifactId>
+    <version>@project.version@</version>
+    <relativePath>common.xml</relativePath>
+  </parent>
+  <artifactId>mock-as-war-common-soapui-workaround</artifactId>
+  <packaging>pom</packaging>  
+
+   <properties>
+    <!-- TO BE OVERRIDEN IN CHILD POM -->
+    <soapui.artifactId>unkwown-soapui</soapui.artifactId>
+    <soapui.dependency.artifactId>unkwown-soapui</soapui.dependency.artifactId>
+    <soapui.plugin.artifactId>unkwown-soapui-plugin</soapui.plugin.artifactId>
+    <soapui.project.mockaswar.path>${soapui.project.file.path}</soapui.project.mockaswar.path>
+    <soapui.generator.classname>FakeGenerator</soapui.generator.classname>
+    
+    <!-- COMMON CONFIGURATION -->
+    <soapui.groupId>eviware</soapui.groupId>
+    <soapui.plugin.version>@soapuiVersionCurrent@</soapui.plugin.version>
+    <soapui.version>@soapuiVersionCurrent@</soapui.version>
+    <soapui.home.fake>${soapui.base.output.directory}/home/bin</soapui.home.fake>
+    <soapui.home.lib>${soapui.home.fake}/../lib</soapui.home.lib>
+  </properties>
+
+  <dependencies>
+    <!-- TODO confirm this is needed
+    to be sure that it is in the local repository so can be retrieved by depency:copy -->
+    <dependency>
+      <groupId>${soapui.groupId}</groupId>
+      <artifactId>${soapui.dependency.artifactId}</artifactId>
+      <version>${soapui.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>${soapui.groupId}</groupId>
+        <artifactId>${soapui.plugin.artifactId}</artifactId>
+        <version>${soapui.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>soapui-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <host>${soapui.host}</host>
+              <outputFolder>${soapui.output.directory}</outputFolder>
+              <projectFile>${soapui.project.mockaswar.path}</projectFile>
+              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+              <soapuiProperties>
+                <property>
+                  <name>soapui.logroot</name>
+                  <value>${soapui.log.directory}</value>
+                </property>
+              </soapuiProperties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.5.1</version>
+        <executions>
+          <execution>
+            <id>copy-soapui-libs</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <excludeScope>provided</excludeScope>
+              <outputDirectory>${soapui.home.lib}</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-soapui-main-jar</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${soapui.groupId}</groupId>
+                  <artifactId>${soapui.artifactId}</artifactId>
+                  <version>${soapui.version}</version>
+                </artifactItem>
+              </artifactItems>            
+              <outputDirectory>${soapui.home.fake}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>prepare-soapui-home</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <!-- to be sure it works on linux -->
+                <mkdir dir="${soapui.home.fake}" />
+                <mkdir dir="${soapui.home.lib}" />
+                </target>
+            </configuration>
+          </execution>     
+          <execution>
+            <id>generate-mock-as-war</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <!-- soapui code does not create subdirectories, so do it ourself -->
+                <mkdir dir="${soapui.war.path.basedir}" />
+                <mkdir dir="${soapui.war.exploded.path}" />
+              
+                <property name="plugin_classpath" refid="maven.plugin.classpath" />
+                
+                <echo message="Launching mock as war generator" />
+                <java failonerror="true" classname="com.eviware.soapui.tools.${soapui.generator.classname}" fork="true" classpath="${project.build.directory}/classes;${plugin_classpath}">
+                  <!-- if no set, fail on the environment with no graphical device -->
+                  <jvmarg value="-Djava.awt.headless=true" />
+                  <jvmarg value="-Dsoapui.logroot=${soapui.log.directory}" />
+                  <jvmarg value="-Dsoapui.home=${soapui.home.fake}" />
+                  <!-- do not add space between option and value, otherwise, there will be an extra leading whitespace
+                  which will make the generation fail -->
+                  <arg value="-d${soapui.war.exploded.path}" />
+                  <arg value="-f${soapui.war.path}" />
+                  <arg value="-w true" />
+                  <arg value="${soapui.project.mockaswar.path}" />
+                </java>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.8.2</version>
+          </dependency>
+          <dependency>
+            <groupId>${soapui.groupId}</groupId>
+            <artifactId>${soapui.dependency.artifactId}</artifactId>
+            <version>${soapui.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>

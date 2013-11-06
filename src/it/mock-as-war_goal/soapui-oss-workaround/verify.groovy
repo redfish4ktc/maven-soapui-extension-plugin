@@ -15,24 +15,10 @@
  *
  */
 
-package org.ktc.soapui.maven.extension.impl;
+import org.ktc.soapui.maven.invoker.util.*;
+import static org.ktc.soapui.maven.invoker.util.Check.*;
 
-public class ProjectInfo {
-
-    public static String getName() {
-        return "${project.artifactId}";
-    }
-
-    public static String getVersion() {
-        return "${project.version}";
-    }
-
-    public static String getFullVersion() {
-        return getVersion() + " (${buildnumber-scm-changeset}; ${buildnumber-date})";
-    }
-    
-    public static String getSoapuiVersion() {
-        return "${soapuiVersionCurrent}";
-    }
-
-}
+CheckBuildLog checker = new CheckBuildLog(basedir);
+checker.assertOssMockAsWarServletHasBeenDeployed();
+checker.assertSmartBearOssTestRunnerHasBeenUsed();
+return true;

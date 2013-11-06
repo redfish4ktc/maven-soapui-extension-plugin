@@ -15,24 +15,7 @@
  *
  */
 
-package org.ktc.soapui.maven.extension.impl;
+import static org.ktc.soapui.maven.invoker.util.Check.*;
 
-public class ProjectInfo {
-
-    public static String getName() {
-        return "${project.artifactId}";
-    }
-
-    public static String getVersion() {
-        return "${project.version}";
-    }
-
-    public static String getFullVersion() {
-        return getVersion() + " (${buildnumber-scm-changeset}; ${buildnumber-date})";
-    }
-    
-    public static String getSoapuiVersion() {
-        return "${soapuiVersionCurrent}";
-    }
-
-}
+log("Skip test as the web.xml declare the pro servlet instead of the oss one");
+return false;

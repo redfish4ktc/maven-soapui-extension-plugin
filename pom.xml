@@ -132,6 +132,17 @@
       <artifactId>maven-plugin-api</artifactId>
       <version>${mavenMinimumSupportedVersion}</version>
     </dependency>
+    <!-- TODO check version built with eclipse groupID -->
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-api</artifactId>
+      <version>1.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-util</artifactId>
+      <version>1.13.1</version>
+    </dependency>    
   </dependencies>
 
   <build>
@@ -340,8 +351,11 @@
               </pomIncludes>
               <preBuildHookScript>setup</preBuildHookScript>
               <postBuildHookScript>verify</postBuildHookScript>
+              <extraArtifacts>
+                <!-- at least needed for soapui oss workaround for mock-as-war -->
+                <extraArtifact>eviware:maven-soapui-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
+              </extraArtifacts>
               <!-- <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath> -->
-
               <!-- TODO modify when fix http://jira.codehaus.org/browse/MINVOKER-137 -->
               <!-- <settingsFile>src/it/settings.xml</settingsFile> -->
               <!-- <mergeUserSettings>true</mergeUserSettings> -->

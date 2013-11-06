@@ -66,8 +66,34 @@ public class CheckBuildLog {
         int matchCount = StringUtils.countMatches(logFileContent, content);
         log("Found " + matchCount + " occurences");
         if (matchCount > 0) {
-            logAndFail("FAILED! Find unexpected content in the log file: " + content);
+            logAndFail("FAILED! Found unexpected content in the log file: " + content);
         }
+    }
+
+    public void assertOssMockAsWarServletHasBeenDeployed() {
+        log("Check that the OSS MockAsWar Servlet has been deployed");
+        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarServlet initMockServiceParameters");
+        assertLogFileDoesNotContain("com.eviware.soapui.mockaswar.MockAsWarProServlet initMockServiceParameters");
+        log("The OSS MockAsWar Servlet has been deployed");
+    }
+
+    public void assertProMockAsWarServletHasBeenDeployed() {
+        log("Check that the PRO MockAsWar Servlet has been deployed");
+        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarServlet initMockServiceParameters");
+        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarProServlet initMockServiceParameters");
+        log("The PRO MockAsWar Servlet has been deployed");
+    }
+    
+    public void assertSmartBearOssTestRunnerHasBeenUsed() {
+        log("Check that the SmartBear OSS runner has been used");
+        assertLogFileContains("INFO  [SoapUITestCaseRunner]");
+        log("The SmartBear OSS runner has been used");
+    }
+    
+    public void assertSmartBearProTestRunnerHasBeenUsed() {
+        log("Check that the SmartBear PRO test runner has been used");
+        assertLogFileContains("INFO  [SoapUIProTestCaseRunner]");
+        log("The SmartBear PRO test runner has been used");
     }
 
     private static void log(String message) {
