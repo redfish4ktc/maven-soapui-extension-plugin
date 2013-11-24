@@ -40,14 +40,14 @@ Main features
   * [`mock` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-mock-goal-add-param)
     * the `runnerType` parameter lets choose to use the open source or pro runner
   * `mock-as-war` additional goal
-    * [`mock-as-war`](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal) generates war file (and/or exploded war) that contains the mockservices defined in the SoapUi project as this can be done from the GUI
+    * [mock-as-war](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal) generates war file (and/or exploded war) that contains the mockservices defined in the SoapUi project as this can be done from the GUI
   * [`test` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-goal-add-param)
     * the `junitHtmlReport` parameter lets disable junit html report generation when using the pro runner
     * the `runnerType` parameter lets choose to use the open source or pro runner 
     * the `testsuiteProperties` parameter lets override custom properties in test suites
     * configure the JunitReportCollector to be able to modify xml junit files generation 
   * `test-verify` additional goal
-    * [test-verify](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-verify-goal) goal that let user run soapui tests, perform post processing tasks and then fail the build if tests failed. This is very usefull to run [multiple projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
+    * [test-verify](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#wiki-test-verify-goal) lets user run soapui tests, perform post processing tasks and then fail the build if some tests have failed. This is very usefull to run [multiple projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
 
 
 **Improvements**
