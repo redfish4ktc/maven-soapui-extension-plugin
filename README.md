@@ -110,9 +110,11 @@ Build status
 
 [![Built on CloudBees](http://www.cloudbees.com/sites/default/files/Button-Built-on-CB-1.png)](http://www.cloudbees.com/dev.cb)
 
-[![Built on Travis](https://love.travis-ci.org/images/stickers.png)](https://travis-ci.org/)
+[![Built on Travis](http://about.travis-ci.org/images/travis-mascot-200px.png)](https://travis-ci.org/)
 
-
+<!--
+http://about.travis-ci.org/images/travisci-small.png
+-->
 
 License
 ============
