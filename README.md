@@ -82,8 +82,21 @@ maven-soapui-extension-plugin has both unit tests and high-level tests. These hi
 Roadmap
 ============
 
-* improve the test goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
-* add a goal for generating war from [mock services](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal)
+**Short term**
+
+* add support for SoapUI 4.6.1
+* add a ```test-multi``` goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects). See the [related issue](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/88)
+
+
+
+**Mid term**
+
+* improve the ```mock-as-war``` goal for generating war from [mock services](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal). See [opened issues](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues?labels=goal%3A%3Amock-as-war&milestone=&page=1&state=open)
+
+
+**Long term**
+
+* does not rely on SmartBear maven plugin
 
 
 
