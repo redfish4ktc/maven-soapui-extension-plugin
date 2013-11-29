@@ -40,4 +40,21 @@ public class Check {
     private static void fail(String message) throws AssertionError {
         throw new AssertionError(message);
     }
+
+    public static boolean isRunningOnTravisCI() {
+        boolean status = false;
+        log("Checking if running on Travis CI");
+
+        String envCI = System.getenv("CI");
+        log("Env CI: " + envCI);
+        String envTRAVIS = System.getenv("TRAVIS");
+        log("Env TRAVIS: " + envTRAVIS);
+
+        if ("true".equals(envCI) && "true".equals(envTRAVIS)) {
+            status = true;
+        }
+        log("Running on Travis CI: " + status);
+        return status;
+    }
+
 }
