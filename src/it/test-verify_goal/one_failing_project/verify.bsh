@@ -28,7 +28,7 @@ try {
   System.out.println("Reading the content of the build log file " + logFile);
   String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
   // Check that the failing "project 1" has been called
-  String expectedContent = "ERROR [SoapUI] An error occured [Fail project 1], see error log for details";
+  String expectedContent = "ERROR [SoapUI] An error occurred [Fail project 1], see error log for details";
   int matchCount = org.apache.commons.lang.StringUtils.countMatches(fileContent, expectedContent);
   System.out.println("Number of occurences of expected content: " + matchCount);
   int expectedMatchCount = 1;

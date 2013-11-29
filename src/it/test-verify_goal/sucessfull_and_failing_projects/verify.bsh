@@ -40,7 +40,7 @@ try {
   String fileContent = org.codehaus.plexus.util.FileUtils.fileRead(logFile, "UTF-8");
 
   // Check that the failing "project 1" has been called
-  if (!checkThatProjectHasBeenRunned(fileContent, "ERROR [SoapUI] An error occured [Fail project 1], see error log for details")) {
+  if (!checkThatProjectHasBeenRunned(fileContent, "ERROR [SoapUI] An error occurred [Fail project 1], see error log for details")) {
     return false;
   }
   // Check that the sucessfull "project 1" has been called
@@ -48,7 +48,7 @@ try {
     return false;
   }
   // Check that the failing "project 2" has been called
-  if (!checkThatProjectHasBeenRunned(fileContent, "ERROR [SoapUI] An error occured [Fail project 2], see error log for details")) {
+  if (!checkThatProjectHasBeenRunned(fileContent, "ERROR [SoapUI] An error occurred [Fail project 2], see error log for details")) {
     return false;
   }
   // Check that the sucessfull "project 2" has been called
