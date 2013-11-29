@@ -72,6 +72,18 @@
     <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <!-- Force use of this version to have the same one than in soapui
+        Otherwise it used the one declared by jasperreports (as we have declare it direclty, it is now on the shortest path) 
+        -->
+        <version>3.2.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>com.smartbear.soapui</groupId>
