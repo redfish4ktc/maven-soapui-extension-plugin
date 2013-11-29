@@ -35,7 +35,7 @@
     <soapui.generator.classname>FakeGenerator</soapui.generator.classname>
     
     <!-- COMMON CONFIGURATION -->
-    <soapui.groupId>eviware</soapui.groupId>
+    <soapui.groupId>com.smartbear.soapui</soapui.groupId>
     <soapui.plugin.version>@soapuiVersionCurrent@</soapui.plugin.version>
     <soapui.version>@soapuiVersionCurrent@</soapui.version>
     <soapui.home.fake>${soapui.base.output.directory}/home/bin</soapui.home.fake>
