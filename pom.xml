@@ -359,7 +359,7 @@
               <postBuildHookScript>verify</postBuildHookScript>
               <extraArtifacts>
                 <!-- at least needed for soapui oss workaround for mock-as-war -->
-                <extraArtifact>eviware:maven-soapui-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
+                <extraArtifact>com.smartbear.soapui:soapui-maven-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
               </extraArtifacts>
               <!-- <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath> -->
               <!-- TODO modify when fix http://jira.codehaus.org/browse/MINVOKER-137 -->
