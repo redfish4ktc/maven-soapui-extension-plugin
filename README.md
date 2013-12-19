@@ -84,7 +84,7 @@ Roadmap
 
 **Short term**
 
-* add support for SoapUI 4.6.1 and upcoming 4.6.2
+* add support for SoapUI 4.6.1, 4.6.2 and 4.6.3
 * add a ```test-multi``` goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects). See the [related issue](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/88)
 
 
