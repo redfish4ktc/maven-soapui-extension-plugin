@@ -17,6 +17,7 @@
 
 # Development todo list #
 
+Here is a list of tasks/ideas that will be implemented in the future.
 
 ## Experiments ##
 
@@ -28,19 +29,26 @@
 
 
 ## Integration tests ##
-  - all pom should use the project version as version (@project.version@)
-  - add intermediate parent pom to avoid duplication for a given tested feature
-  - avoid duplication in verify script (especially log parsing): put duplicate code in a java class (see  
-http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classes.html)
-  - check if we need to force the "–Djava.headless=false" when running test
-  - remove duplication in soapui configuration (settings, projects)
+
+  - poms
+    - all poms should use the project version as version (@project.version@)
+    - add intermediate parent pom to avoid duplication for a given tested feature
+    - create a parent pom for all tests. It should depends on redfish4ktc parent to set plugin versions
+  - migrate verify scripts to groovy because groovy provides more feature than beanshell
+    - should be documented in the development wiki page
+    - modify the invoker plugin to only support groovy scripts (it currently accept groovy and beanshell)
+    - use common code already available (java invoker util code) to avoid duplication (especially log parsing)
+    - always check the runner type used in the tests (available in java invoker util code)
+  - invoker plugin configuration
+    - check if we need to force the "–Djava.headless=false" when running test
+    - remove the `invokerParallelThreads` property in the pom.xml file. Overriding the invoker plugin parameter should be done by passing `-Dinvoker.parallelThreads` parameter  - remove duplication in soapui configuration (settings, projects)
   - add tests with composite projects for all features using the pro runner
-  - test goal default log directory: also check they are no log file in base directory (cf related test of convert-project goal)
-  - pretty print project. See http://www.soapui.org/Working-with-Projects/team-testing-support.html Tip: The “Pretty Print Project Files” setting in the global preferences WSDS Settings tab will make merging a single project file substantially easier (but will also increase the size of the project file).
-  - check the globalProperties bug with maven plugin (http://www.soapui.org/forum/viewtopic.php?f=2&t=8210&p=23818&hilit=maven+globalproperties#p23818). May affect only 4.0.0 version
-  - in test and mock goal, always check the runner type used in the tests
-  - test goal: put all test in a single root directory. Currently, there is a directory per feature
-  - remove the `invokerParallelThreads` property in the pom.xml file. Overriding the invoker plugin parameter should be done by passing `-Dinvoker.parallelThreads` parameter
+  - ```test``` goal
+    - default log directory: also check they are no log file in base directory (cf related test of convert-project goal)
+    - check the globalProperties bug with maven plugin (http://www.soapui.org/forum/viewtopic.php?f=2&t=8210&p=23818&hilit=maven+globalproperties#p23818). May affect only 4.0.0 version
+  - pretty print project. See http://www.soapui.org/Working-with-Projects/team-testing-support.html Tip: The “Pretty Print Project Files” setting in the global preferences WSDLS Settings tab will make merging a single project file substantially easier (but will also increase the size of the project file).
+
+  
 
 
 ## Mojo implementation ##
@@ -63,7 +71,7 @@ http://maven.apache.org/plugins/maven-invoker-plugin/examples/access-test-classe
 * document how to configure scripts and ext directory
 * talk about default value (everything in basedir)
 * put the 'Avoid log warnings at startup' section just before logs tips + modify link/text according to the new documentation about scripts and ext
-* log4j configuration: document the java system property to set an alternative path to the configuration file
+* log4j configuration: document the java system property to set an alternative path to the configuration file + add an integration test
 
 **Test strategy**
 
@@ -75,7 +83,14 @@ The developer documentation should also point on this
 
 **Contributing**
 
-* use pull request
+What
+
+* existing issue: add a comment to notify me about your starting work or if you have any question
+* pick up idea from this todo file: create a new issue to notify me
+
+How
+
+* use pull requests (please create a feature branch from master)
 * if it fixes an issue in the SmartBear implementation, create integration tests that show the issue (in oss and pro runners if needed)
 * create tests (at least integration plugin tests) to show the new feature or the fixed bug
 
