@@ -27,13 +27,13 @@ public class TestVerifyMojo extends AbstractSoapuiMojo {
 
     @Override
     public void performExecute() throws MojoExecutionException, MojoFailureException {
-        getLog().info("Checking if soapui tests mojo fails");
+        getLog().info("Checking if SoapUI Test(s) failed");
         String soapuiTestsHaveFailuresOrErrors = project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY);
         if (BooleanUtils.toBoolean(soapuiTestsHaveFailuresOrErrors)) {
             throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
                     + " (if necessary, set the option to true)");
         }
-        getLog().info("No Soapui tests fail.");
+        getLog().info("No SoapUI Tests failed");
     }
 
 }

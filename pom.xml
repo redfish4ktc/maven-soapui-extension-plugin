@@ -19,12 +19,12 @@
   <parent>
     <groupId>com.github.redfish4ktc.parent</groupId>
     <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>5</version>
+    <version>6</version>
   </parent>
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.5.1.6-SNAPSHOT</version>
+  <version>4.6.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>This plugin adds new features and bug fixes to smartbear maven-soapui-pro-plugin/maven-soapui-plugin.</description>
@@ -62,26 +62,31 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <groovyVersion>1.8.0</groovyVersion>
-    <!-- also check animal-sniffer configuration -->
-    <javaMinimumSupportedVersion>1.6</javaMinimumSupportedVersion>
+    <!-- do not use the maven_minimum_required_version property from the parent as it changes when releasing the project -->
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
-    <soapuiVersionCurrent>4.5.1</soapuiVersionCurrent>
+    <soapuiVersionCurrent>4.6.1</soapuiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <!-- Force use of this version to have the same one than in soapui
+        Otherwise it used the one declared by jasperreports (as we have declare it direclty, it is now on the shortest path) 
+        -->
+        <version>3.2.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
-    <!-- Missing in SmartBear 4.5.1 implementation -->
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>11.0</version>
-    </dependency>
-    <dependency>
-      <groupId>eviware</groupId>
-      <artifactId>maven-soapui-pro-plugin</artifactId>
+      <groupId>com.smartbear.soapui</groupId>
+      <artifactId>soapui-pro-maven-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
       <exclusions>
         <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
@@ -95,6 +100,14 @@
           <artifactId>jasperreports</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <!-- prior 4.5.2 smartbear plugin pro version used commons-lang 2.5. Now, the 2.4 version is used and it does not contain reflection classes we need.
+    So use commons-lang3 to get the classes and not mess soapui with version upgrade
+    -->
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.1</version>
     </dependency>
     <!-- Adding groovy with regular coordinates (see exclusion of maven-soapui-pro-plugin)
     Forced to use the same version than in maven-invoker (due to limitation of the way this plugin perform duplicate dependency detection)
@@ -165,14 +178,6 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>${javaMinimumSupportedVersion}</source>
-          <target>${javaMinimumSupportedVersion}</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
           <delimiters>
@@ -203,6 +208,10 @@
                     <exclude>com.jgoodies</exclude>
                     <exclude>teamdev</exclude>
                   </excludes>
+                  <includes>
+                    <!-- starting from 4.6.1 support, this lib is now declared as dependency in the SmartBear pro plugin -->
+                    <include>com.jgoodies:looks</include>
+                  </includes>
                 </bannedDependencies>
               </rules>
             </configuration>
@@ -248,26 +257,6 @@
             <exclude>src/it/test_goal/runner_type/_soapui-conf/projects/composite-project/**/*</exclude>
           </excludes>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <configuration>
-          <signature>
-            <groupId>org.codehaus.mojo.signature</groupId>
-            <artifactId>java16-sun</artifactId>
-            <version>1.10</version>
-          </signature>
-        </configuration>
-        <executions>
-          <execution>
-            <id>animal-sniffer-check</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -353,7 +342,7 @@
               <postBuildHookScript>verify</postBuildHookScript>
               <extraArtifacts>
                 <!-- at least needed for soapui oss workaround for mock-as-war -->
-                <extraArtifact>eviware:maven-soapui-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
+                <extraArtifact>com.smartbear.soapui:soapui-maven-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
               </extraArtifacts>
               <!-- <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath> -->
               <!-- TODO modify when fix http://jira.codehaus.org/browse/MINVOKER-137 -->

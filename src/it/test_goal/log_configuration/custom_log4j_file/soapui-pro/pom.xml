@@ -29,8 +29,8 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>eviware</groupId>
-        <artifactId>maven-soapui-pro-plugin</artifactId>
+        <groupId>com.smartbear.soapui</groupId>
+        <artifactId>soapui-pro-maven-plugin</artifactId>
         <version>@soapuiVersionCurrent@</version>
         <executions>
           <execution>

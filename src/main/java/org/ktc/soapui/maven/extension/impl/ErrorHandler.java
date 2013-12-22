@@ -17,14 +17,12 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
-import org.apache.commons.lang.reflect.FieldUtils;
-
 import com.eviware.soapui.model.testsuite.TestAssertion;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
+import java.lang.reflect.Field;
+import java.util.List;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
 public class ErrorHandler {
 

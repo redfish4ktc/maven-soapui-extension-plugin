@@ -28,8 +28,8 @@
 
    <properties>
     <soapui.artifactId>soapui</soapui.artifactId>
-    <soapui.dependency.artifactId>maven-soapui-plugin</soapui.dependency.artifactId>
-    <soapui.plugin.artifactId>maven-soapui-plugin</soapui.plugin.artifactId>
+    <soapui.dependency.artifactId>soapui-maven-plugin</soapui.dependency.artifactId>
+    <soapui.plugin.artifactId>soapui-maven-plugin</soapui.plugin.artifactId>
     <soapui.generator.classname>SoapUIMockAsWarGenerator</soapui.generator.classname>
   </properties>
 
