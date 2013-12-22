@@ -343,6 +343,9 @@
               <extraArtifacts>
                 <!-- at least needed for soapui oss workaround for mock-as-war -->
                 <extraArtifact>com.smartbear.soapui:soapui-maven-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
+                <!-- enforce the download of all dependencies of this plugin, because even if we rely on it, we have excluded
+                some of its dependencies, so they are not downloaded prior running the tests -->
+                <extraArtifact>com.smartbear.soapui:soapui-pro-maven-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
               </extraArtifacts>
               <!-- <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath> -->
               <!-- TODO modify when fix http://jira.codehaus.org/browse/MINVOKER-137 -->
