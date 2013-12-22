@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.github.redfish4ktc.parent</groupId>
     <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>5</version>
+    <version>6</version>
   </parent>
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
@@ -62,8 +62,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <groovyVersion>1.8.0</groovyVersion>
-    <!-- also check animal-sniffer configuration -->
-    <javaMinimumSupportedVersion>1.6</javaMinimumSupportedVersion>
+    <!-- do not use the maven_minimum_required_version property from the parent as it changes when releasing the project -->
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
@@ -179,14 +178,6 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>${javaMinimumSupportedVersion}</source>
-          <target>${javaMinimumSupportedVersion}</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
           <delimiters>
@@ -266,26 +257,6 @@
             <exclude>src/it/test_goal/runner_type/_soapui-conf/projects/composite-project/**/*</exclude>
           </excludes>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <configuration>
-          <signature>
-            <groupId>org.codehaus.mojo.signature</groupId>
-            <artifactId>java16-sun</artifactId>
-            <version>1.10</version>
-          </signature>
-        </configuration>
-        <executions>
-          <execution>
-            <id>animal-sniffer-check</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
