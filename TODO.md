@@ -17,12 +17,6 @@
 
 # Development todo list #
 
-## Parent ##
-- move to parent
-  - complier config
-  - animalsniffer
-  - maven minimum version
-
 
 ## Experiments ##
 
