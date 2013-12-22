@@ -122,7 +122,7 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     // will avoid warning on soapui startup
     // if the soapui.home property if already set, we should restore the initial value after the call of this mojo
     private void buildSoapuiGuiEnvironment() throws DependencyResolutionException, IOException {
-        getLog().info("Building a Soapui Gui environment");
+        getLog().info("Building a SoapUI Gui environment");
 
         String version = ProjectInfo.getVersion();
         // use our plugin to be sure we do not have missing dependencies (at least for versions prior to 4.5.2) 
@@ -134,7 +134,7 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
         copySoapuiJar(soapuiLibDirectory, soapuiBinDirectory);
 
         System.setProperty("soapui.home", soapuiBinDirectory.getAbsolutePath());
-        getLog().info("Soapui Gui environment built");
+        getLog().info("SoapUI Gui environment built");
 
         // TODO check to set this java property if setting headless does not work:
         // uncomment to disable browser component
