@@ -24,7 +24,7 @@
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.6.1.1-SNAPSHOT</version>
+  <version>4.6.2.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.</description>
@@ -61,12 +61,12 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <groovyVersion>1.8.0</groovyVersion>
+    <groovyVersion>2.1.7</groovyVersion>
     <!-- do not use the maven_minimum_required_version property from the parent as it changes when releasing the project -->
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
-    <soapuiVersionCurrent>4.6.1</soapuiVersionCurrent>
+    <soapuiVersionCurrent>4.6.2</soapuiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
@@ -89,12 +89,6 @@
       <artifactId>soapui-pro-maven-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
       <exclusions>
-        <!-- declare groovy with regular coordinates, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112)
-        is not able to detect that the project already depends on groovy -->
-        <exclusion>
-          <groupId>groovy</groupId>
-          <artifactId>groovy-all</artifactId>
-        </exclusion>
         <exclusion>
           <groupId>jasperreports</groupId>
           <artifactId>jasperreports</artifactId>
@@ -108,14 +102,6 @@
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>3.1</version>
-    </dependency>
-    <!-- Adding groovy with regular coordinates (see exclusion of maven-soapui-pro-plugin)
-    Forced to use the same version than in maven-invoker (due to limitation of the way this plugin perform duplicate dependency detection)
-    -->
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>${groovyVersion}</version>
     </dependency>
     <!-- use regular maven coordinates (see #67) -->
     <dependency>
@@ -200,7 +186,7 @@
                 <bannedDependencies>
                   <searchTransitive>true</searchTransitive>
                   <excludes>
-                    <!-- needed to avoid conflicts with the maven invoker plugin -->
+                    <!-- needed to avoid conflicts with the maven invoker plugin (see plugin configuration below) -->
                     <exclude>groovy</exclude>
                     <!-- artifacts with wrong pom in the soapui repository (see #67) -->
                     <exclude>jasperreports</exclude>
@@ -370,7 +356,9 @@
               </execution>
             </executions>
             <dependencies>
-              <!-- Force use of the same version than in our plugin to be sure this dependency is not added twice to the classpath -->
+              <!-- Force use of the same version than in our plugin to be sure this dependency is not added twice to the
+              classpath, otherwise the maven-invoker fix (http://jira.codehaus.org/browse/MINVOKER-112) is not able to
+              detect that the project already depends on groovy -->
               <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
