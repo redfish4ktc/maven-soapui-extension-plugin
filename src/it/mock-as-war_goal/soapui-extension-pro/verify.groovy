@@ -19,6 +19,7 @@ import org.ktc.soapui.maven.invoker.util.*;
 import static org.ktc.soapui.maven.invoker.util.Check.*;
 
 CheckBuildLog checker = new CheckBuildLog(basedir);
+checker.assertLogFileContains("[SoapUIProMockAsWarGenerator] Creating WAR file with endpoint"); // the pro generator has runned
 checker.assertProMockAsWarServletHasBeenDeployed();
 checker.assertProTestRunnerHasBeenUsed();
 return true;
