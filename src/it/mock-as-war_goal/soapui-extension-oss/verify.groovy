@@ -19,7 +19,7 @@ import org.ktc.soapui.maven.invoker.util.*;
 import static org.ktc.soapui.maven.invoker.util.Check.*;
 
 CheckBuildLog checker = new CheckBuildLog(basedir);
-checker.assertLogFileContains("[SoapUIExtensionMockAsWarGenerator] WAR Generation complete"); // the oss generator has runned
+checker.assertOssWarGeneratorHasBeenUsed();
 checker.assertOssMockAsWarServletHasBeenDeployed();
 checker.assertOssTestRunnerHasBeenUsed();
 return true;

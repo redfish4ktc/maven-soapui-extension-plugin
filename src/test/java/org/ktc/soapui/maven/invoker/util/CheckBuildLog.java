@@ -52,6 +52,20 @@ public class CheckBuildLog {
         log("The PRO test runner has been used");
     }
 
+    public void assertOssWarGeneratorHasBeenUsed() {
+        log("Check that the OSS war generator has been used");
+        assertLogFileContains("INFO  [SoapUIExtensionMockAsWarGenerator] Creating WAR file with endpoint");
+        assertLogFileContains("INFO  [SoapUIExtensionMockAsWarGenerator] WAR Generation complete");
+        log("The OSS war generator has been used");
+    }
+
+    public void assertProWarGeneratorHasBeenUsed() {
+        log("Check that the PRO war generator has been used");
+        assertLogFileContains("INFO  [SoapUIProMockAsWarGenerator] Creating WAR file with endpoint");
+        // the pro generator does not log war generation complete :-(
+        log("The PRO war generator has been used");
+    }
+
     public void assertLogFileContains(String expectedContent) {
         log("Expect to find content in the log file: " + expectedContent);
         int matchCount = StringUtils.countMatches(logFileContent, expectedContent);
@@ -94,6 +108,20 @@ public class CheckBuildLog {
         log("Check that the SmartBear PRO test runner has been used");
         assertLogFileContains("INFO  [SoapUIProTestCaseRunner]");
         log("The SmartBear PRO test runner has been used");
+    }
+
+    public void assertSmartBearOssWarGeneratorHasBeenUsed() {
+        log("Check that the SmartBear OSS war generator has been used");
+        assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] Creating WAR file with endpoint");
+        assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] WAR Generation complete");
+        log("The OSS war generator has been used");
+    }
+
+    public void assertSmartBearProWarGeneratorHasBeenUsed() {
+        log("Check that the SmartBear PRO war generator has been used");
+        assertLogFileContains("INFO  [SoapUIProMockAsWarGenerator] Creating WAR file with endpoint");
+        // the pro generator does not log war generation complete :-(
+        log("The PRO war generator has been used");
     }
 
     private static void log(String message) {
