@@ -494,6 +494,13 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <description>The maven project.</description>
         </parameter>
         <parameter>
+          <name>runnerType</name>
+          <type>java.lang.String</type>
+          <required>true</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
+        <parameter>
           <name>remoteRepos</name>
           <type>java.util.List</type>
           <required>false</required>
@@ -514,6 +521,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <projectFile          implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectfile}</projectFile>
         <remoteRepos          implementation="java.util.List" default-value="${project.remoteProjectRepositories}"/>
         <repoSession          implementation="org.sonatype.aether.RepositorySystemSession" default-value="${repositorySystemSession}"/>
+        <runnerType           implementation="java.lang.String" default-value="PRO">${soapui.runnerType}</runnerType>
         <warFile              implementation="java.io.File">${soapui.warFile}</warFile>
       </configuration>
       <!-- components -->
@@ -523,7 +531,6 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <field-name>repoSystem</field-name>
         </requirement>
       </requirements>
-
     </mojo>
     <mojo>
       <goal>test-verify</goal>
