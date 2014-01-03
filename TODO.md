@@ -50,6 +50,13 @@ Here is a list of tasks/ideas that will be implemented in the future.
 
   
 
+## POM ##
+
+  - manifest files
+    - javadoc jar: add info in the manifest file (same as in the regular jar)
+    - sources jar: same as for the javadoc jar
+    - move all these configuration in the parent pom 
+
 
 ## Mojo implementation ##
   - test and mock goal does not declare mandatory parameter as required (see plugin.xml). Instead, null check is done in mojo implementation
