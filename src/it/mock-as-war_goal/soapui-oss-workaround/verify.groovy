@@ -19,7 +19,6 @@ import org.ktc.soapui.maven.invoker.util.*;
 import static org.ktc.soapui.maven.invoker.util.Check.*;
 
 CheckBuildLog checker = new CheckBuildLog(basedir);
-//checker.assertOssMockAsWarServletHasBeenDeployed();
+checker.assertOssMockAsWarServletHasBeenDeployed();
 checker.assertSmartBearOssTestRunnerHasBeenUsed();
-checker.assertLogFileContains("SoapUI Test(s) failed");
 return true;

@@ -171,6 +171,12 @@
             <artifactId>ant</artifactId>
             <version>1.8.2</version>
           </dependency>
+          <!-- ensure soapui or soapui-pro dependency is at first place in the classpath to let soapui use the web.xml resource from the right jar -->
+          <dependency>
+            <groupId>${soapui.groupId}</groupId>
+            <artifactId>${soapui.artifactId}</artifactId>
+            <version>${soapui.version}</version>
+          </dependency>
           <dependency>
             <groupId>${soapui.groupId}</groupId>
             <artifactId>${soapui.dependency.artifactId}</artifactId>
