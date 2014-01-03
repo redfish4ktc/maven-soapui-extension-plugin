@@ -21,7 +21,7 @@ maven-soapui-extension-plugin [![Buildhive Build Status](https://buildhive.cloud
 This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.
 For more information about how to use it, see the [wiki](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki).
 
-Last released version: [4.6.2.0](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
+Last released version: [4.6.3.0](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
 
 
 Main features
@@ -84,7 +84,6 @@ Roadmap
 
 **Short term**
 
-* add support for SoapUI 4.6.3
 * add a ```test-multi``` goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects). See the [related issue](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/88)
 
 
