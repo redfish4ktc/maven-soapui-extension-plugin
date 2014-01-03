@@ -17,11 +17,13 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
-import com.eviware.soapui.SoapUIProMockServiceRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionMockServiceRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
+
 import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
 
 public enum RunnerType {
     PRO {
@@ -32,7 +34,7 @@ public enum RunnerType {
 
         @Override
         public SoapUIMockServiceRunner newMockRunner() {
-            return new SoapUIProMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
+            return new SoapUIProExtensionMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
         }
 
         @Override
@@ -49,7 +51,7 @@ public enum RunnerType {
 
         @Override
         public SoapUIMockServiceRunner newMockRunner() {
-            return new SoapUIMockServiceRunner("SoapUI Maven2 MockService Runner");
+            return new SoapUIExtensionMockServiceRunner("SoapUI Maven2 MockService Runner");
         }
 
         @Override
