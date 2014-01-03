@@ -19,6 +19,7 @@ import org.ktc.soapui.maven.invoker.util.*;
 import static org.ktc.soapui.maven.invoker.util.Check.*;
 
 CheckBuildLog checker = new CheckBuildLog(basedir);
+checker.assertOssWarGeneratorHasBeenUsed();
 checker.assertOssMockAsWarServletHasBeenDeployed();
 checker.assertOssTestRunnerHasBeenUsed();
 return true;

@@ -19,7 +19,7 @@ package org.ktc.soapui.maven.extension;
 
 import static org.sonatype.aether.util.filter.DependencyFilterUtils.classpathFilter;
 
-import com.eviware.soapui.tools.SoapUIProMockAsWarGenerator;
+import com.eviware.soapui.tools.SoapUIMockAsWarGenerator;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -30,6 +30,8 @@ import org.apache.maven.model.Build;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ProjectInfo;
+import org.ktc.soapui.maven.extension.impl.RunnerType;
+import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 import org.sonatype.aether.RepositorySystem;
 import org.sonatype.aether.RepositorySystemSession;
 import org.sonatype.aether.collection.CollectRequest;
@@ -76,10 +78,11 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
         // List<RemoteRepository> remoteRepos = getRemoteRepos();
         getLog().info("Running Mock As War");
 
+        RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
         // be carefull, if in the same jvm, the oss generator is used then the pro test runner, we got a class cast
         // exception when loading the project (actual type: oss project, fail to cast into a pro project)
-        SoapUIProMockAsWarGenerator runner = new SoapUIProMockAsWarGenerator();
-//        SoapUIMockAsWarGenerator runner = new SoapUIMockAsWarGenerator("SoapUI Maven2 MockAsWar Runner");
+        SoapUIMockAsWarGenerator runner = runnerTypeEnum.newMockAsWarGenerator();
+
         configureWithSharedParameters(runner);
 
         // TODO should be set to false in all runner mojo
