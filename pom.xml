@@ -24,7 +24,7 @@
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.6.2.1-SNAPSHOT</version>
+  <version>4.6.3.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.</description>
@@ -66,20 +66,25 @@
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
-    <soapuiVersionCurrent>4.6.2</soapuiVersionCurrent>
+    <soapuiVersionCurrent>4.6.3</soapuiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
 
+  <!-- Force use of these versions to have the same one than in soapui
+  Otherwise it used the one declared by jasperreports (as we have declare it direclty, it is now on the shortest path) 
+  -->
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>commons-collections</groupId>
         <artifactId>commons-collections</artifactId>
-        <!-- Force use of this version to have the same one than in soapui
-        Otherwise it used the one declared by jasperreports (as we have declare it direclty, it is now on the shortest path) 
-        -->
         <version>3.2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
