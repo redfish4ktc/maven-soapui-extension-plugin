@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.apache.maven.plugin.MojoFailureException;
 public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
     // already in smartbear implementation
     private String[] globalProperties;
-    private String projectFile;
+    protected String projectFile;
     private String projectPassword;
     private String[] projectProperties;
     protected boolean saveAfterRun;
@@ -52,7 +52,11 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
     protected abstract void performRunnerExecute() throws MojoExecutionException, MojoFailureException;
 
     protected void configureWithSharedParameters(AbstractSoapUIRunner runner) {
-        runner.setProjectFile(projectFile);
+        configureWithSharedParameters(runner, projectFile);
+    }
+
+    protected void configureWithSharedParameters(AbstractSoapUIRunner runner, String currentProjectFile) {
+        runner.setProjectFile(currentProjectFile);
         if (projectPassword != null) {
             runner.setProjectPassword(projectPassword);
         }
@@ -76,5 +80,5 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
             }
         }
     }
-
+    
 }

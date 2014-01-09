@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2011-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,16 @@
 
 package org.ktc.soapui.maven.extension;
 
+import static org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
+
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
-import org.ktc.soapui.maven.extension.impl.RunnerType;
 import org.ktc.soapui.maven.extension.impl.TestSuiteProperties;
-import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper;
 
 public class TestMojo extends AbstractSoapuiRunnerMojo {
     
@@ -58,9 +59,38 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
-        SoapUITestCaseRunner runner = runnerTypeEnum.newTestRunner();
-        configureWithSharedParameters(runner);
+        SoapUITestCaseRunnerWrapper runnerWrapper = newSoapUITestCaseRunnerWrapper(runnerType);
+        String currentProjectFile = projectFile;
+        configureTestRunner(runnerWrapper, currentProjectFile);
+
+        SoapUITestCaseRunner runner = runnerWrapper.getRunner();
+        try {
+            runner.run();
+        } catch (Exception e) {
+            getLog().debug(e);
+            throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
+        }
+        boolean hasFailures = ErrorHandler.hasFailures(runner);
+        if (hasFailures) {
+            if (testFailIgnore) {
+                getLog().warn(
+                        "Some tests have failed (see logs and/or check the printReport,"
+                                + " if necessary, set the option to true)");
+                getLog().debug("Setting project property " + TEST_FAILURES_AND_ERRORS_KEY);
+                project.getProperties().setProperty(TEST_FAILURES_AND_ERRORS_KEY, "true");
+                getLog().debug(
+                        "Property " + TEST_FAILURES_AND_ERRORS_KEY + " set to "
+                                + project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY));
+            } else {
+                throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
+                        + " (if necessary, set the option to true)");
+            }
+        }
+    }
+
+    private void configureTestRunner(SoapUITestCaseRunnerWrapper runnerWrapper, String currentProjectFile) {
+        SoapUITestCaseRunner runner = runnerWrapper.getRunner();
+        configureWithSharedParameters(runner, currentProjectFile);
 
         if (endpoint != null) {
             runner.setEndpoint(endpoint);
@@ -96,7 +126,7 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
         runner.setIgnoreError(true);
         runner.setSaveAfterRun(saveAfterRun);
 
-        if(runnerTypeEnum.isProRunner()) {
+        if(runnerWrapper.isProRunner()) {
             SoapUIProExtensionTestCaseRunner proRunner = (SoapUIProExtensionTestCaseRunner) runner;
             if (environment != null) {
                 proRunner.setEnvironment(environment);
@@ -117,29 +147,6 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
             SoapUIExtensionTestCaseRunner ossRunner = (SoapUIExtensionTestCaseRunner) runner;
             ossRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
         }
-
-        try {
-            runner.run();
-        } catch (Exception e) {
-            getLog().debug(e);
-            throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
-        }
-        boolean hasFailures = ErrorHandler.hasFailures(runner);
-        if (hasFailures) {
-            if (testFailIgnore) {
-                getLog().warn(
-                        "Some tests have failed (see logs and/or check the printReport,"
-                                + " if necessary, set the option to true)");
-                getLog().debug("Setting project property " + TEST_FAILURES_AND_ERRORS_KEY);
-                project.getProperties().setProperty(TEST_FAILURES_AND_ERRORS_KEY, "true");
-                getLog().debug(
-                        "Property " + TEST_FAILURES_AND_ERRORS_KEY + " set to "
-                                + project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY));
-            } else {
-                throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
-                        + " (if necessary, set the option to true)");
-            }
-        }
     }
-    
+
 }
