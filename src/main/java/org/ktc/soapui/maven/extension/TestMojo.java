@@ -59,8 +59,11 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        SoapUITestCaseRunnerWrapper runnerWrapper = newSoapUITestCaseRunnerWrapper(runnerType);
-        String currentProjectFile = projectFile;
+        configureAndRun(newSoapUITestCaseRunnerWrapper(runnerType), projectFile);
+    }
+
+    protected void configureAndRun(SoapUITestCaseRunnerWrapper runnerWrapper, String currentProjectFile)
+            throws MojoFailureException {
         configureTestRunner(runnerWrapper, currentProjectFile);
 
         SoapUITestCaseRunner runner = runnerWrapper.getRunner();
