@@ -91,10 +91,12 @@ Roadmap
 **Mid term**
 
 * improve the ```mock-as-war``` goal for generating war from [mock services](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal). See [opened issues](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues?labels=goal%3A%3Amock-as-war&milestone=&page=1&state=open)
-
+* have a specific implementation for the ```security-test``` goal and implement improvements. See [opened issues](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues?labels=goal%3A%3Asecurity-test&milestone=&page=1&state=open)
 
 **Long term**
 
+* found a way to make report generation work without having a SoapUI installation (PRO feature)
+* add a goal to export wsdl interface from a SoapUI project
 * does not rely on SmartBear maven plugin
 
 
