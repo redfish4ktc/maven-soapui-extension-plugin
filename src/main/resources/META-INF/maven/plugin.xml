@@ -808,7 +808,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
       </parameters>
       <configuration>
         <!-- ######## SPECIFIC test-multi, added for #88 -->
-        <projectFiles implementation="java.util.List">${soapui.projectfiles}</projectFiles>
+        <projectFiles implementation="java.util.List">${soapui.projectFiles}</projectFiles>
         <!-- ######## END OF SPECIFIC test-multi, added for #88 -->
         <!-- ######## CUSTOMIZED, added for #3 -->
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>
