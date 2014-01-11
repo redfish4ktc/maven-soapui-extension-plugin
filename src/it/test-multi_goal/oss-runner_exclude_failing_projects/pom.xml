@@ -47,14 +47,12 @@
               <projectFiles>
                 <scan>
                   <baseDirectory>${soapui.configuration.projects.path}</baseDirectory>
-                  <includes>
-                    <include>**/${soapui.project.fail.1.file}</include>
-                    <include>**/${soapui.project.success.1.file}</include>
-                    <include>**/${soapui.project.fail.2.file}</include>
-                    <include>**/${soapui.project.success.2.file}</include>
-                  </includes>
+                  <excludes>
+                    <exclude>**/*fail-*-soapui-project.xml</exclude>
+                  </excludes>
                 </scan>
               </projectFiles>
+              <runnerType>OSS</runnerType>
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <testFailIgnore>true</testFailIgnore>
             </configuration>
