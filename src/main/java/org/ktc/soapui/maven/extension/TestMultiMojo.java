@@ -53,9 +53,12 @@ public class TestMultiMojo extends TestMojo {
             scanner.setExcludes(toArray(scan.excludes));
             scanner.scan();
 
-            String[] includedFiles = scanner.getIncludedFiles();
-            for (String includedFile : includedFiles) {
+            for (String includedFile : scanner.getIncludedFiles()) {
                 resolved.add(new File(baseDirectory, includedFile));
+            }
+            // composite project are directories
+            for (String includedDirectory : scanner.getIncludedDirectories()) {
+                resolved.add(new File(baseDirectory, includedDirectory));
             }
         }
         return resolved;

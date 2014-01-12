@@ -35,6 +35,7 @@
     <soapui.project.success.2.file>simple-sucess-2-soapui-project.xml</soapui.project.success.2.file>
     <soapui.project.fail.1.file>simple-fail-1-soapui-project.xml</soapui.project.fail.1.file>
     <soapui.project.fail.2.file>simple-fail-2-soapui-project.xml</soapui.project.fail.2.file>
+    <soapui.composite.project.success.1.directory>simple-composite-sucess-1</soapui.composite.project.success.1.directory>
     <soapui.settings.empty.file>${soapui.configuration}/soapui-settings/empty-soapui-settings.xml</soapui.settings.empty.file>
     <soapui.config.output.directory>${project.build.directory}/soapui/ouput</soapui.config.output.directory>
   </properties>
