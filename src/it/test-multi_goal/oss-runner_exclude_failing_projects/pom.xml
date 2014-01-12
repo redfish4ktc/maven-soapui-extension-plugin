@@ -47,8 +47,12 @@
               <projectFiles>
                 <scan>
                   <baseDirectory>${soapui.configuration.projects.path}</baseDirectory>
+                  <includes>
+                    <include>**/*.xml</include>
+                  </includes>
                   <excludes>
                     <exclude>**/*fail-*-soapui-project.xml</exclude>
+                    <exclude>**/composite-projects/**</exclude>
                   </excludes>
                 </scan>
               </projectFiles>
