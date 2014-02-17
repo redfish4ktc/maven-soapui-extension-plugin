@@ -40,7 +40,7 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     private String domain;
     private String host;
     private String endpoint;
-    private String outputFolder;
+    protected String outputFolder;
     private boolean printReport;
     private boolean interactive;
     private boolean exportAll;
@@ -119,9 +119,7 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
         if (host != null) {
             runner.setHost(host);
         }
-        if (outputFolder != null) {
-            runner.setOutputFolder(outputFolder);
-        }
+        configureOuputFolder(runner, currentProjectFile);
         runner.setPrintReport(printReport);
         runner.setExportAll(exportAll);
         runner.setJUnitReport(junitReport);
@@ -150,6 +148,12 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
             SoapUIExtensionTestCaseRunner ossRunner = (SoapUIExtensionTestCaseRunner) runner;
             ossRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
         }
+    }
+
+    // let test-multi override this
+    protected void configureOuputFolder(SoapUITestCaseRunner runner,
+            @SuppressWarnings("unused") String currentProjectFile) {
+        runner.setOutputFolder(outputFolder);
     }
 
 }
