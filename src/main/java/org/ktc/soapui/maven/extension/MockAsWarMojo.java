@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,6 +53,8 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     // TODO add a default value (build.getDirectory() + "/soapui/mock-as-war/" + "exploded")
     private File explodedWarDirectory;
 
+    private boolean enableWebUI;
+
     /**
      * The entry point to Aether, i.e. the component doing all the work.
      * @component
@@ -102,7 +104,7 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
             runner.setWarFile(warFile.getAbsolutePath());
 
             // specific configuration
-            // runner.setEnableWebUI(true);
+             runner.setEnableWebUI(enableWebUI);
             // runner.setLocalEndpoint(null);
             // TODO related java system properties must be correctly set (add documentation)
             // WARN the mock generator does not respect properties (it used directories in the soapui.home directory)
