@@ -23,7 +23,7 @@
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>test-multi-oss-runner-exclude-failing-projects</artifactId>
+  <artifactId>test-multi-oss-runner-several-directory-scans</artifactId>
   <packaging>pom</packaging>
 
   <build>
