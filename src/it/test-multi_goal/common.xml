@@ -31,6 +31,7 @@
   <properties>
     <soapui.configuration.path>${basedir}/../../test-verify_goal/soapui-conf</soapui.configuration.path>
     <soapui.configuration.projects.path>${soapui.configuration.path}/projects</soapui.configuration.projects.path>
+    <soapui.configuration.projects.alternate.path>${soapui.configuration.path}/projects-alternate</soapui.configuration.projects.alternate.path>
     <soapui.project.success.1.file>simple-sucess-1-soapui-project.xml</soapui.project.success.1.file>
     <soapui.project.success.2.file>simple-sucess-2-soapui-project.xml</soapui.project.success.2.file>
     <soapui.project.fail.1.file>simple-fail-1-soapui-project.xml</soapui.project.fail.1.file>
