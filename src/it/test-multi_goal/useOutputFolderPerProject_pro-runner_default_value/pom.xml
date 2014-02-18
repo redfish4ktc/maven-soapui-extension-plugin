@@ -23,7 +23,7 @@
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>test-multi-pro-runner-useOutputFolderPerProject-with-composite-and-standard-projects</artifactId>
+  <artifactId>test-multi-pro-runner-useOutputFolderPerProject-default-value</artifactId>
   <packaging>pom</packaging>
 
   <build>
@@ -48,14 +48,12 @@
                 <scan>
                   <baseDirectory>${soapui.configuration.projects.path}</baseDirectory>
                   <includes>
-                    <include>**/${soapui.composite.project.success.1.directory}</include>
                     <include>**/${soapui.project.success.2.file}</include>
                   </includes>
                 </scan>
               </projectFiles>
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <testFailIgnore>true</testFailIgnore>
-              <useOutputFolderPerProject>true</useOutputFolderPerProject>
             </configuration>
           </execution>
           <execution>

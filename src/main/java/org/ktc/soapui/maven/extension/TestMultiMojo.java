@@ -32,6 +32,7 @@ import org.codehaus.plexus.util.DirectoryScanner;
 public class TestMultiMojo extends TestMojo {
 
     private List<ProjectFilesScan> projectFiles;
+    private boolean useOutputFolderPerProject;
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
@@ -43,13 +44,16 @@ public class TestMultiMojo extends TestMojo {
 
     @Override
     protected void configureOuputFolder(SoapUITestCaseRunner runner, String currentProjectFile) {
-        // TODO add configuration
         // TODO manage already existing directory
         // TODO manage case where composite project path end with end separator
         // String projectFileName = FilenameUtils.normalizeNoEndSeparator(currentProjectFile);
-        String projectFileName = FilenameUtils.getBaseName(currentProjectFile);
-        File projectOuputFolder = new File(outputFolder, projectFileName);
-        runner.setOutputFolder(projectOuputFolder.getAbsolutePath());
+        if (useOutputFolderPerProject) {
+            String projectFileName = FilenameUtils.getBaseName(currentProjectFile);
+            File projectOuputFolder = new File(outputFolder, projectFileName);
+            runner.setOutputFolder(projectOuputFolder.getAbsolutePath());
+        } else {
+            super.configureOuputFolder(runner, currentProjectFile);
+        }
     }
 
     private List<File> resolveProjectFiles() {
