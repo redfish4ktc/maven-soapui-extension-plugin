@@ -23,7 +23,7 @@
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>test-multi-oss-runner-several-directory-scans</artifactId>
+  <artifactId>test-multi-pro-runner-useOutputFolderPerProject-default-value</artifactId>
   <packaging>pom</packaging>
 
   <build>
@@ -48,17 +48,10 @@
                 <scan>
                   <baseDirectory>${soapui.configuration.projects.path}</baseDirectory>
                   <includes>
-                    <include>**/${soapui.project.success.1.file}</include>
-                  </includes>
-                </scan>
-                <scan>
-                  <baseDirectory>${soapui.configuration.projects.alternate.path}</baseDirectory>
-                  <includes>
-                    <include>**/${soapui.project.success.1.file}</include>
+                    <include>**/${soapui.project.success.2.file}</include>
                   </includes>
                 </scan>
               </projectFiles>
-              <runnerType>OSS</runnerType>
               <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <testFailIgnore>true</testFailIgnore>
             </configuration>

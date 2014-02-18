@@ -19,10 +19,12 @@ package org.ktc.soapui.maven.extension;
 
 import static org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
 
+import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.DirectoryScanner;
@@ -30,12 +32,27 @@ import org.codehaus.plexus.util.DirectoryScanner;
 public class TestMultiMojo extends TestMojo {
 
     private List<ProjectFilesScan> projectFiles;
+    private boolean useOutputFolderPerProject;
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         List<File> resolvedProjectFiles = resolveProjectFiles();
         for (File currentProjectFile : resolvedProjectFiles) {
             configureAndRun(newSoapUITestCaseRunnerWrapper(runnerType), currentProjectFile.getAbsolutePath());
+        }
+    }
+
+    @Override
+    protected void configureOuputFolder(SoapUITestCaseRunner runner, String currentProjectFile) {
+        // TODO manage already existing directory
+        // TODO manage case where composite project path end with end separator
+        // String projectFileName = FilenameUtils.normalizeNoEndSeparator(currentProjectFile);
+        if (useOutputFolderPerProject) {
+            String projectFileName = FilenameUtils.getBaseName(currentProjectFile);
+            File projectOuputFolder = new File(outputFolder, projectFileName);
+            runner.setOutputFolder(projectOuputFolder.getAbsolutePath());
+        } else {
+            super.configureOuputFolder(runner, currentProjectFile);
         }
     }
 

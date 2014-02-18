@@ -560,6 +560,16 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           <description>The soapUI project files to test with</description>
         </parameter>
         <!-- ######## END OF SPECIFIC test-multi, added for #88 -->
+        <!-- ######## SPECIFIC test-multi, added for #104 -->
+        <parameter>
+          <name>useOutputFolderPerProject</name>
+          <type>java.lang.Boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>If true, the actual ouputFolder is different for each project execution. Files will be stored in a sub-directory
+          of the configured outputFolder.</description>
+        </parameter>
+        <!-- ######## END OF SPECIFIC test-multi, added for #104 -->
         <!-- ######## CUSTOMIZED, added for #3 -->
         <parameter>
           <name>project</name>
@@ -810,6 +820,9 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <!-- ######## SPECIFIC test-multi, added for #88 -->
         <projectFiles implementation="java.util.List">${soapui.projectFiles}</projectFiles>
         <!-- ######## END OF SPECIFIC test-multi, added for #88 -->
+        <!-- ######## SPECIFIC test-multi, added for #104 -->
+        <useOutputFolderPerProject implementation="boolean" default-value="false">${soapui.useOutputFolderPerProject}</useOutputFolderPerProject>
+        <!-- ######## END OF SPECIFIC test-multi, added for #104 -->
         <!-- ######## CUSTOMIZED, added for #3 -->
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>
         <!-- ######## END OF CUSTOMIZED -->
