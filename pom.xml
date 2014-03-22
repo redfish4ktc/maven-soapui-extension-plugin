@@ -246,6 +246,7 @@
             <exclude>src/it/convert-project_goal/_soapui-conf/projects/composite-project/**/*</exclude>
             <exclude>src/it/mock_goal/_soapui_conf/composite-project/**/*</exclude>
             <exclude>src/it/test_goal/runner_type/_soapui-conf/projects/composite-project/**/*</exclude>
+            <exclude>src/it/test-verify_goal/soapui-conf/projects/composite-projects/**/*</exclude>
           </excludes>
         </configuration>
       </plugin>

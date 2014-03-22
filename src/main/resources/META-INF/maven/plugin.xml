@@ -399,7 +399,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <settingsFile implementation="java.lang.String">${soapui.settingsFile}</settingsFile>
       </configuration>
     </mojo>
-    <!-- ######## CUSTOMIZED -->
+    <!-- ######## ONLY IN [maven-soapui-extension] -->
     <mojo>
       <goal>convert-project</goal>
       <description>Convert standard or composite project</description>
@@ -449,7 +449,6 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>      
       </configuration>
     </mojo>
-    <!-- ######## CUSTOMIZED -->
     <mojo>
       <goal>mock-as-war</goal>
       <description>XXXX</description>
@@ -541,6 +540,343 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
       </requirements>
     </mojo>
     <mojo>
+      <!-- IMPORTANT: except if noticed, configurations/parameters are duplicated from the test mojo
+      the projectFile parameter is not used in this mojo, but is declared here only to make it have a default value as 
+      it is currently mandatory in all mojo implementation
+       -->
+      <goal>test-multi</goal>
+      <description>Runs soapUI functional tests (multi soapui projects management)</description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <!-- ######## CUSTOMIZED -->
+      <implementation>org.ktc.soapui.maven.extension.TestMultiMojo</implementation>
+      <!-- ######## END OF CUSTOMIZED -->
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <parameters>
+        <!-- ######## SPECIFIC test-multi, added for #88 -->
+        <parameter>
+          <name>projectFiles</name>
+          <type>java.util.List</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The soapUI project files to test with</description>
+        </parameter>
+        <!-- ######## END OF SPECIFIC test-multi, added for #88 -->
+        <!-- ######## SPECIFIC test-multi, added for #104 -->
+        <parameter>
+          <name>useOutputFolderPerProject</name>
+          <type>java.lang.Boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>If true, the actual ouputFolder is different for each project execution. Files will be stored in a sub-directory
+          of the configured outputFolder.</description>
+        </parameter>
+        <!-- ######## END OF SPECIFIC test-multi, added for #104 -->
+        <!-- ######## CUSTOMIZED, added for #3 -->
+        <parameter>
+          <name>project</name>
+          <type>org.apache.maven.project.MavenProject</type>
+          <required>false</required>
+          <editable>false</editable>
+          <description>The maven project.</description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #14 -->
+        <parameter>
+          <name>runnerType</name>
+          <type>java.lang.String</type>
+          <required>true</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #38 -->
+        <parameter>
+          <name>testSuiteProperties</name>
+          <type>org.ktc.soapui.maven.extension.impl.TestSuiteProperties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified TestSuite property values</description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #45 -->
+        <parameter>
+          <name>junitHtmlReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Enables creation of junit html report (Pro only)</description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
+        <parameter>
+          <name>coverage</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Enables creation of coverage reports</description>
+        </parameter>
+        <!-- ######## CUSTOMIZED, removed as marked as deprecated in the maven-soapui-pro-plugin
+        <parameter>
+          <name>coverageBuilder</name>
+          <type>boolean</type>
+          <deprecated>use coverage instead</deprecated>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies if coverage report should be created</description>
+        </parameter>
+        ######## END OF CUSTOMIZED -->
+        <parameter>
+          <name>domain</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The domain to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>endpoint</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Overrides the endpoint to use for requests</description>
+        </parameter>
+        <parameter>
+          <name>environment</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Selects a specific environment configuration</description>
+        </parameter>
+        <parameter>
+          <name>exportAll</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on exporting of all results</description>
+        </parameter>
+        <parameter>
+          <name>globalProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified global property values</description>
+        </parameter>
+        <parameter>
+          <name>host</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The host to use for requests</description>
+        </parameter>
+        <parameter>
+          <name>interactive</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Enabled interactive groovy scripts</description>
+        </parameter>
+        <parameter>
+          <name>junitReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on creation of reports in junit style</description>
+        </parameter>
+        <parameter>
+          <name>openReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on creation of reports in junit style</description>
+        </parameter>
+        <parameter>
+          <name>outputFolder</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Sets the output folder for reports</description>
+        </parameter>
+        <parameter>
+          <name>password</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The password to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>printReport</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Turns on printing of reports</description>
+        </parameter>
+        <parameter>
+          <name>projectFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The soapUI project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>projectPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapUI project file</description>
+        </parameter>
+        <parameter>
+          <name>projectProperties</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specified project property values</description>
+        </parameter>
+        <parameter>
+          <name>reportFormat</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Creates reports in specifoed formats</description>
+        </parameter>
+        <parameter>
+          <name>reportName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Creates named report</description>
+        </parameter>
+        <parameter>
+          <name>saveAfterRun</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Saves project file after running tests</description>
+        </parameter>
+        <parameter>
+          <name>settingsFile</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies soapUI settings file to use</description>
+        </parameter>
+        <parameter>
+          <name>settingsPassword</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapui-settings file</description>
+        </parameter>
+        <parameter>
+          <name>skip</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Tells TestRunner to skip tests</description>
+        </parameter>
+        <parameter>
+          <name>soapuiProperties</name>
+          <type>java.util.Properties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>SoapUI Properties.</description>
+        </parameter>
+        <parameter>
+          <name>testCase</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The TestCase to run project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>testFailIgnore</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Specifies password for encrypted soapui-settings file</description>
+        </parameter>
+        <parameter>
+          <name>testSuite</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The TestSuite to run project file to test with</description>
+        </parameter>
+        <parameter>
+          <name>username</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The username to use for authentication challenges</description>
+        </parameter>
+        <parameter>
+          <name>wssPasswordType</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The WSS password-type to use for any authentications. Setting this will
+result in the addition of WS-Security UsernamePassword tokens to any
+outgoing request containing the specified username and password. Set to
+either &apos;Text&apos; or &apos;Digest&apos;</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <!-- ######## SPECIFIC test-multi, added for #88 -->
+        <projectFiles implementation="java.util.List">${soapui.projectFiles}</projectFiles>
+        <!-- ######## END OF SPECIFIC test-multi, added for #88 -->
+        <!-- ######## SPECIFIC test-multi, added for #104 -->
+        <useOutputFolderPerProject implementation="boolean" default-value="false">${soapui.useOutputFolderPerProject}</useOutputFolderPerProject>
+        <!-- ######## END OF SPECIFIC test-multi, added for #104 -->
+        <!-- ######## CUSTOMIZED, added for #3 -->
+        <project implementation="org.apache.maven.project.MavenProject">${project}</project>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #14 -->
+        <runnerType implementation="java.lang.String">PRO</runnerType>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #38 -->
+        <testSuiteProperties implementation="org.ktc.soapui.maven.extension.impl.TestSuiteProperties">${soapui.testSuiteProperties}</testSuiteProperties>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #45 -->
+        <junitHtmlReport implementation="boolean">${soapui.junitHtmlReport}</junitHtmlReport>
+        <!-- ######## END OF CUSTOMIZED -->
+        <wssPasswordType implementation="java.lang.String">${soapui.wssPasswordType}</wssPasswordType>
+        <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
+        <printReport implementation="boolean">${soapui.printReport}</printReport>
+        <junitReport implementation="boolean">${soapui.junitReport}</junitReport>
+        <skip implementation="boolean">${soapui.skip}</skip>
+        <password implementation="java.lang.String">${soapui.password}</password>
+        <username implementation="java.lang.String">${soapui.username}</username>
+        <interactive implementation="boolean">${soapui.interactive}</interactive>
+        <exportAll implementation="boolean">${soapui.exportAll}</exportAll>
+        <projectFile implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectfile}</projectFile>
+        <reportFormat implementation="java.lang.String">${soapui.reportFormat}</reportFormat>
+        <domain implementation="java.lang.String">${soapui.domain}</domain>
+        <soapuiProperties implementation="java.util.Properties">${soapuiProperties}</soapuiProperties>
+        <testSuite implementation="java.lang.String">${soapui.testsuite}</testSuite>
+        <globalProperties implementation="java.lang.String[]">${soapui.globalProperties}</globalProperties>
+        <testCase implementation="java.lang.String">${soapui.testcase}</testCase>
+        <reportName implementation="java.lang.String">${soapui.reportName}</reportName>
+        <host implementation="java.lang.String">${soapui.host}</host>
+        <!-- ######## CUSTOMIZED, removed as marked as deprecated in the maven-soapui-pro-plugin
+        <coverageBuilder implementation="boolean">${soapui.createCoverage}</coverageBuilder>
+        ######## END OF CUSTOMIZED -->
+        <openReport implementation="boolean">${soapui.openReport}</openReport>
+        <testFailIgnore implementation="boolean">${soapui.testFailIgnore}</testFailIgnore>
+        <settingsPassword implementation="java.lang.String">${soapui.settingfFile.password}</settingsPassword>
+        <endpoint implementation="java.lang.String">${soapui.endpoint}</endpoint>
+        <saveAfterRun implementation="boolean">${soapui.saveAfterRun}</saveAfterRun>
+        <environment implementation="java.lang.String">${soapui.environment}</environment>
+        <projectPassword implementation="java.lang.String">${soapui.project.password}</projectPassword>
+        <coverage implementation="boolean">${soapui.coverage}</coverage>
+        <projectProperties implementation="java.lang.String[]">${soapui.projectProperties}</projectProperties>
+        <settingsFile implementation="java.lang.String">${soapui.settingsFile}</settingsFile>
+      </configuration>
+    </mojo>
+    <mojo>
       <goal>test-verify</goal>
       <description>Verify results of soapUI functional tests</description>
       <requiresDirectInvocation>false</requiresDirectInvocation>
@@ -566,7 +902,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>      
       </configuration>
     </mojo>
-    <!-- ######## END OF CUSTOMIZED -->
+    <!-- ######## END OF ONLY IN [maven-soapui-extension] -->
     <mojo>
       <goal>test</goal>
       <description>Runs soapUI functional tests</description>

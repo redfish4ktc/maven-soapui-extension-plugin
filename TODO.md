@@ -69,7 +69,8 @@ Here is a list of tasks/ideas that will be implemented in the future.
       - inform the users they should better use absolute path
       - document the issue for SmartBear implementation
   - plugin.xml: test goal should not declare a 'project' parameter, it should only be configured in the configuration section
-
+  - test-multi
+    - 1st implementation rely on plexus-utils (for the DirectoryScanner). See use of maven-shared-utils instead
 
 ### Documentation ###
 
