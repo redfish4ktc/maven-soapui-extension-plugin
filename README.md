@@ -21,7 +21,7 @@ maven-soapui-extension-plugin [![Buildhive Build Status](https://buildhive.cloud
 This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.
 For more information about how to use it, see the [wiki](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki).
 
-Last released version: [4.6.3.0](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
+Last released version: [4.6.3.1](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#wiki-changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
 
 
 Main features
@@ -45,7 +45,9 @@ Main features
     * the `junitHtmlReport` parameter lets disable junit html report generation when using the pro runner
     * the `runnerType` parameter lets choose to use the open source or pro runner 
     * the `testsuiteProperties` parameter lets override custom properties in test suites
-    * configure the JunitReportCollector to be able to modify xml junit files generation 
+    * configure the JunitReportCollector to be able to modify xml junit files generation
+  * `test-multi` additional goal
+    * [test-multi](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects) allows to run several projects in the same plugin execution. Choice of projects to be runned is done by scanning one or several directories and selecting which projects to include/exclude 
   * `test-verify` additional goal
     * [test-verify](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#test-verify) lets user run soapui tests, perform post processing tasks and then fail the build if some tests have failed. This is very usefull to run [multiple projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects)
 
@@ -84,7 +86,7 @@ Roadmap
 
 **Short term**
 
-* add a ```test-multi``` goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects). See the [related issue](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/88)
+* improve the ```test-multi``` goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects). See [opened issues](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues?labels=goal%3A%3Atest-multi&page=1&state=open)
 
 
 
