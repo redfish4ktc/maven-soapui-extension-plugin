@@ -1,0 +1,67 @@
+<!--
+~ Copyright 2014 Thomas Bouffard (redfish4ktc)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing,
+~ software distributed under the License is distributed on an
+~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~ KIND, either express or implied.  See the License for the
+~ specific language governing permissions and limitations
+~ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>soapui.bugs</groupId>
+    <artifactId>fix-dependencies-parent</artifactId>
+    <version>@project.version@</version>
+    <relativePath>../common.xml</relativePath>
+  </parent>
+  <artifactId>message-content-assertion-with-maven-plugin</artifactId>
+  <packaging>pom</packaging>
+
+  <properties>
+    <soapui_groupId>com.smartbear.soapui</soapui_groupId>
+    <soapui_artifactId>soapui-pro-maven-plugin</soapui_artifactId>
+    <soapui_version>4.6.4</soapui_version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>${soapui_groupId}</groupId>
+        <artifactId>${soapui_artifactId}</artifactId>
+        <version>${soapui_version}</version>
+        <configuration>
+          <projectFile>${soapui.project.file.with-mock.path}</projectFile>
+          <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
+          <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>soapui-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>soapui-start-mock</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>mock</goal>
+            </goals>
+            <configuration>
+              <noBlock>true</noBlock>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
