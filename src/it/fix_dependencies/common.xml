@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -24,9 +24,8 @@
     <relativePath>../common.xml</relativePath>
   </parent>
   <groupId>soapui.bugs</groupId>
-  <artifactId>groovy-parent</artifactId>
+  <artifactId>fix-dependencies-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
   
   <properties>
     <soapui.configuration.path>${basedir}/../soapui-conf</soapui.configuration.path>
