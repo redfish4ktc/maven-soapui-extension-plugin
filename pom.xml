@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2011-2013 Thomas Bouffard (redfish4ktc)
+~ Copyright 2011-2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.6.3.2-SNAPSHOT</version>
+  <version>4.6.4.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.</description>
@@ -66,7 +66,7 @@
     <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
-    <soapuiVersionCurrent>4.6.3</soapuiVersionCurrent>
+    <soapuiVersionCurrent>4.6.4</soapuiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <invokerProfile>defaultInvokerProfile</invokerProfile>
   </properties>
@@ -100,13 +100,19 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- fix for #85 / TODO remove when upgrading to 5.0.0 / Also restore enforcer plugin bannedDependencies configuration -->
+    <dependency>
+      <groupId>com.jgoodies</groupId>
+      <artifactId>forms</artifactId>
+      <version>1.0.7</version>
+    </dependency>
     <!-- prior 4.5.2 smartbear plugin pro version used commons-lang 2.5. Now, the 2.4 version is used and it does not contain reflection classes we need.
     So use commons-lang3 to get the classes and not mess soapui with version upgrade
     -->
     <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.1</version>
+        <version>3.3.1</version>
     </dependency>
     <!-- use regular maven coordinates (see #67) -->
     <dependency>
@@ -215,6 +221,8 @@
                   <includes>
                     <!-- starting from 4.6.1 support, this lib is now declared as dependency in the SmartBear pro plugin -->
                     <include>com.jgoodies:looks</include>
+                    <!-- Fix for #85 / TODO remove when upgrading to 5.0.0 -->
+                    <include>com.jgoodies:forms</include>
                   </includes>
                 </bannedDependencies>
               </rules>

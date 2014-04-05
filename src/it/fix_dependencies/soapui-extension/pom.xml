@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.bugs</groupId>
-    <artifactId>groovy-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>fix-dependencies-parent</artifactId>
+    <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
-  <artifactId>groovy-with-soapui-extension</artifactId>
+  <artifactId>fix-dependencies-in-soapui-extension</artifactId>
   <packaging>pom</packaging>  
 
   <build>
@@ -32,14 +32,16 @@
         <groupId>@project.groupId@</groupId>
         <artifactId>@project.artifactId@</artifactId>
         <version>@project.version@</version>
+        <configuration>
+          <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
+        </configuration>
         <executions>
           <execution>
-            <id>project-with-groovy</id>
+            <id>test-project-with-groovy</id>
             <phase>integration-test</phase>
             <configuration>
-              <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
               <projectFile>${soapui.project.file.path}</projectFile>
-              <outputFolder>${project.build.directory}/soapui/reports</outputFolder>
+              <outputFolder>${project.build.directory}/soapui/reports/groovy</outputFolder>
               <soapuiProperties>
                 <property>
                   <name>soapui.scripting.library</name>
@@ -50,6 +52,28 @@
             <goals>
               <goal>test</goal>
             </goals>
+          </execution>
+          <execution>
+            <id>test-project-with-message-content-assertion</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <outputFolder>${project.build.directory}/soapui/reports/message-content-assertion</outputFolder>
+              <projectFile>${soapui.project.file.with-mock.path}</projectFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>soapui-start-mock</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>mock</goal>
+            </goals>
+            <configuration>
+              <noBlock>true</noBlock>
+              <projectFile>${soapui.project.file.with-mock.path}</projectFile>
+            </configuration>
           </execution>
         </executions>
       </plugin>
