@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~ Copyright 2014 Thomas Bouffard (redfish4ktc)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing,
+~ software distributed under the License is distributed on an
+~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~ KIND, either express or implied.  See the License for the
+~ specific language governing permissions and limitations
+~ under the License.-->
+<con:soapui-project name="groovy-test-steps-with-success-and-failures" resourceRoot="" soapui-version="4.6.4" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="HelloWorldImplServiceSoapBinding" type="wsdl" bindingName="{http://mogul.com/}HelloWorldImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:basic.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:settings/>
+    <con:definitionCache type="TEXT" rootPart="file:basic.wsdl">
+      <con:part>
+        <con:url>file:basic.wsdl</con:url>
+        <con:content><![CDATA[<wsdl:definitions name="HelloWorldImplService" targetNamespace="http://mogul.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://mogul.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://mogul.com/">
+      <xsd:element name="sayHi" type="tns:sayHi"/>
+      <xsd:complexType name="sayHi">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="hi" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="sayHiResponse" type="tns:sayHiResponse"/>
+      <xsd:complexType name="sayHiResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="sayHiResponse">
+    <wsdl:part name="parameters" element="tns:sayHiResponse"/>
+  </wsdl:message>
+  <wsdl:message name="sayHi">
+    <wsdl:part name="parameters" element="tns:sayHi"/>
+  </wsdl:message>
+  <wsdl:portType name="HelloWorld">
+    <wsdl:operation name="sayHi">
+      <wsdl:input name="sayHi" message="tns:sayHi"/>
+      <wsdl:output name="sayHiResponse" message="tns:sayHiResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HelloWorldImplServiceSoapBinding" type="tns:HelloWorld">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sayHi">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sayHi">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sayHiResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HelloWorldImplService">
+    <wsdl:port name="HelloWorldImplPort" binding="tns:HelloWorldImplServiceSoapBinding">
+      <soap:address location="http://127.0.0.1:8088/mockHelloWorldImplServiceSoapBinding"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content>
+        <con:type>http://schemas.xmlsoap.org/wsdl/</con:type>
+      </con:part>
+    </con:definitionCache>
+    <con:endpoints>
+      <con:endpoint>http://127.0.0.1:8088/mockHelloWorld</con:endpoint>
+      <con:endpoint>http://does-not-exist/soapui-mock</con:endpoint>
+    </con:endpoints>
+    <con:operation isOneWay="false" action="" name="sayHi" bindingOperationName="sayHi" type="Request-Response" outputName="sayHiResponse" inputName="sayHi" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
+      <con:settings/>
+      <con:call name="Request 1">
+        <con:settings/>
+        <con:encoding>UTF-8</con:encoding>
+        <con:endpoint>http://127.0.0.1:8088/mockHelloWorld</con:endpoint>
+        <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mog="http://mogul.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mog:sayHi>
+         <!--Optional:-->
+         <hi>?</hi>
+      </mog:sayHi>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+        <con:credentials>
+          <con:authType>Global HTTP Settings</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:jmsPropertyConfig/>
+        <con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mogul.com/HelloWorld/sayHi"/>
+        <con:wsrmConfig version="1.2"/>
+      </con:call>
+    </con:operation>
+  </con:interface>
+  <con:testSuite name="Suite 1 (groovy only)">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 1 - Test 1" searchProperties="true" id="7f05dded-1798-43ce-a150-d74222a9ccd4">
+      <con:settings/>
+      <con:testStep type="groovy" name="groovy 1 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 1 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 2 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 2 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 1 - Test 2" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" id="99798808-09f4-4a64-b44b-5d0c6d427080">
+      <con:settings/>
+      <con:testStep type="groovy" name="groovy 1 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 1 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 2 (ko)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 2 ko");
+throw new AssertionError("Simulate error on Groovy 2");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 3 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 3 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 1 - Test 3" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" id="efd42ed4-4e6e-45b4-b552-a0bc346a0c84">
+      <con:settings/>
+      <con:testStep type="groovy" name="groovy 1 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 1 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 2 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 2 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 3 (ko)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 3 ko");
+throw new AssertionError("Simulate error on Groovy 3");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite name="Suite 2 (Groovy only)">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 2 - Test 1" searchProperties="true" id="7d357d30-271a-46b6-8a9a-e8aff345497e">
+      <con:settings/>
+      <con:testStep type="groovy" name="groovy 1 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 1 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 2 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 2 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 2 - Test 2 - no stop on step error" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" id="2764db8a-c88b-47bb-9aa3-2fc0273075cd">
+      <con:settings/>
+      <con:testStep type="groovy" name="groovy 1 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 1 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 2 (ko)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 2 ko");
+throw new AssertionError("Simulate error on Groovy 2");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 3 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 3 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 4 (ko)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 4 ko");
+throw new AssertionError("Simulate error on Groovy 4");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 5 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 5 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 2 - Test 3" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" id="5d543ded-e149-49b5-bfaf-35d7a3f9157f">
+      <con:settings/>
+      <con:testStep type="groovy" name="groovy 1 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 1 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 2 (ok)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 2 ok");</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="groovy 3 (ko)">
+        <con:settings/>
+        <con:config>
+          <script>log.info("Groovy 3 ko");
+throw new AssertionError("Simulate error on Groovy 3");</script>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite name="Suite 3 (SOAP)">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 3 - Test 1" searchProperties="true" id="6e7d83d8-236e-432d-9cca-1a22df8cf947">
+      <con:settings/>
+      <con:testStep type="request" name="connection failure">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HelloWorldImplServiceSoapBinding</con:interface>
+          <con:operation>sayHi</con:operation>
+          <con:request name="connection failure">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://does-not-exist/soapui-mock</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mog="http://mogul.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mog:sayHi>
+         <hi>Mickael</hi>
+      </mog:sayHi>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Suite 3 - Test 2" searchProperties="true" id="d0e4eb39-ac5d-474b-a645-bc531040a264" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
+      <con:settings/>
+      <con:testStep type="request" name="some assertions fail">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HelloWorldImplServiceSoapBinding</con:interface>
+          <con:operation>sayHi</con:operation>
+          <con:request name="some assertions fail">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://127.0.0.1:8088/mockHelloWorld</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mog="http://mogul.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mog:sayHi>
+         <hi>Mickael</hi>
+      </mog:sayHi>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains Nelson">
+              <con:configuration>
+                <token>&lt;response>Nelson&lt;/response></token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:assertion type="Simple NotContains" name="Not Contains Jackson">
+              <con:configuration>
+                <token>Jackson</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="assertions ok">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HelloWorldImplServiceSoapBinding</con:interface>
+          <con:operation>sayHi</con:operation>
+          <con:request name="assertions ok">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://127.0.0.1:8088/mockHelloWorld</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mog="http://mogul.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mog:sayHi>
+         <hi>Mickael</hi>
+      </mog:sayHi>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:mockService port="8088" path="/mockHelloWorld" host="localhost" name="MockService 1" bindToHostOnly="false" docroot="">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting>
+    </con:settings>
+    <con:mockOperation name="sayHi" interface="HelloWorldImplServiceSoapBinding" operation="sayHi">
+      <con:settings/>
+      <con:dispatchStyle>SEQUENCE</con:dispatchStyle>
+      <con:defaultResponse>Response 1</con:defaultResponse>
+      <con:response name="Response 1" encoding="UTF-8">
+        <con:settings/>
+        <con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mog="http://mogul.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mog:sayHiResponse>
+         <response>Jackson</response>
+      </mog:sayHiResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent>
+        <con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mogul.com/HelloWorld/sayHiResponse"/>
+      </con:response>
+      <con:dispatchConfig/>
+    </con:mockOperation>
+    <con:properties/>
+  </con:mockService>
+  <con:requirements/>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer/>
+  <con:sensitiveInformation/>
+</con:soapui-project>
