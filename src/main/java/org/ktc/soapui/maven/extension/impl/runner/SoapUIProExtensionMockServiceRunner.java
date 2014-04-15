@@ -19,6 +19,10 @@ package org.ktc.soapui.maven.extension.impl.runner;
 
 import com.eviware.soapui.SoapUIProMockServiceRunner;
 import com.eviware.soapui.impl.coverage.report.CoverageBuilder;
+import com.eviware.soapui.impl.wsdl.support.PathUtils;
+import com.eviware.soapui.model.ModelItem;
+import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
+import com.eviware.soapui.support.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRunner {
@@ -37,6 +41,22 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
         if (activate) {
             setCoverageBuilder(new CoverageBuilder());
         }
+    }
+    
+    // duplicated from SmartBear implementation has their pro mock runner defines its own outputFolder field that is
+    // then not used by this method
+    @Override
+    public String getAbsoluteOutputFolder(ModelItem modelItem) {
+        // use getter instead of calling the ouputFolder field directly
+        String folder = PropertyExpander.expandProperties(modelItem, getOutputFolder());
+
+        if (StringUtils.isNullOrEmpty(folder)) {
+            folder = PathUtils.getExpandedResourceRoot(modelItem);
+        } else if (PathUtils.isRelativePath(folder)) {
+            folder = PathUtils.resolveResourcePath(folder, modelItem);
+        }
+
+        return folder;
     }
 
     private void setCoverageBuilder(CoverageBuilder coverageBuilder) {
