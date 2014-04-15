@@ -17,7 +17,7 @@
 
 package org.ktc.soapui.maven.extension;
 
-import static org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
+import static org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
 
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import java.io.File;

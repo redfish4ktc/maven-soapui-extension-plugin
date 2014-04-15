@@ -29,7 +29,7 @@ public class SoapUIMockRunnerWrapper extends AbstractRunnerWrapper<SoapUIMockSer
         return new SoapUIMockRunnerWrapper(runner, runnerTypeEnum);
     }
 
-    public SoapUIMockRunnerWrapper(SoapUIMockServiceRunner runner, RunnerType runnerType) {
+    private SoapUIMockRunnerWrapper(SoapUIMockServiceRunner runner, RunnerType runnerType) {
         super(runner, runnerType);
     }
 

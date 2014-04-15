@@ -17,7 +17,9 @@
 
 package org.ktc.soapui.maven.extension;
 
-import static org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
+import static org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
+
+import org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper;
 
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -26,7 +28,6 @@ import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.TestSuiteProperties;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper;
 
 public class TestMojo extends AbstractSoapuiRunnerMojo {
     
