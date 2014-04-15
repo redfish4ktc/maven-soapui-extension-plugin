@@ -72,6 +72,12 @@ Here is a list of tasks/ideas that will be implemented in the future.
   - test-multi
     - 1st implementation rely on plexus-utils (for the DirectoryScanner). See use of maven-shared-utils instead
 
+## Custom runners implementation ##
+  - constructors without argument should call the super constructor with a `null` title parameter. Otherwise, a default name is used and a trace is displayed in the standard output. This currently only impacts unit tests because runner used in mojo are always built using a custom title
+  - warn: some pro runner may have only a constructor without argument
+
+
+
 ### Documentation ###
 
 **Tips page**
