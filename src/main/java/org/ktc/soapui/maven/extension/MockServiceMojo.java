@@ -24,10 +24,14 @@ import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceR
 import org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUIMockRunnerWrapper;
 
 public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
+    // already in smartbear implementation
     private String mockService;
     private String path;
     private String port;
     private boolean noBlock;
+
+    // custom maven-soapui-extension-plugin
+    private boolean coverageReport;
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
@@ -53,7 +57,7 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
 
         if (runnerWrapper.isProRunner()) {
             SoapUIProExtensionMockServiceRunner proRunner = (SoapUIProExtensionMockServiceRunner) runner;
-            proRunner.activateCoverageReport(false);
+            proRunner.activateCoverageReport(coverageReport);
         }
 
         try {
