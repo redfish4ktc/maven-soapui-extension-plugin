@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,20 @@ package org.ktc.soapui.maven.extension;
 import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.ktc.soapui.maven.extension.impl.RunnerType;
-import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceRunner;
+import org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUIMockRunnerWrapper;
 
 public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
     private String mockService;
     private String path;
     private String port;
     private boolean noBlock;
-    
+
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
-        SoapUIMockServiceRunner runner = runnerTypeEnum.newMockRunner();
+        SoapUIMockRunnerWrapper runnerWrapper = SoapUIMockRunnerWrapper.newSoapUIMockServiceRunner(runnerType);
+
+        SoapUIMockServiceRunner runner = runnerWrapper.getRunner();
         configureWithSharedParameters(runner);
 
         runner.setBlock(!noBlock);
@@ -47,6 +48,13 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         }
         runner.setSaveAfterRun(saveAfterRun);
 
+        // TODO manage this is superclass
+        // runner.setOutputFolder(mockService);
+
+        if (runnerWrapper.isProRunner()) {
+            SoapUIProExtensionMockServiceRunner proRunner = (SoapUIProExtensionMockServiceRunner) runner;
+            proRunner.activateCoverageReport(false);
+        }
 
         try {
             runner.run();
