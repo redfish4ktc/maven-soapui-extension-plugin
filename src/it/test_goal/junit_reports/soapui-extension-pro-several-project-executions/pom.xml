@@ -23,7 +23,7 @@
     <version>@project.version@</version>
     <relativePath>../common-soapui-extension.xml</relativePath>
   </parent>
-  <artifactId>test-oss-junitreport-with-complete-logs-setting</artifactId>
+  <artifactId>test-pro-junitreport-with-several-project-executions</artifactId>
   <packaging>pom</packaging>
 
   <build>
@@ -32,30 +32,30 @@
         <groupId>@project.groupId@</groupId>
         <artifactId>@project.artifactId@</artifactId>
         <configuration>
-          <projectFile>${soapui.configuration.path}/projects/test-steps-with-success-and-failures-soapui-project.xml</projectFile>
-          <runnerType>OSS</runnerType>
-          <!-- TODO check how this can work -->
-<!--           <globalProperties> -->
-<!--             <globalProperty>Complete Error Logs=true</globalProperty> -->
-<!--           </globalProperties> -->
-<!--           <settingsFile>${basedir}/local-soapui-settings.xml</settingsFile> -->
+          <junitHtmlReport>false</junitHtmlReport>
+          <runnerType>PRO</runnerType>
         </configuration>
         <executions>
           <execution>
-            <id>soapui-test</id>
+            <id>soapui-test-1</id>
             <phase>integration-test</phase>
             <goals>
               <goal>test</goal>
             </goals>
+            <configuration>
+              <outputFolder>${soapui_report_output_directory}/test1</outputFolder>
+              <projectFile>${soapui.project.success.1.file.path}</projectFile>
+            </configuration>
           </execution>
           <execution>
-            <id>soapui-start-mock</id>
-            <phase>pre-integration-test</phase>
+            <id>soapui-test-2</id>
+            <phase>integration-test</phase>
             <goals>
-              <goal>mock</goal>
+              <goal>test</goal>
             </goals>
             <configuration>
-              <noBlock>true</noBlock>
+              <outputFolder>${soapui_report_output_directory}/test2</outputFolder>
+              <projectFile>${soapui.project.fail.1.file.path}</projectFile>
             </configuration>
           </execution>
         </executions>
