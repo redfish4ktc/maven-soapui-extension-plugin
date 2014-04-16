@@ -66,8 +66,42 @@
         </executions>
       </plugin>
       <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <!-- TODO version must be defined in parent -->
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <phase>post-integration-test</phase>
+            <configuration>
+              <target>
+                <property name="soapui_html_report_directory" location="${project.build.directory}/soapui/html"/>
+                <mkdir dir="${soapui_html_report_directory}"/>
+                <junitreport todir="${soapui_html_report_directory}">
+                  <fileset dir="${soapui_report_output_directory}">
+                    <include name="TEST-*.xml"/>
+                  </fileset>
+                  <report format="frames" todir="${soapui_html_report_directory}"/>
+                </junitreport>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant-junit</artifactId>
+            <version>1.8.2</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <!-- TODO this should be defined in the reporting + usage of the site lifecycle -->
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
+        <!-- TODO version must be defined in parent -->
         <version>2.17</version>
         <configuration>
           <reportsDirectories>
