@@ -20,6 +20,7 @@ package org.ktc.soapui.maven.invoker.util;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.codehaus.plexus.util.FileUtils;
 
 public class CheckBuildLog {
@@ -73,6 +74,19 @@ public class CheckBuildLog {
         if (matchCount < 1) {
             logAndFail("FAILED! Did not find expected content in the log file: " + expectedContent);
         }
+    }
+
+    public void assertLogFileContainsOneOf(String... expected) {
+        log("Expect to find one of the following in the log file: " + ArrayUtils.toString(expected));
+        for (String string : expected) {
+            int matchCount = StringUtils.countMatches(logFileContent, string);
+            log("  Checking: " + string);
+            log("  Found " + matchCount + " occurences");
+            if (matchCount > 0) {
+                return;
+            }
+        }
+        logAndFail("FAILED! Did not find one of expected content in the log file");
     }
 
     public void assertLogFileDoesNotContain(String content) {
