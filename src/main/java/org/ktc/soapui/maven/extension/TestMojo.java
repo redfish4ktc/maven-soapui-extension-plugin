@@ -95,30 +95,15 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
         SoapUITestCaseRunner runner = runnerWrapper.getRunner();
         configureWithSharedParameters(runner, currentProjectFile);
 
-        if (endpoint != null) {
-            runner.setEndpoint(endpoint);
-        }
-        if (testSuite != null) {
-            runner.setTestSuite(testSuite);
-        }
-        if (testCase != null) {
-            runner.setTestCase(testCase);
-        }
-        if (username != null) {
-            runner.setUsername(username);
-        }
-        if (password != null) {
-            runner.setPassword(password);
-        }
-        if (wssPasswordType != null) {
-            runner.setWssPasswordType(wssPasswordType);
-        }
-        if (domain != null) {
-            runner.setDomain(domain);
-        }
-        if (host != null) {
-            runner.setHost(host);
-        }
+        runner.setEndpoint(endpoint);
+        runner.setTestSuite(testSuite);
+        runner.setTestCase(testCase);
+        runner.setUsername(username);
+        runner.setPassword(password);
+        runner.setWssPasswordType(wssPasswordType);
+        runner.setDomain(domain);
+        runner.setHost(host);
+
         configureOuputFolder(runner, currentProjectFile);
         runner.setPrintReport(printReport);
         runner.setExportAll(exportAll);
@@ -129,17 +114,13 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
 
         if(runnerWrapper.isProRunner()) {
             SoapUIProExtensionTestCaseRunner proRunner = (SoapUIProExtensionTestCaseRunner) runner;
-            if (environment != null) {
-                proRunner.setEnvironment(environment);
-            }
+            proRunner.setEnvironment(environment);
             proRunner.setJunitHtmlReport(junitHtmlReport);
             proRunner.setOpenReport(openReport);
             if (coverage) {
                 proRunner.initCoverageBuilder();
             }
-            if (reportName != null) {
-                proRunner.setReportName(reportName);
-            }
+            proRunner.setReportName(reportName);
             if (reportFormat != null) {
                 proRunner.setReportFormats(reportFormat.split(","));
             }
