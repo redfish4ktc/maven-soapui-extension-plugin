@@ -32,8 +32,6 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
 
     // custom maven-soapui-extension-plugin
     private boolean coverageReport;
-    // TODO manage this is superclass
-    private String outputFolder;
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {

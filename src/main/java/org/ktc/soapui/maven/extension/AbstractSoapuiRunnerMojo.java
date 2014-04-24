@@ -25,6 +25,7 @@ import org.apache.maven.plugin.MojoFailureException;
 public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
     // already in smartbear implementation
     private String[] globalProperties;
+    protected String outputFolder;
     protected String projectFile;
     private String projectPassword;
     private String[] projectProperties;
