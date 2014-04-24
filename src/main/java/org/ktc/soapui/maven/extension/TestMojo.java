@@ -109,7 +109,7 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
         runner.setExportAll(exportAll);
         runner.setJUnitReport(junitReport);
         runner.setEnableUI(interactive);
-        runner.setIgnoreError(true);
+        runner.setIgnoreError(true); // failure detection is delegated to the mojo (see above)
         runner.setSaveAfterRun(saveAfterRun);
 
         if(runnerWrapper.isProRunner()) {
