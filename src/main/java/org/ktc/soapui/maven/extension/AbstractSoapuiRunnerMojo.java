@@ -46,10 +46,6 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
             return;
         }
 
-        // TODO this is managed by the plugin.xml (default value) + all soapui runners
-        if (projectFile == null) {
-            throw new MojoExecutionException("soapui-project-file setting is required");
-        }
         performRunnerExecute();
     }
 
