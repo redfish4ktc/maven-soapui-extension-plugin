@@ -55,10 +55,7 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         if (runnerWrapper.isProRunner()) {
             SoapUIProExtensionMockServiceRunner proRunner = (SoapUIProExtensionMockServiceRunner) runner;
             proRunner.activateCoverageReport(coverageReport);
-            
-            getLog().warn("setting output foler: "  + outputFolder);
             proRunner.setOutputFolder(outputFolder);
-            getLog().warn("registered output foler: "  + proRunner.getOutputFolder() + " / from regular runner: " + runner.getOutputFolder());
         }
 
         try {
