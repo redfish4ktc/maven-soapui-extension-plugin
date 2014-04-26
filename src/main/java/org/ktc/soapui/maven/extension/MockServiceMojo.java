@@ -41,15 +41,9 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         configureWithSharedParameters(runner);
 
         runner.setBlock(!noBlock);
-        if (mockService != null) {
-            runner.setMockService(mockService);
-        }
-        if (path != null) {
-            runner.setPath(path);
-        }
-        if (port != null) {
-            runner.setPort(port);
-        }
+        runner.setMockService(mockService);
+        runner.setPath(path);
+        runner.setPort(port);
         runner.setSaveAfterRun(saveAfterRun);
 
         if (runnerWrapper.isProRunner()) {
