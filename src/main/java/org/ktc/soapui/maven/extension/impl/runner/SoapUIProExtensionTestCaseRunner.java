@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,6 +75,13 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
     @Override
     protected JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
         return ReportCollectorFactory.newReportCollector();
+    }
+
+    @Override
+    public void setEndpoint(String endpoint) {
+        if (endpoint != null) {
+            super.setEndpoint(endpoint);
+        }
     }
 
 }
