@@ -38,6 +38,7 @@ Main features
   * `convert-project` additional goal
     * [convert-project](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#convert-project) converts composite to standard projects or standard to composite projects
   * [`mock` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#mock-additional-parameters)
+    * add several parameters to activate and control the coverage report generation when using the pro runner
     * the `runnerType` parameter lets choose to use the open source or pro runner
   * `mock-as-war` additional goal
     * [mock-as-war](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/MockAsWarGoal) generates war file (and/or exploded war) that contains the mockservices defined in the SoapUi project as this can be done from the GUI
