@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,17 +36,10 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         configureWithSharedParameters(runner);
 
         runner.setBlock(!noBlock);
-        if (mockService != null) {
-            runner.setMockService(mockService);
-        }
-        if (path != null) {
-            runner.setPath(path);
-        }
-        if (port != null) {
-            runner.setPort(port);
-        }
+        runner.setMockService(mockService);
+        runner.setPath(path);
+        runner.setPort(port);
         runner.setSaveAfterRun(saveAfterRun);
-
 
         try {
             runner.run();
