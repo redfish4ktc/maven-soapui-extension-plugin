@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,41 +17,50 @@
 
 package org.ktc.soapui.maven.extension.impl.report;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.ktc.soapui.maven.extension.impl.report.ReportCollectorFactory.newReportCollector;
 
+import com.eviware.soapui.report.JUnitSecurityReportCollector;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.RestoreSystemProperties;
 
 public class ReportCollectorFactoryTest {
 
-    @Test
-    public void newReportCollectorWithNoSystemProperty() {
-        System.clearProperty("soapui.junit.reportCollector");
-        assertThat(newReportCollector()).isNotNull();
-    }
+    private static final Class<JUnitSecurityReportCollector> DEFAULT_COLLECTOR_CLASS = JUnitSecurityReportCollector.class;
+    private static final String REPORT_COLLECTOR_SYS_PROP = "soapui.junit.reportCollector";
+
+    @Rule
+    public final RestoreSystemProperties restoreSysProperties = new RestoreSystemProperties(REPORT_COLLECTOR_SYS_PROP);
 
     @Test
     public void newReportCollectorWithEmptySystemProperty() {
-        System.setProperty("soapui.junit.reportCollector", "");
-        assertThat(newReportCollector()).isNotNull();
+        System.setProperty(REPORT_COLLECTOR_SYS_PROP, "");
+        assertThat(newReportCollector()).isInstanceOf(DEFAULT_COLLECTOR_CLASS);
     }
-    
+
     @Test
     public void newReportCollectorWithNoSystemPropertyBlankValue() {
-        System.setProperty("soapui.junit.reportCollector", "  ");
-        assertThat(newReportCollector()).isNotNull();
+        System.setProperty(REPORT_COLLECTOR_SYS_PROP, "  ");
+        assertThat(newReportCollector()).isInstanceOf(DEFAULT_COLLECTOR_CLASS);
     }
 
     @Test
     public void newReportCollectorSystemPropertyReferenceBadClass() {
-        System.setProperty("soapui.junit.reportCollector", WrongReportCollector.class.getName());
-        assertThat(newReportCollector()).isNotNull();
+        System.setProperty(REPORT_COLLECTOR_SYS_PROP, WrongReportCollector.class.getName());
+        assertThat(newReportCollector()).isInstanceOf(DEFAULT_COLLECTOR_CLASS);
     }
 
     @Test
     public void newReportCollectorSystemPropertyReferenceReportCollectorExtension() {
-        System.setProperty("soapui.junit.reportCollector", NoOpReportCollector.class.getName());
+        System.setProperty(REPORT_COLLECTOR_SYS_PROP, NoOpReportCollector.class.getName());
         assertThat(newReportCollector()).isInstanceOf(NoOpReportCollector.class);
+    }
+
+    @Test
+    public void newReportCollectorWithNoSystemProperty() {
+        System.clearProperty(REPORT_COLLECTOR_SYS_PROP);
+        assertThat(newReportCollector()).isInstanceOf(DEFAULT_COLLECTOR_CLASS);
     }
 
     private static class WrongReportCollector {

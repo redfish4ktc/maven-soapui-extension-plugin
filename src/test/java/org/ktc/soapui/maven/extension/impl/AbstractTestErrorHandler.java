@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2011-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 import com.eviware.soapui.SoapUIProTestCaseRunner;
