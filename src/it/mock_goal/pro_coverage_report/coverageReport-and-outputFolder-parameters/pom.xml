@@ -47,6 +47,13 @@
               <goal>mock</goal>
             </goals>
           </execution>
+          <execution>
+            <id>soapui-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
     </plugins>
