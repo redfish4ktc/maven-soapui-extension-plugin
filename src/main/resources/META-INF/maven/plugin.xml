@@ -53,6 +53,24 @@
           <description></description>
         </parameter>
         <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #50 -->
+        <parameter>
+          <name>coverageReport</name>
+          <type>java.lang.Boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description></description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #51 -->
+        <parameter>
+          <name>outputFolder</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Sets the output folder for reports</description>
+        </parameter>
+        <!-- ######## END OF CUSTOMIZED -->
         <parameter>
           <name>globalProperties</name>
           <type>java.lang.String[]</type>
@@ -147,6 +165,12 @@
         <!-- ######## END OF CUSTOMIZED -->
         <!-- ######## CUSTOMIZED, added for #23 -->
         <runnerType implementation="java.lang.String">PRO</runnerType>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #50 -->
+        <coverageReport implementation="boolean">${soapui.coverageReport}</coverageReport>
+        <!-- ######## END OF CUSTOMIZED -->
+        <!-- ######## CUSTOMIZED, added for #51 -->
+        <outputFolder implementation="java.lang.String">${soapui.outputFolder}</outputFolder>
         <!-- ######## END OF CUSTOMIZED -->
         <port implementation="java.lang.String">${soapui.port}</port>
         <saveAfterRun implementation="boolean">${soapui.saveAfterRun}</saveAfterRun>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,16 +41,32 @@ public class CheckBuildLog {
         }
     }
 
+    // =================================================================================================================
+    // OUR RUNNER EXECUTION CHECKS
+    // =================================================================================================================
+
     public void assertOssTestRunnerHasBeenUsed() {
-        log("Check that the OSS runner has been used");
+        log("Check that the OSS test runner has been used");
         assertLogFileContains("INFO  [SoapUIExtensionTestCaseRunner]");
-        log("The OSS runner has been used");
+        log("The OSS test runner has been used");
     }
 
     public void assertProTestRunnerHasBeenUsed() {
         log("Check that the PRO test runner has been used");
         assertLogFileContains("INFO  [SoapUIProExtensionTestCaseRunner]");
         log("The PRO test runner has been used");
+    }
+
+    public void assertOssMockRunnerHasBeenUsed() {
+        log("Check that the OSS mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIMockServiceRunner]");
+        log("The OSS mock runner has been used");
+    }
+
+    public void assertProMockRunnerHasBeenUsed() {
+        log("Check that the PRO mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIProExtensionMockServiceRunner]");
+        log("The PRO mock runner has been used");
     }
 
     public void assertOssWarGeneratorHasBeenUsed() {
@@ -66,6 +82,58 @@ public class CheckBuildLog {
         // the pro generator does not log war generation complete :-(
         log("The PRO war generator has been used");
     }
+
+    // =================================================================================================================
+    // SERVLET DEPLOYMENT CHECKS
+    // =================================================================================================================
+
+    public void assertOssMockAsWarServletHasBeenDeployed() {
+        log("Check that the OSS MockAsWar Servlet has been deployed");
+        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarServlet initMockServiceParameters");
+        assertLogFileDoesNotContain("com.eviware.soapui.mockaswar.MockAsWarProServlet initMockServiceParameters");
+        log("The OSS MockAsWar Servlet has been deployed");
+    }
+
+    public void assertProMockAsWarServletHasBeenDeployed() {
+        log("Check that the PRO MockAsWar Servlet has been deployed");
+        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarServlet initMockServiceParameters");
+        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarProServlet initMockServiceParameters");
+        log("The PRO MockAsWar Servlet has been deployed");
+    }
+    
+    // =================================================================================================================
+    // SMARTBEAR RUNNER EXECUTION CHECKS
+    // =================================================================================================================
+
+    public void assertSmartBearOssTestRunnerHasBeenUsed() {
+        log("Check that the SmartBear OSS test runner has been used");
+        assertLogFileContains("INFO  [SoapUITestCaseRunner]");
+        log("The SmartBear OSS test runner has been used");
+    }
+    
+    public void assertSmartBearProTestRunnerHasBeenUsed() {
+        log("Check that the SmartBear PRO test runner has been used");
+        assertLogFileContains("INFO  [SoapUIProTestCaseRunner]");
+        log("The SmartBear PRO test runner has been used");
+    }
+
+    public void assertSmartBearOssWarGeneratorHasBeenUsed() {
+        log("Check that the SmartBear OSS war generator has been used");
+        assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] Creating WAR file with endpoint");
+        assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] WAR Generation complete");
+        log("The OSS war generator has been used");
+    }
+
+    public void assertSmartBearProWarGeneratorHasBeenUsed() {
+        log("Check that the SmartBear PRO war generator has been used");
+        assertLogFileContains("INFO  [SoapUIProMockAsWarGenerator] Creating WAR file with endpoint");
+        // the pro generator does not log war generation complete :-(
+        log("The PRO war generator has been used");
+    }
+
+    // =================================================================================================================
+    // GENERIC LOG CONTENT
+    // =================================================================================================================
 
     public void assertLogFileContains(String expectedContent) {
         log("Expect to find content in the log file: " + expectedContent);
@@ -98,45 +166,9 @@ public class CheckBuildLog {
         }
     }
 
-    public void assertOssMockAsWarServletHasBeenDeployed() {
-        log("Check that the OSS MockAsWar Servlet has been deployed");
-        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarServlet initMockServiceParameters");
-        assertLogFileDoesNotContain("com.eviware.soapui.mockaswar.MockAsWarProServlet initMockServiceParameters");
-        log("The OSS MockAsWar Servlet has been deployed");
-    }
-
-    public void assertProMockAsWarServletHasBeenDeployed() {
-        log("Check that the PRO MockAsWar Servlet has been deployed");
-        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarServlet initMockServiceParameters");
-        assertLogFileContains("com.eviware.soapui.mockaswar.MockAsWarProServlet initMockServiceParameters");
-        log("The PRO MockAsWar Servlet has been deployed");
-    }
-    
-    public void assertSmartBearOssTestRunnerHasBeenUsed() {
-        log("Check that the SmartBear OSS runner has been used");
-        assertLogFileContains("INFO  [SoapUITestCaseRunner]");
-        log("The SmartBear OSS runner has been used");
-    }
-    
-    public void assertSmartBearProTestRunnerHasBeenUsed() {
-        log("Check that the SmartBear PRO test runner has been used");
-        assertLogFileContains("INFO  [SoapUIProTestCaseRunner]");
-        log("The SmartBear PRO test runner has been used");
-    }
-
-    public void assertSmartBearOssWarGeneratorHasBeenUsed() {
-        log("Check that the SmartBear OSS war generator has been used");
-        assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] Creating WAR file with endpoint");
-        assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] WAR Generation complete");
-        log("The OSS war generator has been used");
-    }
-
-    public void assertSmartBearProWarGeneratorHasBeenUsed() {
-        log("Check that the SmartBear PRO war generator has been used");
-        assertLogFileContains("INFO  [SoapUIProMockAsWarGenerator] Creating WAR file with endpoint");
-        // the pro generator does not log war generation complete :-(
-        log("The PRO war generator has been used");
-    }
+    // =================================================================================================================
+    // UTILS
+    // =================================================================================================================
 
     private static void log(String message) {
         Check.log(getLogHeader(), message);
