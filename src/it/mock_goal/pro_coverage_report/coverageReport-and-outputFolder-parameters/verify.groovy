@@ -27,7 +27,7 @@ File noCoverageInBaseDirectory = new File(basedir, "coverage-frames.html");
 assertThat(noCoverageInBaseDirectory).doesNotExist();
 
 log("Verifying that coverage report files exist in the configured output directory");
-File file = new File(basedir, "target/soapui/coverage/coverage-frames.html");
+File file = new File(basedir, "target/soapui/mock-coverage/coverage-frames.html");
 assertThat(file).exists();
 
 return true;

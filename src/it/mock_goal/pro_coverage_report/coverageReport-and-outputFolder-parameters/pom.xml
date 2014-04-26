@@ -35,7 +35,6 @@
         <configuration>
           <coverageReport>true</coverageReport>
           <noBlock>true</noBlock>
-          <outputFolder>${project.build.directory}/soapui/coverage</outputFolder>
           <projectFile>${soapui.project.file.path}</projectFile>
           <settingsFile>${soapui.settings.empty.file.path}</settingsFile>
         </configuration>
@@ -46,6 +45,9 @@
             <goals>
               <goal>mock</goal>
             </goals>
+            <configuration>
+              <outputFolder>${project.build.directory}/soapui/mock-coverage</outputFolder>
+            </configuration>
           </execution>
           <execution>
             <id>soapui-test</id>
@@ -53,6 +55,10 @@
             <goals>
               <goal>test</goal>
             </goals>
+            <configuration>
+              <exportAll>true</exportAll>
+              <outputFolder>${project.build.directory}/soapui/test</outputFolder>
+            </configuration>
           </execution>
         </executions>
       </plugin>
