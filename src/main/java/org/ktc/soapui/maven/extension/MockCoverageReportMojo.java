@@ -15,21 +15,20 @@
  *
  */
 
-package org.ktc.soapui.maven.extension.impl.runner;
+package org.ktc.soapui.maven.extension;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.ktc.soapui.maven.extension.impl.report.coverage.CoverageBuilderHolderFactory.getCoverageBuilderHolder;
 
-import com.eviware.soapui.impl.coverage.report.CoverageBuilder;
-import org.junit.Test;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 
-public class SoapUIProExtensionMockServiceRunnerTest {
-    
-    @Test
-    public void activateCoverageReport()  {
-        SoapUIProExtensionMockServiceRunner runner = new SoapUIProExtensionMockServiceRunner(null);
-        CoverageBuilder coverageBuilder = new CoverageBuilder();
-        runner.setCoverageBuilder(coverageBuilder);
-        assertThat(runner.getCoverageBuilder()).isSameAs(coverageBuilder);
+public class MockCoverageReportMojo extends AbstractSoapuiMojo {
+
+    @Override
+    protected void performExecute() throws MojoExecutionException, MojoFailureException {
+        getLog().info("Running mock coverage report generation");
+        getCoverageBuilderHolder().exportReports();
+        getLog().info("Mock coverage report generation done");
     }
 
 }

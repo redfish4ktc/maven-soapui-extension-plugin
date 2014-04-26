@@ -17,6 +17,9 @@
 
 package org.ktc.soapui.maven.extension;
 
+import static org.ktc.soapui.maven.extension.impl.report.coverage.CoverageBuilderHolderFactory.getCoverageBuilderHolder;
+
+import com.eviware.soapui.impl.coverage.report.CoverageBuilder;
 import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -32,6 +35,9 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
 
     // custom maven-soapui-extension-plugin
     private boolean coverageReport;
+    // TODO find a better name
+    // do not forget to update integration tests directory names
+    private boolean coverageReportDelegated;
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
@@ -54,8 +60,15 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
 
         if (runnerWrapper.isProRunner()) {
             SoapUIProExtensionMockServiceRunner proRunner = (SoapUIProExtensionMockServiceRunner) runner;
-            proRunner.activateCoverageReport(coverageReport);
             proRunner.setOutputFolder(outputFolder);
+
+            if (coverageReport) {
+                proRunner.setCoverageBuilder(newCoverageBuilder());
+                // TODO improvement use adapter around the coverage builder to avoid duplicating the logic
+                // currently it is done in both the holder and the runner
+                // the runner should stay simple without having to know the coverage report is delegated
+                proRunner.setCoverageReportDelegated(coverageReportDelegated);
+            }
         }
 
         try {
@@ -65,4 +78,9 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
             throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
         }
     }
+
+    private CoverageBuilder newCoverageBuilder() {
+        return getCoverageBuilderHolder().newCoverageBuilder(outputFolder, coverageReportDelegated);
+    }
+
 }

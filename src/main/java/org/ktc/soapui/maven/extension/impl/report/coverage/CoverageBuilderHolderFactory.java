@@ -15,21 +15,15 @@
  *
  */
 
-package org.ktc.soapui.maven.extension.impl.runner;
+package org.ktc.soapui.maven.extension.impl.report.coverage;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+// TODO can we manage this with a maven component?
+public class CoverageBuilderHolderFactory {
 
-import com.eviware.soapui.impl.coverage.report.CoverageBuilder;
-import org.junit.Test;
+    private static final CoverageBuilderHolder instance = new CoverageBuilderHolder();
 
-public class SoapUIProExtensionMockServiceRunnerTest {
-    
-    @Test
-    public void activateCoverageReport()  {
-        SoapUIProExtensionMockServiceRunner runner = new SoapUIProExtensionMockServiceRunner(null);
-        CoverageBuilder coverageBuilder = new CoverageBuilder();
-        runner.setCoverageBuilder(coverageBuilder);
-        assertThat(runner.getCoverageBuilder()).isSameAs(coverageBuilder);
+    public static CoverageBuilderHolder getCoverageBuilderHolder() {
+        return instance;
     }
 
 }

@@ -15,21 +15,19 @@
  *
  */
 
-package org.ktc.soapui.maven.extension.impl.runner;
-
+import org.ktc.soapui.maven.invoker.util.*;
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.ktc.soapui.maven.invoker.util.Check.*;
 
-import com.eviware.soapui.impl.coverage.report.CoverageBuilder;
-import org.junit.Test;
+CheckBuildLog checker = new CheckBuildLog(basedir);
+checker.assertProMockRunnerHasBeenUsed();
 
-public class SoapUIProExtensionMockServiceRunnerTest {
-    
-    @Test
-    public void activateCoverageReport()  {
-        SoapUIProExtensionMockServiceRunner runner = new SoapUIProExtensionMockServiceRunner(null);
-        CoverageBuilder coverageBuilder = new CoverageBuilder();
-        runner.setCoverageBuilder(coverageBuilder);
-        assertThat(runner.getCoverageBuilder()).isSameAs(coverageBuilder);
-    }
+log("Verifying that coverage report files do not exist in the base directory");
+File noCoverageInBaseDirectory = new File(basedir, "coverage-frames.html");
+assertThat(noCoverageInBaseDirectory).doesNotExist();
 
-}
+log("Verifying that coverage report files exist in the configured output directory");
+File file = new File(basedir, "target/soapui/mock-coverage/coverage-frames.html");
+assertThat(file).exists();
+
+return true;

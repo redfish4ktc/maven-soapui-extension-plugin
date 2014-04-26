@@ -23,11 +23,16 @@ import com.eviware.soapui.impl.wsdl.support.PathUtils;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.support.StringUtils;
+import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.log4j.Logger;
 
 public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRunner {
+    
+    private static final Logger LOG = Logger.getLogger(SoapUIProExtensionMockServiceRunner.class);
 
     private static final String COVERAGE_BUILDER_FIELD_NAME = "c";
+    private boolean coverageReportDelegated;
 
     public SoapUIProExtensionMockServiceRunner() {
         super();
@@ -37,12 +42,6 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
         super(title);
     }
 
-    public void activateCoverageReport(boolean activate) {
-        if (activate) {
-            setCoverageBuilder(new CoverageBuilder());
-        }
-    }
-    
     // duplicated from SmartBear implementation has their pro mock runner defines its own outputFolder field that is
     // then not used by this method
     @Override
@@ -59,7 +58,7 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
         return folder;
     }
 
-    private void setCoverageBuilder(CoverageBuilder coverageBuilder) {
+    public void setCoverageBuilder(CoverageBuilder coverageBuilder) {
         try {
             FieldUtils.writeField(this, COVERAGE_BUILDER_FIELD_NAME, coverageBuilder, true);
         } catch (IllegalAccessException e) {
@@ -67,15 +66,27 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
         }
     }
 
-    public boolean isActivateCoverageBuilder() {
-        return getCoverageBuilder() != null;
-    }
-
-    private CoverageBuilder getCoverageBuilder() {
+    @VisibleForTesting
+    CoverageBuilder getCoverageBuilder() {
         try {
             return (CoverageBuilder) FieldUtils.readField(this, COVERAGE_BUILDER_FIELD_NAME, true);
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Unable to read field " + COVERAGE_BUILDER_FIELD_NAME, e);
+        }
+    }
+
+    public void setCoverageReportDelegated(boolean coverageReportDelegated) {
+        this.coverageReportDelegated = coverageReportDelegated;
+    }
+
+    @Override
+    protected void exportReports() {
+        if (!coverageReportDelegated) {
+            LOG.info("Export reports");
+            super.exportReports();
+        }
+        else {
+            LOG.info("Skip export reports as generation is delegated to an external task");
         }
     }
 
