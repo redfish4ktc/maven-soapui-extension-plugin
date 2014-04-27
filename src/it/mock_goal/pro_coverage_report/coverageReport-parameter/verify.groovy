@@ -16,7 +16,7 @@
  */
 
 import org.ktc.soapui.maven.invoker.util.*;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.ktc.soapui.maven.invoker.util.Check.*;
 
 CheckBuildLog checker = new CheckBuildLog(basedir);
