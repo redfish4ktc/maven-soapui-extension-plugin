@@ -157,6 +157,16 @@ public class CheckBuildLog {
         logAndFail("FAILED! Did not find one of expected content in the log file");
     }
 
+    public void assertLogFileContainsStrictly(String expectedContent, int expectedCount) {
+        log("Expect to find content " + expectedCount + " times in the log file. Content: " + expectedContent);
+        int matchCount = StringUtils.countMatches(logFileContent, expectedContent);
+        log("Found " + matchCount + " occurences");
+        if (matchCount != expectedCount) {
+            logAndFail("FAILED! Expect to find " + expectedCount + " times, found" + matchCount
+                    + " times. Expected content: " + expectedContent);
+        }
+    }
+
     public void assertLogFileDoesNotContain(String content) {
         log("Expect not to find content in the log file: " + content);
         int matchCount = StringUtils.countMatches(logFileContent, content);
