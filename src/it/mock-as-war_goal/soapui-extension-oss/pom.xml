@@ -23,7 +23,7 @@
     <version>@project.version@</version>
     <relativePath>../common-soapui-extension.xml</relativePath>
   </parent>
-  <artifactId>mock-as-war-soapui-extension-pro</artifactId>
+  <artifactId>mock-as-war-soapui-extension-oss</artifactId>
   <packaging>pom</packaging>  
 
   <properties>
