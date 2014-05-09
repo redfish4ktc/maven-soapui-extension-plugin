@@ -23,19 +23,19 @@ import static org.ktc.soapui.maven.invoker.util.Check.*;
 CheckBuildLog checker = new CheckBuildLog(basedir);
 checker.assertOssWarGeneratorHasBeenUsed();
 
-// will be possible when we will have set a default folder (see #123)
-//log("Verifying that exploded war has been created in the default folder");
-//File explodedWarDirectory = new File(basedir, "target/soapui/mock-as-war/explodedWar");
-//assertThat(explodedWarDirectory).exists();
+File buildDirectory = new File(basedir, "build");
+
+log("Verifying that exploded war has been created in the default folder");
+File explodedWarDirectory = new File(buildDirectory, "soapui/mock-as-war/explodedWar"); // we could also check header_logo.jpg
+assertThat(explodedWarDirectory).exists();
 
 log("Verifying that no war file has been generated");
 def foundWars = new ArrayList<String>()
-new File(basedir, "target").eachFileRecurse(FILES) {
+buildDirectory.eachFileRecurse(FILES) {
     if(it.name.endsWith('.war')) {
         foundWars.add("${it.absolutePath}");
     }
 }
 assertThat(foundWars).describedAs("Should not have found wars").isEmpty()
-
 
 return true;

@@ -24,9 +24,11 @@
     <relativePath>../common-no-jetty-deploy.xml</relativePath>
   </parent>
   <artifactId>mock-as-war-soapui-extension-oss-no-war-folder-parameters-set</artifactId>
-  <packaging>pom</packaging>  
+  <packaging>pom</packaging>
 
   <build>
+    <!-- build in a non default directory to be sure we haven't configure the default war folder with hard coded "target" value -->
+    <directory>${project.basedir}/build</directory>
     <plugins>
       <plugin>
         <groupId>@project.groupId@</groupId>
