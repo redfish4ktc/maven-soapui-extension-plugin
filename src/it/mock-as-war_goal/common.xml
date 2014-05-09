@@ -19,30 +19,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>common-it-parent</artifactId>
+    <artifactId>mock-as-war-goal-no-jetty-deploy</artifactId>
     <version>@project.version@</version>
-    <relativePath>../common.xml</relativePath>
+    <relativePath>common-no-jetty-deploy.xml</relativePath>
   </parent>
   <groupId>soapui.extension</groupId>
   <artifactId>mock-as-war-goal</artifactId>
   <packaging>pom</packaging>
   
   <properties>
-    <soapui.configuration.path>${basedir}/../_soapui_conf</soapui.configuration.path>
-    <soapui.project.file.path>${soapui.configuration.path}/test-mock-service-soapui-project.xml</soapui.project.file.path>
-    <soapui.settings.empty.file.path>${soapui.configuration.path}/empty-soapui-settings.xml</soapui.settings.empty.file.path>
-
-    <soapui.base.output.directory>${project.build.directory}/soapui</soapui.base.output.directory>
-    <soapui.output.directory>${soapui.base.output.directory}/reports</soapui.output.directory>
-    <soapui.log.directory>${soapui.base.output.directory}/test-logs/</soapui.log.directory>
-    <soapui.generation.dir>${soapui.base.output.directory}/generation</soapui.generation.dir>
-    <!-- put generated webapp in 2 differents tree to be sure our plugin creates subdirectories -->
-    <soapui.war.path.basedir>${soapui.generation.dir}/file/war/</soapui.war.path.basedir>
-    <soapui.war.path>${soapui.war.path.basedir}/${project.build.finalName}.war</soapui.war.path>
-    <soapui.war.exploded.path>${soapui.generation.dir}/war/exploded</soapui.war.exploded.path>
-    <soapui.host>localhost:${server.port}</soapui.host>    
-
-    <!-- COMMON CONFIGURATION -->
+    <!-- JETTY SERVER CONFIGURATION -->
     <server.port>9090</server.port>
     <server.stop.port>9091</server.stop.port>
   </properties>
