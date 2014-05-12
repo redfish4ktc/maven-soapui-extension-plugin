@@ -23,6 +23,6 @@ checker.assertProMockRunnerHasBeenUsed();
 
 // Groovy logs
 checker.assertLogFileContainsStrictly("INFO  [log] Starting mock services of project [test-mock-service]", 1);
-checker.assertLogFileContainsStrictly("INFO  [log] Starting mock services of project [test-mock-service-2]", 2); // bug, should appear only once
+checker.assertLogFileContainsStrictly("INFO  [log] Starting mock services of project [test-mock-service-2]", 1);
 
 return true;

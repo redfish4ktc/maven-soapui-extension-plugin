@@ -60,4 +60,9 @@ public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {
         }
     }
 
+    @Override
+    protected void initGroovyLog() {
+        // stubbed to prevent multiple appenders, groovy.log is configured in soapui-log4j.xml
+    }
+
 }

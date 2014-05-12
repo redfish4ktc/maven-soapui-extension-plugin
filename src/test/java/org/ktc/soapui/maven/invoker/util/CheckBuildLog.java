@@ -59,7 +59,7 @@ public class CheckBuildLog {
 
     public void assertOssMockRunnerHasBeenUsed() {
         log("Check that the OSS mock runner has been used");
-        assertLogFileContains("INFO  [SoapUIMockServiceRunner]");
+        assertLogFileContains("INFO  [SoapUIExtensionMockServiceRunner]");
         log("The OSS mock runner has been used");
     }
 
@@ -174,7 +174,7 @@ public class CheckBuildLog {
         int matchCount = StringUtils.countMatches(logFileContent, expectedContent);
         log("Found " + matchCount + " occurences");
         if (matchCount != expectedCount) {
-            logAndFail("FAILED! Expect to find " + expectedCount + " times, found" + matchCount
+            logAndFail("FAILED! Expect to find " + expectedCount + " times, found " + matchCount
                     + " times. Expected content: " + expectedContent);
         }
     }

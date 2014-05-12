@@ -42,7 +42,7 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
             setCoverageBuilder(new CoverageBuilder());
         }
     }
-    
+
     // duplicated from SmartBear implementation has their pro mock runner defines its own outputFolder field that is
     // then not used by this method
     @Override
@@ -77,6 +77,11 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Unable to read field " + COVERAGE_BUILDER_FIELD_NAME, e);
         }
+    }
+
+    @Override
+    protected void initGroovyLog() {
+        // stubbed to prevent multiple appenders, groovy.log is configured in soapui-log4j.xml
     }
 
 }

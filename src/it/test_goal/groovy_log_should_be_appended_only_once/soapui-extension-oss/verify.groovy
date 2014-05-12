@@ -28,6 +28,6 @@ checker.assertLogFileContains("Project [simple-sucess-2] finished with status [F
 
 // Groovy logs
 checker.assertLogFileContainsStrictly("INFO  [log] I am project 1 and I succeed", 1);
-checker.assertLogFileContainsStrictly("INFO  [log] I am project 2 and I succeed", 2); // bug, should appear only once
+checker.assertLogFileContainsStrictly("INFO  [log] I am project 2 and I succeed", 1);
 
 return true;
