@@ -117,6 +117,18 @@ public class CheckBuildLog {
         log("The SmartBear PRO test runner has been used");
     }
 
+    public void assertSmartBearOssMockRunnerHasBeenUsed() {
+        log("Check that the SmartBear OSS mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIMockServiceRunner]");
+        log("The SmartBear OSS mock runner has been used");
+    }
+
+    public void assertSmartBearProMockRunnerHasBeenUsed() {
+        log("Check that SmartBear the PRO mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIProMockServiceRunner]");
+        log("The SmartBear PRO mock runner has been used");
+    }
+
     public void assertSmartBearOssWarGeneratorHasBeenUsed() {
         log("Check that the SmartBear OSS war generator has been used");
         assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] Creating WAR file with endpoint");

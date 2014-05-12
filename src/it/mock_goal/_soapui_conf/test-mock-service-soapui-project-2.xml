@@ -13,7 +13,7 @@
 ~ KIND, either express or implied.  See the License for the
 ~ specific language governing permissions and limitations
 ~ under the License.-->
-<con:soapui-project activeEnvironment="Default" name="test-mock-service" resourceRoot="" soapui-version="4.6.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project activeEnvironment="Default" name="test-mock-service-2" resourceRoot="" soapui-version="4.6.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
   <con:settings/>
   <con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="HelloWorldImplServiceSoapBinding" type="wsdl" bindingName="{http://mogul.com/}HelloWorldImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:basic.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <con:settings/>
@@ -63,7 +63,7 @@
   </wsdl:binding>
   <wsdl:service name="HelloWorldImplService">
     <wsdl:port name="HelloWorldImplPort" binding="tns:HelloWorldImplServiceSoapBinding">
-      <soap:address location="http://127.0.0.1:8088/mockHelloWorldImplServiceSoapBinding"/>
+      <soap:address location="http://127.0.0.1:8089/mockHelloWorldImplServiceSoapBinding"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>]]></con:content>
@@ -71,14 +71,14 @@
       </con:part>
     </con:definitionCache>
     <con:endpoints>
-      <con:endpoint>http://127.0.0.1:8088/mockHelloWorld</con:endpoint>
+      <con:endpoint>http://127.0.0.1:8089/mockHelloWorld</con:endpoint>
     </con:endpoints>
     <con:operation isOneWay="false" action="" name="sayHi" bindingOperationName="sayHi" type="Request-Response" outputName="sayHiResponse" inputName="sayHi" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
       <con:settings/>
       <con:call name="Request 1">
         <con:settings/>
         <con:encoding>UTF-8</con:encoding>
-        <con:endpoint>http://127.0.0.1:8088/mockHelloWorld</con:endpoint>
+        <con:endpoint>http://127.0.0.1:8089/mockHelloWorld</con:endpoint>
         <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mog="http://mogul.com/">
    <soapenv:Header/>
    <soapenv:Body>
@@ -113,7 +113,7 @@
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
             </con:settings>
             <con:encoding>UTF-8</con:encoding>
-            <con:endpoint>http://127.0.0.1:8088/mockHelloWorld</con:endpoint>
+            <con:endpoint>http://127.0.0.1:8089/mockHelloWorld</con:endpoint>
             <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mog="http://mogul.com/">
    <soapenv:Header/>
    <soapenv:Body>
@@ -144,7 +144,7 @@
     </con:testCase>
     <con:properties/>
   </con:testSuite>
-  <con:mockService port="8088" path="/mockHelloWorld" host="127.0.0.1" name="HelloWorld MockService" bindToHostOnly="false" docroot="" faultMockOperation="sayHi">
+  <con:mockService port="8089" path="/mockHelloWorld" host="127.0.0.1" name="HelloWorld MockService" bindToHostOnly="false" docroot="" faultMockOperation="sayHi">
     <con:settings>
       <con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting>
     </con:settings>
@@ -166,7 +166,7 @@
       </con:response>
       <con:dispatchConfig/>
     </con:mockOperation>
-    <con:startScript>log.info 'Starting mock services of project [test-mock-service]'</con:startScript>
+    <con:startScript>log.info 'Starting mock services of project [test-mock-service-2]'</con:startScript>
     <con:properties/>
   </con:mockService>
   <con:properties/>
