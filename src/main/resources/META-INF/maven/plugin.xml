@@ -547,7 +547,7 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
       </parameters>
       <configuration>
         <enableWebUI          implementation="java.lang.Boolean" default-value="false">${soapui.enableWebUI}</enableWebUI>
-        <explodedWarDirectory implementation="java.io.File">${soapui.explodedWarDirectory}</explodedWarDirectory>
+        <explodedWarDirectory implementation="java.io.File" default-value="${project.build.directory}/soapui/mock-as-war/explodedWar">${soapui.explodedWarDirectory}</explodedWarDirectory>
         <project              implementation="org.apache.maven.project.MavenProject" default-value="${project}"/>    
         <projectFile          implementation="java.lang.String" default-value="${project.artifactId}-soapui-project.xml">${soapui.projectfile}</projectFile>
         <remoteRepos          implementation="java.util.List" default-value="${project.remoteProjectRepositories}"/>

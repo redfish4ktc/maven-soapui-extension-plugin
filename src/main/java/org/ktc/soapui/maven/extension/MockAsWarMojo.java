@@ -99,9 +99,11 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
             explodedWarDirectory.mkdirs();
             runner.setOutputFolder(explodedWarDirectory.getAbsolutePath());
 
-            // TODO needed as mockaswar generator does not create subdirectories
-            warFile.getParentFile().mkdirs();
-            runner.setWarFile(warFile.getAbsolutePath());
+            if (warFile != null) {
+                // TODO needed as mockaswar generator does not create subdirectories
+                warFile.getParentFile().mkdirs();
+                runner.setWarFile(warFile.getAbsolutePath());
+            }
 
             // specific configuration
              runner.setEnableWebUI(enableWebUI);
