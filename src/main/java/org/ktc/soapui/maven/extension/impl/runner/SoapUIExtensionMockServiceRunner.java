@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,17 +21,17 @@ import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 
 public class SoapUIExtensionMockServiceRunner extends SoapUIMockServiceRunner {
 
-	public SoapUIExtensionMockServiceRunner() {
+    public SoapUIExtensionMockServiceRunner() {
+        super();
+    }
 
-	}
-
-	public SoapUIExtensionMockServiceRunner(String title) {
-		super(title);
-	}
+    public SoapUIExtensionMockServiceRunner(String title) {
+        super(title);
+    }
 
     @Override
     protected void initGroovyLog() {
-    	//stubbed to prevent multiple appenders, groovy.log is configured in soapui-log4j.xml
+        // stubbed to prevent multiple appenders, groovy.log is configured in soapui-log4j.xml
     }
-    
+
 }
