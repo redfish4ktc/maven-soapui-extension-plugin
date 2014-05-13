@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-~ Copyright 2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -85,6 +85,7 @@
    <logger name="groovy.log">
      <level value="INFO" />
     <appender-ref ref="GLOBAL_GROOVY_LOG" />
+    <appender-ref ref="CONSOLE" />
    </logger>   
    <!-- =============== -->
    <!-- Loggers         -->

@@ -59,7 +59,7 @@ public class CheckBuildLog {
 
     public void assertOssMockRunnerHasBeenUsed() {
         log("Check that the OSS mock runner has been used");
-        assertLogFileContains("INFO  [SoapUIMockServiceRunner]");
+        assertLogFileContains("INFO  [SoapUIExtensionMockServiceRunner]");
         log("The OSS mock runner has been used");
     }
 
@@ -117,6 +117,18 @@ public class CheckBuildLog {
         log("The SmartBear PRO test runner has been used");
     }
 
+    public void assertSmartBearOssMockRunnerHasBeenUsed() {
+        log("Check that the SmartBear OSS mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIMockServiceRunner]");
+        log("The SmartBear OSS mock runner has been used");
+    }
+
+    public void assertSmartBearProMockRunnerHasBeenUsed() {
+        log("Check that SmartBear the PRO mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIProMockServiceRunner]");
+        log("The SmartBear PRO mock runner has been used");
+    }
+
     public void assertSmartBearOssWarGeneratorHasBeenUsed() {
         log("Check that the SmartBear OSS war generator has been used");
         assertLogFileContains("INFO  [SoapUIMockAsWarGenerator] Creating WAR file with endpoint");
@@ -155,6 +167,16 @@ public class CheckBuildLog {
             }
         }
         logAndFail("FAILED! Did not find one of expected content in the log file");
+    }
+
+    public void assertLogFileContainsStrictly(String expectedContent, int expectedCount) {
+        log("Expect to find content " + expectedCount + " times in the log file. Content: " + expectedContent);
+        int matchCount = StringUtils.countMatches(logFileContent, expectedContent);
+        log("Found " + matchCount + " occurences");
+        if (matchCount != expectedCount) {
+            logAndFail("FAILED! Expect to find " + expectedCount + " times, found " + matchCount
+                    + " times. Expected content: " + expectedContent);
+        }
     }
 
     public void assertLogFileDoesNotContain(String content) {

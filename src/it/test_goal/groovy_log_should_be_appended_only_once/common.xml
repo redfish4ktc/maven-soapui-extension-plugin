@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012 Thomas Bouffard (redfish4ktc)
+~ Copyright 2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -19,20 +19,17 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>soapui.extension</groupId>
-    <artifactId>common-it-parent</artifactId>
+    <artifactId>test-goal</artifactId>
     <version>@project.version@</version>
     <relativePath>../common.xml</relativePath>
   </parent>
   <groupId>soapui.extension</groupId>
-  <artifactId>mock-goal</artifactId>
+  <artifactId>test-goal-groovy-log-should-be-appended-only-once-parent</artifactId>
   <packaging>pom</packaging>
+  <version>@project.version@</version>
   
   <properties>
-    <soapui.configuration.path>${basedir}/../../_soapui_conf</soapui.configuration.path>
-    <soapui.project.file.path>${soapui.configuration.path}/test-mock-service-soapui-project.xml</soapui.project.file.path>
-    <soapui.project.2.file.path>${soapui.configuration.path}/test-mock-service-soapui-project-2.xml</soapui.project.2.file.path>
-    <soapui.project.composite.file.path>${soapui.configuration.path}/composite-project</soapui.project.composite.file.path>
-    <soapui.settings.empty.file.path>${soapui.configuration.path}/empty-soapui-settings.xml</soapui.settings.empty.file.path>
+    <soapui.config.output.directory>${project.build.directory}/soapui</soapui.config.output.directory>
   </properties>
 
 </project>

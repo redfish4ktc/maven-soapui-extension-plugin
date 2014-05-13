@@ -68,7 +68,9 @@ Main features
   * fix the 'groovy.log' bug, see the [logs](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#log-configuration) documentation
   * [`mock` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#mock)
     * make the 'skip' parameter work, see [#35](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/35)
-
+    * append groovy log messages only once in the console, see [#68](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/68)
+  * [`test` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#test)
+    * append groovy log messages only once in the console, see [#68](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/68) 
 
 **Tests**
 
