@@ -317,13 +317,13 @@
       </properties>
       <repositories>
         <repository>
-          <id>eviwareRepository</id>
+          <id>soapuiRepository</id>
           <url>http://www.soapui.org/repository/maven2</url>
         </repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
-          <id>eviwarePluginRepository</id>
+          <id>soapuiPluginRepository</id>
           <url>http://www.soapui.org/repository/maven2</url>
         </pluginRepository>
       </pluginRepositories>
