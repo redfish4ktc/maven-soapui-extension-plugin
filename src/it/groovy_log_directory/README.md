@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2013 Thomas Bouffard (redfish4ktc)
+~ Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -15,4 +15,5 @@
 ~ under the License.
 -->
 
-The issue exists in the SmartBear plugins (both OSS and PRO) at least from the 3.6.1 version.
+The issue exists in the SmartBear plugins (both OSS and PRO) at least from the 3.6.1 version to 4.6.4  
+It has been fixed in SoapUI 5.0.0
