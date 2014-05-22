@@ -89,7 +89,7 @@ Roadmap
 
 **Short term**
 
-* support SoapUI 5.0.0-beta and 5.0.0
+* support SoapUI 5.0.0
 * improve the ```test-multi``` goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects). See [opened issues](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues?labels=goal%3A%3Atest-multi&page=1&state=open)
 * provide a new `JunitReportCollector` to have more details about failures (steps, assertions) in the junit report. See [#42](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/42)
 
