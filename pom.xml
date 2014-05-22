@@ -217,6 +217,8 @@
                     <!-- remove ui support as in SmartBear plugins (see #75) -->
                     <exclude>com.jgoodies</exclude>
                     <exclude>teamdev</exclude>
+                    <!-- no license check, but has been needed for 5.0.0-beta (see #109) -->
+                    <exclude>license4j</exclude>
                   </excludes>
                   <includes>
                     <!-- starting from 4.6.1 support, this lib is now declared as dependency in the SmartBear pro plugin -->
