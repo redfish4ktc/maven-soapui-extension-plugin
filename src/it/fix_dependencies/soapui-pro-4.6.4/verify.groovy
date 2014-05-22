@@ -19,6 +19,9 @@ import org.ktc.soapui.maven.invoker.util.*;
 import static org.ktc.soapui.maven.invoker.util.Check.*;
 
 CheckBuildLog checker = new CheckBuildLog(basedir);
-checker.assertLogFileContains("A required class was missing while executing com.smartbear.soapui:soapui-pro-maven-plugin:4.6.4:mock: com/jgoodies/forms/builder/ButtonBarBuilder");
+checker.assertLogFileContainsOneOf(
+        "A required class was missing while executing com.smartbear.soapui:soapui-pro-maven-plugin:4.6.4:mock: com/jgoodies/forms/builder/ButtonBarBuilder", // maven 3
+        "java.lang.NoClassDefFoundError: com/jgoodies/forms/builder/ButtonBarBuilder" // maven 2.2.1
+        );
 
 return true;

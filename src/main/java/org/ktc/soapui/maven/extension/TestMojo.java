@@ -17,7 +17,7 @@
 
 package org.ktc.soapui.maven.extension;
 
-import static org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
+import static org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
 
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -26,7 +26,7 @@ import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.TestSuiteProperties;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUITestCaseRunnerWrapper;
+import org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper;
 
 public class TestMojo extends AbstractSoapuiRunnerMojo {
     
@@ -40,7 +40,6 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
     private String domain;
     private String host;
     private String endpoint;
-    protected String outputFolder;
     private boolean printReport;
     private boolean interactive;
     private boolean exportAll;
@@ -95,51 +94,32 @@ public class TestMojo extends AbstractSoapuiRunnerMojo {
         SoapUITestCaseRunner runner = runnerWrapper.getRunner();
         configureWithSharedParameters(runner, currentProjectFile);
 
-        if (endpoint != null) {
-            runner.setEndpoint(endpoint);
-        }
-        if (testSuite != null) {
-            runner.setTestSuite(testSuite);
-        }
-        if (testCase != null) {
-            runner.setTestCase(testCase);
-        }
-        if (username != null) {
-            runner.setUsername(username);
-        }
-        if (password != null) {
-            runner.setPassword(password);
-        }
-        if (wssPasswordType != null) {
-            runner.setWssPasswordType(wssPasswordType);
-        }
-        if (domain != null) {
-            runner.setDomain(domain);
-        }
-        if (host != null) {
-            runner.setHost(host);
-        }
+        runner.setEndpoint(endpoint);
+        runner.setTestSuite(testSuite);
+        runner.setTestCase(testCase);
+        runner.setUsername(username);
+        runner.setPassword(password);
+        runner.setWssPasswordType(wssPasswordType);
+        runner.setDomain(domain);
+        runner.setHost(host);
+
         configureOuputFolder(runner, currentProjectFile);
         runner.setPrintReport(printReport);
         runner.setExportAll(exportAll);
         runner.setJUnitReport(junitReport);
         runner.setEnableUI(interactive);
-        runner.setIgnoreError(true);
+        runner.setIgnoreError(true); // failure detection is delegated to the mojo (see above)
         runner.setSaveAfterRun(saveAfterRun);
 
         if(runnerWrapper.isProRunner()) {
             SoapUIProExtensionTestCaseRunner proRunner = (SoapUIProExtensionTestCaseRunner) runner;
-            if (environment != null) {
-                proRunner.setEnvironment(environment);
-            }
+            proRunner.setEnvironment(environment);
             proRunner.setJunitHtmlReport(junitHtmlReport);
             proRunner.setOpenReport(openReport);
             if (coverage) {
                 proRunner.initCoverageBuilder();
             }
-            if (reportName != null) {
-                proRunner.setReportName(reportName);
-            }
+            proRunner.setReportName(reportName);
             if (reportFormat != null) {
                 proRunner.setReportFormats(reportFormat.split(","));
             }

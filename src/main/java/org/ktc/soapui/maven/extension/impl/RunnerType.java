@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Thomas Bouffard (redfish4ktc)
+ * Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,14 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
-import com.eviware.soapui.SoapUIProMockServiceRunner;
 import com.eviware.soapui.tools.SoapUIMockAsWarGenerator;
 import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 import com.eviware.soapui.tools.SoapUIProMockAsWarGenerator;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionMockAsWarGenerator;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionMockServiceRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
+import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
 
 public enum RunnerType {
@@ -35,7 +36,7 @@ public enum RunnerType {
 
         @Override
         public SoapUIMockServiceRunner newMockRunner() {
-            return new SoapUIProMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
+            return new SoapUIProExtensionMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
         }
 
         @Override
@@ -58,7 +59,7 @@ public enum RunnerType {
 
         @Override
         public SoapUIMockServiceRunner newMockRunner() {
-            return new SoapUIMockServiceRunner("SoapUI Maven2 MockService Runner");
+            return new SoapUIExtensionMockServiceRunner("SoapUI Maven2 MockService Runner");
         }
 
         @Override

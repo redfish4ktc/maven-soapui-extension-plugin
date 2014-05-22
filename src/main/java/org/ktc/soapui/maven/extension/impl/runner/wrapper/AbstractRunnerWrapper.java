@@ -15,24 +15,17 @@
  *
  */
 
-package org.ktc.soapui.maven.extension.impl.runner;
+package org.ktc.soapui.maven.extension.impl.runner.wrapper;
 
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
+import com.eviware.soapui.tools.AbstractSoapUIRunner;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
-import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
-public class SoapUITestCaseRunnerWrapper {
+public abstract class AbstractRunnerWrapper<R extends AbstractSoapUIRunner> {
 
-    private SoapUITestCaseRunner runner;
+    private R runner;
     private RunnerType runnerType;
 
-    public static SoapUITestCaseRunnerWrapper newSoapUITestCaseRunnerWrapper(String runnerType) {
-        RunnerType runnerTypeEnum = EnumConverter.toRunnerType(runnerType);
-        SoapUITestCaseRunner runner = runnerTypeEnum.newTestRunner();
-        return new SoapUITestCaseRunnerWrapper(runner, runnerTypeEnum);
-    }
-
-    private SoapUITestCaseRunnerWrapper(SoapUITestCaseRunner runner, RunnerType runnerType) {
+    protected AbstractRunnerWrapper(R runner, RunnerType runnerType) {
         this.runner = runner;
         this.runnerType = runnerType;
     }
@@ -41,7 +34,7 @@ public class SoapUITestCaseRunnerWrapper {
         return runnerType.isProRunner();
     }
 
-    public SoapUITestCaseRunner getRunner() {
+    public R getRunner() {
         return runner;
     }
 

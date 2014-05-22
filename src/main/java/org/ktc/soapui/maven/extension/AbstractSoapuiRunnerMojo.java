@@ -17,6 +17,8 @@
 
 package org.ktc.soapui.maven.extension;
 
+import static org.apache.commons.lang3.ArrayUtils.nullToEmpty;
+
 import com.eviware.soapui.tools.AbstractSoapUIRunner;
 import java.util.Properties;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -25,6 +27,7 @@ import org.apache.maven.plugin.MojoFailureException;
 public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
     // already in smartbear implementation
     private String[] globalProperties;
+    protected String outputFolder;
     protected String projectFile;
     private String projectPassword;
     private String[] projectProperties;
@@ -43,9 +46,7 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
             getLog().info("SoapUI execution is skipped.");
             return;
         }
-        if (projectFile == null) {
-            throw new MojoExecutionException("soapui-project-file setting is required");
-        }
+
         performRunnerExecute();
     }
 
@@ -57,22 +58,17 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
 
     protected void configureWithSharedParameters(AbstractSoapUIRunner runner, String currentProjectFile) {
         runner.setProjectFile(currentProjectFile);
-        if (projectPassword != null) {
-            runner.setProjectPassword(projectPassword);
-        }
-        if (settingsFile != null) {
-            runner.setSettingsFile(settingsFile);
-        }
-        if (settingsPassword != null) {
-            runner.setSoapUISettingsPassword(settingsPassword);
-        }
-        if (globalProperties != null) {
-            runner.setGlobalProperties(globalProperties);
-        }
-        if (projectProperties != null) {
-            runner.setProjectProperties(projectProperties);
-        }
-        if (soapuiProperties != null && !soapuiProperties.isEmpty()) {
+        runner.setProjectPassword(projectPassword);
+        runner.setSettingsFile(settingsFile);
+        runner.setSoapUISettingsPassword(settingsPassword);
+        runner.setGlobalProperties(nullToEmpty(globalProperties));
+        runner.setProjectProperties(nullToEmpty(projectProperties));
+
+        initializeSystemProperties();
+    }
+
+    private void initializeSystemProperties() {
+        if (!isNullOrEmpty(soapuiProperties)) {
             for (Object keyObject : soapuiProperties.keySet()) {
                 String key = (String) keyObject;
                 getLog().info("Setting " + key + " value " + soapuiProperties.getProperty(key));
@@ -80,5 +76,9 @@ public abstract class AbstractSoapuiRunnerMojo extends AbstractSoapuiMojo {
             }
         }
     }
-    
+
+    private static boolean isNullOrEmpty(Properties props) {
+        return props == null || props.isEmpty();
+    }
+
 }

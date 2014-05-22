@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package org.ktc.soapui.maven.invoker.util;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.codehaus.plexus.util.FileUtils;
 
 public class CheckBuildLog {
@@ -40,16 +41,32 @@ public class CheckBuildLog {
         }
     }
 
+    // =================================================================================================================
+    // OUR RUNNER EXECUTION CHECKS
+    // =================================================================================================================
+
     public void assertOssTestRunnerHasBeenUsed() {
-        log("Check that the OSS runner has been used");
+        log("Check that the OSS test runner has been used");
         assertLogFileContains("INFO  [SoapUIExtensionTestCaseRunner]");
-        log("The OSS runner has been used");
+        log("The OSS test runner has been used");
     }
 
     public void assertProTestRunnerHasBeenUsed() {
         log("Check that the PRO test runner has been used");
         assertLogFileContains("INFO  [SoapUIProExtensionTestCaseRunner]");
         log("The PRO test runner has been used");
+    }
+
+    public void assertOssMockRunnerHasBeenUsed() {
+        log("Check that the OSS mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIExtensionMockServiceRunner]");
+        log("The OSS mock runner has been used");
+    }
+
+    public void assertProMockRunnerHasBeenUsed() {
+        log("Check that the PRO mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIProExtensionMockServiceRunner]");
+        log("The PRO mock runner has been used");
     }
 
     public void assertOssWarGeneratorHasBeenUsed() {
@@ -66,23 +83,9 @@ public class CheckBuildLog {
         log("The PRO war generator has been used");
     }
 
-    public void assertLogFileContains(String expectedContent) {
-        log("Expect to find content in the log file: " + expectedContent);
-        int matchCount = StringUtils.countMatches(logFileContent, expectedContent);
-        log("Found " + matchCount + " occurences");
-        if (matchCount < 1) {
-            logAndFail("FAILED! Did not find expected content in the log file: " + expectedContent);
-        }
-    }
-
-    public void assertLogFileDoesNotContain(String content) {
-        log("Expect not to find content in the log file: " + content);
-        int matchCount = StringUtils.countMatches(logFileContent, content);
-        log("Found " + matchCount + " occurences");
-        if (matchCount > 0) {
-            logAndFail("FAILED! Found unexpected content in the log file: " + content);
-        }
-    }
+    // =================================================================================================================
+    // SERVLET DEPLOYMENT CHECKS
+    // =================================================================================================================
 
     public void assertOssMockAsWarServletHasBeenDeployed() {
         log("Check that the OSS MockAsWar Servlet has been deployed");
@@ -98,16 +101,32 @@ public class CheckBuildLog {
         log("The PRO MockAsWar Servlet has been deployed");
     }
     
+    // =================================================================================================================
+    // SMARTBEAR RUNNER EXECUTION CHECKS
+    // =================================================================================================================
+
     public void assertSmartBearOssTestRunnerHasBeenUsed() {
-        log("Check that the SmartBear OSS runner has been used");
+        log("Check that the SmartBear OSS test runner has been used");
         assertLogFileContains("INFO  [SoapUITestCaseRunner]");
-        log("The SmartBear OSS runner has been used");
+        log("The SmartBear OSS test runner has been used");
     }
     
     public void assertSmartBearProTestRunnerHasBeenUsed() {
         log("Check that the SmartBear PRO test runner has been used");
         assertLogFileContains("INFO  [SoapUIProTestCaseRunner]");
         log("The SmartBear PRO test runner has been used");
+    }
+
+    public void assertSmartBearOssMockRunnerHasBeenUsed() {
+        log("Check that the SmartBear OSS mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIMockServiceRunner]");
+        log("The SmartBear OSS mock runner has been used");
+    }
+
+    public void assertSmartBearProMockRunnerHasBeenUsed() {
+        log("Check that SmartBear the PRO mock runner has been used");
+        assertLogFileContains("INFO  [SoapUIProMockServiceRunner]");
+        log("The SmartBear PRO mock runner has been used");
     }
 
     public void assertSmartBearOssWarGeneratorHasBeenUsed() {
@@ -123,6 +142,55 @@ public class CheckBuildLog {
         // the pro generator does not log war generation complete :-(
         log("The PRO war generator has been used");
     }
+
+    // =================================================================================================================
+    // GENERIC LOG CONTENT
+    // =================================================================================================================
+
+    public void assertLogFileContains(String expectedContent) {
+        log("Expect to find content in the log file: " + expectedContent);
+        int matchCount = StringUtils.countMatches(logFileContent, expectedContent);
+        log("Found " + matchCount + " occurences");
+        if (matchCount < 1) {
+            logAndFail("FAILED! Did not find expected content in the log file: " + expectedContent);
+        }
+    }
+
+    public void assertLogFileContainsOneOf(String... expected) {
+        log("Expect to find one of the following in the log file: " + ArrayUtils.toString(expected));
+        for (String string : expected) {
+            int matchCount = StringUtils.countMatches(logFileContent, string);
+            log("  Checking: " + string);
+            log("  Found " + matchCount + " occurences");
+            if (matchCount > 0) {
+                return;
+            }
+        }
+        logAndFail("FAILED! Did not find one of expected content in the log file");
+    }
+
+    public void assertLogFileContainsStrictly(String expectedContent, int expectedCount) {
+        log("Expect to find content " + expectedCount + " times in the log file. Content: " + expectedContent);
+        int matchCount = StringUtils.countMatches(logFileContent, expectedContent);
+        log("Found " + matchCount + " occurences");
+        if (matchCount != expectedCount) {
+            logAndFail("FAILED! Expect to find " + expectedCount + " times, found " + matchCount
+                    + " times. Expected content: " + expectedContent);
+        }
+    }
+
+    public void assertLogFileDoesNotContain(String content) {
+        log("Expect not to find content in the log file: " + content);
+        int matchCount = StringUtils.countMatches(logFileContent, content);
+        log("Found " + matchCount + " occurences");
+        if (matchCount > 0) {
+            logAndFail("FAILED! Found unexpected content in the log file: " + content);
+        }
+    }
+
+    // =================================================================================================================
+    // UTILS
+    // =================================================================================================================
 
     private static void log(String message) {
         Check.log(getLogHeader(), message);

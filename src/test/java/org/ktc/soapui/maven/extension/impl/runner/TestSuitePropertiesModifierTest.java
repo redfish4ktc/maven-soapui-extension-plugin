@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 
 package org.ktc.soapui.maven.extension.impl.runner;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.extractProperty;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.extractProperty;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.WsdlTestSuite;

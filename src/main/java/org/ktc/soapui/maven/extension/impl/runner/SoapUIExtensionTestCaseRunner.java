@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,18 @@ public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {
     @Override
     protected JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
         return ReportCollectorFactory.newReportCollector();
+    }
+
+    @Override
+    public void setEndpoint(String endpoint) {
+        if (endpoint != null) {
+            super.setEndpoint(endpoint);
+        }
+    }
+
+    @Override
+    protected void initGroovyLog() {
+        // stubbed to prevent multiple appenders, groovy.log is configured in soapui-log4j.xml
     }
 
 }

@@ -15,7 +15,7 @@
  *
  */
 
-import static org.fest.assertions.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 File baseOutputDirectory = new File(basedir, "target/soapui/ouput");
 assertThat(new File(baseOutputDirectory, "simple-sucess-2-soapui-project")).describedAs("No subdirectory created in the configured outputFolder")
