@@ -54,6 +54,7 @@
             </goals>
           </execution>
           <execution>
+            <!-- in old implementation, message content assertion required additional dependency, see #85 -->
             <id>test-project-with-message-content-assertion</id>
             <phase>integration-test</phase>
             <goals>

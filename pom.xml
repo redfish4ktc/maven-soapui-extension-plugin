@@ -106,12 +106,6 @@
       <version>1.5.0</version>
       <scope>test</scope>
     </dependency>
-    <!-- fix for #85 / TODO remove when upgrading to 5.0.0 / Also restore enforcer plugin bannedDependencies configuration -->
-    <dependency>
-      <groupId>com.jgoodies</groupId>
-      <artifactId>forms</artifactId>
-      <version>1.0.7</version>
-    </dependency>
     <!-- prior 4.5.2 smartbear plugin pro version used commons-lang 2.5. Now, the 2.4 version is used and it does not contain reflection classes we need.
     So use commons-lang3 to get the classes and not mess soapui with version upgrade
     -->
@@ -227,8 +221,6 @@
                   <includes>
                     <!-- starting from 4.6.1 support, this lib is now declared as dependency in the SmartBear pro plugin -->
                     <include>com.jgoodies:looks</include>
-                    <!-- Fix for #85 / TODO remove when upgrading to 5.0.0 -->
-                    <include>com.jgoodies:forms</include>
                   </includes>
                 </bannedDependencies>
               </rules>
