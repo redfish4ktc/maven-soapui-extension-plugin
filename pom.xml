@@ -94,9 +94,15 @@
       <artifactId>soapui-pro-maven-plugin</artifactId>
       <version>${soapuiVersionCurrent}</version>
       <exclusions>
+        <!-- use regular maven coordinates (see #67) -->
         <exclusion>
           <groupId>jasperreports</groupId>
           <artifactId>jasperreports</artifactId>
+        </exclusion>
+        <!-- make it as optional in our implementation (see #125) -->
+        <exclusion>
+          <groupId>javafx</groupId>
+          <artifactId>jfxrt</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -216,7 +222,10 @@
                     <exclude>jasperreports</exclude>
                     <!-- remove ui support as in SmartBear plugins (see #75) -->
                     <exclude>com.jgoodies</exclude>
+                    <!-- for embedded browser only in pre 5.0.0 versions -->
                     <exclude>teamdev</exclude>
+                    <!-- make it as optional in our implementation (see #125) -->
+                    <exclude>javafx</exclude>
                     <!-- no license check, but has been needed for 5.0.0-beta (see #109) -->
                     <exclude>license4j</exclude>
                   </excludes>
@@ -347,6 +356,9 @@
               <projectsDirectory>src/it</projectsDirectory>
               <cloneClean>true</cloneClean>
               <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+              <setupIncludes>
+                <setupInclude>_setup/**/pom.xml</setupInclude>
+              </setupIncludes>
               <pomIncludes>
                 <pomInclude>**/pom.xml</pomInclude>
               </pomIncludes>

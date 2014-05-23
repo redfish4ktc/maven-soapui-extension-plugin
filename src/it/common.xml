@@ -18,14 +18,44 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.github.redfish4ktc.parent</groupId>
-    <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>6</version>
+    <groupId>soapui.extension</groupId>
+    <artifactId>base-it-parent</artifactId>
+    <version>@project.version@</version>
+    <relativePath>./base.xml</relativePath>
   </parent>
-  <groupId>soapui.extension</groupId>
   <artifactId>common-it-parent</artifactId>
   <packaging>pom</packaging>
-  <version>@project.version@</version>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.smartbear.soapui</groupId>
+          <artifactId>soapui-pro-maven-plugin</artifactId>
+          <version>@soapuiVersionCurrent@</version>
+          <dependencies>
+            <dependency>
+              <groupId>javafx</groupId>
+              <artifactId>jfxrt</artifactId>
+              <version>99-empty-SNAPSHOT</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>com.smartbear.soapui</groupId>
+          <artifactId>soapui-maven-plugin</artifactId>
+          <version>@soapuiVersionCurrent@</version>
+          <dependencies>
+            <dependency>
+              <groupId>javafx</groupId>
+              <artifactId>jfxrt</artifactId>
+              <version>99-empty-SNAPSHOT</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
   
   <profiles>
     <profile>
