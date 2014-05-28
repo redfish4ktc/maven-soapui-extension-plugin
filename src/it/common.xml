@@ -28,6 +28,11 @@
 
   <build>
     <pluginManagement>
+      <!-- Note on the javafx workaround (see #125)
+      the empty jar is installed in the local repo (by a setup project) but maven 3 won't use it as it is not retrieved using a remote repository
+      As I do not want to run tests with new maven 3 -Dmaven.legacyLocalRepo=true (could hide side effects), I use the systemPath configure to the
+      local repository where the javafx jar has been previously installed
+      -->
       <plugins>
         <plugin>
           <groupId>com.smartbear.soapui</groupId>
@@ -37,7 +42,9 @@
             <dependency>
               <groupId>javafx</groupId>
               <artifactId>jfxrt</artifactId>
-              <version>99-empty-SNAPSHOT</version>
+              <version>99-empty</version>
+              <scope>system</scope>
+              <systemPath>@localRepository@/javafx/jfxrt/99-empty/jfxrt-99-empty.jar</systemPath>
             </dependency>
           </dependencies>
         </plugin>
@@ -49,7 +56,9 @@
             <dependency>
               <groupId>javafx</groupId>
               <artifactId>jfxrt</artifactId>
-              <version>99-empty-SNAPSHOT</version>
+              <version>99-empty</version>
+              <scope>system</scope>
+              <systemPath>@localRepository@/javafx/jfxrt/99-empty/jfxrt-99-empty.jar</systemPath>
             </dependency>
           </dependencies>
         </plugin>
