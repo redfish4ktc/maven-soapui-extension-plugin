@@ -49,6 +49,13 @@
       <groupId>${soapui.groupId}</groupId>
       <artifactId>${soapui.dependency.artifactId}</artifactId>
       <version>${soapui.version}</version>
+      <exclusions>
+        <!-- workaround for #125 -->
+        <exclusion>
+          <groupId>javafx</groupId>
+          <artifactId>jfxrt</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 
@@ -131,7 +138,7 @@
                 <!-- to be sure it works on linux -->
                 <mkdir dir="${soapui.home.fake}" />
                 <mkdir dir="${soapui.home.lib}" />
-                </target>
+              </target>
             </configuration>
           </execution>     
           <execution>
@@ -181,6 +188,14 @@
             <groupId>${soapui.groupId}</groupId>
             <artifactId>${soapui.dependency.artifactId}</artifactId>
             <version>${soapui.version}</version>
+          </dependency>
+          <!-- workaround for #125 -->
+          <dependency>
+            <groupId>javafx</groupId>
+            <artifactId>jfxrt</artifactId>
+            <version>99-empty</version>
+            <scope>system</scope>
+            <systemPath>@localRepository@/javafx/jfxrt/99-empty/jfxrt-99-empty.jar</systemPath>
           </dependency>
         </dependencies>
       </plugin>

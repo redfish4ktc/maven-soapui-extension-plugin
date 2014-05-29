@@ -18,41 +18,52 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.github.redfish4ktc.parent</groupId>
-    <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>6</version>
+    <groupId>soapui.extension</groupId>
+    <artifactId>base-it-parent</artifactId>
+    <version>@project.version@</version>
+    <relativePath>./base.xml</relativePath>
   </parent>
-  <groupId>soapui.extension</groupId>
   <artifactId>common-it-parent</artifactId>
   <packaging>pom</packaging>
-  <version>@project.version@</version>
-  
-  <profiles>
-    <profile>
-      <id>defaultInvokerProfile</id>
-       <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-    </profile>
-    <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
-    <profile>
-      <id>declareRepositories</id>
-       <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>soapuiRepository</id>
-          <url>http://www.soapui.org/repository/maven2</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>soapuiPluginRepository</id>
-          <url>http://www.soapui.org/repository/maven2</url>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
-  </profiles>
+
+  <build>
+    <pluginManagement>
+      <!-- Note on the javafx workaround (see #125)
+      the empty jar is installed in the local repo (by a setup project) but maven 3 won't use it as it is not retrieved using a remote repository
+      As I do not want to run tests with new maven 3 -Dmaven.legacyLocalRepo=true (could hide side effects), I use the systemPath configure to the
+      local repository where the javafx jar has been previously installed
+      -->
+      <plugins>
+        <plugin>
+          <groupId>com.smartbear.soapui</groupId>
+          <artifactId>soapui-pro-maven-plugin</artifactId>
+          <version>@soapuiVersionCurrent@</version>
+          <dependencies>
+            <dependency>
+              <groupId>javafx</groupId>
+              <artifactId>jfxrt</artifactId>
+              <version>99-empty</version>
+              <scope>system</scope>
+              <systemPath>@localRepository@/javafx/jfxrt/99-empty/jfxrt-99-empty.jar</systemPath>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>com.smartbear.soapui</groupId>
+          <artifactId>soapui-maven-plugin</artifactId>
+          <version>@soapuiVersionCurrent@</version>
+          <dependencies>
+            <dependency>
+              <groupId>javafx</groupId>
+              <artifactId>jfxrt</artifactId>
+              <version>99-empty</version>
+              <scope>system</scope>
+              <systemPath>@localRepository@/javafx/jfxrt/99-empty/jfxrt-99-empty.jar</systemPath>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>

@@ -1,0 +1,59 @@
+<!--
+~ Copyright 2014 Thomas Bouffard (redfish4ktc)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing,
+~ software distributed under the License is distributed on an
+~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~ KIND, either express or implied.  See the License for the
+~ specific language governing permissions and limitations
+~ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.github.redfish4ktc.parent</groupId>
+    <artifactId>redfish4ktc-maven-oss-parent</artifactId>
+    <version>6</version>
+  </parent>
+  <groupId>soapui.extension</groupId>
+  <artifactId>base-it-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>@project.version@</version>
+  <description>Base pom, shared even by setup projects</description>
+
+  <profiles>
+    <profile>
+      <id>defaultInvokerProfile</id>
+       <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+    </profile>
+    <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
+    <profile>
+      <id>declareRepositories</id>
+       <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>soapuiRepository</id>
+          <url>http://www.soapui.org/repository/maven2</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>soapuiPluginRepository</id>
+          <url>http://www.soapui.org/repository/maven2</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+</project>
