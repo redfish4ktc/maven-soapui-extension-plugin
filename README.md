@@ -21,7 +21,8 @@ maven-soapui-extension-plugin [![Buildhive Build Status](https://buildhive.cloud
 This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.
 For more information about how to use it, see the [wiki](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki).
 
-Last released version: [4.6.4.1](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
+Last released version: [4.6.4.1](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)   
+Next release will provide support for SoapUI 5.0.0
 
 
 Main features
@@ -64,8 +65,8 @@ Main features
 
 **Bug fixes**
 
-  * starting from soapui 3.6.1, almost all SmartBear plugin versions have missing dependencies. This is fixed in maven-soapui-extension-plugin
-  * fix the 'groovy.log' bug, see the [logs](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#log-configuration) documentation
+  * Almost all SmartBear plugin versions have missing dependencies. This is fixed in maven-soapui-extension-plugin, see the [wiki](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/DependencyIssues) for more details
+  * Always fix the 'groovy.log' bug (only fixed as of version 5.0.0 in SmartBear implementation), see the [logs](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#log-configuration) documentation
   * [`mock` goal](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals#mock)
     * make the 'skip' parameter work, see [#35](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/35)
     * append groovy log messages only once in the console, see [#68](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/68)
@@ -89,7 +90,6 @@ Roadmap
 
 **Short term**
 
-* support SoapUI 5.0.0-beta and 5.0.0
 * improve the ```test-multi``` goal to run [multiple soapui projects](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/TestGoalMultipleProjects). See [opened issues](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues?labels=goal%3A%3Atest-multi&page=1&state=open)
 * provide a new `JunitReportCollector` to have more details about failures (steps, assertions) in the junit report. See [#42](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/42)
 
@@ -110,7 +110,7 @@ Roadmap
 Supported java and maven versions
 ============
   * maven 2.2.1, 3.0.x (tested with 3.0.4 and 3.0.5), 3.1.x (tested with 3.1.0 and 3.1.1) and 3.2.1
-  * java 6 and 7 (soapui needs java 6+ starting from 4.0.0), java 8 experimental support
+  * java 6 and 7 (soapui needs java 6+ starting from 4.0.0), java 8 experimental support (SoapUI should officially support Java 8 in 5.1.x version)
 
 
   
