@@ -1,0 +1,108 @@
+<!--
+  ~ Copyright 2014 Thomas Bouffard (redfish4ktc)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>soapui.extension</groupId>
+    <artifactId>test-junit-report-improvements-common</artifactId>
+    <version>@project.version@</version>
+    <relativePath>../common-soapui-extension.xml</relativePath>
+  </parent>
+  <artifactId>test-oss-junitreport-with-complete-logs-setting</artifactId>
+  <packaging>pom</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>@project.groupId@</groupId>
+        <artifactId>@project.artifactId@</artifactId>
+        <configuration>
+          <projectFile>${soapui.configuration.path}/projects/test-steps-with-success-and-failures-soapui-project.xml</projectFile>
+          <runnerType>OSS</runnerType>
+          <!-- TODO check how this can work -->
+<!--           <globalProperties> -->
+<!--             <globalProperty>Complete Error Logs=true</globalProperty> -->
+<!--           </globalProperties> -->
+<!--           <settingsFile>${basedir}/local-soapui-settings.xml</settingsFile> -->
+        </configuration>
+        <executions>
+          <execution>
+            <id>soapui-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>soapui-start-mock</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>mock</goal>
+            </goals>
+            <configuration>
+              <noBlock>true</noBlock>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>post-integration-test</phase>
+            <configuration>
+              <target>
+                <property name="soapui_html_report_directory" location="${project.build.directory}/soapui/html"/>
+                <mkdir dir="${soapui_html_report_directory}"/>
+                <junitreport todir="${soapui_html_report_directory}">
+                  <fileset dir="${soapui_report_output_directory}">
+                    <include name="**/TEST-*.xml"/>
+                  </fileset>
+                  <report format="frames" todir="${soapui_html_report_directory}"/>
+                </junitreport>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- TODO this should be defined in the reporting + usage of the site lifecycle -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <configuration>
+          <reportsDirectories>
+            <reportDirectory>${soapui_report_output_directory}</reportDirectory>
+          </reportsDirectories>
+        </configuration>
+        <executions>
+          <execution>
+            <id>surefire-report</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>report-only</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -29,6 +29,7 @@
   
   <properties>
     <soapui.configuration.path>${basedir}/../../_soapui_conf</soapui.configuration.path>
+    <soapui.project.fail.1.file.path>${soapui.configuration.path}/projects/simple-fail-1-soapui-project.xml</soapui.project.fail.1.file.path>
     <soapui.project.success.1.file.path>${soapui.configuration.path}/projects/simple-sucess-1-soapui-project.xml</soapui.project.success.1.file.path>
     <soapui.project.success.2.file.path>${soapui.configuration.path}/projects/simple-sucess-2-soapui-project.xml</soapui.project.success.2.file.path>
     <soapui.settings.empty.file.path>${soapui.configuration.path}/settings/empty-soapui-settings.xml</soapui.settings.empty.file.path>
