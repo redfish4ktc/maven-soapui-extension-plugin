@@ -15,7 +15,7 @@
  *
  */
 
-package com.eviware.soapui.report;
+package org.ktc.soapui.maven.extension.impl.report;
 
 import com.eviware.soapui.model.testsuite.Assertable;
 import com.eviware.soapui.model.testsuite.TestAssertion;
@@ -25,19 +25,18 @@ import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
+import com.eviware.soapui.report.JUnitSecurityReportCollector;
 import com.eviware.soapui.support.xml.XmlUtils;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.log4j.Logger;
 
 // TODO for multi projects, could be nice to prefix testsuite by the name of the project
 // could be done in a subclass or with an option (see http://blog.infostretch.com/customizing-soapui-reports)
-// TODO move in a regular package
-// currently in eviware package to let the class access to the package protected failures field for instance
-// warn, update integration tests
 // TODO modify log level used to debug
 // TODO use stringbuilder instead StringBuffer
 public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
@@ -72,8 +71,8 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
             StringBuffer buf = new StringBuffer();
             
             // previous failure
-            if (failures.containsKey(testCase)) {
-                buf.append(failures.get(testCase));
+            if (getFailures().containsKey(testCase)) {
+                buf.append(getFailures().get(testCase));
 //                appendBreakLine(buf);
             }
             // no previous failure, but success
@@ -112,7 +111,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
 
 //            buf.append("</pre><hr/>");
 
-            failures.put(testCase, buf.toString());
+            getFailures().put(testCase, buf.toString());
         }
         else {
             log.error("##### Success");
@@ -124,10 +123,10 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
             appendTestStepStatus(buf, currentStep, result);
             appendTestAssertionsOfTestStepIfAvailable(buf, currentStep);
             
-            if (failures.containsKey(testCase)) {
+            if (getFailures().containsKey(testCase)) {
                 // any prior test-step failed!…
-                String updatedFailureMessage = failures.get(testCase) + "\n" + buf.toString();
-                failures.put(testCase, updatedFailureMessage);
+                String updatedFailureMessage = getFailures().get(testCase) + "\n" + buf.toString();
+                getFailures().put(testCase, updatedFailureMessage);
             } else {
                 pendingSuccess.put(testCase, buf.toString());
             }
@@ -189,4 +188,15 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         buf.append(EOL);
     }
     
+    private Map<TestCase,String> getFailures() {
+        String fieldName = "failures";
+        try {
+            @SuppressWarnings("unchecked")
+            Map<TestCase,String> failures = (Map<TestCase,String>) FieldUtils.readField(this, fieldName, true);
+            return failures;
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Unable to read field " + fieldName, e);
+        }
+    }
+
 }

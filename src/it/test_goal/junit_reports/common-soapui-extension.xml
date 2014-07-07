@@ -45,7 +45,7 @@
             <soapuiProperties>
               <property>
                 <name>soapui.junit.reportCollector</name>
-                <value>com.eviware.soapui.report.StepInfoJUnitReportCollector</value>
+                <value>org.ktc.soapui.maven.extension.impl.report.StepInfoJUnitReportCollector</value>
               </property>
             </soapuiProperties>
             <testFailIgnore>true</testFailIgnore>
