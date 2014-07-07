@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -192,3 +192,18 @@ This is the format that will let us extend this feature: override/create propert
   </suites>
 </testsuiteproperties>
 ```
+
+
+**StepInfoJUnitReportCollector**
+
+Improve implementation started in #42
+
+* add a system property to log request/response for failed steps
+* same for successfull steps (maybe only one option using a enum: none, failed, all)
+
+Find a way to set the "Complete Error Logs" without a setting file (see integration tests). Ask SmartBear on the SoapUI forums what is the expected behaviour for property set with the globalProperties option
+
+* merged if exist in the setting file
+* do nothing if not exist in the settings file
+* override value from the settings file
+* other...
