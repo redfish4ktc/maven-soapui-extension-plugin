@@ -109,7 +109,7 @@ Roadmap
 
 Supported java and maven versions
 ============
-  * maven 2.2.1, 3.0.x (tested with 3.0.4 and 3.0.5), 3.1.x (tested with 3.1.0 and 3.1.1) and 3.2.1
+  * maven 2.2.1, 3.0.x (tested with 3.0.5), 3.1.x (tested with 3.1.1) and 3.2.1
   * java 6 and 7 (soapui needs java 6+ starting from 4.0.0), java 8 experimental support
 
 
@@ -127,18 +127,19 @@ If it is not specified, the CI job
 **List of CI jobs**
 
 * maven 3.2.1, openjdk6, openjdk7, oracle jdk7 and oraclejdk8 (Travis) [![Travis Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin) - builds all pushes in all branches and pull requests, uses a fresh maven local repository at each build
-* maven 3.2.1, oracle jdk6 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_oracle_jdk6/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_oracle_jdk6/)
 * maven 3.2.1, openjdk8 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_openjdk8/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_openjdk8/)
+* maven 3.2.1, oracle jdk6 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_oracle_jdk6/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_oracle_jdk6/)
+* maven 3.1.1, oracle jdk8 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk8)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk8/)
 * maven 3.1.1, oracle jdk7 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk7)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk7/)
-* maven 3.1.0, sun jdk6 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.1.0_sun_jdk6)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.1.0_sun_jdk6/)
-* maven 3.1.0, oracle jdk7 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.1.0_oracle_jdk7)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.1.0_oracle_jdk7/)
-* maven 3.1.0, openjdk8 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.1.0_openjdk8)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.1.0_openjdk8/)
+* maven 3.1.1, oracle jdk6 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk6)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk6/)
+* maven 3.0.5, oracle jdk8 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.0.5_oracle_jdk8)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.5_oracle_jdk8/)
+* maven 3.0.5, openjdk8 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.5_openjdk8/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.5_openjdk8/)
 * maven 3.0.5, oracle jdk7 (Buildhive) [![Buildhive Build Status](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/badge/icon)](https://buildhive.cloudbees.com/job/redfish4ktc/job/maven-soapui-extension-plugin/) - builds master and pull requests, uses a fresh maven local repository at each build
+* maven 3.0.5, oracle jdk6 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.0.5_oracle_jdk6)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.5_oracle_jdk6/)
 * maven 3.0.4, openjdk7 (drone.io) [![drone.io Build Status](https://drone.io/redfish4ktc/maven-soapui-extension-plugin/status.png)](https://drone.io/redfish4ktc/maven-soapui-extension-plugin/latest) - only launched  manually, uses a fresh maven local repository at each build
-* maven 3.0.4, openjdk8 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.4_openjdk8/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.0.4_openjdk8/)
+* maven 2.2.1, openjdk8 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_openjdk8/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_openjdk8/)
 * maven 2.2.1, oracle jdk6 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_oracle_jdk6/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_oracle_jdk6/)
 * maven 2.2.1, oracle jdk7 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_oracle_jdk7/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_oracle_jdk7/)
-* maven 2.2.1, openjdk8 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_openjdk8/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-2.2.1_openjdk8/)
 
 
 [![Built on CloudBees](http://www.cloudbees.com/sites/default/files/Button-Built-on-CB-1.png)](http://www.cloudbees.com/dev.cb)
