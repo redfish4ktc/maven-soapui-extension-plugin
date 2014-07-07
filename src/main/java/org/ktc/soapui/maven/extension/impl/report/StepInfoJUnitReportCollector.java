@@ -37,7 +37,6 @@ import org.apache.log4j.Logger;
 
 // TODO for multi projects, could be nice to prefix testsuite by the name of the project
 // could be done in a subclass or with an option (see http://blog.infostretch.com/customizing-soapui-reports)
-// TODO modify log level used to debug
 // TODO use stringbuilder instead StringBuffer
 public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
     private static final Logger log = Logger.getLogger(StepInfoJUnitReportCollector.class);
@@ -51,11 +50,14 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         TestStep currentStep = result.getTestStep();
         TestCase testCase = currentStep.getTestCase();
         
-        log.error("##### testcase: " + testCase.getName());
-        log.error("##### currentStep: " + currentStep.getName());
-
+        if(log.isDebugEnabled()) {
+            log.debug("Entering afterStep");
+            log.debug("  testcase: " + testCase.getName());
+            log.debug("  currentStep: " + currentStep.getName());
+        }
 
         if (result.getStatus() == TestStepStatus.FAILED) {
+            log.debug("Test step status is FAILED");
             // TODO restore this behaviour
 //            if (maxErrors > 0) {
 //                Integer errors = errorCount.get(testCase);
@@ -78,7 +80,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
             // no previous failure, but success
             else if (pendingSuccess.containsKey(testCase)) {
                 String testCasePendingSuccess = pendingSuccess.get(testCase);
-                log.error("##### existing pending success, adding: " + testCasePendingSuccess);
+                log.debug("Existing pending success, adding: " + testCasePendingSuccess);
                 buf.append(testCasePendingSuccess);
 //                appendBreakLine(buf);
                 
@@ -100,7 +102,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
 
             // use string value since constant is defined in pro.. duh..
             if (testRunner.getTestCase().getSettings().getBoolean("Complete Error Logs")) {
-                log.error("##### process complete error logs!!!!");
+                log.debug("Add complete error logs");
                 StringWriter stringWriter = new StringWriter();
                 PrintWriter writer = new PrintWriter(stringWriter);
                 result.writeTo(writer);
@@ -109,12 +111,10 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
                 // TODO break line needed?
             }
 
-//            buf.append("</pre><hr/>");
-
             getFailures().put(testCase, buf.toString());
         }
         else {
-            log.error("##### Success");
+            log.debug("Test step status is SUCCESS");
             StringBuffer buf = new StringBuffer();
             if (pendingSuccess.containsKey(testCase)) {
                 buf.append(pendingSuccess.get(testCase));
@@ -170,7 +170,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
     
     private static void appendTestAssertionsOfTestStepIfAvailable(StringBuffer buf, TestStep step) {
         if (step instanceof Assertable) {
-            log.error("##### step is assertable");
+            log.debug("Test step is Assertable");
             Assertable requestStep = (Assertable) step;
             if (requestStep.getAssertionCount() > 0) {
                 buf.append("Assertion details:").append(EOL);
