@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Thomas Bouffard (redfish4ktc)
+ * Copyright 2013-2014 Thomas Bouffard (redfish4ktc)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ public class MockAsWarExtension extends MockAsWar {
 
     public MockAsWarExtension(String projectPath, String settingsPath, String warDir, String warFile,
             boolean includeExt, boolean actions, boolean listeners, String localEndpoint, boolean enableWebUI) {
-        super(projectPath, settingsPath, warDir, warFile, includeExt, actions, listeners, localEndpoint, enableWebUI);
+        super(projectPath, settingsPath, warDir, warFile, includeExt, actions, listeners, localEndpoint, enableWebUI,
+                null);
     }
 
     @Override
