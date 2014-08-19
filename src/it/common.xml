@@ -46,6 +46,12 @@
               <scope>system</scope>
               <systemPath>@localRepository@/javafx/jfxrt/99-empty/jfxrt-99-empty.jar</systemPath>
             </dependency>
+            <!-- missing in 5.1.0 (see #129) -->
+            <dependency>
+              <groupId>org.reflections</groupId>
+              <artifactId>reflections</artifactId>
+              <version>0.9.9-RC1</version>
+            </dependency>
           </dependencies>
         </plugin>
         <plugin>
