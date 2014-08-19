@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2012-2013 Thomas Bouffard (redfish4ktc)
+~ Copyright 2012-2014 Thomas Bouffard (redfish4ktc)
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -57,6 +57,13 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- workaround for #129 which is missing in soapui-pro-maven-plugin 5.1.0 -->
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.9-RC1</version>
+    </dependency>
+    <!-- end of workaround for #129 -->
   </dependencies>
 
   <build>
@@ -116,7 +123,7 @@
                   <artifactId>${soapui.artifactId}</artifactId>
                   <version>${soapui.version}</version>
                 </artifactItem>
-              </artifactItems>            
+              </artifactItems> 
               <outputDirectory>${soapui.home.fake}</outputDirectory>
             </configuration>
           </execution>
@@ -197,6 +204,19 @@
             <scope>system</scope>
             <systemPath>@localRepository@/javafx/jfxrt/99-empty/jfxrt-99-empty.jar</systemPath>
           </dependency>
+          <!-- end of workaround for #125 -->
+          <!-- workaround for #129 which is missing in soapui-pro-maven-plugin 5.1.0 -->
+          <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.9-RC1</version>
+          </dependency>
+          <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0</version>
+          </dependency>
+          <!-- end of workaround for #129 -->
         </dependencies>
       </plugin>
     </plugins>

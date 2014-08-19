@@ -72,7 +72,7 @@
   </properties>
 
   <!-- Force use of these versions to have the same one than in soapui
-  Otherwise it used the one declared by jasperreports (as we have declare it direclty, it is now on the shortest path) 
+  Otherwise it used the one declared by jasperreports (as we have declare it directly, it is now on the shortest path) 
   -->
   <dependencyManagement>
     <dependencies>
@@ -85,6 +85,12 @@
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
         <version>1.1.1</version>
+      </dependency>
+      <!-- Temp for #129: use the same version as in SoapUI -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>14.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
