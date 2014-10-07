@@ -44,7 +44,7 @@ Main features
 
 **Documentation**
 
-  * give [tips](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips) about configuration expectially for [logs](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips#log-configuration)
+  * give [tips](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Tips) about maven plugin configuration (both for maven-soapui-extension-plugin and SmartBear plugins)
   * provide full documentation of [goals and parameters](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/Goals)
 
 
@@ -126,7 +126,7 @@ Roadmap
 
 Supported java and maven versions
 ============
-  * maven 2.2.1, 3.0.x (tested with 3.0.5), 3.1.x (tested with 3.1.1) and 3.2.x (tested with 3.2.1)
+  * maven 2.2.1, 3.0.x (tested with 3.0.5), 3.1.x (tested with 3.1.1) and 3.2.x (tested with 3.2.1 and 3.2.3)
   * java 6 and 7 (soapui needs java 6+ as of version 4.0.0), java 8 experimental support
 
 
@@ -145,7 +145,7 @@ If it is not specified, the CI job
 
 **List of CI jobs**
 
-* maven 3.2.1, openjdk6, openjdk7, oracle jdk7 and oraclejdk8 (Travis) [![Travis Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin) - builds all pushes in all branches and pull requests, uses a fresh maven local repository at each build
+* maven 3.2.3, openjdk6, openjdk7, oracle jdk7 and oraclejdk8 (Travis) [![Travis Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin) - builds all pushes in all branches and pull requests, uses a fresh maven local repository at each build
 * maven 3.2.1, openjdk8 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_openjdk8/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_openjdk8/)
 * maven 3.2.1, oracle jdk6 (CloudBees) [![CloudBees Build Status](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_oracle_jdk6/badge/icon)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.2.1_oracle_jdk6/)
 * maven 3.1.1, oracle jdk8 (CloudBees) [![Build Status](https://redfish4ktc-oss.ci.cloudbees.com/buildStatus/icon?job=maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk8)](https://redfish4ktc-oss.ci.cloudbees.com/job/maven-soapui-extension-plugin_maven-3.1.1_oracle_jdk8/)
