@@ -24,6 +24,21 @@ For more information about how to use it, see the [wiki](https://github.com/redf
 Last released version: [4.6.4.1](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki#changelog) available on [Maven Central](http://search.maven.org/#search|gav|1|g%3A%22com.github.redfish4ktc.soapui%22%20AND%20a%3A%22maven-soapui-extension-plugin%22)
 
 
+
+News (2014-10-07)
+============
+
+Latest version is now quite old. For the summer, I have been working to implement 5.x support but work is currently paused because of [dependency issues](https://github.com/redfish4ktc/maven-soapui-extension-plugin/wiki/DependencyIssues) (javafx, missing dependencies in 5.1.x)
+
+So, I am currently focusing on a new version on the [4.6.4 line](https://github.com/redfish4ktc/maven-soapui-extension-plugin/milestones/4.6.4.2). As major new features, it will contain
+
+* new custom junit report for both OSS and PRO (see [#42](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/42) and [#56](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/56))
+* mock-as-war support for all maven 2.2.1+ versions (see [#70](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/70) and [#121](https://github.com/redfish4ktc/maven-soapui-extension-plugin/issues/121)) 
+
+Hope you will enjoy
+
+
+
 Main features
 ============
 
