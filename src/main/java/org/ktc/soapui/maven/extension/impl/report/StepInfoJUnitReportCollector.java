@@ -37,7 +37,6 @@ import org.apache.log4j.Logger;
 
 // TODO for multi projects, could be nice to prefix testsuite by the name of the project
 // could be done in a subclass or with an option (see http://blog.infostretch.com/customizing-soapui-reports)
-// TODO use stringbuilder instead StringBuffer
 public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
     private static final Logger log = Logger.getLogger(StepInfoJUnitReportCollector.class);
     
@@ -70,7 +69,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
 //                errorCount.put(testCase, errors + 1);
 //            }
 
-            StringBuffer buf = new StringBuffer();
+            StringBuilder buf = new StringBuilder();
             
             // previous failure
             if (getFailures().containsKey(testCase)) {
@@ -115,7 +114,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         }
         else {
             log.debug("Test step status is SUCCESS");
-            StringBuffer buf = new StringBuffer();
+            StringBuilder buf = new StringBuilder();
             if (pendingSuccess.containsKey(testCase)) {
                 buf.append(pendingSuccess.get(testCase));
 //                appendBreakLine(buf);
@@ -160,7 +159,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
 //        }
 //    }
     
-    private static void appendTestStepStatus(StringBuffer buf, TestStep step, TestStepResult result) {
+    private static void appendTestStepStatus(StringBuilder buf, TestStep step, TestStepResult result) {
         // TODO check if we need xml entities as we are in a CDATA block
 //      buf.append("<h3><b>").append(XmlUtils.entitize(step.getName())).append(" Failed</b></h3><pre>");
         buf.append("Test Step: ").append(step.getName());
@@ -168,7 +167,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         appendBreakLine(buf);
     }
     
-    private static void appendTestAssertionsOfTestStepIfAvailable(StringBuffer buf, TestStep step) {
+    private static void appendTestAssertionsOfTestStepIfAvailable(StringBuilder buf, TestStep step) {
         if (step instanceof Assertable) {
             log.debug("Test step is Assertable");
             Assertable requestStep = (Assertable) step;
@@ -184,7 +183,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         }
     }
     
-    private static void appendBreakLine(StringBuffer buf) {
+    private static void appendBreakLine(StringBuilder buf) {
         buf.append(EOL);
     }
     
