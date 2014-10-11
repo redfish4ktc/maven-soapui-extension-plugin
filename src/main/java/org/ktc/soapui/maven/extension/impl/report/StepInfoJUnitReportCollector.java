@@ -35,8 +35,6 @@ import java.util.Map;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.log4j.Logger;
 
-// TODO for multi projects, could be nice to prefix testsuite by the name of the project
-// could be done in a subclass or with an option (see http://blog.infostretch.com/customizing-soapui-reports)
 public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
     private static final Logger log = Logger.getLogger(StepInfoJUnitReportCollector.class);
     

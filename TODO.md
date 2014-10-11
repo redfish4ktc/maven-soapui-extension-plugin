@@ -207,3 +207,8 @@ Find a way to set the "Complete Error Logs" without a setting file (see integrat
 * do nothing if not exist in the settings file
 * override value from the settings file
 * other...
+
+
+Improvement for multi projects
+Prefix testsuite by the name of the project. This is done by SoapUI Pro reporting when it generates junit html multi pages report
+This could be done in a subclass or with an option (see http://blog.infostretch.com/customizing-soapui-reports)
