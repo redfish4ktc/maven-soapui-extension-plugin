@@ -267,6 +267,7 @@
           <excludes>
             <exclude>.gitignore</exclude>
             <exclude>.travis.yml</exclude>
+            <exclude>appveyor.yml</exclude>
             <!-- modified from orginal plugin.xml generated file -->
             <exclude>src/main/resources/META-INF/maven/plugin.xml</exclude>
             <!-- Unable to add license because some files have no way to specify comments -->
