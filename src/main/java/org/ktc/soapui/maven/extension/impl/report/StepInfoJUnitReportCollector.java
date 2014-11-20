@@ -15,7 +15,7 @@
  *
  */
 
-package com.eviware.soapui.report;
+package org.ktc.soapui.maven.extension.impl.report;
 
 import com.eviware.soapui.model.testsuite.Assertable;
 import com.eviware.soapui.model.testsuite.TestAssertion;
@@ -25,21 +25,16 @@ import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
+import com.eviware.soapui.report.JUnitSecurityReportCollector;
 import com.eviware.soapui.support.xml.XmlUtils;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.log4j.Logger;
 
-// TODO for multi projects, could be nice to prefix testsuite by the name of the project
-// could be done in a subclass or with an option (see http://blog.infostretch.com/customizing-soapui-reports)
-// TODO move in a regular package
-// currently in eviware package to let the class access to the package protected failures field for instance
-// warn, update integration tests
-// TODO modify log level used to debug
-// TODO use stringbuilder instead StringBuffer
 public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
     private static final Logger log = Logger.getLogger(StepInfoJUnitReportCollector.class);
     
@@ -52,11 +47,14 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         TestStep currentStep = result.getTestStep();
         TestCase testCase = currentStep.getTestCase();
         
-        log.error("##### testcase: " + testCase.getName());
-        log.error("##### currentStep: " + currentStep.getName());
-
+        if(log.isDebugEnabled()) {
+            log.debug("Entering afterStep");
+            log.debug("  testcase: " + testCase.getName());
+            log.debug("  currentStep: " + currentStep.getName());
+        }
 
         if (result.getStatus() == TestStepStatus.FAILED) {
+            log.debug("Test step status is FAILED");
             // TODO restore this behaviour
 //            if (maxErrors > 0) {
 //                Integer errors = errorCount.get(testCase);
@@ -69,17 +67,17 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
 //                errorCount.put(testCase, errors + 1);
 //            }
 
-            StringBuffer buf = new StringBuffer();
+            StringBuilder buf = new StringBuilder();
             
             // previous failure
-            if (failures.containsKey(testCase)) {
-                buf.append(failures.get(testCase));
+            if (getFailures().containsKey(testCase)) {
+                buf.append(getFailures().get(testCase));
 //                appendBreakLine(buf);
             }
             // no previous failure, but success
             else if (pendingSuccess.containsKey(testCase)) {
                 String testCasePendingSuccess = pendingSuccess.get(testCase);
-                log.error("##### existing pending success, adding: " + testCasePendingSuccess);
+                log.debug("Existing pending success, adding: " + testCasePendingSuccess);
                 buf.append(testCasePendingSuccess);
 //                appendBreakLine(buf);
                 
@@ -101,7 +99,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
 
             // use string value since constant is defined in pro.. duh..
             if (testRunner.getTestCase().getSettings().getBoolean("Complete Error Logs")) {
-                log.error("##### process complete error logs!!!!");
+                log.debug("Add complete error logs");
                 StringWriter stringWriter = new StringWriter();
                 PrintWriter writer = new PrintWriter(stringWriter);
                 result.writeTo(writer);
@@ -110,13 +108,11 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
                 // TODO break line needed?
             }
 
-//            buf.append("</pre><hr/>");
-
-            failures.put(testCase, buf.toString());
+            getFailures().put(testCase, buf.toString());
         }
         else {
-            log.error("##### Success");
-            StringBuffer buf = new StringBuffer();
+            log.debug("Test step status is SUCCESS");
+            StringBuilder buf = new StringBuilder();
             if (pendingSuccess.containsKey(testCase)) {
                 buf.append(pendingSuccess.get(testCase));
 //                appendBreakLine(buf);
@@ -124,10 +120,10 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
             appendTestStepStatus(buf, currentStep, result);
             appendTestAssertionsOfTestStepIfAvailable(buf, currentStep);
             
-            if (failures.containsKey(testCase)) {
+            if (getFailures().containsKey(testCase)) {
                 // any prior test-step failed!…
-                String updatedFailureMessage = failures.get(testCase) + "\n" + buf.toString();
-                failures.put(testCase, updatedFailureMessage);
+                String updatedFailureMessage = getFailures().get(testCase) + "\n" + buf.toString();
+                getFailures().put(testCase, updatedFailureMessage);
             } else {
                 pendingSuccess.put(testCase, buf.toString());
             }
@@ -161,7 +157,7 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
 //        }
 //    }
     
-    private static void appendTestStepStatus(StringBuffer buf, TestStep step, TestStepResult result) {
+    private static void appendTestStepStatus(StringBuilder buf, TestStep step, TestStepResult result) {
         // TODO check if we need xml entities as we are in a CDATA block
 //      buf.append("<h3><b>").append(XmlUtils.entitize(step.getName())).append(" Failed</b></h3><pre>");
         buf.append("Test Step: ").append(step.getName());
@@ -169,9 +165,9 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         appendBreakLine(buf);
     }
     
-    private static void appendTestAssertionsOfTestStepIfAvailable(StringBuffer buf, TestStep step) {
+    private static void appendTestAssertionsOfTestStepIfAvailable(StringBuilder buf, TestStep step) {
         if (step instanceof Assertable) {
-            log.error("##### step is assertable");
+            log.debug("Test step is Assertable");
             Assertable requestStep = (Assertable) step;
             if (requestStep.getAssertionCount() > 0) {
                 buf.append("Assertion details:").append(EOL);
@@ -185,8 +181,19 @@ public class StepInfoJUnitReportCollector extends JUnitSecurityReportCollector {
         }
     }
     
-    private static void appendBreakLine(StringBuffer buf) {
+    private static void appendBreakLine(StringBuilder buf) {
         buf.append(EOL);
     }
     
+    private Map<TestCase,String> getFailures() {
+        String fieldName = "failures";
+        try {
+            @SuppressWarnings("unchecked")
+            Map<TestCase,String> failures = (Map<TestCase,String>) FieldUtils.readField(this, fieldName, true);
+            return failures;
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Unable to read field " + fieldName, e);
+        }
+    }
+
 }
