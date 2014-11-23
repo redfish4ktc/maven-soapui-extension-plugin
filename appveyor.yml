@@ -61,5 +61,5 @@ platform: Any CPU
 #  - Any CPU
 
 build_script:
-  # - cmd: mvn --show-version --errors verify -P declareRepositories,runIT -Dinvoker.streamLogs=true
-  - cmd: mvn --show-version --errors clean verify -P declareRepositories -Dinvoker.streamLogs=true
+  - cmd: mvn --show-version --errors verify -P declareRepositories,runIT -Dinvoker.streamLogs=true
+  # - cmd: mvn --show-version --errors clean verify -P declareRepositories -Dinvoker.streamLogs=true
