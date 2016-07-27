@@ -17,7 +17,8 @@
 
 package org.ktc.soapui.maven.extension.impl.runner;
 
-import com.eviware.soapui.tools.SoapUIMockServiceRunner;
+
+import com.smartbear.ready.cmd.runner.SoapUIMockServiceRunner;
 
 public class SoapUIExtensionMockServiceRunner extends SoapUIMockServiceRunner {
 

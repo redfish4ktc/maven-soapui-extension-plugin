@@ -19,8 +19,9 @@ package org.ktc.soapui.maven.extension;
 
 import static org.apache.commons.lang3.ArrayUtils.nullToEmpty;
 
-import com.eviware.soapui.tools.AbstractSoapUIRunner;
 import java.util.Properties;
+
+import com.smartbear.ready.cmd.runner.AbstractSoapUIRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 

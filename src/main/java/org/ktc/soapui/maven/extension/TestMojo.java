@@ -19,7 +19,7 @@ package org.ktc.soapui.maven.extension;
 
 import static org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
 
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
+import com.smartbear.ready.cmd.runner.SoapUITestCaseRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;

@@ -19,24 +19,24 @@ package org.ktc.soapui.maven.extension.impl.runner;
 
 import java.util.List;
 
+import com.eviware.soapui.impl.wsdl.WsdlTestSuite;
 import org.apache.log4j.Logger;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
-import com.eviware.soapui.model.testsuite.TestSuite;
 
 public class TestSuitePropertiesModifier {
     private static final Logger log = Logger.getLogger(TestSuitePropertiesModifier.class);
 
     public static void overrideTestSuiteProperties(WsdlProject project, String[] testsuiteProperties) {
         log.info("Configuring test suite properties");
-        List<TestSuite> suites = project.getTestSuiteList();
-        for (TestSuite suite : suites) {
+        List<WsdlTestSuite> suites = project.getTestSuiteList();
+        for (WsdlTestSuite suite : suites) {
             overrideTestSuiteProperties(suite, testsuiteProperties);
         }
         log.info("Test suite properties configuration done");
     }
 
-    public static void overrideTestSuiteProperties(TestSuite testSuite, String[] testsuiteProperties) {
+    public static void overrideTestSuiteProperties(WsdlTestSuite testSuite, String[] testsuiteProperties) {
         if (testsuiteProperties != null) {
             for (String option : testsuiteProperties) {
                 int positionOfKeyValueSeparator = option.indexOf('=');

@@ -17,7 +17,7 @@
 
 package org.ktc.soapui.maven.extension.impl.runner.wrapper;
 
-import com.eviware.soapui.tools.AbstractSoapUIRunner;
+import com.smartbear.ready.cmd.runner.AbstractSoapUIRunner;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
 
 public abstract class AbstractRunnerWrapper<R extends AbstractSoapUIRunner> {

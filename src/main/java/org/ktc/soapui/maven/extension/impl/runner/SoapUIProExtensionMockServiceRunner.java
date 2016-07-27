@@ -17,24 +17,26 @@
 
 package org.ktc.soapui.maven.extension.impl.runner;
 
-import com.eviware.soapui.SoapUIProMockServiceRunner;
 import com.eviware.soapui.impl.coverage.report.CoverageBuilder;
 import com.eviware.soapui.impl.wsdl.support.PathUtils;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.support.StringUtils;
+import com.smartbear.ready.cmd.runner.SoapUIMockServiceRunner;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRunner {
+public class SoapUIProExtensionMockServiceRunner extends SoapUIMockServiceRunner /*extends SoapUIProMockServiceRunner*/ {
 
     private static final String COVERAGE_BUILDER_FIELD_NAME = "c";
 
     public SoapUIProExtensionMockServiceRunner() {
         super();
+        throw new IllegalArgumentException("Not implemented");
     }
 
     public SoapUIProExtensionMockServiceRunner(String title) {
-        super(title);
+        //super(title);
+        throw new IllegalArgumentException("Not implemented");
     }
 
     public void activateCoverageReport(boolean activate) {
@@ -45,6 +47,7 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
 
     // duplicated from SmartBear implementation has their pro mock runner defines its own outputFolder field that is
     // then not used by this method
+    /*
     @Override
     public String getAbsoluteOutputFolder(ModelItem modelItem) {
         // use getter instead of calling the ouputFolder field directly
@@ -57,7 +60,7 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
         }
 
         return folder;
-    }
+    }*/
 
     private void setCoverageBuilder(CoverageBuilder coverageBuilder) {
         try {
@@ -78,10 +81,10 @@ public class SoapUIProExtensionMockServiceRunner extends SoapUIProMockServiceRun
             throw new RuntimeException("Unable to read field " + COVERAGE_BUILDER_FIELD_NAME, e);
         }
     }
-
+/*
     @Override
     protected void initGroovyLog() {
         // stubbed to prevent multiple appenders, groovy.log is configured in soapui-log4j.xml
     }
-
+*/
 }
