@@ -21,7 +21,8 @@ import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.model.project.ProjectFactoryRegistry;
 import com.eviware.soapui.settings.ProjectSettings;
 import com.eviware.soapui.support.StringUtils;
-import com.eviware.soapui.tools.SoapUIMockAsWarGenerator;
+import com.smartbear.ready.cmd.runner.SoapUIMockAsWarGenerator;
+
 import java.io.File;
 
 public class SoapUIExtensionMockAsWarGenerator extends SoapUIMockAsWarGenerator {
@@ -62,7 +63,7 @@ public class SoapUIExtensionMockAsWarGenerator extends SoapUIMockAsWarGenerator 
         // TODO the temporary file should be removed at the end of the process
         MockAsWarExtension mockAsWar = new MockAsWarExtension(pFile, getSettingsFile(), getOutputFolder(),
                 this.getWarFile(), this.isIncludeLibraries(), this.isIncludeActions(), this.isIncludeListeners(),
-                endpoint, this.isEnableWebUI());
+                endpoint, this.isEnableWebUI(), null);
 
         mockAsWar.createMockAsWarArchive();
         this.log.info("WAR Generation complete");

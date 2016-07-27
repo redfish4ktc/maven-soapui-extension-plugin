@@ -19,9 +19,10 @@ package org.ktc.soapui.maven.extension.impl;
 
 import com.eviware.soapui.model.testsuite.TestAssertion;
 import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import java.lang.reflect.Field;
 import java.util.List;
+
+import com.smartbear.ready.cmd.runner.SoapUITestCaseRunner;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 public class ErrorHandler {
@@ -40,7 +41,7 @@ public class ErrorHandler {
     }
 
     private static List<TestCase> getFailedTests(SoapUITestCaseRunner runner) {
-        String fieldName = "failedTests";
+        String fieldName = "e";
         Field field = FieldUtils.getField(SoapUITestCaseRunner.class, fieldName, true);
         try {
             @SuppressWarnings("unchecked")

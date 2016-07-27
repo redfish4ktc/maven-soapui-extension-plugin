@@ -17,15 +17,15 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
+import com.smartbear.ready.cmd.runner.pro.SoapUIProTestCaseRunner;
 import org.junit.Before;
 
-import com.eviware.soapui.SoapUIProTestCaseRunner;
 
-public class ErrorHandlerForProTest extends AbstractTestErrorHandler {
+public class ErrorHandlerForProTest /*extends AbstractTestErrorHandler*/ {
 
   @Before
   public void setup() {
-    runner = new SoapUIProTestCaseRunner();
+    //runner = new SoapUIProTestCaseRunner();
   }
 
 }

@@ -17,10 +17,10 @@
 
 package org.ktc.soapui.maven.extension.impl.runner;
 
-import com.eviware.soapui.SoapUIProTestCaseRunner;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.report.JUnitReportCollector;
 import com.eviware.soapui.report.JUnitSecurityReportCollector;
+import com.smartbear.ready.cmd.runner.pro.SoapUIProTestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.report.ReportCollectorFactory;
 
 public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
@@ -49,7 +49,7 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
     }
 
     @Override
-    protected void initProject(WsdlProject project) {
+    protected void initProject(WsdlProject project) throws Exception {
         super.initProject(project);
         initTestSuiteProperties(project);
     }
@@ -59,7 +59,7 @@ public class SoapUIProExtensionTestCaseRunner extends SoapUIProTestCaseRunner {
     }
     
     @Override
-    public void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project) {
+    public void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project) throws Exception {
         if (junitHtmlReport) {
             super.exportJUnitReports(collector, folder, project);
         } else {

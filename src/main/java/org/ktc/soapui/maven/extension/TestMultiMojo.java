@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.smartbear.ready.cmd.runner.SoapUITestCaseRunner;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.DirectoryScanner;
 
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
 
 public class TestMultiMojo extends TestMojo {
 

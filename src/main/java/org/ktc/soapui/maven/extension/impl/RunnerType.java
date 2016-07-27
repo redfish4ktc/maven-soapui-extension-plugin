@@ -17,15 +17,11 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
-import com.eviware.soapui.tools.SoapUIMockAsWarGenerator;
-import com.eviware.soapui.tools.SoapUIMockServiceRunner;
-import com.eviware.soapui.tools.SoapUIProMockAsWarGenerator;
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionMockAsWarGenerator;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionMockServiceRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
+import com.smartbear.ready.cmd.runner.SoapUIMockAsWarGenerator;
+import com.smartbear.ready.cmd.runner.SoapUIMockServiceRunner;
+import com.smartbear.ready.cmd.runner.SoapUITestCaseRunner;
+import com.smartbear.ready.cmd.runner.pro.SoapUIProMockAsWarGenerator;
+import org.ktc.soapui.maven.extension.impl.runner.*;
 
 public enum RunnerType {
     PRO {

@@ -17,7 +17,7 @@
 
 package org.ktc.soapui.maven.extension.impl.runner.wrapper;
 
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
+import com.smartbear.ready.cmd.runner.SoapUITestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 

@@ -17,7 +17,7 @@
 
 package org.ktc.soapui.maven.extension.impl.runner.wrapper;
 
-import com.eviware.soapui.tools.SoapUIMockServiceRunner;
+import com.smartbear.ready.cmd.runner.SoapUIMockServiceRunner;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
 
