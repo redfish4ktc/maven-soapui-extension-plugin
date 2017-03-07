@@ -45,7 +45,8 @@ install:
   # by default, all script lines are interpreted as batch
   - cmd: set PATH=%PATH%;C:\bin\apache-maven-3.3.9\bin
   - cmd: set MVN_VERSION=3.3.9
-  - cmd: IF NOT exist "C:\bin\apache-maven-%MVN_VERSION%\bin\*.*" (echo Maven %MVN_VERSION% not installed, so install it & cinst maven -Version %MVN_VERSION%) ELSE (echo  Maven %MVN_VERSION% already installed)
+  - cmd: set CHOCO_MVN_PACKAGE_VERSION=3.3.9.2
+  - cmd: IF NOT exist "C:\bin\apache-maven-%MVN_VERSION%\bin\*.*" (echo Maven %MVN_VERSION% not installed, so install it & cinst maven -Version %CHOCO_MVN_PACKAGE_VERSION%) ELSE (echo  Maven %MVN_VERSION% already installed)
 
 
 #---------------------------------#
