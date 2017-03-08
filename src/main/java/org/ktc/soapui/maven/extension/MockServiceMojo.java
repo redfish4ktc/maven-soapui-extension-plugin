@@ -17,7 +17,7 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.tools.SoapUIMockServiceRunner;
+import com.smartbear.ready.cmd.runner.SoapUIMockServiceRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceRunner;

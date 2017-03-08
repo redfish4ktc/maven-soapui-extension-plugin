@@ -17,14 +17,15 @@
 
 package org.ktc.soapui.maven.extension;
 
-import static org.sonatype.aether.util.filter.DependencyFilterUtils.classpathFilter;
+import static org.eclipse.aether.util.filter.DependencyFilterUtils.classpathFilter;
 
-import com.eviware.soapui.tools.SoapUIMockAsWarGenerator;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+
+import com.smartbear.ready.cmd.runner.SoapUIMockAsWarGenerator;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.model.Build;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -32,16 +33,16 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ProjectInfo;
 import org.ktc.soapui.maven.extension.impl.RunnerType;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
-import org.sonatype.aether.RepositorySystem;
-import org.sonatype.aether.RepositorySystemSession;
-import org.sonatype.aether.collection.CollectRequest;
-import org.sonatype.aether.graph.Dependency;
-import org.sonatype.aether.repository.RemoteRepository;
-import org.sonatype.aether.resolution.ArtifactResult;
-import org.sonatype.aether.resolution.DependencyRequest;
-import org.sonatype.aether.resolution.DependencyResolutionException;
-import org.sonatype.aether.util.artifact.DefaultArtifact;
-import org.sonatype.aether.util.artifact.JavaScopes;
+import org.eclipse.aether.RepositorySystem;
+import org.eclipse.aether.RepositorySystemSession;
+import org.eclipse.aether.collection.CollectRequest;
+import org.eclipse.aether.graph.Dependency;
+import org.eclipse.aether.repository.RemoteRepository;
+import org.eclipse.aether.resolution.ArtifactResult;
+import org.eclipse.aether.resolution.DependencyRequest;
+import org.eclipse.aether.resolution.DependencyResolutionException;
+import org.eclipse.aether.artifact.DefaultArtifact;
+import org.eclipse.aether.util.artifact.JavaScopes;
 
 public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     // for 2.2.x support, see http://docs.codehaus.org/display/MAVENUSER/Mojo+Developer+Cookbook
@@ -54,6 +55,8 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
     private File explodedWarDirectory;
 
     private boolean enableWebUI;
+
+    private boolean includeExt;
 
     /**
      * The entry point to Aether, i.e. the component doing all the work.
@@ -95,12 +98,12 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
         try {
             buildSoapuiGuiEnvironment();
 
-            // TODO needed as mockaswar generator does not create subdirectories
+            // Needed as mockaswar generator does not create subdirectories
             explodedWarDirectory.mkdirs();
             runner.setOutputFolder(explodedWarDirectory.getAbsolutePath());
 
             if (warFile != null) {
-                // TODO needed as mockaswar generator does not create subdirectories
+                // Needed as mockaswar generator does not create subdirectories
                 warFile.getParentFile().mkdirs();
                 runner.setWarFile(warFile.getAbsolutePath());
             }
@@ -111,7 +114,7 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
             // TODO related java system properties must be correctly set (add documentation)
             // WARN the mock generator does not respect properties (it used directories in the soapui.home directory)
             // runner.setIncludeActions(false);
-            // runner.setIncludeLibraries(false);
+            runner.setIncludeLibraries(includeExt);
             // runner.setIncludeListeners(false);
 
             // TODO pro feature: include scripts
@@ -135,7 +138,8 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
         // use our plugin to be sure we do not have missing dependencies (at least for versions prior to 4.5.2) 
         File soapuiLibDirectory = getBuiltSoapuiGuiLibDirectory();
         resolveAndCopyDependencies(new DefaultArtifact("com.github.redfish4ktc.soapui:maven-soapui-extension-plugin:"
-                + version), soapuiLibDirectory);        
+                + version), soapuiLibDirectory);
+
         // Needed, otherwise the generator mess up
         File soapuiBinDirectory = getBuiltSoapuiGuiBinDirectory();
         copySoapuiJar(soapuiLibDirectory, soapuiBinDirectory);
@@ -150,12 +154,12 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
 
     private void resolveAndCopyDependencies(DefaultArtifact rootArtifact, File soapuiLibDirectory) throws DependencyResolutionException,
             IOException {
-        getLog().info("Resolving artifact " + rootArtifact + " from " + remoteRepos);
+        getLog().info("Resolving artifact " + rootArtifact + " from " + repoSystem);
         Collection<ArtifactResult> results = repoSystem.resolveDependencies(repoSession,
                 newDependencyRequest(rootArtifact)).getArtifactResults();
         getLog().info("Artifact resolved with transitive dependencies: " + results.size());
 
-        getLog().info("Copying artifacts to " + soapuiLibDirectory);
+        getLog().info("Copying " + results.size() + " artifacts to " + soapuiLibDirectory);
         for (ArtifactResult result : results) {
             File artifactFile = result.getArtifact().getFile();
             File ouputFile = new File(soapuiLibDirectory, artifactFile.getName());
@@ -170,7 +174,7 @@ public class MockAsWarMojo extends AbstractSoapuiRunnerMojo {
         File[] mainJars = sourceDirectory.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                if (name.toLowerCase().startsWith("soapui") && name.toLowerCase().endsWith(".jar"))
+                if (name.toLowerCase().startsWith("ready-api-soapui") && name.toLowerCase().endsWith(".jar"))
                     return true;
                 return false;
             }

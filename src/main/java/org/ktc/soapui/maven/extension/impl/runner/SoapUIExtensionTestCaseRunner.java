@@ -19,7 +19,7 @@ package org.ktc.soapui.maven.extension.impl.runner;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.report.JUnitSecurityReportCollector;
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
+import com.smartbear.ready.cmd.runner.SoapUITestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.report.ReportCollectorFactory;
 
 public class SoapUIExtensionTestCaseRunner extends SoapUITestCaseRunner {

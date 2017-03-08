@@ -17,9 +17,9 @@
 
 package org.ktc.soapui.maven.extension.impl;
 
+import com.smartbear.ready.cmd.runner.SoapUITestCaseRunner;
 import org.junit.Before;
 
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
 
 public class ErrorHandlerTest extends AbstractTestErrorHandler {
 

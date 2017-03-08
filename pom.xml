@@ -24,7 +24,7 @@
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.6.4.3-SNAPSHOT</version>
+  <version>5.1.2.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.</description>
@@ -53,6 +53,14 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
+    <developer>
+      <name>Havard Bjastad</name>
+      <id>hbjastad</id>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
   </developers>
   <issueManagement>
     <system>GitHub Issues</system>
@@ -60,15 +68,17 @@
   </issueManagement>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <groovyVersion>2.1.7</groovyVersion>
+    <project.b7uild.sourceEncoding>UTF-8</project.b7uild.sourceEncoding>
+    <java_minimum_supported_version>1.7</java_minimum_supported_version>
+    <groovyVersion>2.4.4</groovyVersion>
     <!-- do not use the maven_minimum_required_version property from the parent as it changes when releasing the project -->
-    <mavenMinimumSupportedVersion>2.2.1</mavenMinimumSupportedVersion>
+    <mavenMinimumSupportedVersion>3.1.0</mavenMinimumSupportedVersion>
     <invokerParallelThreads>1</invokerParallelThreads>
     <!-- use a camel case property name otherwise, the maven invoker plugin won't use it while filtering -->
-    <soapuiVersionCurrent>4.6.4</soapuiVersionCurrent>
+    <readyapiVersionCurrent>1.7.0</readyapiVersionCurrent>
     <!-- TODO fix for http://jira.codehaus.org/browse/MINVOKER-137 -->
     <invokerProfile>defaultInvokerProfile</invokerProfile>
+    <aether-api.version>1.1.0</aether-api.version>
   </properties>
 
   <!-- Force use of these versions to have the same one than in soapui
@@ -90,9 +100,9 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>com.smartbear.soapui</groupId>
-      <artifactId>soapui-pro-maven-plugin</artifactId>
-      <version>${soapuiVersionCurrent}</version>
+      <groupId>com.smartbear</groupId>
+      <artifactId>ready-api-maven-plugin</artifactId>
+      <version>${readyapiVersionCurrent}</version>
       <exclusions>
         <exclusion>
           <groupId>jasperreports</groupId>
@@ -140,7 +150,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
-      <artifactId>maven-project</artifactId>
+      <artifactId>maven-core</artifactId>
       <version>${mavenMinimumSupportedVersion}</version>
     </dependency>
     <dependency>
@@ -148,17 +158,22 @@
       <artifactId>maven-plugin-api</artifactId>
       <version>${mavenMinimumSupportedVersion}</version>
     </dependency>
-    <!-- TODO check version built with eclipse groupID -->
     <dependency>
-      <groupId>org.sonatype.aether</groupId>
+      <groupId>org.eclipse.aether</groupId>
       <artifactId>aether-api</artifactId>
-      <version>1.13.1</version>
+      <version>${aether-api.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.sonatype.aether</groupId>
+      <groupId>org.eclipse.aether</groupId>
       <artifactId>aether-util</artifactId>
-      <version>1.13.1</version>
-    </dependency>    
+      <version>${aether-api.version}</version>
+    </dependency>
+    <!-- For some reason this transitive dependency must be explicitly declared -->
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.10</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -214,6 +229,8 @@
                   <includes>
                     <!-- starting from 4.6.1 support, this lib is now declared as dependency in the SmartBear pro plugin -->
                     <include>com.jgoodies:looks</include>
+                    <!-- this lib is now declared as dependency in the SmartBear plugin -->
+                    <include>com.jgoodies:binding</include>
                     <!-- Fix for #85 / TODO remove when upgrading to 5.0.0 -->
                     <include>com.jgoodies:forms</include>
                   </includes>
@@ -229,7 +246,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <Soapui-version>${soapuiVersionCurrent}</Soapui-version>
+              <Soapui-version>${readyapiVersionCurrent}</Soapui-version>
             </manifestEntries>
           </archive>
         </configuration>
@@ -311,14 +328,14 @@
       </properties>
       <repositories>
         <repository>
-          <id>eviwareRepository</id>
-          <url>http://www.soapui.org/repository/maven2</url>
+          <id>smartbearRepository</id>
+          <url>http://smartbearsoftware.com/repository/maven2</url>
         </repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
-          <id>eviwarePluginRepository</id>
-          <url>http://www.soapui.org/repository/maven2</url>
+          <id>smartbearPluginRepository</id>
+          <url>http://smartbearsoftware.com/repository/maven2</url>
         </pluginRepository>
       </pluginRepositories>
     </profile>
@@ -348,10 +365,10 @@
               <postBuildHookScript>verify</postBuildHookScript>
               <extraArtifacts>
                 <!-- at least needed for soapui oss workaround for mock-as-war -->
-                <extraArtifact>com.smartbear.soapui:soapui-maven-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
+                <extraArtifact>com.smartbear:ready-api-maven-plugin:${readyapiVersionCurrent}:jar</extraArtifact>
                 <!-- enforce the download of all dependencies of this plugin, because even if we rely on it, we have excluded
                 some of its dependencies, so they are not downloaded prior running the tests -->
-                <extraArtifact>com.smartbear.soapui:soapui-pro-maven-plugin:${soapuiVersionCurrent}:jar</extraArtifact>
+                <extraArtifact>com.smartbear:ready-api-pro-maven-plugin:${readyapiVersionCurrent}:jar</extraArtifact>
               </extraArtifacts>
               <!-- <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath> -->
               <!-- TODO modify when fix http://jira.codehaus.org/browse/MINVOKER-137 -->
