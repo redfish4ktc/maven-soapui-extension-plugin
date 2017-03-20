@@ -19,12 +19,12 @@
   <parent>
     <groupId>com.github.redfish4ktc.parent</groupId>
     <artifactId>redfish4ktc-maven-oss-parent</artifactId>
-    <version>6</version>
+    <version>7</version>
   </parent>
 
   <groupId>com.github.redfish4ktc.soapui</groupId>
   <artifactId>maven-soapui-extension-plugin</artifactId>
-  <version>4.6.4.2-SNAPSHOT</version>
+  <version>4.6.4.3-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>maven-soapui-extension-plugin</name>
   <description>This plugin adds new features and bug fixes to SmartBear soapui-pro-maven-plugin/soapui-maven-plugin.</description>
@@ -79,7 +79,7 @@
       <dependency>
         <groupId>commons-collections</groupId>
         <artifactId>commons-collections</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.2</version>
       </dependency>
       <dependency>
         <groupId>commons-logging</groupId>
@@ -162,19 +162,6 @@
   </dependencies>
 
   <build>
-    <!-- TODO move this in the parent pom
-    2.5 version needed because of https://jira.codehaus.org/browse/MRELEASE-812
-    -->
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.5</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
     <resources>
       <resource>
         <directory>src/main/resources</directory>
@@ -267,6 +254,7 @@
           <excludes>
             <exclude>.gitignore</exclude>
             <exclude>.travis.yml</exclude>
+            <exclude>appveyor.yml</exclude>
             <!-- modified from orginal plugin.xml generated file -->
             <exclude>src/main/resources/META-INF/maven/plugin.xml</exclude>
             <!-- Unable to add license because some files have no way to specify comments -->

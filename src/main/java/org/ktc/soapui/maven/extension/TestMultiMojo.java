@@ -19,19 +19,22 @@ package org.ktc.soapui.maven.extension;
 
 import static org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper.newSoapUITestCaseRunnerWrapper;
 
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.DirectoryScanner;
 
+import com.eviware.soapui.tools.SoapUITestCaseRunner;
+
 public class TestMultiMojo extends TestMojo {
 
-    private List<ProjectFilesScan> projectFiles;
+    // use array to support maven 2.2.1
+    private ProjectFilesScan[] projectFiles;
     private boolean useOutputFolderPerProject;
 
     @Override

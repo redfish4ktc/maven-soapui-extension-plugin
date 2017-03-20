@@ -1,0 +1,66 @@
+# Notes:
+#   - Minimal appveyor.yml file is an empty file. All sections are optional.
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+#   - Section names should be unique on each level.
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+
+# Do not build on tags (GitHub only)
+skip_tags: true
+
+# Skipping commits with particular message or from user
+#skip_commits:
+#  message: /Created.*\.(png|jpg|jpeg|bmp|gif)/       # Regex for matching commit message
+#  author: John        # Commit author's username, name, email or regexp maching one of these.
+
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Operating system (build VM template)
+os: Windows Server 2012
+
+# environment variables
+environment:
+  JAVA_HOME: C:\Program Files\Java\jdk1.7.0
+
+# http://www.appveyor.com/docs/build-cache
+cache:
+  - C:\bin\apache-maven-3.3.9
+  - C:\Users\appveyor\.m2\repository
+
+# scripts that run after cloning repository
+install:
+  # causes issue, so do not use it set MVN_INSTALLATION=C:\bin\apache-maven-%MVN_VERSION%
+  # by default, all script lines are interpreted as batch
+  - cmd: set PATH=%PATH%;C:\bin\apache-maven-3.3.9\bin
+  - cmd: set MVN_VERSION=3.3.9
+  - cmd: set CHOCO_MVN_PACKAGE_VERSION=3.3.9.2
+  - cmd: IF NOT exist "C:\bin\apache-maven-%MVN_VERSION%\bin\*.*" (echo Maven %MVN_VERSION% not installed, so install it & cinst maven -Version %CHOCO_MVN_PACKAGE_VERSION%) ELSE (echo  Maven %MVN_VERSION% already installed)
+
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
+platform: Any CPU
+
+# to add several platforms to build matrix:
+#platform:
+#  - x86
+#  - Any CPU
+
+build_script:
+  - cmd: mvn --show-version --errors verify -P declareRepositories,runIT -Dinvoker.streamLogs=true
+  # - cmd: mvn --show-version --errors clean verify -P declareRepositories -Dinvoker.streamLogs=true
