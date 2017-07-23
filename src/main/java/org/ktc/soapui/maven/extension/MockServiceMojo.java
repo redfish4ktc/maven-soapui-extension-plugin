@@ -20,7 +20,6 @@ package org.ktc.soapui.maven.extension;
 import com.eviware.soapui.tools.SoapUIMockServiceRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceRunner;
 import org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUIMockRunnerWrapper;
 
 public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
@@ -45,12 +44,6 @@ public class MockServiceMojo extends AbstractSoapuiRunnerMojo {
         runner.setPath(path);
         runner.setPort(port);
         runner.setSaveAfterRun(saveAfterRun);
-
-        if (runnerWrapper.isProRunner()) {
-            SoapUIProExtensionMockServiceRunner proRunner = (SoapUIProExtensionMockServiceRunner) runner;
-            proRunner.activateCoverageReport(coverageReport);
-            proRunner.setOutputFolder(outputFolder);
-        }
 
         try {
             runner.run();

@@ -17,12 +17,13 @@
 
 package org.ktc.soapui.maven.extension;
 
-import com.eviware.soapui.impl.wsdl.WsdlProjectPro;
 import java.io.File;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ProjectConversionType;
 import org.ktc.soapui.maven.extension.impl.enums.EnumConverter;
+
+import com.eviware.soapui.impl.wsdl.WsdlProject;
 
 public class ConvertProjectMojo extends AbstractSoapuiMojo {
     private File inputProject;
@@ -46,8 +47,7 @@ public class ConvertProjectMojo extends AbstractSoapuiMojo {
         // maybe this is fixed by providing settings file (auto-save option in the global UI-Settings which will save
         // all open projects when exiting, is that what you are looking for?)
         try {
-            WsdlProjectPro wsdlProject = new WsdlProjectPro(inputProject.getAbsolutePath());
-            wsdlProject.setComposite(conversionTypeEnum.isTargetedProjectComposite());
+            WsdlProject wsdlProject = new WsdlProject(inputProject.getAbsolutePath());
             wsdlProject.saveAs(outputProject.getAbsolutePath());
         } catch (Exception e) {
             throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);

@@ -53,7 +53,7 @@ public class EnumConverterTest {
             EnumConverter.toRunnerType("%%%oooo$$$");
             failBecauseExceptionWasNotThrown(UnknownEnumException.class);
         } catch (UnknownEnumException e) {
-            assertThat(e.getMessage()).isEqualTo("Unsupported runner type %%%oooo$$$. Valid values are [PRO,OSS]");
+            assertThat(e.getMessage()).isEqualTo("Unsupported runner type %%%oooo$$$. Valid values are [OSS]");
         }
     }
 

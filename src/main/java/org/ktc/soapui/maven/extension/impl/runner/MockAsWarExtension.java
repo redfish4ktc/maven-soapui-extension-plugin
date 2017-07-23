@@ -17,30 +17,18 @@
 
 package org.ktc.soapui.maven.extension.impl.runner;
 
-import com.eviware.soapui.mockaswar.MockAsWarProServlet;
-import com.eviware.soapui.mockaswar.MockAsWarServlet;
+import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.tools.MockAsWar;
 
 public class MockAsWarExtension extends MockAsWar {
 
-    private static String SMARTBEAR_OSS_SERVLET_CLASS_NAME = MockAsWarServlet.class.getName();
-    private static String SMARTBEAR_PRO_SERVLET_CLASS_NAME = MockAsWarProServlet.class.getName();
-
     public MockAsWarExtension(String projectPath, String settingsPath, String warDir, String warFile,
-            boolean includeExt, boolean actions, boolean listeners, String localEndpoint, boolean enableWebUI) {
-        super(projectPath, settingsPath, warDir, warFile, includeExt, actions, listeners, localEndpoint, enableWebUI);
+            boolean includeExt, boolean actions, boolean listeners, String localEndpoint, boolean enableWebUI, WsdlProject project) {
+        super(projectPath, settingsPath, warDir, warFile, includeExt, actions, listeners, localEndpoint, enableWebUI, project);
     }
 
     @Override
     protected void createContent(StringBuilder content) {
         super.createContent(content);
-
-        // modify the servlet name because, by default, the SmartBear PRO Servlet is used
-        replace(content, SMARTBEAR_PRO_SERVLET_CLASS_NAME, SMARTBEAR_OSS_SERVLET_CLASS_NAME);
     }
-
-    private static void replace(StringBuilder content, String old, String replacement) {
-        content.replace(content.indexOf(old), content.indexOf(old) + old.length(), replacement);
-    }
-
 }

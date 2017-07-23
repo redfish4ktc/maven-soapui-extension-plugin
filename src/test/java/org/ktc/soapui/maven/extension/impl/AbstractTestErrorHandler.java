@@ -20,7 +20,6 @@ package org.ktc.soapui.maven.extension.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-import com.eviware.soapui.SoapUIProTestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestAssertion;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
@@ -54,14 +53,14 @@ public abstract class AbstractTestErrorHandler {
   private void initializeFailedTests() throws IllegalAccessException {
     List<TestCase> failedTests = new ArrayList<TestCase>();
     failedTests.add(mock(TestCase.class));
-    Field field = FieldUtils.getField(SoapUIProTestCaseRunner.class, "failedTests", true);
+    Field field = FieldUtils.getField(SoapUITestCaseRunner.class, "failedTests", true);
     FieldUtils.writeField(field, runner, failedTests, true);
   }
 
   private void initializeFailedAssertions() throws IllegalAccessException {
     List<TestAssertion> failedAssertions = new ArrayList<TestAssertion>();
     failedAssertions.add(mock(TestAssertion.class));
-    Field field = FieldUtils.getField(SoapUIProTestCaseRunner.class, "assertions", true);
+    Field field = FieldUtils.getField(SoapUITestCaseRunner.class, "assertions", true);
     FieldUtils.writeField(field, runner, failedAssertions, true);
   }
 
