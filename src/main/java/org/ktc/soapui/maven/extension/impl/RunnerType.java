@@ -19,38 +19,12 @@ package org.ktc.soapui.maven.extension.impl;
 
 import com.eviware.soapui.tools.SoapUIMockAsWarGenerator;
 import com.eviware.soapui.tools.SoapUIMockServiceRunner;
-import com.eviware.soapui.tools.SoapUIProMockAsWarGenerator;
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionMockAsWarGenerator;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionMockServiceRunner;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionMockServiceRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
 
 public enum RunnerType {
-    PRO {
-        @Override
-        public SoapUITestCaseRunner newTestRunner() {
-            return new SoapUIProExtensionTestCaseRunner("SoapUI Pro Maven2 TestCase Runner");
-        }
-
-        @Override
-        public SoapUIMockServiceRunner newMockRunner() {
-            return new SoapUIProExtensionMockServiceRunner("SoapUI Pro Maven2 MockService Runner");
-        }
-
-        @Override
-        public SoapUIMockAsWarGenerator newMockAsWarGenerator() {
-            // currently no constructor with String arguments
-            return new SoapUIProMockAsWarGenerator();
-        }
-
-        @Override
-        public boolean isProRunner() {
-            return true;
-        }
-
-    },
     OSS {
         @Override
         public SoapUITestCaseRunner newTestRunner() {

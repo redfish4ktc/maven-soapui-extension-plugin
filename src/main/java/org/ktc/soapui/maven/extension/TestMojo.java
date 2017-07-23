@@ -25,115 +25,98 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.ktc.soapui.maven.extension.impl.ErrorHandler;
 import org.ktc.soapui.maven.extension.impl.TestSuiteProperties;
 import org.ktc.soapui.maven.extension.impl.runner.SoapUIExtensionTestCaseRunner;
-import org.ktc.soapui.maven.extension.impl.runner.SoapUIProExtensionTestCaseRunner;
 import org.ktc.soapui.maven.extension.impl.runner.wrapper.SoapUITestCaseRunnerWrapper;
 
 public class TestMojo extends AbstractSoapuiRunnerMojo {
-    
-    public static final String TEST_FAILURES_AND_ERRORS_KEY = "soapui_extension_Mlx#ppp";
-    
-    private String testSuite;
-    private String testCase;
-    private String username;
-    private String password;
-    private String wssPasswordType;
-    private String domain;
-    private String host;
-    private String endpoint;
-    private boolean printReport;
-    private boolean interactive;
-    private boolean exportAll;
-    private boolean junitReport;
-    private boolean openReport;
-    private boolean testFailIgnore;
-    private boolean coverage;
-    private String reportFormat;
-    private String reportName;
-    // new in soapui 4.5.0 (pro only)
-    private String environment;
 
-    // maven-soapui-extension additional parameters
-    private TestSuiteProperties testSuiteProperties;
-    private boolean junitHtmlReport = true;
+	public static final String TEST_FAILURES_AND_ERRORS_KEY = "soapui_extension_Mlx#ppp";
 
-    @Override
-    protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
-        configureAndRun(newSoapUITestCaseRunnerWrapper(runnerType), projectFile);
-    }
+	private String testSuite;
+	private String testCase;
+	private String username;
+	private String password;
+	private String wssPasswordType;
+	private String domain;
+	private String host;
+	private String endpoint;
+	private boolean printReport;
+	private boolean interactive;
+	private boolean exportAll;
+	private boolean junitReport;
+	private boolean openReport;
+	private boolean testFailIgnore;
+	private boolean coverage;
+	private String reportFormat;
+	private String reportName;
+	// new in soapui 4.5.0 (pro only)
+	private String environment;
 
-    protected void configureAndRun(SoapUITestCaseRunnerWrapper runnerWrapper, String currentProjectFile)
-            throws MojoFailureException {
-        configureTestRunner(runnerWrapper, currentProjectFile);
+	// maven-soapui-extension additional parameters
+	private TestSuiteProperties testSuiteProperties;
+	private boolean junitHtmlReport = true;
 
-        SoapUITestCaseRunner runner = runnerWrapper.getRunner();
-        try {
-            runner.run();
-        } catch (Exception e) {
-            getLog().debug(e);
-            throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
-        }
-        boolean hasFailures = ErrorHandler.hasFailures(runner);
-        if (hasFailures) {
-            if (testFailIgnore) {
-                getLog().warn(
-                        "Some tests have failed (see logs and/or check the printReport,"
-                                + " if necessary, set the option to true)");
-                getLog().debug("Setting project property " + TEST_FAILURES_AND_ERRORS_KEY);
-                project.getProperties().setProperty(TEST_FAILURES_AND_ERRORS_KEY, "true");
-                getLog().debug(
-                        "Property " + TEST_FAILURES_AND_ERRORS_KEY + " set to "
-                                + project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY));
-            } else {
-                throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
-                        + " (if necessary, set the option to true)");
-            }
-        }
-    }
+	@Override
+	protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
+		configureAndRun(newSoapUITestCaseRunnerWrapper(runnerType), projectFile);
+	}
 
-    private void configureTestRunner(SoapUITestCaseRunnerWrapper runnerWrapper, String currentProjectFile) {
-        SoapUITestCaseRunner runner = runnerWrapper.getRunner();
-        configureWithSharedParameters(runner, currentProjectFile);
+	protected void configureAndRun(SoapUITestCaseRunnerWrapper runnerWrapper, String currentProjectFile)
+			throws MojoFailureException {
+		configureTestRunner(runnerWrapper, currentProjectFile);
 
-        runner.setEndpoint(endpoint);
-        runner.setTestSuite(testSuite);
-        runner.setTestCase(testCase);
-        runner.setUsername(username);
-        runner.setPassword(password);
-        runner.setWssPasswordType(wssPasswordType);
-        runner.setDomain(domain);
-        runner.setHost(host);
+		SoapUITestCaseRunner runner = runnerWrapper.getRunner();
+		try {
+			runner.run();
+		} catch (Exception e) {
+			getLog().debug(e);
+			throw new MojoFailureException("SoapUI has errors: " + e.getMessage(), e);
+		}
+		boolean hasFailures = ErrorHandler.hasFailures(runner);
+		if (hasFailures) {
+			if (testFailIgnore) {
+				getLog().warn("Some tests have failed (see logs and/or check the printReport,"
+						+ " if necessary, set the option to true)");
+				getLog().debug("Setting project property " + TEST_FAILURES_AND_ERRORS_KEY);
+				project.getProperties().setProperty(TEST_FAILURES_AND_ERRORS_KEY, "true");
+				getLog().debug("Property " + TEST_FAILURES_AND_ERRORS_KEY + " set to "
+						+ project.getProperties().getProperty(TEST_FAILURES_AND_ERRORS_KEY));
+			} else {
+				throw new MojoFailureException("SoapUI Test(s) failed: see logs and/or check the printReport"
+						+ " (if necessary, set the option to true)");
+			}
+		}
+	}
 
-        configureOuputFolder(runner, currentProjectFile);
-        runner.setPrintReport(printReport);
-        runner.setExportAll(exportAll);
-        runner.setJUnitReport(junitReport);
-        runner.setEnableUI(interactive);
-        runner.setIgnoreError(true); // failure detection is delegated to the mojo (see above)
-        runner.setSaveAfterRun(saveAfterRun);
+	private void configureTestRunner(SoapUITestCaseRunnerWrapper runnerWrapper, String currentProjectFile) {
+		SoapUITestCaseRunner runner = runnerWrapper.getRunner();
+		configureWithSharedParameters(runner, currentProjectFile);
 
-        if(runnerWrapper.isProRunner()) {
-            SoapUIProExtensionTestCaseRunner proRunner = (SoapUIProExtensionTestCaseRunner) runner;
-            proRunner.setEnvironment(environment);
-            proRunner.setJunitHtmlReport(junitHtmlReport);
-            proRunner.setOpenReport(openReport);
-            if (coverage) {
-                proRunner.initCoverageBuilder();
-            }
-            proRunner.setReportName(reportName);
-            if (reportFormat != null) {
-                proRunner.setReportFormats(reportFormat.split(","));
-            }
-            proRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
-        } else {
-            SoapUIExtensionTestCaseRunner ossRunner = (SoapUIExtensionTestCaseRunner) runner;
-            ossRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
-        }
-    }
+		runner.setEndpoint(endpoint);
+		runner.setTestSuite(testSuite);
+		runner.setTestCase(testCase);
+		runner.setUsername(username);
+		runner.setPassword(password);
+		runner.setWssPasswordType(wssPasswordType);
+		runner.setDomain(domain);
+		runner.setHost(host);
 
-    // let test-multi override this
-    protected void configureOuputFolder(SoapUITestCaseRunner runner,
-            @SuppressWarnings("unused") String currentProjectFile) {
-        runner.setOutputFolder(outputFolder);
-    }
+		configureOuputFolder(runner, currentProjectFile);
+		runner.setPrintReport(printReport);
+		runner.setExportAll(exportAll);
+		runner.setJUnitReport(junitReport);
+		runner.setEnableUI(interactive);
+		runner.setIgnoreError(true); // failure detection is delegated to the
+										// mojo (see above)
+		runner.setSaveAfterRun(saveAfterRun);
+
+		SoapUIExtensionTestCaseRunner ossRunner = (SoapUIExtensionTestCaseRunner) runner;
+		ossRunner.setTestSuiteProperties(testSuiteProperties.getProperties());
+	}
+
+	// let test-multi override this
+	protected void configureOuputFolder(SoapUITestCaseRunner runner,
+			@SuppressWarnings("unused") String currentProjectFile) {
+		runner.setOutputFolder(outputFolder);
+	}
 
 }

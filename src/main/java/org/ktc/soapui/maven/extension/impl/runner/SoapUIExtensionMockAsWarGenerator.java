@@ -62,7 +62,7 @@ public class SoapUIExtensionMockAsWarGenerator extends SoapUIMockAsWarGenerator 
         // TODO the temporary file should be removed at the end of the process
         MockAsWarExtension mockAsWar = new MockAsWarExtension(pFile, getSettingsFile(), getOutputFolder(),
                 this.getWarFile(), this.isIncludeLibraries(), this.isIncludeActions(), this.isIncludeListeners(),
-                endpoint, this.isEnableWebUI());
+                endpoint, this.isEnableWebUI(), project);
 
         mockAsWar.createMockAsWarArchive();
         this.log.info("WAR Generation complete");
