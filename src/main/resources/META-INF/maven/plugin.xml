@@ -602,6 +602,15 @@ either &apos;Text&apos; or &apos;Digest&apos;</description>
           of the configured outputFolder.</description>
         </parameter>
         <!-- ######## END OF SPECIFIC test-multi, added for #104 -->
+        <!-- ######## SPECIFIC failBuildIfSomeTestFail, added by Jesús Muñoz (jmunoz@leda-mc.com) -->
+        <parameter>
+          <name>failBuildIfSomeTestFail</name>
+          <type>java.lang.Boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>If true, all projects will be executed and if parameter testFailIgnore is false the build will fail.</description>
+        </parameter>
+        <!-- ######## END OF SPECIFIC failBuildIfSomeTestFail, added by Jesús Muñoz (jmunoz@leda-mc.com) -->
         <!-- ######## CUSTOMIZED, added for #3 -->
         <parameter>
           <name>project</name>
