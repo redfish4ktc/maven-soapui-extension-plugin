@@ -36,12 +36,28 @@ public class TestMultiMojo extends TestMojo {
     // use array to support maven 2.2.1
     private ProjectFilesScan[] projectFiles;
     private boolean useOutputFolderPerProject;
+    private boolean failBuildIfSomeTestFail;
 
     @Override
     protected void performRunnerExecute() throws MojoExecutionException, MojoFailureException {
         List<File> resolvedProjectFiles = resolveProjectFiles();
+        List<File> failedProjects = new ArrayList<File>();
         for (File currentProjectFile : resolvedProjectFiles) {
-            configureAndRun(newSoapUITestCaseRunnerWrapper(runnerType), currentProjectFile.getAbsolutePath());
+            try{
+            	configureAndRun(newSoapUITestCaseRunnerWrapper(runnerType), currentProjectFile.getAbsolutePath());
+            }catch (MojoFailureException e){
+            	if (failBuildIfSomeTestFail){
+            		failedProjects.add(currentProjectFile);
+            	}else{
+            		throw e;
+            	}
+            }
+        }
+        
+        if(failBuildIfSomeTestFail && failedProjects.size()>0){
+        	MultiMojoFailureException error = new MultiMojoFailureException(failedProjects); 
+        	getLog().error(error);
+        	throw error;
         }
     }
 
