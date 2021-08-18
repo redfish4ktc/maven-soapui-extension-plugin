@@ -16,3 +16,7 @@ jdk:
 notifications:
   email:
     - red4ktc-github987225@yahoo.fr
+
+cache:
+  directories:
+  - $HOME/.m2
