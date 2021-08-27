@@ -15,6 +15,12 @@
 ~ under the License.
 -->
 
+
+UPDATE 2021-08-27: **This repository is now archived**. Thanks to all contributors and users of this plugin. \
+I haven't used SoapUI since a long time and I no longer have time to maintain this plugin.
+
+
+
 maven-soapui-extension-plugin [![Travis Build Status](https://secure.travis-ci.org/redfish4ktc/maven-soapui-extension-plugin.png?branch=master)](https://travis-ci.org/redfish4ktc/maven-soapui-extension-plugin)
 ============
 
